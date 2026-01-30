@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetic Medische Expertises | Medische expertises in 4 weken</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CclipPath id='k'%3E%3Cpath d='M0 0H32V32H0V0Z M14 15H20V17H14V15Z' clip-rule='evenodd'/%3E%3C/clipPath%3E%3C/defs%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cg clip-path='url(%23k)'%3E%3Cpath d='M10 6V26H14V18L21 26H26L17 16L25 6H20L14 14V6H10Z' fill='%23FAF9F7'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 180 180' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CclipPath id='k'%3E%3Cpath d='M0 0H180V180H0V0Z M78 84H102V92H78V84Z' clip-rule='evenodd'/%3E%3C/clipPath%3E%3C/defs%3E%3Crect width='180' height='180' rx='22' fill='%23141414'/%3E%3Cg clip-path='url(%23k)'%3E%3Cpath d='M56 40V140H78V100L118 140H144L96 90L140 40H114L78 80V40H56Z' fill='%23FAF9F7'/%3E%3C/g%3E%3C/svg%3E">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Warm Calm Authority Palette */
+            --warm-ink: #141414;
+            --ivory-grey: #FAF9F7;
+            --warm-fog: #F1F0ED;
+            --stone-grey: #5C5C58;  /* Darker for better contrast */
+            --soft-taupe: #8A8780;  /* Darker for WCAG */
+            --warm-teal: #2F6F6A;
+            --warm-teal-hover: #1F5A56;
+            --muted-copper: #B08A5A;
+            --muted-copper-hover: #9A764B;
+            --white: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--stone-grey);
+            background: var(--ivory-grey);
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--warm-ink);
+            font-weight: 600;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--warm-ink);
+            color: var(--soft-taupe);
+            padding: 0.625rem 0;
+            font-size: 0.8125rem;
+        }
+
+        .top-bar-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2.5rem;
+        }
+
+        .top-bar a {
+            color: #A6A39A;
+            text-decoration: none;
+            transition: color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .top-bar a:hover {
+            color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: var(--ivory-grey);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .header.scrolled {
+            background: var(--white);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--warm-ink);
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .logo-kinetic {
+            color: var(--warm-teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--stone-grey);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--warm-ink);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            min-height: 48px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--warm-ink);
+            border: 1.5px solid var(--warm-ink);
+        }
+
+        .btn-primary:hover {
+            background: var(--muted-copper);
+            border-color: var(--muted-copper);
+            color: var(--white);
+        }
+
+        .btn-filled {
+            background: var(--warm-ink);
+            color: var(--white);
+            border: 1.5px solid var(--warm-ink);
+        }
+
+        .btn-filled:hover {
+            background: var(--muted-copper);
+            border-color: var(--muted-copper);
+        }
+
+        .btn-accent {
+            background: var(--warm-teal);
+            color: var(--white);
+            border: 1.5px solid var(--warm-teal);
+        }
+
+        .btn-accent:hover {
+            background: var(--warm-teal-hover);
+            border-color: var(--warm-teal-hover);
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--warm-fog);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .trust-bar-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--stone-grey);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .trust-icon {
+            flex-shrink: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--ivory-grey);
+            padding: 5rem 2rem 6rem;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+            max-width: 560px;
+        }
+
+        .hero-text h1 span {
+            color: var(--warm-teal);
+        }
+
+        .hero-text .subline {
+            font-size: 0.9375rem;
+            color: var(--stone-grey);
+            letter-spacing: 0.04em;
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Hero Stats Card */
+        .hero-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 6px;
+            padding: 2rem;
+        }
+
+        .hero-card h3 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--stone-grey);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-item .label {
+            color: var(--stone-grey);
+            font-size: 0.9375rem;
+        }
+
+        .comparison-item .values {
+            display: flex;
+            gap: 1.25rem;
+            text-align: right;
+        }
+
+        .comparison-item .old {
+            color: var(--soft-taupe);
+            text-decoration: line-through;
+            font-size: 0.9375rem;
+        }
+
+        .comparison-item .new {
+            color: var(--warm-ink);
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-ivory {
+            background: var(--ivory-grey);
+        }
+
+        .section-fog {
+            background: var(--warm-fog);
+        }
+
+        .section-dark {
+            background: var(--warm-ink);
+            color: var(--soft-taupe);
+        }
+
+        .section-dark h2, .section-dark h3 {
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--warm-teal);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section-subtitle {
+            font-size: 1.0625rem;
+            color: var(--stone-grey);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .section-dark .section-subtitle {
+            color: #A6A39A;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 60px;
+            right: 60px;
+            height: 1px;
+            background: var(--soft-taupe);
+        }
+
+        .process-step {
+            flex: 1;
+            max-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: var(--white);
+            border: 1px solid var(--soft-taupe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            position: relative;
+            z-index: 1;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+        }
+
+        .process-step.active .step-number {
+            border-color: var(--muted-copper);
+            color: var(--muted-copper);
+        }
+
+        .process-step h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 0.875rem;
+            color: var(--stone-grey);
+            line-height: 1.6;
+        }
+
+        .step-tag {
+            display: inline-block;
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.625rem;
+            border-radius: 3px;
+            margin-top: 0.75rem;
+            background: var(--white);
+            color: var(--stone-grey);
+            border: 1px solid var(--soft-taupe);
+        }
+
+        .step-tag.ai {
+            background: var(--warm-teal);
+            color: var(--white);
+            border: none;
+        }
+
+        /* Metrics Section */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .metric-card {
+            background: var(--warm-fog);
+            padding: 2.5rem 2rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-card .value {
+            font-size: 2.75rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .label {
+            font-size: 0.875rem;
+            color: var(--stone-grey);
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 1.75rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .benefit-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.9375rem;
+            color: var(--stone-grey);
+            line-height: 1.65;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 0;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        .faq-question:hover {
+            color: var(--warm-teal);
+        }
+
+        .faq-question .icon {
+            font-size: 1.25rem;
+            color: var(--soft-taupe);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.open .faq-question .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 0.9375rem;
+            color: var(--stone-grey);
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 0 0 1.5rem;
+        }
+
+        .faq-answer-inner {
+            background: var(--warm-fog);
+            padding: 1.25rem;
+            border-radius: 4px;
+        }
+
+        /* Pricing Section */
+        .pricing-content {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .pricing-table {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .pricing-row:nth-child(odd) {
+            background: var(--ivory-grey);
+        }
+
+        .pricing-row:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-row.header {
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--stone-grey);
+        }
+
+        .pricing-row .label {
+            color: var(--stone-grey);
+        }
+
+        .pricing-row .old {
+            color: var(--soft-taupe);
+            text-decoration: line-through;
+        }
+
+        .pricing-row .new {
+            color: var(--warm-ink);
+            font-weight: 600;
+            position: relative;
+            padding-left: 0.75rem;
+        }
+
+        .pricing-row .new::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--muted-copper);
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: 6px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            line-height: 1;
+        }
+
+        .pricing-card .price-note {
+            font-size: 0.875rem;
+            color: var(--stone-grey);
+            margin-top: 0.375rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card ul li {
+            padding: 0.625rem 0;
+            font-size: 0.9375rem;
+            color: var(--stone-grey);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card ul li span {
+            color: var(--warm-ink);
+            font-weight: 500;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--warm-fog);
+            padding: 5rem 2rem;
+        }
+
+        .cta-content {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content > p {
+            font-size: 1.0625rem;
+            color: var(--stone-grey);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .cta-box {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 6px;
+            padding: 1.5rem 2rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box .offer {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+        }
+
+        .cta-box .details {
+            font-size: 0.875rem;
+            color: var(--stone-grey);
+            margin-top: 0.25rem;
+        }
+
+        .cta-metrics {
+            font-size: 0.8125rem;
+            color: var(--stone-grey);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-metrics strong {
+            color: var(--warm-ink);
+        }
+
+        .cta-guarantee {
+            font-size: 0.875rem;
+            color: var(--warm-teal);
+            font-weight: 500;
+            margin-top: 1.5rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: var(--warm-fog);
+            padding: 2rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .team-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-avatar {
+            width: 64px;
+            height: 64px;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            object-fit: cover;
+        }
+
+        .team-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .team-info .role {
+            font-size: 0.875rem;
+            color: var(--warm-teal);
+            font-weight: 500;
+        }
+
+        .team-card p {
+            font-size: 0.9375rem;
+            color: var(--stone-grey);
+            line-height: 1.65;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-card .credential {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--stone-grey);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--warm-ink);
+            color: #A6A39A;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand .logo-footer {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .logo-footer svg {
+            display: block;
+        }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            max-width: 280px;
+            line-height: 1.6;
+        }
+
+        .footer-links h4 {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #A6A39A;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links a {
+            display: block;
+            font-size: 0.875rem;
+            color: #A6A39A;
+            text-decoration: none;
+            padding: 0.375rem 0;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8125rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-card {
+                max-width: 420px;
+            }
+
+            .process-flow {
+                flex-direction: column;
+                gap: 2rem;
+                max-width: 400px;
+            }
+
+            .process-flow::before {
+                display: none;
+            }
+
+            .process-step {
+                max-width: 100%;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 1.25rem;
+                text-align: left;
+            }
+
+            .step-number {
+                margin: 0;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar-content {
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.25rem;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem 4rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.25rem;
+            }
+
+            .trust-bar-content {
+                gap: 1.5rem;
+            }
+
+            .trust-item {
+                font-size: 0.6875rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <a href="tel:+31612345678">+31 6 1234 5678</a>
+            <a href="mailto:info@kineticexpertises.nl">info@kineticexpertises.nl</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-content">
+            <a href="#" class="logo">
+                <!-- Horizontal lockup: monogram + woordmerk -->
+                <svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="k-cut-header">
+                            <path d="M0 0H32V32H0V0Z M14 15H20V17H14V15Z" clip-rule="evenodd"/>
+                        </clipPath>
+                    </defs>
+                    <rect width="32" height="32" rx="4" fill="#141414"/>
+                    <g clip-path="url(#k-cut-header)">
+                        <path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#FAF9F7"/>
+                    </g>
+                    <text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#141414" letter-spacing="-0.02em">Kinetic</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="#proces">Werkwijze</a>
+                <a href="#voordelen">Voordelen</a>
+                <a href="#faq">FAQ</a>
+                <a href="#team">Team</a>
+                <a href="#contact" class="btn btn-primary">Plan pilot-call</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-bar-content">
+            <span class="trust-item">
+                <svg class="trust-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16" height="16" rx="2" fill="#2F6F6A"/>
+                    <path d="M4 3V13H7V9.5L10.5 13H14L9 8L13.5 3H10L7 6.5V3H4Z" fill="#FFFFFF"/>
+                </svg>
+                AVG/GDPR compliant
+            </span>
+            <span class="trust-item">
+                <svg class="trust-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16" height="16" rx="2" fill="#2F6F6A"/>
+                    <path d="M4 3V13H7V9.5L10.5 13H14L9 8L13.5 3H10L7 6.5V3H4Z" fill="#FFFFFF"/>
+                </svg>
+                In lijn met NEN 7510
+            </span>
+            <span class="trust-item">
+                <svg class="trust-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16" height="16" rx="2" fill="#2F6F6A"/>
+                    <path d="M4 3V13H7V9.5L10.5 13H14L9 8L13.5 3H10L7 6.5V3H4Z" fill="#FFFFFF"/>
+                </svg>
+                EU data hosting
+            </span>
+            <span class="trust-item">
+                <svg class="trust-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16" height="16" rx="2" fill="#2F6F6A"/>
+                    <path d="M4 3V13H7V9.5L10.5 13H14L9 8L13.5 3H10L7 6.5V3H4Z" fill="#FFFFFF"/>
+                </svg>
+                BIG-geregistreerd specialist
+            </span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Beslisklare medische dossiers binnen <span>4 weken</span></h1>
+                <p class="subline">Volledig traceerbaar · Privacy-by-design · Geautoriseerd door de medisch specialist</p>
+                
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-filled">Plan pilot-call</a>
+                    <a href="#proces" class="btn btn-primary">Bekijk procesflow</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h3>Vergelijking (marktgemiddelde)</h3>
+                <div class="comparison-item">
+                    <span class="label">Doorlooptijd</span>
+                    <div class="values">
+                        <span class="old">Vaak 6-9 mnd</span>
+                        <span class="new">4 weken</span>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <span class="label">Tarief</span>
+                    <div class="values">
+                        <span class="old">Typisch €2.500+</span>
+                        <span class="new">€1.950</span>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <span class="label">Tijdgarantie</span>
+                    <div class="values">
+                        <span class="old">Vaak niet</span>
+                        <span class="new">Inclusief</span>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <span class="label">Bronverwijzing</span>
+                    <div class="values">
+                        <span class="old">Beperkt</span>
+                        <span class="new">Volledig</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section-fog" id="proces">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Werkwijze</div>
+                <h2 class="section-title">Van dossier tot rapport in vier stappen</h2>
+                <p class="section-subtitle">Gestructureerd proces met duidelijke verantwoordelijkheidsverdeling</p>
+            </div>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div>
+                        <h3>Dossier aanlevering</h3>
+                        <p>Upload via beveiligde portal. Alle gangbare formaten.</p>
+                        <span class="step-tag">Geautomatiseerd</span>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div>
+                        <h3>Voorbereiding</h3>
+                        <p>Documentstructurering, tijdlijn-extractie en inconsistentie-detectie.</p>
+                        <span class="step-tag ai">AI-gestuurd</span>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div>
+                        <h3>Medische beoordeling</h3>
+                        <p>BIG-geregistreerde orthopedisch chirurg formuleert medisch oordeel.</p>
+                        <span class="step-tag">Specialist</span>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div>
+                        <h3>Rapport & levering</h3>
+                        <p>Volledig rapport met bronverwijzingen, binnen 4 weken.</p>
+                        <span class="step-tag">Specialist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section section-ivory" id="voordelen">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Resultaat</div>
+                <h2 class="section-title">Meetbare voordelen</h2>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="value">4 weken</div>
+                    <div class="label">Gegarandeerde doorlooptijd</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">€1.950</div>
+                    <div class="label">Vast tarief per expertise</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">25%</div>
+                    <div class="label">Korting bij overschrijding</div>
+                </div>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Versnelde doorlooptijd</h3>
+                    <p>Van vaak 6-9 maanden naar 4 weken. Snellere afhandeling betekent sneller reserveringen afbouwen en dossiers afsluiten.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Hogere extractienauwkeurigheid</h3>
+                    <p>Geautomatiseerde documentanalyse detecteert inconsistenties en informatie-gaps die bij handmatige review gemist kunnen worden.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Volledige traceerbaarheid</h3>
+                    <p>Elke conclusie in het rapport bevat bronverwijzing naar het originele document. Complete audit trail voor juridische zekerheid.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Privacy & compliance</h3>
+                    <p>Pseudonimisering vóór AI-analyse. In lijn met NEN 7510, AVG-compliant, EU-only data hosting. Geen training op productiedata.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-fog" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Veelgestelde vragen</div>
+                <h2 class="section-title">Compliance, privacy en verantwoordelijkheid</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Hoe is de privacy en AVG-compliance gewaarborgd?
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Privacy staat centraal. Alle identificerende gegevens worden verwijderd vóór AI-analyse (pseudonimisering). Data wordt verwerkt op EU-only servers, we werken in lijn met NEN 7510 voor informatiebeveiliging in de zorg, en er wordt niet getraind op productiedata – uitsluitend inference. Een volledige audit trail is beschikbaar voor compliance-verificatie.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Wie is verantwoordelijk voor het medische oordeel?
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>De volledige verantwoordelijkheid ligt bij onze BIG-geregistreerde orthopedisch chirurg. De AI-voorbereiding structureert het dossier; de specialist beoordeelt, interpreteert en ondertekent. Deze scheiding is wettelijk en ethisch correct en garandeert onafhankelijke medische expertise.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Wat gebeurt er als de 4 weken termijn niet gehaald wordt?
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Wij hanteren een harde tijdgarantie: bij overschrijding ontvangt u automatisch 25% korting op het tarief. In uitzonderlijke gevallen communiceren wij proactief en maken we nieuwe afspraken. De termijn start bij ontvangst van het complete dossier.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Welke typen zaken behandelen jullie?
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Wij richten ons op orthopedische expertises bij letselschade en arbeidsongeschiktheidszaken. Dit omvat whiplash, rugklachten, fracturen, gewrichtsproblematiek en andere musculoskeletale aandoeningen.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Hoe verhoudt de prijs zich tot de markt?
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>In de markt zien we vaak tarieven van €2.500-€4.000 met doorlooptijden van 6-9 maanden. Wij bieden €1.950 vast tarief met 4 weken doorlooptijd. De versnelde afhandeling reduceert daarnaast indirecte kosten zoals reserveringen en administratie.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section section-fog" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Tarieven</div>
+                <h2 class="section-title">Transparante prijsstelling</h2>
+                <p class="section-subtitle">Eén vast tarief, volledige service</p>
+            </div>
+            <div class="pricing-content">
+                <div class="pricing-table">
+                    <div class="pricing-row header">
+                        <span>Kenmerk</span>
+                        <span>Markt (typisch)</span>
+                        <span>Kinetic</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span class="label">Doorlooptijd</span>
+                        <span class="old">Vaak 6-9 mnd</span>
+                        <span class="new">4 weken</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span class="label">Tarief</span>
+                        <span class="old">€2.500-€4.000</span>
+                        <span class="new">€1.950 vast</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span class="label">Tijdgarantie</span>
+                        <span class="old">Vaak niet</span>
+                        <span class="new">Inclusief</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span class="label">Traceerbaarheid</span>
+                        <span class="old">Beperkt</span>
+                        <span class="new">Volledig</span>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="price">€1.950</div>
+                    <p class="price-note">per expertise, vast tarief</p>
+                    <ul>
+                        <li><span>Doorlooptijd:</span> 4 weken</li>
+                        <li><span>Tijdgarantie:</span> 25% korting bij overschrijding</li>
+                        <li><span>Dossieranalyse:</span> geautomatiseerd met verificatie</li>
+                        <li><span>Specialist:</span> BIG-geregistreerd orthopedisch chirurg</li>
+                        <li><span>Bronverwijzingen:</span> volledig</li>
+                        <li><span>Compliance:</span> AVG + in lijn met NEN 7510</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-accent">Plan pilot-call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content">
+            <div class="section-label">Pilot programma</div>
+            <h2>Valideer onze werkwijze met meetbaar resultaat</h2>
+            <p>Voor de eerste vijf verzekeraars die onze aanpak willen toetsen</p>
+            <div class="cta-box">
+                <div class="offer">5 expertises voor €7.800</div>
+                <div class="details">Normaal €9.750 — 20% introductiekorting</div>
+            </div>
+            <p class="cta-metrics"><strong>Wij meten en rapporteren:</strong> doorlooptijd per dossier, volledigheid bronverwijzingen, acceptatie door behandelaar, herwerkpercentage.</p>
+            <a href="mailto:info@kineticexpertises.nl?subject=Pilotaanvraag" class="btn btn-filled">Vraag pilotvoorwaarden aan</a>
+            <p class="cta-guarantee">Niet tevreden over dossierstructuur of audit trail? Kosteloos herstel binnen 5 werkdagen.</p>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section section-ivory" id="team">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Team</div>
+                <h2 class="section-title">Medische expertise & technologie</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <img class="team-avatar" src="data:image/jpeg;base64,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" alt="Edwin Diepeveen">
+                        <div class="team-info">
+                            <h3>Edwin Diepeveen</h3>
+                            <div class="role">Orthopedisch Chirurg</div>
+                        </div>
+                    </div>
+                    <p>20+ jaar ervaring in orthopedische chirurgie. Gespecialiseerd in medische expertises voor letselschade en arbeidsongeschiktheid.</p>
+                    <div class="credential">BIG-geregistreerd</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-card-header">
+                        <img class="team-avatar" src="data:image/jpeg;base64,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IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/bAEMABgQFBgUEBgYFBgcHBggKEAoKCQkKFA4PDBAXFBgYFxQWFhodJR8aGyMcFhYgLCAjJicpKikZHy0wLSgwJSgpKP/bAEMBBwcHCggKEwoKEygaFhooKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKP/AABEIAMgAyAMBIgACEQEDEQH/xAAdAAACAgMBAQEAAAAAAAAAAAAAAQUGAwQHCAIJ/8QAPRAAAQMDAgQEAwUGBgIDAAAAAQACAwQFERIhBjFBUQciYXETgZEUMqGxwQgjQlLR8BUzYnKC4RYkJTTS/8QAGQEBAAMBAQAAAAAAAAAAAAAAAAECAwQF/8QAIhEAAgICAgEFAQAAAAAAAAAAAAECEQMhEjFBBBMyUWEi/9oADAMBAAIRAxEAPwD0t3TCXdMLlNgQhCAQTCQTCAEuqaXVANYTUQCpbTmaIVDm62xF41lo6gcyFDcd32n4b4TuV1q6xlHHTxkiVzdXmOzQB1JOAF51PGfEl6oZ7jTXWSKvEfwZXBjMhuDp0kDbchwcN8SHsrwhyKt0eooKqnqHysp54pXxO0SNY8OLHdjjkVjudxo7XSPqrjUxU1OwZdJK7SB0XkqzcR8QWK43OSluFXE6odrOJS4aS0F4IP8AFkuORuDkquSVtzfWyxVtwmmqTl8cjiXmdhJIcBnc884B3yr+0RyPWtT4i8MU8oidcg+RzixrYo3PztnOw5b81kj42tsr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" alt="Jan-Willem van Beek">
+                        <div class="team-info">
+                            <h3>Jan-Willem van Beek</h3>
+                            <div class="role">Founder</div>
+                        </div>
+                    </div>
+                    <p>Achtergrond in healthcare technology en procesoptimalisatie. Focus op het verbeteren van medische dienstverlening.</p>
+                    <div class="credential">Business Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <!-- Stacked lockup: monogram + woordmerk + descriptor -->
+                <div class="logo-footer">
+                    <svg width="100" height="90" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <clipPath id="k-cut-footer">
+                                <path d="M26 0H74V48H26V0Z M44 23H54V26H44V23Z" clip-rule="evenodd"/>
+                            </clipPath>
+                        </defs>
+                        <rect x="26" y="0" width="48" height="48" rx="6" fill="#FAF9F7"/>
+                        <g clip-path="url(#k-cut-footer)">
+                            <path d="M40 12V36H44V27L54 36H60L48 25L58 12H52L44 21V12H40Z" fill="#141414"/>
+                        </g>
+                        <text x="50" y="68" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" letter-spacing="-0.02em" text-anchor="middle">Kinetic</text>
+                        <text x="50" y="82" font-family="Inter, sans-serif" font-size="8" font-weight="500" fill="#A6A39A" letter-spacing="0.04em" text-anchor="middle">Medische expertises</text>
+                    </svg>
+                </div>
+                <p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="mailto:info@kineticexpertises.nl">info@kineticexpertises.nl</a>
+                <a href="tel:+31612345678">+31 6 1234 5678</a>
+            </div>
+            <div class="footer-links">
+                <h4>Juridisch</h4>
+                <a href="#">Privacybeleid</a>
+                <a href="#">Algemene voorwaarden</a>
+                <a href="#">Verwerkersovereenkomst</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Kinetic Medische Expertises</p>
+            <span>SSL beveiligd</span>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isOpen = item.classList.contains('open');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    faqItem.classList.remove('open');
+                });
+                
+                // Open clicked item if it wasn't already open
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
