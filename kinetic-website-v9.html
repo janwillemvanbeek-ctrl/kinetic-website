@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetic Medische Expertises | Medische expertises in 4 weken</title>
+    <meta name="description" content="Medische expertises binnen 4 weken. AI-ondersteunde dossiervoorbereiding met volledige traceerbaarheid. Arts blijft eindverantwoordelijk.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cpath d='M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z' fill='%23FAF9F7'/%3E%3C/svg%3E">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --warm-ink: #141414;
+            --ivory: #FAF9F7;
+            --fog: #F1F0ED;
+            --stone: #5C5C58;
+            --stone-readable: #4A4A47;
+            --warm-teal: #2F6F6A;
+            --warm-teal-hover: #265B57;
+            --line: #EDECE9;
+            --line-dark: rgba(255,255,255,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--stone);
+            background: var(--ivory);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Desktop: slightly larger body text for reading comfort */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 17px;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--warm-ink);
+            font-weight: 600;
+        }
+
+        /* Focus states for accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--warm-teal);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           HEADER - Dark like footer
+           ============================================ */
+        .header {
+            background: var(--warm-ink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--line-dark);
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #A8A8A4;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .nav-links .btn {
+            color: #FFFFFF;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1.5px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--warm-teal);
+            color: #FFFFFF;
+            border-color: var(--warm-teal);
+        }
+
+        .btn-primary:hover {
+            background: var(--warm-teal-hover);
+            border-color: var(--warm-teal-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--warm-ink);
+            border-color: var(--warm-ink);
+        }
+
+        .btn-secondary:hover {
+            background: var(--warm-ink);
+            color: #FFFFFF;
+        }
+
+        /* ============================================
+           TRUST BAR - With different line icons
+           ============================================ */
+        .trust-bar {
+            background: var(--fog);
+            padding: 0.875rem 2rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .trust-bar-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--stone-readable);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .trust-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           HERO - Ivory background
+           ============================================ */
+        .hero {
+            background: var(--ivory);
+            padding: 4rem 2rem 5rem;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.75rem;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text h1 span {
+            color: var(--warm-teal);
+        }
+
+        .hero-subline {
+            font-size: 0.9375rem;
+            color: var(--stone);
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-microcopy {
+            font-size: 0.8125rem;
+            color: var(--stone-readable);
+        }
+
+        /* Hero comparison card */
+        .hero-card {
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 2rem;
+        }
+
+        .hero-card h3 {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--stone);
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.875rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-item .label {
+            color: var(--stone);
+            font-size: 0.9375rem;
+        }
+
+        .comparison-item .values {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .comparison-item .old {
+            color: var(--stone);
+            text-decoration: line-through;
+            font-size: 0.875rem;
+        }
+
+        .comparison-item .new {
+            color: var(--warm-ink);
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-ivory {
+            background: var(--ivory);
+        }
+
+        .section-fog {
+            background: var(--fog);
+        }
+
+        .section-ink {
+            background: var(--warm-ink);
+            color: #A8A8A4;
+        }
+
+        .section-ink h2, .section-ink h3 {
+            color: #FFFFFF;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--warm-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.875rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--stone);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           PROCESS
+           ============================================ */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 80px;
+            right: 80px;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+            z-index: 1;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            flex-shrink: 0;
+        }
+
+        .process-step.ai .step-number {
+            border-color: var(--warm-teal);
+            color: var(--warm-teal);
+        }
+
+        .process-step h3 {
+            font-size: 0.9375rem;
+            margin-bottom: 0.375rem;
+        }
+
+        .process-step p {
+            font-size: 0.8125rem;
+            color: var(--stone);
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+            flex-grow: 1;
+        }
+
+        .step-output {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            padding: 0.375rem 0.75rem;
+            border-radius: 3px;
+            display: inline-block;
+            background: #FFFFFF;
+            color: var(--stone);
+            border: 1px solid var(--line);
+            margin-top: auto;
+        }
+
+        .process-step.ai .step-output {
+            background: var(--warm-teal);
+            color: #FFFFFF;
+            border: none;
+        }
+
+        /* ============================================
+           WAT KINETIC NIET DOET
+           ============================================ */
+        .not-does-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .not-does-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .not-does-item h3 {
+            font-size: 0.9375rem;
+            margin-bottom: 0.5rem;
+            color: var(--warm-ink);
+        }
+
+        .not-does-item p {
+            font-size: 0.875rem;
+            color: var(--stone);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           BENEFITS
+           ============================================ */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .benefit-card {
+            background: #FFFFFF;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+        }
+
+        .benefit-card h3 {
+            font-size: 0.9375rem;
+            margin-bottom: 0.375rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.875rem;
+            color: var(--stone);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           FAQ
+           ============================================ */
+        .faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .faq-category {
+            margin-bottom: 2rem;
+        }
+
+        .faq-category-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--warm-teal);
+            margin-bottom: 0.75rem;
+            padding-left: 0.25rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 0;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        .faq-question:hover {
+            color: var(--warm-teal);
+        }
+
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-left: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-icon line {
+            stroke: var(--stone);
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            font-size: 0.9375rem;
+            color: var(--stone);
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding-bottom: 1.25rem;
+        }
+
+        /* ============================================
+           PRICING
+           ============================================ */
+        .pricing-content {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .pricing-context {
+            padding-top: 1rem;
+        }
+
+        .pricing-context h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-anchor {
+            background: var(--fog);
+            padding: 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-anchor p {
+            font-size: 0.9375rem;
+            color: var(--stone);
+            line-height: 1.6;
+        }
+
+        .price-anchor strong {
+            color: var(--warm-ink);
+        }
+
+        .pricing-features {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            padding: 0.625rem 0;
+            font-size: 0.9375rem;
+            color: var(--stone);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: var(--warm-teal);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .pricing-card {
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .pricing-card-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--warm-teal);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            line-height: 1;
+        }
+
+        .pricing-card .price-note {
+            font-size: 0.875rem;
+            color: var(--stone);
+            margin-top: 0.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .cta-microcopy {
+            text-align: center;
+        }
+
+        /* ============================================
+           MID-PAGE CTA
+           ============================================ */
+        .mid-cta {
+            background: var(--fog);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .mid-cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mid-cta h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mid-cta p {
+            font-size: 0.9375rem;
+            color: var(--stone);
+            margin-bottom: 1.5rem;
+        }
+
+        .mid-cta .cta-microcopy {
+            margin-top: 0.75rem;
+        }
+
+        /* ============================================
+           TEAM
+           ============================================ */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 2rem;
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--fog);
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .team-info h3 {
+            font-size: 1rem;
+            margin-bottom: 0.125rem;
+        }
+
+        .team-info .role {
+            font-size: 0.8125rem;
+            color: var(--warm-teal);
+            font-weight: 600;
+        }
+
+        .team-card p {
+            font-size: 0.875rem;
+            color: var(--stone);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--warm-ink);
+            color: #A8A8A4;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            max-width: 280px;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .footer-links h4 {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #A8A8A4;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            display: block;
+            font-size: 0.875rem;
+            color: #A8A8A4;
+            text-decoration: none;
+            padding: 0.375rem 0;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line-dark);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8125rem;
+        }
+
+        /* ============================================
+           PROCESS CTA
+           ============================================ */
+        .process-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .process-cta-note {
+            font-size: 0.8125rem;
+            color: var(--stone);
+            margin-top: 0.75rem;
+        }
+
+        /* Output Preview */
+        .output-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--ivory);
+            border-radius: 8px;
+            border: 1px solid var(--line);
+        }
+
+        .output-preview-thumb {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .output-preview-thumb:hover {
+            transform: scale(1.02);
+        }
+
+        .preview-mini {
+            width: 180px;
+            padding: 12px;
+            background: var(--fog);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .preview-mini-header {
+            font-size: 8px;
+            font-weight: 600;
+            color: var(--warm-ink);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .preview-timeline {
+            position: relative;
+            padding-left: 8px;
+        }
+
+        .preview-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 1px;
+            background: var(--line);
+        }
+
+        .preview-mini-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .preview-mini-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 5px;
+            height: 5px;
+            background: var(--warm-teal);
+            border-radius: 50%;
+        }
+
+        .preview-mini-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .preview-type {
+            font-size: 5px;
+            font-weight: 600;
+            padding: 2px 4px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .preview-type-seh {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .preview-type-ortho {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .preview-type-radio {
+            background: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .preview-mini-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .preview-mini-date {
+            font-size: 5px;
+            color: var(--stone);
+            margin-bottom: 1px;
+        }
+
+        .preview-mini-title {
+            font-size: 7px;
+            font-weight: 500;
+            color: var(--warm-ink);
+            margin-bottom: 1px;
+        }
+
+        .preview-mini-desc {
+            font-size: 5px;
+            color: var(--stone);
+            font-style: italic;
+        }
+
+        .preview-mini-footer {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid var(--line);
+        }
+
+        .preview-mini-source {
+            font-size: 5px;
+            color: var(--stone);
+            background: var(--ivory);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .output-preview-text {
+            text-align: left;
+        }
+
+        .output-preview-note {
+            font-size: 0.8125rem;
+            color: var(--stone-readable);
+            margin-top: 0.75rem;
+            max-width: 280px;
+        }
+
+        /* Governance Statement */
+        .governance-statement {
+            margin-top: 2.5rem;
+            padding: 1.5rem 2rem;
+            background: var(--ivory);
+            border-left: 3px solid var(--warm-teal);
+            border-radius: 0 4px 4px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .governance-statement h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .governance-statement p {
+            font-size: 0.8125rem;
+            color: var(--stone-readable);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           MODAL
+           ============================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(20, 20, 20, 0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--ivory);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            background: var(--ivory);
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--warm-ink);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--stone);
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--warm-ink);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 1rem;
+        }
+
+        .modal-tab {
+            background: none;
+            border: 1px solid var(--line);
+            padding: 0.625rem 1.25rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--stone);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .modal-tab:hover {
+            border-color: var(--stone);
+        }
+
+        .modal-tab.active {
+            background: var(--warm-ink);
+            border-color: var(--warm-ink);
+            color: var(--ivory);
+        }
+
+        /* Mockup phase labels */
+        .mockup-phase-label {
+            font-size: 0.6875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--stone);
+            background: var(--ivory);
+            padding: 0.5rem 1rem;
+            border-radius: 4px 4px 0 0;
+            border: 1px solid var(--line);
+            border-bottom: none;
+            display: inline-block;
+            margin-bottom: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mockup-container {
+            background: var(--fog);
+            padding: 2rem;
+            border-radius: 4px;
+        }
+
+        .mockup-panel {
+            display: none;
+        }
+
+        .mockup-panel.active {
+            display: block;
+        }
+
+        /* Timeline mockup styles */
+        .mockup-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--warm-ink);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .timeline-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-date {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--stone);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--warm-ink);
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            font-size: 12px;
+            color: var(--stone);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .source-box {
+            background: var(--ivory);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 10px;
+            color: var(--stone);
+        }
+
+        /* Rapport mockup styles */
+        .rapport-section-header {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--warm-ink);
+            margin-bottom: 16px;
+        }
+
+        .rapport-body-text {
+            font-size: 11px;
+            color: var(--warm-ink);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .rapport-source-box {
+            background: var(--ivory);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-top: 20px;
+        }
+
+        .rapport-source-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--stone);
+            margin-bottom: 8px;
+        }
+
+        .rapport-source-list {
+            font-size: 10px;
+            color: var(--stone);
+            line-height: 1.6;
+        }
+
+        .rapport-source-item {
+            margin-bottom: 4px;
+        }
+
+        .rapport-page-number {
+            text-align: right;
+            font-size: 10px;
+            color: var(--stone);
+            margin-top: 20px;
+        }
+
+        .mockup-caption {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.8125rem;
+            color: var(--stone-readable);
+            line-height: 1.6;
+        }
+
+        /* Dossier header styles */
+        .dossier-header {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            padding: 12px 16px;
+            background: var(--ivory);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .dossier-header-compact {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .dossier-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .dossier-label {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--stone);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .dossier-value {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--warm-ink);
+        }
+
+        .dossier-redacted {
+            background: #E8E7E4;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-family: monospace;
+            font-size: 10px;
+        }
+
+        .dossier-status {
+            color: var(--stone);
+            font-style: italic;
+        }
+
+        /* Enhanced timeline styles */
+        .timeline-wrapper {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background: var(--line);
+        }
+
+        .timeline-wrapper .timeline-item {
+            display: flex;
+            gap: 16px;
+            position: relative;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .timeline-wrapper .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-type {
+            position: absolute;
+            left: -60px;
+            top: 0;
+            width: 44px;
+            padding: 4px 0;
+            font-size: 9px;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .type-seh {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .type-ortho {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .type-radio {
+            background: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .type-fysio {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-wrapper .timeline-date {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--stone);
+            margin-bottom: 4px;
+        }
+
+        /* Inline redacted text */
+        .redacted-inline {
+            background: #E8E7E4;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 10px;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            /* Hero-card full width on tablet */
+            .hero-card {
+                max-width: none;
+                width: 100%;
+            }
+
+            /* Process-flow to 1 column on tablet for better reading flow */
+            .process-flow {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .process-flow::before {
+                display: none;
+            }
+
+            .not-does-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* Simplified navigation on mobile - hide secondary links */
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.btn):not([href="#proces"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            /* Compact trust-bar on mobile - show only 2 items */
+            .trust-bar-content {
+                gap: 1.5rem;
+            }
+
+            .trust-item:nth-child(n+3) {
+                display: none;
+            }
+
+            /* Shorter subtitle on mobile */
+            .section-subtitle {
+                font-size: 0.875rem;
+            }
+
+            .process-flow {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            /* Modal responsive */
+            .modal-overlay {
+                padding: 1rem;
+            }
+
+            .modal-header {
+                padding: 1rem 1.25rem;
+            }
+
+            .modal-body {
+                padding: 1.25rem;
+            }
+
+            .modal-tabs {
+                flex-direction: column;
+            }
+
+            .dossier-header {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .dossier-header-compact {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-wrapper {
+                padding-left: 50px;
+            }
+
+            .timeline-wrapper::before {
+                left: 18px;
+            }
+
+            .timeline-type {
+                left: -50px;
+                width: 38px;
+                font-size: 8px;
+            }
+
+            /* Output preview responsive */
+            .output-preview {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .output-preview-text {
+                text-align: center;
+            }
+
+            .output-preview-note {
+                max-width: none;
+            }
+
+            .governance-statement {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Dark -->
+    <header class="header" id="header">
+        <nav class="nav-content">
+            <a href="#" class="logo">
+                <!-- Light logo on dark background - with cutout -->
+                <svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="k-cut-header">
+                            <path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/>
+                        </clipPath>
+                    </defs>
+                    <rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+                    <g clip-path="url(#k-cut-header)">
+                        <path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/>
+                    </g>
+                    <text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="#proces">Werkwijze</a>
+                <a href="#voordelen">Voordelen</a>
+                <a href="#faq">FAQ</a>
+                <a href="#prijzen">Prijzen</a>
+                <a href="#contact" class="btn btn-primary">Plan een gesprek</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Trust Bar - Different icons per item -->
+    <div class="trust-bar">
+        <div class="trust-bar-content">
+            <span class="trust-item">
+                <!-- Shield icon -->
+                <svg class="trust-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M8 1.5L2 4v4c0 3.5 2.5 5.5 6 7 3.5-1.5 6-3.5 6-7V4L8 1.5z"/>
+                </svg>
+                AVG compliant
+            </span>
+            <span class="trust-item">
+                <!-- File check icon -->
+                <svg class="trust-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 1.5H3.5a1 1 0 00-1 1v11a1 1 0 001 1h9a1 1 0 001-1V6L9 1.5z"/>
+                    <path d="M5.5 9l2 2 3-3"/>
+                </svg>
+                NEN 7510
+            </span>
+            <span class="trust-item">
+                <!-- Server/EU icon -->
+                <svg class="trust-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="2" width="12" height="5" rx="1"/>
+                    <rect x="2" y="9" width="12" height="5" rx="1"/>
+                    <circle cx="5" cy="4.5" r="0.75" fill="currentColor"/>
+                    <circle cx="5" cy="11.5" r="0.75" fill="currentColor"/>
+                </svg>
+                EU hosting
+            </span>
+            <span class="trust-item">
+                <!-- Badge/credential icon -->
+                <svg class="trust-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="8" cy="6" r="4"/>
+                    <path d="M5 9.5v5l3-1.5 3 1.5v-5"/>
+                </svg>
+                BIG-geregistreerd
+            </span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Beslisklare medische dossiers binnen <span>4 weken</span></h1>
+                
+                <p class="hero-subline">Volledig traceerbaar · Privacy-by-design · Geautoriseerd door BIG-geregistreerd specialist</p>
+                
+                <div class="hero-cta">
+                    <div class="hero-cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Plan een verkennend gesprek</a>
+                        <a href="#proces" class="btn btn-secondary">Bekijk werkwijze</a>
+                    </div>
+                    <p class="cta-microcopy">Geen verplichtingen · 15 minuten · Vertrouwelijk</p>
+                </div>
+            </div>
+            
+            <!-- FIXED: Claims genuanceerd met "typisch" en "indicatief" -->
+            <div class="hero-card">
+                <h3>Vergelijking met markt</h3>
+                <div class="comparison-item">
+                    <span class="label">Doorlooptijd (typisch)</span>
+                    <div class="values">
+                        <span class="old">6-9 mnd</span>
+                        <span class="new">4 weken</span>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <span class="label">Tarief (indicatief)</span>
+                    <div class="values">
+                        <span class="old">€4.000+</span>
+                        <span class="new">€1.950</span>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <span class="label">Tijdgarantie</span>
+                    <div class="values">
+                        <span class="old">Nee</span>
+                        <span class="new">Ja</span>
+                    </div>
+                </div>
+                <div class="comparison-item">
+                    <!-- FIXED: "Traceerbaarheid" i.p.v. "Bronverwijzing" -->
+                    <span class="label">Traceerbaarheid</span>
+                    <div class="values">
+                        <span class="old">Standaard</span>
+                        <span class="new">Volledig</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section-fog" id="proces">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Werkwijze</div>
+                <h2 class="section-title">Van dossier tot rapport in vier stappen</h2>
+                <p class="section-subtitle">Gestructureerd proces met duidelijke verantwoordelijkheidsverdeling</p>
+            </div>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Dossier aanlevering</h3>
+                    <p>U levert het medisch dossier aan via beveiligde upload</p>
+                    <span class="step-output">Intake bevestiging</span>
+                </div>
+                <div class="process-step ai">
+                    <div class="step-number">2</div>
+                    <h3>AI-verwerking</h3>
+                    <p>Extractie, ordening en detectie van hiaten</p>
+                    <span class="step-output">Chronologische tijdlijn</span>
+                </div>
+                <div class="process-step ai">
+                    <div class="step-number">3</div>
+                    <h3>Voorbereiding</h3>
+                    <p>Concept medische samenvatting met bronverwijzingen</p>
+                    <!-- FIXED: "Concept rapport (IWMD-structuur)" -->
+                    <span class="step-output">Concept rapport (IWMD)</span>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Medisch oordeel</h3>
+                    <p>Arts beoordeelt, onderzoekt en autoriseert</p>
+                    <span class="step-output">Definitief rapport</span>
+                </div>
+            </div>
+            
+            <div class="output-preview">
+                <div class="output-preview-thumb" id="openExamples">
+                    <div class="preview-mini">
+                        <div class="preview-mini-header">Chronologisch overzicht</div>
+                        <div class="preview-timeline">
+                            <div class="preview-mini-item">
+                                <span class="preview-type preview-type-seh">SEH</span>
+                                <div class="preview-mini-text">
+                                    <div class="preview-mini-date">12-03-2021 · Dag 0</div>
+                                    <div class="preview-mini-title">SEH-verslag</div>
+                                    <div class="preview-mini-desc">Eerste presentatie na ongeval</div>
+                                </div>
+                            </div>
+                            <div class="preview-mini-item">
+                                <span class="preview-type preview-type-ortho">Ortho</span>
+                                <div class="preview-mini-text">
+                                    <div class="preview-mini-date">18-03-2021 · Dag 6</div>
+                                    <div class="preview-mini-title">Polikliniek orthopedie</div>
+                                    <div class="preview-mini-desc">MRI aangevraagd</div>
+                                </div>
+                            </div>
+                            <div class="preview-mini-item">
+                                <span class="preview-type preview-type-radio">Radio</span>
+                                <div class="preview-mini-text">
+                                    <div class="preview-mini-date">07-04-2021 · Dag 26</div>
+                                    <div class="preview-mini-title">MRI rechterknie</div>
+                                    <div class="preview-mini-desc">Partiële ruptuur VKB</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-mini-footer">
+                            <span class="preview-mini-source">Bron: ZH Amstelland, p. 2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="output-preview-text">
+                    <button class="btn btn-secondary" id="openExamplesBtn">Bekijk voorbeeldoutput</button>
+                    <p class="output-preview-note">Geanonimiseerde voorbeelden van tijdlijn en concept-rapport</p>
+                </div>
+            </div>
+            
+            <div class="governance-statement">
+                <h4>Van concept naar definitief rapport</h4>
+                <p>AI ondersteunt bij dossiervoorbereiding en signalering. De arts beoordeelt, onderzoekt en stelt het definitieve oordeel vast. De opdrachtgever ontvangt uitsluitend het geautoriseerde rapport.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rolverdeling -->
+    <section class="section section-ivory">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Rolverdeling</div>
+                <h2 class="section-title">Heldere verantwoordelijkheden</h2>
+                <p class="section-subtitle">Kinetic levert onafhankelijke medische expertises in opdracht van de inkopende partij</p>
+            </div>
+            
+            <div class="not-does-grid">
+                <div class="not-does-item">
+                    <h3>AI structureert, arts oordeelt</h3>
+                    <p>AI extraheert en ordent de medische feiten. De arts interpreteert, weegt en concludeert.</p>
+                </div>
+                <div class="not-does-item">
+                    <h3>Elke conclusie door de specialist</h3>
+                    <p>Bevindingen zijn aandachtspunten. Het medisch oordeel is altijd van de arts.</p>
+                </div>
+                <div class="not-does-item">
+                    <h3>Volledige medische verantwoordelijkheid</h3>
+                    <p>De BIG-geregistreerde specialist tekent het rapport en draagt volledige verantwoordelijkheid.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section section-fog" id="voordelen">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Voordelen</div>
+                <h2 class="section-title">Wat u krijgt</h2>
+                <p class="section-subtitle">Elke expertise bevat standaard</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Volledige traceerbaarheid</h3>
+                    <p>Elke conclusie verwijst naar brondocument en paginanummer. Reproduceerbaar en verdedigbaar.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Volledigheidscontrole</h3>
+                    <p>Automatische detectie van ontbrekende documenten of incomplete periodes in het dossier.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Bronvergelijking</h3>
+                    <p>Detectie van discrepanties tussen verschillende medische bronnen.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Tijdgarantie</h3>
+                    <p>4 weken doorlooptijd gegarandeerd. Bij overschrijding: korting op het tarief.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mid-page CTA -->
+    <section class="mid-cta">
+        <div class="mid-cta-content">
+            <h2>Benieuwd of Kinetic past bij uw dossiers?</h2>
+            <p>In een kort gesprek bespreken we uw specifieke situatie en of onze aanpak aansluit.</p>
+            <a href="#contact" class="btn btn-primary">Plan een verkennend gesprek</a>
+            <p class="cta-microcopy">Geen verplichtingen · 15 minuten · Vertrouwelijk</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-fog" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Veelgestelde vragen</div>
+                <h2 class="section-title">Vragen van verzekeraars en letselschadepraktijken</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-category">
+                    <div class="faq-category-label">Juridisch & aansprakelijkheid</div>
+                    
+                    <div class="faq-item open">
+                        <button class="faq-question">
+                            Wie is aansprakelijk voor de inhoud van het rapport?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            De BIG-geregistreerde medisch specialist die het rapport opstelt en ondertekent is volledig eindverantwoordelijk voor de medische inhoud. Kinetic faciliteert de dossiervoorbereiding en rapportage, maar neemt geen medische oordelen.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Is het rapport bruikbaar in een gerechtelijke procedure?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Ja. Het rapport volgt de IWMD-vraagstelling, bevat volledige bronverwijzingen en wordt opgesteld en geautoriseerd door een onafhankelijke BIG-geregistreerde specialist.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <div class="faq-category-label">Rol van AI</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Welke rol speelt AI precies in het proces?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            AI ondersteunt bij het ordenen, samenvatten en signaleren van het aangeleverde dossier. AI stelt geen diagnoses, doet geen causaliteitsuitspraken en trekt geen medische conclusies.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Ziet de opdrachtgever AI-output?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Nee. De opdrachtgever ontvangt uitsluitend het definitieve, door de specialist geautoriseerde rapport.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <div class="faq-category-label">Privacy & compliance</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Wie is verwerkingsverantwoordelijke en wie is verwerker?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            De opdrachtgever is verwerkingsverantwoordelijke. Kinetic treedt op als verwerker en sluit daarvoor een verwerkersovereenkomst.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Worden gegevens gebruikt voor training van AI-modellen?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Nee. Dossiers worden uitsluitend verwerkt voor de betreffende expertise en niet gebruikt voor training of hergebruik.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Welke compliance-documenten zijn beschikbaar?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Op verzoek leveren wij: verwerkersovereenkomst, DPIA-template, beschrijving dataverwerking en rol- en verantwoordelijkheidsmatrix. Dit versnelt interne goedkeuringstrajecten.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <div class="faq-category-label">Inkoop & pilot</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Is Kinetic geschikt voor structurele inzet?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Ja. De werkwijze is ontworpen voor herhaalbare inzet binnen grotere dossierstromen, met vaste doorlooptijd en vaste rapportstructuur.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Zit er een verplichting aan een pilot?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Nee. De pilot is bedoeld om de werkwijze te toetsen en kent geen verplichting tot vervolg.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <div class="faq-category-label">Praktisch</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Wat gebeurt er als het dossier onvolledig blijkt?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Ontbrekende onderdelen worden gesignaleerd en teruggekoppeld aan de opdrachtgever. De doorlooptijd start zodra het dossier compleet is.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Wat kost een expertise en hoe lang duurt het?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            €1.950 per dossier, all-in. Doorlooptijd is 4 weken vanaf complete dossieraanlevering. Bij overschrijding ontvangt u korting.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Kan er na oplevering toelichting worden gegeven?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Ja. Vragen over het rapport worden door de betrokken specialist beantwoord.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section section-ivory" id="prijzen">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Investering</div>
+                <h2 class="section-title">Transparant tarief</h2>
+            </div>
+            
+            <div class="pricing-content">
+                <div class="pricing-context">
+                    <h3>Eén vast tarief, geen verrassingen</h3>
+                    
+                    <!-- FIXED: Indirecte kosten zonder bedrag -->
+                    <div class="price-anchor">
+                        <p><strong>Ter vergelijking:</strong> een traditionele medische expertise kost typisch €4.000-5.000 met een doorlooptijd van 6-9 maanden. Daar kunnen indirecte kosten bijkomen door vertraging en heropening van dossiers.</p>
+                    </div>
+                    
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">—</span> Volledige expertise volgens IWMD-standaard</li>
+                        <li><span class="check-icon">—</span> 4 weken doorlooptijd gegarandeerd</li>
+                        <li><span class="check-icon">—</span> Chronologische tijdlijn met bronverwijzingen</li>
+                        <li><span class="check-icon">—</span> Audit trail voor reproduceerbaarheid</li>
+                        <li><span class="check-icon">—</span> Fysiek onderzoek door BIG-geregistreerd specialist</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-card-label">Pilotprijs</div>
+                    <div class="price">€1.950</div>
+                    <div class="price-note">per dossier · all-in</div>
+                    <a href="#contact" class="btn btn-primary">Plan een gesprek</a>
+                    <p class="cta-microcopy">Pilot vrijblijvend · geen verplichting tot vervolg</p>
+                    <p class="cta-microcopy" style="margin-top: 0.5rem; font-style: italic;">Geschikt voor structurele inkoop</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section section-fog" id="team">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Team</div>
+                <h2 class="section-title">Wie er achter Kinetic staat</h2>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-header">
+                        <img class="team-avatar" src="data:image/jpeg;base64,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" alt="Edwin Diepeveen">
+                        <div class="team-info">
+                            <h3>Edwin Diepeveen</h3>
+                            <div class="role">Orthopedisch chirurg</div>
+                        </div>
+                    </div>
+                    <p>20+ jaar ervaring met medische expertises in letselschadezaken. BIG-geregistreerd specialist en eindverantwoordelijk voor alle rapporten.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-header">
+                        <img class="team-avatar" src="data:image/jpeg;base64,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IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/bAEMABQMEBAQDBQQEBAUFBQYHDAgHBwcHDwsLCQwRDxISEQ8RERMWHBcTFBoVEREYIRgaHR0fHx8TFyIkIh4kHB4fHv/bAEMBBQUFBwYHDggIDh4UERQeHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHv/AABEIAHAAcAMBIgACEQEDEQH/xAAdAAABBQEBAQEAAAAAAAAAAAAHAAEFBggEAwIJ/8QAPBAAAQMDAgMFBgQEBQUAAAAAAQIDBAAFEQYhBxIxEyJBUWEIFHGBkaEjMlKxFSRCwTM0RFPwcoKT0eH/xAAZAQACAwEAAAAAAAAAAAAAAAAAAwECBAX/xAAjEQADAAICAgICAwAAAAAAAAAAAQIDERIhMUEEIhMjMlFh/9oADAMBAAIRAxEAPwDWlPTU9YTQIUqQpUAfDriWmVurzyoSVHAzsN6EF19oLSsRxox4FxmR3n0JQ8hHKnsiQFL32yFHHL6ZJFcftd64uGm9ExtNWaGZdy1N2sRKQrBS0EjnPz5sfWsw3mZcbJo+PbrgwiLNySoNHKAckADyB5Unbbc0/FjTW2Uqn6NG6k9pizx33mLJYJj4Zc5VPy+4kjGQQlOVb9d/Cqo97VrqGFhdoYEjGE9jlTYPrk82OnQ1mSTf5T6kF5bkd5sFIeCAoKGTspJ2UPQ+O/nUK+X5b4UEgqz1bzyn1APT4Uz8c+iFTNUQ/atuSJCBJtsZxg9ct8qifRQO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" alt="Jan-Willem van Beek">
+                        <div class="team-info">
+                            <h3>Jan-Willem van Beek</h3>
+                            <div class="role">Founder</div>
+                        </div>
+                    </div>
+                    <p>Achtergrond in healthcare technology en procesoptimalisatie. Focus op het verbeteren van medische dienstverlening door slimme inzet van technologie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section section-ink" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" style="color: #A8A8A4;">Contact</div>
+                <h2 class="section-title">Plan een verkennend gesprek</h2>
+                <p class="section-subtitle" style="color: #A8A8A4;">In 15 minuten bespreken we of Kinetic past bij uw dossiers</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="mailto:info@kineticmedical.nl" class="btn btn-primary" style="margin-bottom: 1rem;">info@kineticmedical.nl</a>
+                <p class="cta-microcopy" style="color: #A8A8A4;">Reactie binnen 48 uur</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="k-cut-footer">
+                            <path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/>
+                        </clipPath>
+                    </defs>
+                    <rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+                    <g clip-path="url(#k-cut-footer)">
+                        <path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/>
+                    </g>
+                    <text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
+                </svg>
+                <p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>
+                <a href="tel:+31612345678">+31 6 1234 5678</a>
+            </div>
+            <div class="footer-links">
+                <h4>Juridisch</h4>
+                <a href="#">Privacybeleid</a>
+                <a href="#">Algemene voorwaarden</a>
+                <a href="#">Verwerkersovereenkomst</a>
+            </div>
+        </div>
+        <!-- FIXED: Dynamic year -->
+        <div class="footer-bottom">
+            <p>© <script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
+            <span>SSL beveiligd</span>
+        </div>
+    </footer>
+
+    <!-- Modal: Voorbeeldoutput -->
+    <div class="modal-overlay" id="examplesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Voorbeeldoutput (geanonimiseerd)</h2>
+                <button class="modal-close" id="closeModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="timeline">Chronologische tijdlijn</button>
+                    <button class="modal-tab" data-tab="rapport">Concept rapport</button>
+                </div>
+
+                <!-- Tab 1: Timeline -->
+                <div class="mockup-panel active" id="panel-timeline">
+                    <div class="mockup-phase-label">Interne dossiervoorbereiding (conceptfase)</div>
+                    <div class="mockup-container">
+                        <!-- Dossier header -->
+                        <div class="dossier-header">
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Zaaknummer</span>
+                                <span class="dossier-value">2021-KME-0847</span>
+                            </div>
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Betrokkene</span>
+                                <span class="dossier-value dossier-redacted">[Naam geanonimiseerd]</span>
+                            </div>
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Geboortedatum</span>
+                                <span class="dossier-value dossier-redacted">[XX-XX-1985]</span>
+                            </div>
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Ongevalsdatum</span>
+                                <span class="dossier-value">12-03-2021</span>
+                            </div>
+                        </div>
+
+                        <div class="mockup-header">Chronologisch overzicht</div>
+
+                        <div class="timeline-wrapper">
+                            <div class="timeline-item">
+                                <div class="timeline-type type-seh">SEH</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">12-03-2021 · Dag 0</div>
+                                    <div class="timeline-title">SEH-verslag</div>
+                                    <div class="timeline-description">
+                                        Eerste presentatie na ongeval met knieklachten rechts.<br>
+                                        Röntgen: geen fractuur zichtbaar.
+                                    </div>
+                                    <div class="source-box">Bron: ZH Amstelland, SEH verslag, p. 2</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-type type-ortho">Ortho</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">18-03-2021 · Dag 6</div>
+                                    <div class="timeline-title">Polikliniek orthopedie</div>
+                                    <div class="timeline-description">
+                                        Controle 6 dagen post-trauma. Persisterende klachten.<br>
+                                        MRI aangevraagd ter uitsluiting meniscusletsel.
+                                    </div>
+                                    <div class="source-box">Bron: Orthopedie Kliniek West, brief, p. 1–2</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-type type-radio">Radio</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">07-04-2021 · Dag 26</div>
+                                    <div class="timeline-title">MRI rechterknie</div>
+                                    <div class="timeline-description">
+                                        Partiële ruptuur voorste kruisband. Mediaal meniscus<br>
+                                        intact. Lichte hydrops.
+                                    </div>
+                                    <div class="source-box">Bron: Radiologie ZH Amstelland, verslag, p. 1</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-type type-fysio">Fysio</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">21-04-2021 · Dag 40</div>
+                                    <div class="timeline-title">Fysiotherapie intake</div>
+                                    <div class="timeline-description">
+                                        Start revalidatietraject. Quadriceps atrofie rechts.<br>
+                                        Behandelplan: 2x per week, 12 weken.
+                                    </div>
+                                    <div class="source-box">Bron: FysioPraktijk Centrum, intake, p. 3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mockup-caption">
+                        Voorbeeld van een automatisch gegenereerde chronologische tijdlijn.<br>
+                        Elke gebeurtenis is direct herleidbaar tot het originele document en paginanummer.
+                    </p>
+                </div>
+
+                <!-- Tab 2: Rapport -->
+                <div class="mockup-panel" id="panel-rapport">
+                    <div class="mockup-phase-label">Concept — niet geautoriseerd</div>
+                    <div class="mockup-container">
+                        <!-- Dossier header -->
+                        <div class="dossier-header dossier-header-compact">
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Zaaknummer</span>
+                                <span class="dossier-value">2021-KME-0847</span>
+                            </div>
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Betrokkene</span>
+                                <span class="dossier-value dossier-redacted">[Naam geanonimiseerd]</span>
+                            </div>
+                            <div class="dossier-meta">
+                                <span class="dossier-label">Status</span>
+                                <span class="dossier-value dossier-status">Concept — ter beoordeling arts</span>
+                            </div>
+                        </div>
+
+                        <div class="rapport-section-header">3. Medische voorgeschiedenis</div>
+
+                        <p class="rapport-body-text">
+                            <span class="redacted-inline">[Betrokkene]</span> rapporteert sinds het ongeval op 12 maart 2021 persisterende pijnklachten in de rechterknie, toegenomen bij belasting. Direct na het ongeval is <span class="redacted-inline">[betrokkene]</span> gezien op de SEH van ZH Amstelland, waar röntgenonderzoek geen fractuur toonde.
+                        </p>
+
+                        <p class="rapport-body-text">
+                            Bij poliklinische controle op 18 maart 2021 werd een MRI aangevraagd wegens aanhoudende klachten. Deze MRI (7 april 2021) toonde een partiële ruptuur van de voorste kruisband.
+                        </p>
+
+                        <div class="rapport-source-box">
+                            <div class="rapport-source-label">Bronnen:</div>
+                            <div class="rapport-source-list">
+                                <div class="rapport-source-item">— SEH verslag ZH Amstelland, d.d. 12-03-2021, p. 2</div>
+                                <div class="rapport-source-item">— Brief orthopedie Kliniek West, d.d. 18-03-2021, p. 1–2</div>
+                                <div class="rapport-source-item">— MRI verslag Radiologie ZH Amstelland, d.d. 07-04-2021, p. 1</div>
+                            </div>
+                        </div>
+
+                        <div class="rapport-page-number">p. 3</div>
+                    </div>
+                    <p class="mockup-caption">
+                        Fragment uit concept-rapport.<br>
+                        AI ondersteunt bij ordening en bronverwijzing; de BIG-geregistreerde specialist beoordeelt en autoriseert het definitieve rapport.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isOpen = item.classList.contains('open');
+                
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('examplesModal');
+        const openBtn = document.getElementById('openExamples');
+        const openBtnAlt = document.getElementById('openExamplesBtn');
+        const closeBtn = document.getElementById('closeModal');
+        const tabs = document.querySelectorAll('.modal-tab');
+        const panels = document.querySelectorAll('.mockup-panel');
+
+        // Open modal (thumbnail)
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Open modal (button)
+        openBtnAlt.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close on overlay click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById('panel-' + targetTab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
