@@ -5,19 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kinetic · Tooling Demo — Pseudonymizer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
 --ivory:#FAF9F7;--teal:#2F6F6A;--teal-lt:#3a8a84;--teal-dim:rgba(47,111,106,.12);
 --ink:#141414;--fog:#F0EFEC;--mist:#E8E6E2;--stone:#9C9890;--white:#FFF;
 --line-dark:rgba(255,255,255,.1);
---fd:'Instrument Serif',Georgia,serif;--fb:'DM Sans',-apple-system,sans-serif;
+--fd:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--fb:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
 --c-bsn:#D94F4F;--c-name:#C77B2E;--c-date:#2F6F6A;--c-phone:#7B5EA7;
 --c-email:#3B7DD8;--c-iban:#D94F4F;--c-addr:#8B6B47;--c-org:#5B8C5A;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:var(--fb);background:var(--ivory);color:var(--stone);line-height:1.7;-webkit-font-smoothing:antialiased}
 
 /* Home-style header */
 .header{background:var(--ink);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--line-dark)}
@@ -33,7 +34,7 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 .hero{padding:5rem 2rem 3rem;text-align:center}
 .hero-lab{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
 .hero-lab::before{content:'';width:24px;height:1px;background:var(--teal)}
-.hero h1{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em}
+.hero h1{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;color:var(--ink);line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em}
 .hero p{font-size:1.05rem;color:var(--stone);max-width:540px;margin:0 auto;line-height:1.65}
 
 .pipe{padding:2rem 2rem 3rem;max-width:800px;margin:0 auto}
@@ -55,9 +56,9 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 .demo{background:var(--fog);padding:3rem 2rem 4rem}
 .demo-c{max-width:1200px;margin:0 auto}
 .demo-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
-.demo-t{font-family:var(--fd);font-size:1.6rem;color:var(--ink)}
+.demo-t{font-family:var(--fd);font-size:1.6rem;color:var(--ink);font-weight:600}
 .demo-a{display:flex;gap:.75rem}
-.btn{font-family:var(--fb);font-size:.85rem;font-weight:600;border:none;cursor:pointer;border-radius:8px;padding:.65rem 1.4rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn{font-family:var(--fb);font-size:.9375rem;font-weight:600;border:none;cursor:pointer;border-radius:4px;padding:.875rem 1.75rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
 .btn-p{background:var(--teal);color:var(--white)}
 .btn-p:hover{background:var(--teal-lt);transform:translateY(-1px);box-shadow:0 4px 12px rgba(47,111,106,.25)}
 .btn-p:active{transform:translateY(0)}
