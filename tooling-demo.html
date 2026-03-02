@@ -67,8 +67,8 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 .ed-p{background:var(--white);display:flex;flex-direction:column}
 .ph-h{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--fog)}
 .ph-t{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--stone)}
-.ph-i{width:8px;height:8px;border-radius:50%}
-.ph-i.in{background:var(--teal)}.ph-i.out{background:var(--c-bsn)}
+.ph-i{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ph-i.in{background:var(--teal)}.ph-i.ind-out{background:var(--c-bsn)}
 .ed-ta{width:100%;min-height:420px;padding:1.25rem;border:none;outline:none;resize:vertical;font-family:var(--fb);font-size:.82rem;line-height:1.75;color:var(--ink);background:var(--white)}
 .ed-ta::placeholder{color:var(--stone)}
 .out{padding:1.25rem;min-height:420px;font-family:var(--fb);font-size:.82rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;word-wrap:break-word;overflow-y:auto}
@@ -150,14 +150,14 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 <div class="demo-h">
 <h2 class="demo-t">Pseudonymizer</h2>
 <div class="demo-a">
-<button class="btn btn-s" id="br"><svg class="btn-i" viewBox="0 0 16 16" fill="none"><path d="M2.5 8a5.5 5.5 0 019.3-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 8a5.5 5.5 0 01-9.3 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 2.5L12 4l1.5-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13.5L4 12l-1.5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Reset voorbeeld</button>
-<button class="btn btn-p" id="bp"><svg class="btn-i" viewBox="0 0 16 16" fill="none"><path d="M2 4l4 4-4 4M8 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pseudonimiseer</button>
+<button class="btn btn-s" id="br" onclick="reset()"><svg class="btn-i" viewBox="0 0 16 16" fill="none"><path d="M2.5 8a5.5 5.5 0 019.3-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 8a5.5 5.5 0 01-9.3 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 2.5L12 4l1.5-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13.5L4 12l-1.5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Reset voorbeeld</button>
+<button class="btn btn-p" id="bp" onclick="run()"><svg class="btn-i" viewBox="0 0 16 16" fill="none"><path d="M2 4l4 4-4 4M8 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pseudonimiseer</button>
 </div></div>
 
 <div class="ed">
 <div class="ed-p"><div class="ph-h"><span class="ph-t">Invoer &mdash; Medisch dossier</span><span class="ph-i in"></span></div>
 <textarea class="ed-ta" id="inp" placeholder="Plak hier een medisch dossier..."></textarea></div>
-<div class="ed-p"><div class="ph-h"><span class="ph-t">Uitvoer &mdash; Gepseudonimiseerd</span><span class="ph-i out"></span></div>
+<div class="ed-p"><div class="ph-h"><span class="ph-t">Uitvoer &mdash; Gepseudonimiseerd</span><span class="ph-i ind-out"></span></div>
 <div class="out" id="outp"><span class="out-ph">Klik op &ldquo;Pseudonimiseer&rdquo; om het resultaat te zien&hellip;</span></div></div>
 </div>
 
@@ -183,7 +183,6 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 
 <footer class="ft"><p>Kinetic Medische Expertises &middot; <span>Pseudonymizer v3.0</span></p></footer>
 <script>
-(function(){
 var MED=['Morbus Bechterew','Nervus Medianus','Nervus Ulnaris','Nervus Radialis','Nervus Ischiadicus','Nervus Femoralis','Plexus Brachialis','Hernia Nuclei Pulposi','HNP','Carpal Tunnel Syndroom','CTS','Whiplash Associated Disorder','WAD','Post Commotioneel Syndroom','PCS','PTSS','Posttraumatisch Stressstoornis','CRPS','Complex Regionaal Pijnsyndroom','Sudeck','Fibromyalgie','Artrose','Osteoporose','Spondylodese','Spondylolisthesis','Discushernia','Discusdegeneratie','Radiculopathie','Cervicaal','Thoracaal','Lumbaal','Sacraal','Cervicobrachialgie','Lumboischialgie','Ischialgie','Scoliose','Kyfose','Lordose','Stenose','Foraminastenose','Myelopathie','Tendinitis','Tendinopathie','Bursitis','Epicondylitis','Impingement','Frozen Shoulder','Adhesieve Capsulitis','Instabiliteit','Meniscusletsel','Kruisbandletsel','VKB','AKB','Voorste Kruisband','Achterste Kruisband','Collaterale Band','Labrum','Bankart Laesie','SLAP Laesie','Rotatorcuff','Supraspinatus','Infraspinatus','Subscapularis','HWK','BWK','LWK','C1','C2','C3','C4','C5','C6','C7','Th1','Th2','Th3','Th4','Th5','Th6','Th7','Th8','Th9','Th10','Th11','Th12','L1','L2','L3','L4','L5','S1','S2','Processus Spinosus','Facetgewricht','Discus Intervertebralis','Ligamentum Flavum','Ligamentum Longitudinale','Dura Mater','Cauda Equina','Conus Medullaris','MRI','CT-scan','CT','EMG','Elektromyografie','Echografie','VAS-score','VAS','NDI','Neck Disability Index','DASH','Roland Morris','Oswestry','Oswestry Disability Index','ODI','WHODAS','Functionele Capaciteitsevaluatie','FCE','Belastbaarheidsonderzoek','Fysiotherapie','Manuele Therapie','Oefentherapie','Cesar','Mensendieck','TENS','Transcutane Elektrische Neurostimulatie','Infiltratie','Epiduraal','Facetdenervatie','Radiofrequente Denervatie','Discografie','Nucleoplastie','Foraminotomie','Laminectomie','Microdiscectomie','Prothese','Artrodese','Osteotomie','Arthroscopie','Revalidatie','Pijnrevalidatie','Graded Activity','Graded Exposure','Cognitieve Gedragstherapie','CGT','EMDR','ACT','Blijvende Invaliditeit','BI','Functionele Invaliditeit','FI','Arbeidsvermogensschade','Huishoudelijke Hulpbehoefte','HHB','Verlies Zelfwerkzaamheid','VSZ','Smartengeld','Shockschade','Affectieschade','AMA Guides','NVvN Richtlijnen','Verzekeringsgeneeskundige','Arbeidsdeskundige','Medisch Adviseur','Belangenbehartiger','Letselschade','Expertiserapport','Percentage Blijvende Invaliditeit','PBI','Proportionele Aansprakelijkheid','Causaal Verband','Conditio Sine Qua Non','CSQN','Pre-existentie','Predispositie','Ongevalsgevolg','Spurling test','Spurling','MRC','SEH','dermatoom','hypoesthesie','tricepsreflex','cervicale wervelkolom','cervicale mobiliteit'];
 var sMed=MED.slice().sort(function(a,b){return b.length-a.length});
 
@@ -343,10 +342,8 @@ outp.innerHTML='<span class="out-ph">Klik op \u201cPseudonimiseer\u201d om het r
 
 document.getElementById('bp').addEventListener('click',run);
 document.getElementById('br').addEventListener('click',reset);
-
-document.addEventListener('DOMContentLoaded',function(){reset();setTimeout(run,400);});
-if(document.readyState!=='loading'){reset();setTimeout(run,400);}
-})();
+reset();
+setTimeout(run,400);
 </script>
 </body>
 </html>
