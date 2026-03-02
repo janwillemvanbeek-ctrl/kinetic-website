@@ -1,1 +1,352 @@
-{"type":"error","error":{"type":"api_error","message":"Internal server error"},"request_id":"req_011CYehezon7PpatoJc2uDpy"}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic · Tooling Demo — Pseudonymizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--ivory:#FAF9F7;--teal:#2F6F6A;--teal-lt:#3a8a84;--teal-dim:rgba(47,111,106,.12);
+--ink:#141414;--fog:#F0EFEC;--mist:#E8E6E2;--stone:#9C9890;--white:#FFF;
+--fd:'Instrument Serif',Georgia,serif;--fb:'DM Sans',-apple-system,sans-serif;
+--c-bsn:#D94F4F;--c-name:#C77B2E;--c-date:#2F6F6A;--c-phone:#7B5EA7;
+--c-email:#3B7DD8;--c-iban:#D94F4F;--c-addr:#8B6B47;--c-org:#5B8C5A;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.sh{position:sticky;top:0;z-index:100;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.06)}
+.sh-in{max-width:1200px;margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.sh-l{display:flex;align-items:center;gap:2rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-w{font-family:var(--fd);font-size:1.25rem;color:var(--ivory)}
+.sh-nav{display:flex;gap:1.5rem}
+.sh-nav a{font-size:.85rem;color:rgba(250,249,247,.55);text-decoration:none;transition:color .2s}
+.sh-nav a:hover{color:var(--ivory)}
+.badge{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);background:rgba(47,111,106,.15);padding:.3rem .75rem;border-radius:100px;border:1px solid rgba(47,111,106,.25)}
+
+.hero{padding:5rem 2rem 3rem;text-align:center}
+.hero-lab{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
+.hero-lab::before{content:'';width:24px;height:1px;background:var(--teal)}
+.hero h1{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em}
+.hero p{font-size:1.05rem;color:var(--stone);max-width:540px;margin:0 auto;line-height:1.65}
+
+.pipe{padding:2rem 2rem 3rem;max-width:800px;margin:0 auto}
+.pipe-s{display:flex;align-items:center;justify-content:center}
+.ps{display:flex;align-items:center;gap:.75rem;padding:.85rem 1.4rem;border-radius:10px;background:var(--white);border:1.5px solid var(--mist);transition:all .3s}
+.ps.act{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-dim),0 2px 8px rgba(47,111,106,.08)}
+.ps.fut{opacity:.4}
+.ps-n{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0}
+.ps.act .ps-n{background:var(--teal);color:var(--white)}
+.ps.fut .ps-n{background:var(--mist);color:var(--stone)}
+.ps-l{font-size:.82rem;font-weight:600;white-space:nowrap}
+.ps.act .ps-l{color:var(--ink)}.ps.fut .ps-l{color:var(--stone)}
+.ps-t{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .45rem;border-radius:4px}
+.ps.act .ps-t{background:rgba(47,111,106,.1);color:var(--teal)}
+.ps.fut .ps-t{background:var(--mist);color:var(--stone)}
+.pc{width:40px;height:2px;background:var(--mist);flex-shrink:0;position:relative}
+.pc::after{content:'\203A';position:absolute;right:-2px;top:50%;transform:translateY(-50%);color:var(--mist);font-size:1rem}
+
+.demo{background:var(--fog);padding:3rem 2rem 4rem}
+.demo-c{max-width:1200px;margin:0 auto}
+.demo-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.demo-t{font-family:var(--fd);font-size:1.6rem;color:var(--ink)}
+.demo-a{display:flex;gap:.75rem}
+.btn{font-family:var(--fb);font-size:.85rem;font-weight:600;border:none;cursor:pointer;border-radius:8px;padding:.65rem 1.4rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p{background:var(--teal);color:var(--white)}
+.btn-p:hover{background:var(--teal-lt);transform:translateY(-1px);box-shadow:0 4px 12px rgba(47,111,106,.25)}
+.btn-p:active{transform:translateY(0)}
+.btn-s{background:var(--white);color:var(--ink);border:1.5px solid var(--mist)}
+.btn-s:hover{border-color:var(--stone)}
+.btn-i{width:16px;height:16px}
+
+.ed{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--mist);border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06)}
+.ed-p{background:var(--white);display:flex;flex-direction:column}
+.ph-h{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--fog)}
+.ph-t{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--stone)}
+.ph-i{width:8px;height:8px;border-radius:50%}
+.ph-i.in{background:var(--teal)}.ph-i.out{background:var(--c-bsn)}
+.ed-ta{width:100%;min-height:420px;padding:1.25rem;border:none;outline:none;resize:vertical;font-family:var(--fb);font-size:.82rem;line-height:1.75;color:var(--ink);background:var(--white)}
+.ed-ta::placeholder{color:var(--stone)}
+.out{padding:1.25rem;min-height:420px;font-family:var(--fb);font-size:.82rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;word-wrap:break-word;overflow-y:auto}
+.out-ph{color:var(--stone);font-style:italic}
+
+.ph{font-weight:600;padding:.1em .35em;border-radius:4px;font-size:.78rem;letter-spacing:.02em;white-space:nowrap}
+.ph-bsn{background:rgba(217,79,79,.1);color:var(--c-bsn)}
+.ph-name{background:rgba(199,123,46,.1);color:var(--c-name)}
+.ph-date{background:rgba(47,111,106,.1);color:var(--c-date)}
+.ph-phone{background:rgba(123,94,167,.1);color:var(--c-phone)}
+.ph-email{background:rgba(59,125,216,.1);color:var(--c-email)}
+.ph-iban{background:rgba(217,79,79,.08);color:var(--c-iban);border:1px dashed rgba(217,79,79,.3)}
+.ph-addr{background:rgba(139,107,71,.1);color:var(--c-addr)}
+.ph-org{background:rgba(91,140,90,.1);color:var(--c-org)}
+.ph-pc{background:rgba(139,107,71,.12);color:var(--c-addr);border:1px dashed rgba(139,107,71,.3)}
+
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--mist);border-radius:10px;overflow:hidden;margin-top:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.sc{background:var(--white);padding:1.1rem 1.25rem;text-align:center}
+.sv{font-family:var(--fd);font-size:1.8rem;color:var(--ink);line-height:1;margin-bottom:.3rem}
+.sl{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone)}
+.sd{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+
+.how{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.how-lab{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);margin-bottom:.75rem;display:inline-flex;align-items:center;gap:.5rem}
+.how-lab::before{content:'';width:24px;height:1px;background:var(--teal)}
+.how h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--ink);margin-bottom:2.5rem;letter-spacing:-.01em}
+.how-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.hc{background:var(--white);border:1.5px solid var(--fog);border-radius:12px;padding:1.75rem;transition:all .3s}
+.hc:hover{border-color:var(--teal);box-shadow:0 4px 16px rgba(47,111,106,.08);transform:translateY(-2px)}
+.hc-n{font-family:var(--fd);font-size:2.4rem;color:var(--teal);opacity:.3;line-height:1;margin-bottom:1rem}
+.hc h3{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.65rem}
+.hc p{font-size:.85rem;color:var(--stone);line-height:1.6}
+
+.ft{border-top:1px solid var(--mist);padding:2rem;text-align:center}
+.ft p{font-size:.8rem;color:var(--stone)}
+.ft span{color:var(--teal)}
+
+@media(max-width:900px){.ed{grid-template-columns:1fr}.how-g{grid-template-columns:repeat(2,1fr)}.pipe-s{flex-wrap:wrap;gap:.5rem}.pc{display:none}}
+@media(max-width:600px){.how-g{grid-template-columns:1fr}.sh-nav{display:none}.demo-h{flex-direction:column;gap:1rem;align-items:flex-start}}
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero,.pipe,.demo,.how{animation:fu .6s ease-out both}
+.pipe{animation-delay:.1s}.demo{animation-delay:.15s}.how{animation-delay:.2s}
+@keyframes pu{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
+.puls{animation:pu .6s ease-in-out}
+</style>
+</head>
+<body>
+
+<header class="sh"><div class="sh-in">
+<div class="sh-l">
+<a href="https://kineticmedical.nl" class="logo">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#2F6F6A"/><path d="M10 8v16M10 16l8-8M10 16l8 8" stroke="#FAF9F7" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span class="logo-w">Kinetic</span>
+</a>
+<nav class="sh-nav">
+<a href="https://kineticmedical.nl/#proces">Proces</a>
+<a href="https://kineticmedical.nl/#prijzen">Prijzen</a>
+<a href="https://kineticmedical.nl/#contact">Contact</a>
+</nav>
+</div>
+<div><span class="badge">Tooling Demo</span></div>
+</div></header>
+
+<section class="hero">
+<div class="hero-lab">Tooling Preview</div>
+<h1>Bekijk onze tooling in actie</h1>
+<p>Client-side pseudonimisering van medische dossiers. Geen data verlaat uw browser &mdash; alles draait lokaal.</p>
+</section>
+
+<section class="pipe"><div class="pipe-s">
+<div class="ps act"><span class="ps-n">1</span><span class="ps-l">Pseudonymizer</span><span class="ps-t">Actief</span></div>
+<div class="pc"></div>
+<div class="ps fut"><span class="ps-n">2</span><span class="ps-l">Tijdlijn Extract</span><span class="ps-t">Binnenkort</span></div>
+<div class="pc"></div>
+<div class="ps fut"><span class="ps-n">3</span><span class="ps-l">Concept Rapport</span><span class="ps-t">Binnenkort</span></div>
+</div></section>
+
+<section class="demo"><div class="demo-c">
+<div class="demo-h">
+<h2 class="demo-t">Pseudonymizer</h2>
+<div class="demo-a">
+<button class="btn btn-s" id="br"><svg class="btn-i" viewBox="0 0 16 16" fill="none"><path d="M2.5 8a5.5 5.5 0 019.3-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 8a5.5 5.5 0 01-9.3 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 2.5L12 4l1.5-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13.5L4 12l-1.5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Reset voorbeeld</button>
+<button class="btn btn-p" id="bp"><svg class="btn-i" viewBox="0 0 16 16" fill="none"><path d="M2 4l4 4-4 4M8 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pseudonimiseer</button>
+</div></div>
+
+<div class="ed">
+<div class="ed-p"><div class="ph-h"><span class="ph-t">Invoer &mdash; Medisch dossier</span><span class="ph-i in"></span></div>
+<textarea class="ed-ta" id="inp" placeholder="Plak hier een medisch dossier..."></textarea></div>
+<div class="ed-p"><div class="ph-h"><span class="ph-t">Uitvoer &mdash; Gepseudonimiseerd</span><span class="ph-i out"></span></div>
+<div class="out" id="outp"><span class="out-ph">Klik op &ldquo;Pseudonimiseer&rdquo; om het resultaat te zien&hellip;</span></div></div>
+</div>
+
+<div class="sg" id="sg">
+<div class="sc"><div class="sv" id="s0">0</div><div class="sl">Vervangingen</div></div>
+<div class="sc"><div class="sv" id="s1">0</div><div class="sl"><span class="sd" style="background:var(--c-bsn)"></span>BSN&rsquo;s</div></div>
+<div class="sc"><div class="sv" id="s2">0</div><div class="sl"><span class="sd" style="background:var(--c-name)"></span>Namen</div></div>
+<div class="sc"><div class="sv" id="s3">0</div><div class="sl"><span class="sd" style="background:var(--c-date)"></span>Datums</div></div>
+<div class="sc"><div class="sv" id="s4">0</div><div class="sl"><span class="sd" style="background:var(--c-phone)"></span>Contact</div></div>
+<div class="sc"><div class="sv" id="s5">0</div><div class="sl"><span class="sd" style="background:var(--c-org)"></span>Overig</div></div>
+</div>
+</div></section>
+
+<section class="how">
+<div class="how-lab">Onder de motorkap</div>
+<h2>Hoe de Pseudonymizer werkt</h2>
+<div class="how-g">
+<div class="hc"><div class="hc-n">01</div><h3>BSN Elfproef</h3><p>Elk 9-cijferig getal wordt gevalideerd met de modulo-11 elfproef. Alleen geldige BSN&rsquo;s worden vervangen &mdash; geen valse positieven.</p></div>
+<div class="hc"><div class="hc-n">02</div><h3>Medisch Woordenboek</h3><p>100+ beschermde medische termen (Morbus Bechterew, Nervus Medianus, HWK, etc.) worden nooit gepseudonimiseerd &mdash; de klinische inhoud blijft intact.</p></div>
+<div class="hc"><div class="hc-n">03</div><h3>T-notatie</h3><p>Alle datums worden omgezet naar T&plusmn;dagen relatief aan de ongevalsdatum. &ldquo;15 maart 2022&rdquo; wordt T+45 als het ongeval op 29 januari 2022 was.</p></div>
+<div class="hc"><div class="hc-n">04</div><h3>Consistente Mapping</h3><p>Dezelfde naam krijgt altijd hetzelfde pseudoniem binnen &eacute;&eacute;n document. &ldquo;Dr. Van der Berg&rdquo; wordt overal [PERSOON-1] &mdash; nooit wisselend.</p></div>
+</div></section>
+
+<footer class="ft"><p>Kinetic Medische Expertises &middot; <span>Pseudonymizer v3.0</span></p></footer>
+<script>
+(function(){
+var MED=['Morbus Bechterew','Nervus Medianus','Nervus Ulnaris','Nervus Radialis','Nervus Ischiadicus','Nervus Femoralis','Plexus Brachialis','Hernia Nuclei Pulposi','HNP','Carpal Tunnel Syndroom','CTS','Whiplash Associated Disorder','WAD','Post Commotioneel Syndroom','PCS','PTSS','Posttraumatisch Stressstoornis','CRPS','Complex Regionaal Pijnsyndroom','Sudeck','Fibromyalgie','Artrose','Osteoporose','Spondylodese','Spondylolisthesis','Discushernia','Discusdegeneratie','Radiculopathie','Cervicaal','Thoracaal','Lumbaal','Sacraal','Cervicobrachialgie','Lumboischialgie','Ischialgie','Scoliose','Kyfose','Lordose','Stenose','Foraminastenose','Myelopathie','Tendinitis','Tendinopathie','Bursitis','Epicondylitis','Impingement','Frozen Shoulder','Adhesieve Capsulitis','Instabiliteit','Meniscusletsel','Kruisbandletsel','VKB','AKB','Voorste Kruisband','Achterste Kruisband','Collaterale Band','Labrum','Bankart Laesie','SLAP Laesie','Rotatorcuff','Supraspinatus','Infraspinatus','Subscapularis','HWK','BWK','LWK','C1','C2','C3','C4','C5','C6','C7','Th1','Th2','Th3','Th4','Th5','Th6','Th7','Th8','Th9','Th10','Th11','Th12','L1','L2','L3','L4','L5','S1','S2','Processus Spinosus','Facetgewricht','Discus Intervertebralis','Ligamentum Flavum','Ligamentum Longitudinale','Dura Mater','Cauda Equina','Conus Medullaris','MRI','CT-scan','CT','EMG','Elektromyografie','Echografie','VAS-score','VAS','NDI','Neck Disability Index','DASH','Roland Morris','Oswestry','Oswestry Disability Index','ODI','WHODAS','Functionele Capaciteitsevaluatie','FCE','Belastbaarheidsonderzoek','Fysiotherapie','Manuele Therapie','Oefentherapie','Cesar','Mensendieck','TENS','Transcutane Elektrische Neurostimulatie','Infiltratie','Epiduraal','Facetdenervatie','Radiofrequente Denervatie','Discografie','Nucleoplastie','Foraminotomie','Laminectomie','Microdiscectomie','Prothese','Artrodese','Osteotomie','Arthroscopie','Revalidatie','Pijnrevalidatie','Graded Activity','Graded Exposure','Cognitieve Gedragstherapie','CGT','EMDR','ACT','Blijvende Invaliditeit','BI','Functionele Invaliditeit','FI','Arbeidsvermogensschade','Huishoudelijke Hulpbehoefte','HHB','Verlies Zelfwerkzaamheid','VSZ','Smartengeld','Shockschade','Affectieschade','AMA Guides','NVvN Richtlijnen','Verzekeringsgeneeskundige','Arbeidsdeskundige','Medisch Adviseur','Belangenbehartiger','Letselschade','Expertiserapport','Percentage Blijvende Invaliditeit','PBI','Proportionele Aansprakelijkheid','Causaal Verband','Conditio Sine Qua Non','CSQN','Pre-existentie','Predispositie','Ongevalsgevolg','Spurling test','Spurling','MRC','SEH','dermatoom','hypoesthesie','tricepsreflex','cervicale wervelkolom','cervicale mobiliteit'];
+var sMed=MED.slice().sort(function(a,b){return b.length-a.length});
+
+function isValidBSN(d){
+if(d.length!==9||d==='000000000')return false;
+var n=d.split('').map(Number);
+var s=n[0]*9+n[1]*8+n[2]*7+n[3]*6+n[4]*5+n[5]*4+n[6]*3+n[7]*2-n[8]*1;
+return s>0&&s%11===0;
+}
+
+var MO={januari:0,februari:1,maart:2,april:3,mei:4,juni:5,juli:6,augustus:7,september:8,oktober:9,november:10,december:11};
+function pDate(s){
+var m=s.match(/(\d{1,2})\s+(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\s+(\d{4})/i);
+if(m)return new Date(+m[3],MO[m[2].toLowerCase()],+m[1]);
+var m2=s.match(/(\d{2})-(\d{2})-(\d{4})/);
+if(m2)return new Date(+m2[3],+m2[2]-1,+m2[1]);
+return null;
+}
+function dDiff(a,b){return Math.round((a-b)/864e5)}
+function findAcc(t){
+var ps=[/(?:ongeval|aanrijding|botsing|verkeersongeval)[\s\S]{0,80}?(\d{1,2}\s+(?:januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\s+\d{4})/i,/(?:plaatsvond\s+op|d\.d\.)\s+(\d{1,2}\s+(?:januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\s+\d{4})/i];
+for(var i=0;i<ps.length;i++){var m=ps[i].exec(t);if(m){var d=pDate(m[1]);if(d)return d;}}
+return null;
+}
+
+function protMed(t){
+var pr=[];var r=t;
+sMed.forEach(function(term,i){
+var esc=term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+var re=new RegExp('\\b'+esc+'\\b','gi');
+r=r.replace(re,function(m){var p='\x00M'+i+'_'+pr.length+'\x00';pr.push({p:p,o:m});return p;});
+});
+return{t:r,pr:pr};
+}
+function restMed(t,pr){var r=t;pr.forEach(function(x){r=r.split(x.p).join(x.o);});return r;}
+
+var nM={},nC=0,oM={},oC=0,S;
+function gN(n){var k=n.toLowerCase().replace(/\s+/g,' ').trim();if(!nM[k]){nC++;nM[k]='PERSOON-'+nC;}S.names++;S.total++;return nM[k];}
+function gO(o){var k=o.toLowerCase().trim();if(!oM[k]){oC++;oM[k]='ORG-'+oC;}S.orgs++;S.total++;return oM[k];}
+
+function pseudo(text){
+nM={};nC=0;oM={};oC=0;
+S={total:0,bsn:0,names:0,dates:0,contact:0,orgs:0};
+var aD=findAcc(text);
+var pm=protMed(text);var r=pm.t;
+
+// BSN
+r=r.replace(/\b(\d{9})\b/g,function(m,d){if(isValidBSN(d)){S.bsn++;S.total++;return '[BSN]';}return m;});
+// IBAN
+r=r.replace(/\b[A-Z]{2}\d{2}[A-Z]{4}\d{10}\b/g,function(){S.contact++;S.total++;return '[IBAN]';});
+// Email
+r=r.replace(/[\w.-]+@[\w.-]+\.\w{2,}/g,function(){S.contact++;S.total++;return '[EMAIL]';});
+// Phone
+r=r.replace(/\b06[-\s]?\d{8}\b/g,function(){S.contact++;S.total++;return '[TELEFOON]';});
+r=r.replace(/\b0\d{2}[-\s]?\d{7}\b/g,function(){S.contact++;S.total++;return '[TELEFOON]';});
+// Known orgs
+['Antonius Ziekenhuis','UMC Utrecht','Sint Maartenskliniek','Achmea Schadeverzekeringen','FysioFit Utrecht','Van Dongen & Partners Advocaten','Kliniek voor Neurologische Expertise'].forEach(function(o){
+var re=new RegExp(o.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g');
+r=r.replace(re,function(){return '['+gO(o)+']';});
+});
+// B.V./N.V.
+r=r.replace(/\b([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*\s+B\.V\.)\b/g,function(m){if(m.indexOf('[ORG')>=0)return m;return '['+gO(m)+']';});
+// Addresses
+r=r.replace(/\b([A-Z][a-z]+(?:straat|laan|weg|plein|singel|gracht|kade|baan|park|dijk|dreef|hof|steeg))\s+(\d{1,4}(?:\s?[a-zA-Z])?)\b/g,function(){S.orgs++;S.total++;return '[ADRES]';});
+// Postcodes
+r=r.replace(/\b(\d{4})\s?([A-Z]{2})\b/g,function(m,n){var v=+n;if(v>=1000&&v<=9999){S.orgs++;S.total++;return '[POSTCODE]';}return m;});
+// BIG
+r=r.replace(/BIG-registratienummer:\s*\d+/g,function(){S.contact++;S.total++;return 'BIG-registratienummer: [BIG-NR]';});
+// Dossier/polis
+r=r.replace(/(polisnummer|dossiernummer)\s+[\w-]+/gi,function(m){S.orgs++;S.total++;return m.split(/\s+/)[0]+' [NUMMER]';});
+
+// Dates -> T-notation
+r=r.replace(/(\d{1,2})\s+(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\s+(\d{4})/gi,function(m){
+var d=pDate(m);S.dates++;S.total++;
+if(d&&aD){var diff=dDiff(d,aD);if(diff===0)return '[T\u00b10 \u2014 ongevalsdatum]';return '[T'+(diff>0?'+':'')+diff+']';}
+return '[DATUM]';
+});
+
+// Names
+var ti='dr\\.?|drs\\.?|mr\\.?|mevr\\.?|dhr\\.?|prof\\.?|ing\\.?|ir\\.?|bc\\.?';
+var tv='van|de|der|den|het|ter|ten|te|op|in|bij|uit|tot|voor';
+// Title + firstname + tussenvoegsel + surname
+var r1=new RegExp('('+ti+')\\s+([A-Z][a-z\u00e9\u00e8\u00eb\u00ef\u00f6\u00fc]+)\\s+((?:(?:'+tv+')\\s+)+[A-Z][a-z\u00e9\u00e8\u00eb\u00ef\u00f6\u00fc]+(?:-[a-zA-Z][a-z]+)?)','g');
+r=r.replace(r1,function(m,t,f,rest){if(m.indexOf('[PERSOON')>=0)return m;return t+' ['+gN(f+' '+rest)+']';});
+// Title + initials + tussenvoegsel + surname
+var r2=new RegExp('('+ti+')\\s+([A-Z]\\.(?:\\s?[A-Z]\\.)*\\s*)((?:(?:'+tv+')\\s+)*[A-Z][a-z\u00e9\u00e8\u00eb\u00ef\u00f6\u00fc]+(?:-[a-zA-Z][a-z]+)?)','g');
+r=r.replace(r2,function(m,t,ini,sur){if(m.indexOf('[PERSOON')>=0)return m;return t+' ['+gN(ini.trim()+' '+sur)+']';});
+// Title + firstname only (catch remaining)
+var r3=new RegExp('('+ti+')\\s+([A-Z][a-z\u00e9\u00e8\u00eb\u00ef\u00f6\u00fc]{2,})\\b','g');
+r=r.replace(r3,function(m,t,fn){if(m.indexOf('[PERSOON')>=0)return m;return t+' ['+gN(fn)+']';});
+
+// Map standalone surname references to existing persons
+var tvArr=tv.split('|');
+for(var key in nM){
+var kp=key.split(' ');
+// Find tussenvoegsel+surname combos
+var tusIdx=-1;
+for(var j=0;j<kp.length;j++){if(tvArr.indexOf(kp[j])>=0){tusIdx=j;break;}}
+if(tusIdx>=0){
+var combo=kp.slice(tusIdx).join(' ');
+// Capitalize first letter for matching
+var cap=combo.charAt(0).toUpperCase()+combo.slice(1);
+[combo,cap].forEach(function(v){
+var esc=v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+var re=new RegExp('(?:^|(?<=[\\s,.:;]))'+esc+'(?=[\\s,.:;\\n]|$)','g');
+r=r.replace(re,function(mm){if(r.indexOf('['+nM[key]+']')>=0&&mm.indexOf('[')<0){S.names++;S.total++;return '['+nM[key]+']';}return mm;});
+});
+}
+}
+
+r=restMed(r,pm.pr);
+return{text:r,stats:S};
+}
+
+function colorize(t){
+t=t.replace(/\[T([^\]]+)\]/g,'<span class="ph ph-date">[T$1]</span>');
+t=t.replace(/\[BSN\]/g,'<span class="ph ph-bsn">[BSN]</span>');
+t=t.replace(/\[PERSOON-(\d+)\]/g,'<span class="ph ph-name">[PERSOON-$1]</span>');
+t=t.replace(/\[DATUM\]/g,'<span class="ph ph-date">[DATUM]</span>');
+t=t.replace(/\[TELEFOON\]/g,'<span class="ph ph-phone">[TELEFOON]</span>');
+t=t.replace(/\[EMAIL\]/g,'<span class="ph ph-email">[EMAIL]</span>');
+t=t.replace(/\[IBAN\]/g,'<span class="ph ph-iban">[IBAN]</span>');
+t=t.replace(/\[ADRES\]/g,'<span class="ph ph-addr">[ADRES]</span>');
+t=t.replace(/\[POSTCODE\]/g,'<span class="ph ph-pc">[POSTCODE]</span>');
+t=t.replace(/\[ORG-(\d+)\]/g,'<span class="ph ph-org">[ORG-$1]</span>');
+t=t.replace(/\[BIG-NR\]/g,'<span class="ph ph-bsn">[BIG-NR]</span>');
+t=t.replace(/\[NUMMER\]/g,'<span class="ph ph-org">[NUMMER]</span>');
+return t;
+}
+var SAMPLE="MEDISCH EXPERTISERAPPORT \u2014 LETSELSCHADE\n\nBetreft: Dhr. Johannes van der Berg\nGeboortedatum: 14 februari 1978\nBSN: 111222333\nDossiernummer: LS-2024-04892\n\nGeachte mr. Van Dongen,\n\nOp verzoek van uw kantoor, Van Dongen & Partners Advocaten te Rotterdam, heb ik op 23 april 2024 een neurologisch onderzoek verricht bij bovengenoemde betrokkene in verband met het verkeersongeval dat plaatsvond op 29 januari 2022.\n\nANAMNESE\nBetrokkene, dhr. J. van der Berg, was op 29 januari 2022 als bestuurder betrokken bij een kop-staartbotsing op de A27 ter hoogte van afslag Lexmond. Hij werd van achteren aangereden terwijl hij stilstond voor het verkeerslicht. Direct na het ongeval ervoer hij nekpijn en hoofdpijn. Hij werd per ambulance naar het Antonius Ziekenhuis te Nieuwegein vervoerd. De SEH-arts, dr. P.W.M. de Vries, constateerde een Whiplash Associated Disorder graad II.\n\nIn de weken na het ongeval ontwikkelde betrokkene toenemende klachten van:\n- Cervicobrachialgie links\n- Concentratiestoornissen passend bij Post Commotioneel Syndroom\n- Hoofdpijn, dagelijks, VAS-score 6-7\n- Tintelingen in de vingers (digiti III-V) links, passend bij Nervus Ulnaris irritatie ter hoogte van C7-Th1\n\nBetrokkene is werkzaam als projectmanager bij Strukton Rail B.V. en was voor het ongeval volledig arbeidsgeschikt. Sinds het ongeval is hij gedeeltelijk arbeidsongeschikt (50%).\n\nVOORGESCHIEDENIS\nBetrokkene was eerder onder behandeling bij dr. M.J. Bakker, reumatoloog in het UMC Utrecht, in verband met lichte artrose van de rechter knie (2019). Dit staat los van de huidige klachten.\n\nBEHANDELING SINDS ONGEVAL\n- 29 januari 2022: SEH Antonius Ziekenhuis, dr. De Vries\n- Februari - juni 2022: Fysiotherapie bij FysioFit Utrecht, behandelaar mevr. A. Kramer-de Wit\n- Augustus 2022: MRI cervicale wervelkolom (HWK): discusdegeneratie C5-C6, lichte foraminastenose rechts\n- Oktober 2022: Verwijzing naar pijnrevalidatie, Sint Maartenskliniek Nijmegen\n- Januari 2023: Facetdenervatie C4-C5 en C5-C6 door dr. R. Verhagen, anesthesioloog\n- Maart 2023 - heden: Cognitieve Gedragstherapie bij psycholoog drs. E.M. Jansen\n\nHUIDIG ONDERZOEK (23 april 2024)\nBij onderzoek op mijn polikliniek, Parkstraat 15 te Utrecht (tel: 030-2345678), presenteert betrokkene zich als een goed verzorgde man. Contactgegevens betrokkene: Kerkstraat 42, 3512 AB Utrecht, tel: 06-12345678, e-mail: j.vanderberg@gmail.com.\n\nNeurologisch onderzoek:\n- Cervicale mobiliteit: flexie 30\u00b0 (normaal 50\u00b0), extensie 20\u00b0 (normaal 60\u00b0), rotatie links 40\u00b0 (normaal 80\u00b0)\n- Spurling test: positief links\n- Lichte hypoesthesie dermatoom C7 links\n- Kracht MRC 4+/5 triceps links\n- Reflexen: tricepsreflex links verlaagd\n\nCONCLUSIE\nEr is sprake van een Cervicobrachialgie links op basis van foraminastenose C5-C6 als gevolg van het verkeersongeval d.d. 29 januari 2022. De klachten zijn consistent met het ongevalsmechanisme. De pre-existente artrose van de rechter knie speelt geen rol in het huidige klachtenpatroon.\n\nOp basis van de AMA Guides (6e editie) en NVvN Richtlijnen begroting ik het Percentage Blijvende Invaliditeit op 7% van de gehele persoon.\n\nVerzekeringsgegevens: IBAN NL91ABNA0417164300, polisnummer 987654321 bij Achmea Schadeverzekeringen.\n\nMet collegiale hoogachting,\n\nDr. F.H. van Leeuwen\nNeuroloog\nBIG-registratienummer: 49123456701\nKliniek voor Neurologische Expertise\nMaliebaan 88, 3581 CV Utrecht";
+
+var inp=document.getElementById('inp'),outp=document.getElementById('outp');
+
+function run(){
+var t=inp.value.trim();
+if(!t){outp.innerHTML='<span class="out-ph">Voer eerst tekst in of laad het voorbeeld.</span>';return;}
+outp.classList.add('puls');
+var res=pseudo(t);
+var esc=res.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+outp.innerHTML=colorize(esc);
+var st=res.stats;
+document.getElementById('s0').textContent=st.total;
+document.getElementById('s1').textContent=st.bsn;
+document.getElementById('s2').textContent=st.names;
+document.getElementById('s3').textContent=st.dates;
+document.getElementById('s4').textContent=st.contact;
+document.getElementById('s5').textContent=st.orgs;
+document.getElementById('sg').classList.add('puls');
+setTimeout(function(){outp.classList.remove('puls');document.getElementById('sg').classList.remove('puls');},600);
+}
+
+function reset(){
+inp.value=SAMPLE;
+outp.innerHTML='<span class="out-ph">Klik op \u201cPseudonimiseer\u201d om het resultaat te zien\u2026</span>';
+['s0','s1','s2','s3','s4','s5'].forEach(function(id){document.getElementById(id).textContent='0';});
+}
+
+document.getElementById('bp').addEventListener('click',run);
+document.getElementById('br').addEventListener('click',reset);
+
+document.addEventListener('DOMContentLoaded',function(){reset();setTimeout(run,400);});
+if(document.readyState!=='loading'){reset();setTimeout(run,400);}
+})();
+</script>
+</body>
+</html>
