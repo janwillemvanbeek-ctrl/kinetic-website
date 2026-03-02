@@ -11,6 +11,7 @@
 :root{
 --ivory:#FAF9F7;--teal:#2F6F6A;--teal-lt:#3a8a84;--teal-dim:rgba(47,111,106,.12);
 --ink:#141414;--fog:#F0EFEC;--mist:#E8E6E2;--stone:#9C9890;--white:#FFF;
+--line-dark:rgba(255,255,255,.1);
 --fd:'Instrument Serif',Georgia,serif;--fb:'DM Sans',-apple-system,sans-serif;
 --c-bsn:#D94F4F;--c-name:#C77B2E;--c-date:#2F6F6A;--c-phone:#7B5EA7;
 --c-email:#3B7DD8;--c-iban:#D94F4F;--c-addr:#8B6B47;--c-org:#5B8C5A;
@@ -18,15 +19,16 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 
-.sh{position:sticky;top:0;z-index:100;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.06)}
-.sh-in{max-width:1200px;margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
-.sh-l{display:flex;align-items:center;gap:2rem}
-.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.logo-w{font-family:var(--fd);font-size:1.25rem;color:var(--ivory)}
-.sh-nav{display:flex;gap:1.5rem}
-.sh-nav a{font-size:.85rem;color:rgba(250,249,247,.55);text-decoration:none;transition:color .2s}
-.sh-nav a:hover{color:var(--ivory)}
-.badge{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);background:rgba(47,111,106,.15);padding:.3rem .75rem;border-radius:100px;border:1px solid rgba(47,111,106,.25)}
+/* Home-style header */
+.header{background:var(--ink);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--line-dark)}
+.nav-content{max-width:1100px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;text-decoration:none}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:#A8A8A4;text-decoration:none;font-weight:500;font-size:.9375rem;transition:color .2s}
+.nav-links a:hover{color:#FFF}
+.nav-links a.active{color:#FFF}
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;padding:.875rem 1.75rem;border-radius:4px;font-weight:600;font-size:.9375rem;text-decoration:none;background:var(--teal);color:#FFF;border:1.5px solid var(--teal);transition:all .2s}
+.nav-cta:hover{background:var(--teal-lt);border-color:var(--teal-lt)}
 
 .hero{padding:5rem 2rem 3rem;text-align:center}
 .hero-lab{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
@@ -102,12 +104,18 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 .hc h3{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.65rem}
 .hc p{font-size:.85rem;color:var(--stone);line-height:1.6}
 
-.ft{border-top:1px solid var(--mist);padding:2rem;text-align:center}
-.ft p{font-size:.8rem;color:var(--stone)}
-.ft span{color:var(--teal)}
+/* Home-style footer */
+.footer{background:var(--ink);color:#A8A8A4;padding:4rem 2rem 2rem}
+.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;padding-bottom:2rem;border-bottom:1px solid var(--line-dark)}
+.footer-brand p{font-size:.875rem;line-height:1.6;color:#8A8A87;margin-top:1rem;max-width:320px}
+.footer-links h4{font-size:.8125rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#FFF;margin-bottom:1rem}
+.footer-links a{display:block;color:#A8A8A4;text-decoration:none;font-size:.875rem;margin-bottom:.75rem;transition:color .2s}
+.footer-links a:hover{color:#FFF}
+.footer-bottom{max-width:1100px;margin:1.5rem auto 0;display:flex;justify-content:space-between;align-items:center;font-size:.8125rem;color:#8A8A87}
 
-@media(max-width:900px){.ed{grid-template-columns:1fr}.how-g{grid-template-columns:repeat(2,1fr)}.pipe-s{flex-wrap:wrap;gap:.5rem}.pc{display:none}}
-@media(max-width:600px){.how-g{grid-template-columns:1fr}.sh-nav{display:none}.demo-h{flex-direction:column;gap:1rem;align-items:flex-start}}
+@media(max-width:900px){.ed{grid-template-columns:1fr}.how-g{grid-template-columns:repeat(2,1fr)}.pipe-s{flex-wrap:wrap;gap:.5rem}.pc{display:none}.footer-content{grid-template-columns:1fr;gap:2rem}}
+@media(max-width:760px){.nav-content{flex-direction:column;gap:1rem}.nav-links{flex-wrap:wrap;justify-content:center;gap:1rem}}
+@media(max-width:600px){.how-g{grid-template-columns:1fr}.demo-h{flex-direction:column;gap:1rem;align-items:flex-start}.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
 @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .hero,.pipe,.demo,.how{animation:fu .6s ease-out both}
 .pipe{animation-delay:.1s}.demo{animation-delay:.15s}.how{animation-delay:.2s}
@@ -117,20 +125,20 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 </head>
 <body>
 
-<header class="sh"><div class="sh-in">
-<div class="sh-l">
+<header class="header" id="header"><nav class="nav-content">
 <a href="https://kineticmedical.nl" class="logo">
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#2F6F6A"/><path d="M10 8v16M10 16l8-8M10 16l8 8" stroke="#FAF9F7" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span class="logo-w">Kinetic</span>
+<span style="font-family:Inter, sans-serif;font-size:1.25rem;font-weight:600;color:#FAF9F7;letter-spacing:-0.02em;margin-left:.6rem;">Kinetic</span>
 </a>
-<nav class="sh-nav">
-<a href="https://kineticmedical.nl/#proces">Proces</a>
+<div class="nav-links">
+<a href="https://kineticmedical.nl/#proces">Werkwijze</a>
+<a href="https://kineticmedical.nl/#voordelen">Voordelen</a>
+<a href="https://kineticmedical.nl/#faq">FAQ</a>
 <a href="https://kineticmedical.nl/#prijzen">Prijzen</a>
-<a href="https://kineticmedical.nl/#contact">Contact</a>
-</nav>
+<a href="/tooling-demo.html" class="active">Demo</a>
+<a href="https://kineticmedical.nl/#contact" class="nav-cta">Plan een gesprek</a>
 </div>
-<div><span class="badge">Tooling Demo</span></div>
-</div></header>
+</nav></header>
 
 <section class="hero">
 <div class="hero-lab">Tooling Preview</div>
@@ -181,7 +189,34 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--ink);line-height:
 <div class="hc"><div class="hc-n">04</div><h3>Consistente Mapping</h3><p>Dezelfde naam krijgt altijd hetzelfde pseudoniem binnen &eacute;&eacute;n document. &ldquo;Dr. Van der Berg&rdquo; wordt overal [PERSOON-1] &mdash; nooit wisselend.</p></div>
 </div></section>
 
-<footer class="ft"><p>Kinetic Medische Expertises &middot; <span>Pseudonymizer v3.0</span></p></footer>
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="k-cut-footer-demo"><path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/></clipPath></defs>
+<rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+<g clip-path="url(#k-cut-footer-demo)"><path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/></g>
+<text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
+</svg>
+<p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>
+</div>
+<div class="footer-links">
+<h4>Contact</h4>
+<a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>
+<a href="tel:+31612345678">+31 6 1234 5678</a>
+</div>
+<div class="footer-links">
+<h4>Juridisch</h4>
+<a href="#">Privacybeleid</a>
+<a href="#">Algemene voorwaarden</a>
+<a href="#">Verwerkersovereenkomst</a>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; <script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
+<span>SSL beveiligd</span>
+</div>
+</footer>
 <script>
 var MED=['Morbus Bechterew','Nervus Medianus','Nervus Ulnaris','Nervus Radialis','Nervus Ischiadicus','Nervus Femoralis','Plexus Brachialis','Hernia Nuclei Pulposi','HNP','Carpal Tunnel Syndroom','CTS','Whiplash Associated Disorder','WAD','Post Commotioneel Syndroom','PCS','PTSS','Posttraumatisch Stressstoornis','CRPS','Complex Regionaal Pijnsyndroom','Sudeck','Fibromyalgie','Artrose','Osteoporose','Spondylodese','Spondylolisthesis','Discushernia','Discusdegeneratie','Radiculopathie','Cervicaal','Thoracaal','Lumbaal','Sacraal','Cervicobrachialgie','Lumboischialgie','Ischialgie','Scoliose','Kyfose','Lordose','Stenose','Foraminastenose','Myelopathie','Tendinitis','Tendinopathie','Bursitis','Epicondylitis','Impingement','Frozen Shoulder','Adhesieve Capsulitis','Instabiliteit','Meniscusletsel','Kruisbandletsel','VKB','AKB','Voorste Kruisband','Achterste Kruisband','Collaterale Band','Labrum','Bankart Laesie','SLAP Laesie','Rotatorcuff','Supraspinatus','Infraspinatus','Subscapularis','HWK','BWK','LWK','C1','C2','C3','C4','C5','C6','C7','Th1','Th2','Th3','Th4','Th5','Th6','Th7','Th8','Th9','Th10','Th11','Th12','L1','L2','L3','L4','L5','S1','S2','Processus Spinosus','Facetgewricht','Discus Intervertebralis','Ligamentum Flavum','Ligamentum Longitudinale','Dura Mater','Cauda Equina','Conus Medullaris','MRI','CT-scan','CT','EMG','Elektromyografie','Echografie','VAS-score','VAS','NDI','Neck Disability Index','DASH','Roland Morris','Oswestry','Oswestry Disability Index','ODI','WHODAS','Functionele Capaciteitsevaluatie','FCE','Belastbaarheidsonderzoek','Fysiotherapie','Manuele Therapie','Oefentherapie','Cesar','Mensendieck','TENS','Transcutane Elektrische Neurostimulatie','Infiltratie','Epiduraal','Facetdenervatie','Radiofrequente Denervatie','Discografie','Nucleoplastie','Foraminotomie','Laminectomie','Microdiscectomie','Prothese','Artrodese','Osteotomie','Arthroscopie','Revalidatie','Pijnrevalidatie','Graded Activity','Graded Exposure','Cognitieve Gedragstherapie','CGT','EMDR','ACT','Blijvende Invaliditeit','BI','Functionele Invaliditeit','FI','Arbeidsvermogensschade','Huishoudelijke Hulpbehoefte','HHB','Verlies Zelfwerkzaamheid','VSZ','Smartengeld','Shockschade','Affectieschade','AMA Guides','NVvN Richtlijnen','Verzekeringsgeneeskundige','Arbeidsdeskundige','Medisch Adviseur','Belangenbehartiger','Letselschade','Expertiserapport','Percentage Blijvende Invaliditeit','PBI','Proportionele Aansprakelijkheid','Causaal Verband','Conditio Sine Qua Non','CSQN','Pre-existentie','Predispositie','Ongevalsgevolg','Spurling test','Spurling','MRC','SEH','dermatoom','hypoesthesie','tricepsreflex','cervicale wervelkolom','cervicale mobiliteit'];
 var sMed=MED.slice().sort(function(a,b){return b.length-a.length});
