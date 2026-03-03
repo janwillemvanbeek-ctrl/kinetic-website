@@ -24,7 +24,6 @@
             --ivory: #FAF9F7;
             --fog: #F1F0ED;
             --stone: #5C5C58;
-            --stone-readable: #4A4A47;
             --warm-teal: #2F6F6A;
             --warm-teal-hover: #265B57;
             --line: #EDECE9;
@@ -42,13 +41,6 @@
             background: var(--ivory);
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
-        }
-
-        /* Desktop: slightly larger body text for reading comfort */
-        @media (min-width: 1024px) {
-            body {
-                font-size: 17px;
-            }
         }
 
         h1, h2, h3, h4 {
@@ -173,9 +165,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.8125rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--stone-readable);
+            color: var(--stone);
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
@@ -235,7 +227,7 @@
 
         .cta-microcopy {
             font-size: 0.8125rem;
-            color: var(--stone-readable);
+            color: var(--stone);
         }
 
         /* Hero comparison card */
@@ -367,9 +359,6 @@
         .process-step {
             text-align: center;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .step-number {
@@ -387,7 +376,6 @@
             font-size: 1rem;
             font-weight: 600;
             color: var(--warm-ink);
-            flex-shrink: 0;
         }
 
         .process-step.ai .step-number {
@@ -405,7 +393,6 @@
             color: var(--stone);
             line-height: 1.5;
             margin-bottom: 0.75rem;
-            flex-grow: 1;
         }
 
         .step-output {
@@ -419,7 +406,6 @@
             background: #FFFFFF;
             color: var(--stone);
             border: 1px solid var(--line);
-            margin-top: auto;
         }
 
         .process-step.ai .step-output {
@@ -811,183 +797,6 @@
             margin-top: 0.75rem;
         }
 
-        /* Output Preview */
-        .output-preview {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: var(--ivory);
-            border-radius: 8px;
-            border: 1px solid var(--line);
-        }
-
-        .output-preview-thumb {
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .output-preview-thumb:hover {
-            transform: scale(1.02);
-        }
-
-        .preview-mini {
-            width: 180px;
-            padding: 12px;
-            background: var(--fog);
-            border: 1px solid var(--line);
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .preview-mini-header {
-            font-size: 8px;
-            font-weight: 600;
-            color: var(--warm-ink);
-            margin-bottom: 10px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .preview-timeline {
-            position: relative;
-            padding-left: 8px;
-        }
-
-        .preview-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 4px;
-            bottom: 4px;
-            width: 1px;
-            background: var(--line);
-        }
-
-        .preview-mini-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 6px;
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .preview-mini-item::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 5px;
-            width: 5px;
-            height: 5px;
-            background: var(--warm-teal);
-            border-radius: 50%;
-        }
-
-        .preview-mini-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .preview-type {
-            font-size: 5px;
-            font-weight: 600;
-            padding: 2px 4px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-
-        .preview-type-seh {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-
-        .preview-type-ortho {
-            background: #DBEAFE;
-            color: #1E40AF;
-        }
-
-        .preview-type-radio {
-            background: #E0E7FF;
-            color: #3730A3;
-        }
-
-        .preview-mini-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .preview-mini-date {
-            font-size: 5px;
-            color: var(--stone);
-            margin-bottom: 1px;
-        }
-
-        .preview-mini-title {
-            font-size: 7px;
-            font-weight: 500;
-            color: var(--warm-ink);
-            margin-bottom: 1px;
-        }
-
-        .preview-mini-desc {
-            font-size: 5px;
-            color: var(--stone);
-            font-style: italic;
-        }
-
-        .preview-mini-footer {
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1px solid var(--line);
-        }
-
-        .preview-mini-source {
-            font-size: 5px;
-            color: var(--stone);
-            background: var(--ivory);
-            padding: 2px 4px;
-            border-radius: 2px;
-        }
-
-        .output-preview-text {
-            text-align: left;
-        }
-
-        .output-preview-note {
-            font-size: 0.8125rem;
-            color: var(--stone-readable);
-            margin-top: 0.75rem;
-            max-width: 280px;
-        }
-
-        /* Governance Statement */
-        .governance-statement {
-            margin-top: 2.5rem;
-            padding: 1.5rem 2rem;
-            background: var(--ivory);
-            border-left: 3px solid var(--warm-teal);
-            border-radius: 0 4px 4px 0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .governance-statement h4 {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--warm-ink);
-            margin-bottom: 0.5rem;
-        }
-
-        .governance-statement p {
-            font-size: 0.8125rem;
-            color: var(--stone-readable);
-            line-height: 1.6;
-        }
-
         /* ============================================
            MODAL
            ============================================ */
@@ -1084,24 +893,6 @@
             background: var(--warm-ink);
             border-color: var(--warm-ink);
             color: var(--ivory);
-        }
-
-        /* Mockup phase labels */
-        .mockup-phase-label {
-            font-size: 0.6875rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--stone);
-            background: var(--ivory);
-            padding: 0.5rem 1rem;
-            border-radius: 4px 4px 0 0;
-            border: 1px solid var(--line);
-            border-bottom: none;
-            display: inline-block;
-            margin-bottom: -1px;
-            position: relative;
-            z-index: 1;
         }
 
         .mockup-container {
@@ -1221,7 +1012,7 @@
             text-align: center;
             margin-top: 1.5rem;
             font-size: 0.8125rem;
-            color: var(--stone-readable);
+            color: var(--stone);
             line-height: 1.6;
         }
 
@@ -1497,25 +1288,6 @@
                 width: 38px;
                 font-size: 8px;
             }
-
-            /* Output preview responsive */
-            .output-preview {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
-            }
-
-            .output-preview-text {
-                text-align: center;
-            }
-
-            .output-preview-note {
-                max-width: none;
-            }
-
-            .governance-statement {
-                padding: 1.25rem;
-            }
         }
     </style>
 </head>
@@ -1677,50 +1449,9 @@
                 </div>
             </div>
             
-            <div class="output-preview">
-                <div class="output-preview-thumb" id="openExamples">
-                    <div class="preview-mini">
-                        <div class="preview-mini-header">Chronologisch overzicht</div>
-                        <div class="preview-timeline">
-                            <div class="preview-mini-item">
-                                <span class="preview-type preview-type-seh">SEH</span>
-                                <div class="preview-mini-text">
-                                    <div class="preview-mini-date">12-03-2021 · Dag 0</div>
-                                    <div class="preview-mini-title">SEH-verslag</div>
-                                    <div class="preview-mini-desc">Eerste presentatie na ongeval</div>
-                                </div>
-                            </div>
-                            <div class="preview-mini-item">
-                                <span class="preview-type preview-type-ortho">Ortho</span>
-                                <div class="preview-mini-text">
-                                    <div class="preview-mini-date">18-03-2021 · Dag 6</div>
-                                    <div class="preview-mini-title">Polikliniek orthopedie</div>
-                                    <div class="preview-mini-desc">MRI aangevraagd</div>
-                                </div>
-                            </div>
-                            <div class="preview-mini-item">
-                                <span class="preview-type preview-type-radio">Radio</span>
-                                <div class="preview-mini-text">
-                                    <div class="preview-mini-date">07-04-2021 · Dag 26</div>
-                                    <div class="preview-mini-title">MRI rechterknie</div>
-                                    <div class="preview-mini-desc">Partiële ruptuur VKB</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="preview-mini-footer">
-                            <span class="preview-mini-source">Bron: ZH Amstelland, p. 2</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="output-preview-text">
-                    <button class="btn btn-secondary" id="openExamplesBtn">Bekijk voorbeeldoutput</button>
-                    <p class="output-preview-note">Geanonimiseerde voorbeelden van tijdlijn en concept-rapport</p>
-                </div>
-            </div>
-            
-            <div class="governance-statement">
-                <h4>Van concept naar definitief rapport</h4>
-                <p>AI ondersteunt bij dossiervoorbereiding en signalering. De arts beoordeelt, onderzoekt en stelt het definitieve oordeel vast. De opdrachtgever ontvangt uitsluitend het geautoriseerde rapport.</p>
+            <div class="process-cta">
+                <button class="btn btn-secondary" id="openExamples">Bekijk voorbeeldoutput</button>
+                <p class="process-cta-note">Geanonimiseerde voorbeelden van tijdlijn en rapport</p>
             </div>
         </div>
     </section>
@@ -1796,96 +1527,110 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Veelgestelde vragen</div>
-                <h2 class="section-title">Vragen van verzekeraars en letselschadepraktijken</h2>
+                <h2 class="section-title">Vragen en antwoorden</h2>
             </div>
             
             <div class="faq-list">
                 <div class="faq-category">
-                    <div class="faq-category-label">Juridisch & aansprakelijkheid</div>
+                    <div class="faq-category-label">Juridisch & medisch</div>
                     
                     <div class="faq-item open">
                         <button class="faq-question">
-                            Wie is aansprakelijk voor de inhoud van het rapport?
+                            Is dit juridisch verdedigbaar?
+                            <!-- FIXED: SVG icon instead of text -->
                             <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
                                 <line x1="10" y1="4" x2="10" y2="16"/>
                                 <line x1="4" y1="10" x2="16" y2="10"/>
                             </svg>
                         </button>
                         <div class="faq-answer">
-                            De BIG-geregistreerde medisch specialist die het rapport opstelt en ondertekent is volledig eindverantwoordelijk voor de medische inhoud. Kinetic faciliteert de dossiervoorbereiding en rapportage, maar neemt geen medische oordelen.
+                            Ja. De AI doet geen medische oordelen — alleen extractie, ordening en detectie van hiaten. Elke conclusie in het rapport is traceerbaar naar bronmateriaal met paginanummer. De BIG-geregistreerde specialist beoordeelt, onderzoekt de patiënt en tekent het rapport. De werkwijze voldoet aan de IWMD-vraagstelling en is reproduceerbaar.
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <button class="faq-question">
-                            Is het rapport bruikbaar in een gerechtelijke procedure?
+                            Wie is eindverantwoordelijk voor het rapport?
                             <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
                                 <line x1="10" y1="4" x2="10" y2="16"/>
                                 <line x1="4" y1="10" x2="16" y2="10"/>
                             </svg>
                         </button>
                         <div class="faq-answer">
-                            Ja. Het rapport volgt de IWMD-vraagstelling, bevat volledige bronverwijzingen en wordt opgesteld en geautoriseerd door een onafhankelijke BIG-geregistreerde specialist.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-category">
-                    <div class="faq-category-label">Rol van AI</div>
-                    
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Welke rol speelt AI precies in het proces?
-                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
-                                <line x1="10" y1="4" x2="10" y2="16"/>
-                                <line x1="4" y1="10" x2="16" y2="10"/>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            AI ondersteunt bij het ordenen, samenvatten en signaleren van het aangeleverde dossier. AI stelt geen diagnoses, doet geen causaliteitsuitspraken en trekt geen medische conclusies.
+                            De BIG-geregistreerde medisch specialist is volledig eindverantwoordelijk. AI ondersteunt bij de voorbereiding, maar de arts beoordeelt alle bevindingen, voert het onderzoek uit en autoriseert de conclusies.
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <button class="faq-question">
-                            Ziet de opdrachtgever AI-output?
+                            Voldoet het rapport aan de IWMD-standaard?
                             <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
                                 <line x1="10" y1="4" x2="10" y2="16"/>
                                 <line x1="4" y1="10" x2="16" y2="10"/>
                             </svg>
                         </button>
                         <div class="faq-answer">
-                            Nee. De opdrachtgever ontvangt uitsluitend het definitieve, door de specialist geautoriseerde rapport.
+                            Ja. Het rapport volgt de IWMD-vraagstelling en bevat alle vereiste onderdelen. Elke conclusie is onderbouwd met bronverwijzingen.
                         </div>
                     </div>
                 </div>
                 
                 <div class="faq-category">
-                    <div class="faq-category-label">Privacy & compliance</div>
+                    <div class="faq-category-label">Privacy & data</div>
                     
                     <div class="faq-item">
                         <button class="faq-question">
-                            Wie is verwerkingsverantwoordelijke en wie is verwerker?
+                            Hoe wordt de privacy gewaarborgd?
                             <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
                                 <line x1="10" y1="4" x2="10" y2="16"/>
                                 <line x1="4" y1="10" x2="16" y2="10"/>
                             </svg>
                         </button>
                         <div class="faq-answer">
-                            De opdrachtgever is verwerkingsverantwoordelijke. Kinetic treedt op als verwerker en sluit daarvoor een verwerkersovereenkomst.
+                            Privacy-by-design: persoonsgegevens worden verwijderd vóór AI-verwerking. Data wordt verwerkt op EU-servers, niet gebruikt voor training, en bewaard conform afgesproken retentiebeleid. Bij onboarding tekenen we een verwerkersovereenkomst.
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <button class="faq-question">
-                            Worden gegevens gebruikt voor training van AI-modellen?
+                            Welke certificeringen zijn er?
                             <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
                                 <line x1="10" y1="4" x2="10" y2="16"/>
                                 <line x1="4" y1="10" x2="16" y2="10"/>
                             </svg>
                         </button>
                         <div class="faq-answer">
-                            Nee. Dossiers worden uitsluitend verwerkt voor de betreffende expertise en niet gebruikt voor training of hergebruik.
+                            De werkwijze is in lijn met AVG/GDPR en NEN 7510. ISO 27001-certificering staat op de roadmap. Bij elke pilot stellen we een DPIA op.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <div class="faq-category-label">Praktisch</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Hoe lang duurt een expertise?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            Standaard 4 weken vanaf complete dossieraanlevering. Bij overschrijding ontvangt u korting op het tarief. Spoedtrajecten zijn bespreekbaar.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Wat kost een expertise?
+                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
+                                <line x1="10" y1="4" x2="10" y2="16"/>
+                                <line x1="4" y1="10" x2="16" y2="10"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            €1.950 per dossier, all-in. Inclusief tijdgarantie, volledige bronverwijzing en audit trail. Geen verrassingen achteraf.
                         </div>
                     </div>
                     
@@ -1901,77 +1646,17 @@
                             Op verzoek leveren wij: verwerkersovereenkomst, DPIA-template, beschrijving dataverwerking en rol- en verantwoordelijkheidsmatrix. Dit versnelt interne goedkeuringstrajecten.
                         </div>
                     </div>
-                </div>
-                
-                <div class="faq-category">
-                    <div class="faq-category-label">Inkoop & pilot</div>
                     
                     <div class="faq-item">
                         <button class="faq-question">
-                            Is Kinetic geschikt voor structurele inzet?
+                            Wat gebeurt er na oplevering van het rapport?
                             <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
                                 <line x1="10" y1="4" x2="10" y2="16"/>
                                 <line x1="4" y1="10" x2="16" y2="10"/>
                             </svg>
                         </button>
                         <div class="faq-answer">
-                            Ja. De werkwijze is ontworpen voor herhaalbare inzet binnen grotere dossierstromen, met vaste doorlooptijd en vaste rapportstructuur.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Zit er een verplichting aan een pilot?
-                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
-                                <line x1="10" y1="4" x2="10" y2="16"/>
-                                <line x1="4" y1="10" x2="16" y2="10"/>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            Nee. De pilot is bedoeld om de werkwijze te toetsen en kent geen verplichting tot vervolg.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-category">
-                    <div class="faq-category-label">Praktisch</div>
-                    
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Wat gebeurt er als het dossier onvolledig blijkt?
-                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
-                                <line x1="10" y1="4" x2="10" y2="16"/>
-                                <line x1="4" y1="10" x2="16" y2="10"/>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            Ontbrekende onderdelen worden gesignaleerd en teruggekoppeld aan de opdrachtgever. De doorlooptijd start zodra het dossier compleet is.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Wat kost een expertise en hoe lang duurt het?
-                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
-                                <line x1="10" y1="4" x2="10" y2="16"/>
-                                <line x1="4" y1="10" x2="16" y2="10"/>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            €1.950 per dossier, all-in. Doorlooptijd is 4 weken vanaf complete dossieraanlevering. Bij overschrijding ontvangt u korting.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Kan er na oplevering toelichting worden gegeven?
-                            <svg class="faq-icon" viewBox="0 0 20 20" fill="none">
-                                <line x1="10" y1="4" x2="10" y2="16"/>
-                                <line x1="4" y1="10" x2="16" y2="10"/>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            Ja. Vragen over het rapport worden door de betrokken specialist beantwoord.
+                            Na oplevering blijft het dossier beschikbaar voor toelichting. Eventuele vragen over het rapport worden door de betrokken specialist beantwoord.
                         </div>
                     </div>
                 </div>
@@ -2060,7 +1745,7 @@
             </div>
             
             <div style="text-align: center;">
-                <a href="mailto:info@kineticmedical.nl" class="btn btn-primary" style="margin-bottom: 1rem;">info@kineticmedical.nl</a>
+                <a href="/cdn-cgi/l/email-protection#5a33343c351a3133343f2e3339743436" class="btn btn-primary" style="margin-bottom: 1rem;"><span class="__cf_email__" data-cfemail="2e474048416e4547404b5a474d004042">[email&#160;protected]</span></a>
                 <p class="cta-microcopy" style="color: #A8A8A4;">Reactie binnen 48 uur</p>
             </div>
         </div>
@@ -2086,12 +1771,12 @@
             </div>
             <div class="footer-links">
                 <h4>Contact</h4>
-                <a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>
+                <a href="/cdn-cgi/l/email-protection#6e070008012e0507000b1a070d400002"><span class="__cf_email__" data-cfemail="51383f373e113a383f342538327f3f3d">[email&#160;protected]</span></a>
                 <a href="tel:+31612345678">+31 6 1234 5678</a>
             </div>
             <div class="footer-links">
                 <h4>Juridisch</h4>
-                <a href="/tooling-demo.html">Tooling demo</a>
+                <a href="tooling-demo.html">Tooling demo</a>
                 <a href="#">Privacybeleid</a>
                 <a href="#">Algemene voorwaarden</a>
                 <a href="#">Verwerkersovereenkomst</a>
@@ -2099,7 +1784,7 @@
         </div>
         <!-- FIXED: Dynamic year -->
         <div class="footer-bottom">
-            <p>© <script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
+            <p>© <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
             <span>SSL beveiligd</span>
         </div>
     </footer>
@@ -2124,7 +1809,6 @@
 
                 <!-- Tab 1: Timeline -->
                 <div class="mockup-panel active" id="panel-timeline">
-                    <div class="mockup-phase-label">Interne dossiervoorbereiding (conceptfase)</div>
                     <div class="mockup-container">
                         <!-- Dossier header -->
                         <div class="dossier-header">
@@ -2210,7 +1894,6 @@
 
                 <!-- Tab 2: Rapport -->
                 <div class="mockup-panel" id="panel-rapport">
-                    <div class="mockup-phase-label">Concept — niet geautoriseerd</div>
                     <div class="mockup-container">
                         <!-- Dossier header -->
                         <div class="dossier-header dossier-header-compact">
@@ -2224,7 +1907,7 @@
                             </div>
                             <div class="dossier-meta">
                                 <span class="dossier-label">Status</span>
-                                <span class="dossier-value dossier-status">Concept — ter beoordeling arts</span>
+                                <span class="dossier-value dossier-status">Concept</span>
                             </div>
                         </div>
 
@@ -2299,19 +1982,12 @@
         // Modal functionality
         const modal = document.getElementById('examplesModal');
         const openBtn = document.getElementById('openExamples');
-        const openBtnAlt = document.getElementById('openExamplesBtn');
         const closeBtn = document.getElementById('closeModal');
         const tabs = document.querySelectorAll('.modal-tab');
         const panels = document.querySelectorAll('.mockup-panel');
 
-        // Open modal (thumbnail)
+        // Open modal
         openBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Open modal (button)
-        openBtnAlt.addEventListener('click', () => {
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
@@ -2341,15 +2017,4 @@
         // Tab switching
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                const targetTab = tab.dataset.tab;
-                
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-                
-                tab.classList.add('active');
-                document.getElementById('panel-' + targetTab).classList.add('active');
-            });
-        });
-    </script>
-</body>
-</html>
+                const targetTab = tab.dataset
