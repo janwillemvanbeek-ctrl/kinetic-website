@@ -54,7 +54,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 /* PIPELINE */
 .pipe{padding:1.5rem 2rem 3rem;max-width:800px;margin:0 auto}
 .pipe-row{display:flex;align-items:center;justify-content:center;gap:.5rem}
-.pipe-step{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;border-radius:6px;background:#FFF;border:1.5px solid var(--line)}
+.pipe-step{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;border-radius:6px;background:#FFF;border:1.5px solid var(--line);text-decoration:none;transition:all .2s;cursor:default}
+a.pipe-step{cursor:pointer}
+a.pipe-step:hover{border-color:var(--warm-teal);transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+a.pipe-step:hover .pipe-label{color:var(--warm-teal)}
 .pipe-step.active{border-color:var(--warm-teal)}
 .pipe-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
 .pipe-step.active .pipe-num{background:var(--warm-teal);color:#FFF}
@@ -165,9 +168,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 <div class="pipe"><div class="pipe-row">
 <div class="pipe-step active"><span class="pipe-num">1</span><span class="pipe-label">Pseudonymizer</span><span class="pipe-tag">Actief</span></div>
 <div class="pipe-connector"></div>
-<a href="tijdlijn-demo.html" class="pipe-step done" style="text-decoration:none"><span class="pipe-num">2</span><span class="pipe-label">Tijdlijn Extract</span><span class="pipe-tag">Gereed</span></a>
+<a href="tijdlijn-demo.html" class="pipe-step done"><span class="pipe-num">2</span><span class="pipe-label">Tijdlijn Extract</span><span class="pipe-tag">Gereed</span></a>
 <div class="pipe-connector"></div>
-<div class="pipe-step future"><span class="pipe-num">3</span><span class="pipe-label">Concept Rapport</span><span class="pipe-tag">Binnenkort</span></div>
+<a href="rapport-demo.html" class="pipe-step done"><span class="pipe-num">3</span><span class="pipe-label">Concept Rapport</span><span class="pipe-tag">Gereed</span></a>
 </div></div>
 
 <!-- DEMO -->
@@ -422,3 +425,4 @@ outp.innerHTML='<span class="out-ph">Klik op \u201cPseudonimiseer\u201d om het r
 }
 
 document.getElementById('bp').addEventListener('click',run);
+reset();
