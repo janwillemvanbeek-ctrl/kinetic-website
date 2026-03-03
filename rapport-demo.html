@@ -147,6 +147,36 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 @media(max-width:900px){.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:1.5rem}.rp-field{grid-template-columns:1fr}}
 @media(max-width:600px){.rapport-body{padding:1.25rem 1rem}.rapport-header{grid-template-columns:1fr}}
 
+
+.rp-completeness{padding:1.5rem 2rem;border-bottom:1px solid var(--line)}
+.rp-compl-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.rp-compl-title{font-size:.8125rem;font-weight:600;color:var(--warm-ink)}
+.rp-compl-score{font-size:1.5rem;font-weight:600}
+.rp-compl-bar{height:6px;background:var(--fog);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+.rp-compl-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.rp-compl-detail{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.rp-compl-col{display:flex;flex-direction:column;gap:.25rem}
+.rp-compl-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.25rem}
+.rp-compl-item{font-size:.75rem;color:var(--stone);padding:.2rem 0 .2rem 1rem;position:relative}
+.rp-compl-ok::before{content:'';position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:var(--warm-teal)}
+.rp-compl-miss::before{content:'';position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:#D94F4F}
+.rp-hiaat{background:#FFF8F5;border:1.5px solid #F5D5C8;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.rp-hiaat-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.rp-hiaat-status{font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .5rem;border-radius:3px;background:#D94F4F;color:#FFF}
+.rp-hiaat-doc{font-size:.875rem;font-weight:600;color:var(--warm-ink)}
+.rp-hiaat-verwacht{font-size:.75rem;color:var(--stone);margin-left:auto}
+.rp-hiaat-text{font-size:.8125rem;color:var(--stone);line-height:1.6;margin-bottom:.75rem}
+.rp-hiaat-actie{font-size:.8125rem;color:#D94F4F;font-weight:500;padding:.5rem .75rem;background:rgba(217,79,79,.06);border-radius:4px}
+.rp-hiaat-actie-label{font-weight:600}
+.rp-contra{background:#FFFBF5;border:1.5px solid #F5E6C8;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.rp-contra-thema{font-size:.875rem;font-weight:600;color:#C77B2E;margin-bottom:.75rem}
+.rp-contra-bronnen{margin-bottom:.75rem}
+.rp-contra-bron{font-size:.75rem;color:var(--stone);line-height:1.6;padding:.25rem 0 .25rem 1rem;border-left:2px solid #E8C88A;margin-bottom:.25rem}
+.rp-contra-relevantie{font-size:.8125rem;color:var(--stone);line-height:1.6;padding:.5rem .75rem;background:rgba(199,123,46,.06);border-radius:4px}
+.rp-contra-rel-label{font-weight:600;color:#C77B2E}
+.rp-arts-context{font-size:.75rem;color:var(--warm-teal);line-height:1.5;margin-top:.5rem;padding:.5rem .75rem;background:rgba(47,111,106,.04);border-radius:4px;border-left:2px solid var(--warm-teal)}
+.rp-arts-ctx-label{font-weight:600}
+@media(max-width:600px){.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}}
 </style>
 </head>
 <body>
@@ -229,7 +259,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 </div>
 <div class="footer-links">
 <h4>Contact</h4>
-<a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>
+<a href="/cdn-cgi/l/email-protection#b4dddad2dbf4dfdddad1c0ddd7d9d1d0ddd7d5d89adad8"><span class="__cf_email__" data-cfemail="5f363139301f3436313a2b363c323a3b363c3e33713133">[email&#160;protected]</span></a>
 <a href="tel:+31612345678">+31 6 1234 5678</a>
 </div>
 <div class="footer-links">
@@ -241,7 +271,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 </div>
 </div>
 <div class="footer-bottom">
-<p>&copy; <script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
+<p>&copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
 <span>SSL beveiligd</span>
 </div>
 </footer>
@@ -257,6 +287,11 @@ var EXAMPLE_RAPPORT = {
     opdrachtgever: "Aon Letselschade B.V.",
     ongevalsdatum: "29-01-2022",
     onderzoeksdatum: "23-04-2024"
+  },
+  compleetheid: {
+    score: 78,
+    aanwezig: ["SEH-verslag","Ontslagbrief","Huisartsbrief","Fysiotherapie intake","MRI cervicaal","Verwijsbrief pijnrevalidatie","Operatieverslag denervatie","Intake CGT","Keuringsrapport"],
+    ontbrekend: ["Fysiotherapie eindverslag (verwacht juni 2022)","Intake/voortgangsverslag pijnrevalidatie [ORGANISATIE-7]","Neuropsychologisch onderzoek (verwezen door neuroloog)"]
   },
   sections: [
     {
@@ -325,10 +360,55 @@ var EXAMPLE_RAPPORT = {
       num: "5", title: "Samenvatting medische informatie", badge: "ai", type: "text",
       paragraphs: [
         "Chronologisch overzicht van de relevante medische behandelingen na het ongeval:",
-        "29-01-2022 \u2014 SEH-presentatie [ORGANISATIE-2]. WAD graad II. R\u00f6ntgen cervicaal: geen fracturen.\n14-02-2022 \u2014 Controle huisarts. Cervicobrachialgie links, concentratiestoornissen. Verwijzing fysiotherapie.\n21-02-2022 \u2014 Start fysiotherapie [ORGANISATIE-6]. Cervicale mobiliteit: flexie 35\u00b0, extensie 25\u00b0.\n18-08-2022 \u2014 MRI cervicaal: discusdegeneratie C5\u2013C6, protrusie, foraminastenose links.\n12-10-2022 \u2014 Verwijzing pijnrevalidatie [ORGANISATIE-7] wegens persisterende klachten.\n15-01-2023 \u2014 Radiofrequente facetdenervatie C4\u2013C5 en C5\u2013C6.\n08-03-2023 \u2014 Start CGT i.v.m. Post Commotioneel Syndroom.\n23-04-2024 \u2014 Expertiseonderzoek (heden).",
-        "Opmerking: er ontbreekt een eindverslag van het fysiotherapietraject (verwacht rond juni 2022) en er is geen intake- of voortgangsverslag van de pijnrevalidatie bij [ORGANISATIE-7] aangetroffen."
+        "29-01-2022 \u2014 SEH-presentatie [ORGANISATIE-2]. WAD graad II. R\u00f6ntgen cervicaal: geen fracturen.\n14-02-2022 \u2014 Controle huisarts. Cervicobrachialgie links, concentratiestoornissen. Verwijzing fysiotherapie.\n21-02-2022 \u2014 Start fysiotherapie [ORGANISATIE-6]. Cervicale mobiliteit: flexie 35\u00b0, extensie 25\u00b0.\n18-08-2022 \u2014 MRI cervicaal: discusdegeneratie C5\u2013C6, protrusie, foraminastenose links.\n12-10-2022 \u2014 Verwijzing pijnrevalidatie [ORGANISATIE-7] wegens persisterende klachten.\n15-01-2023 \u2014 Radiofrequente facetdenervatie C4\u2013C5 en C5\u2013C6.\n08-03-2023 \u2014 Start CGT i.v.m. Post Commotioneel Syndroom.\n23-04-2024 \u2014 Expertiseonderzoek (heden)."
       ],
       sources: ["Zie bronverwijzingen bij secties 3 en 4"]
+    },
+    {
+      num: "5a", title: "Hiaten in het dossier", badge: "ai", type: "hiaten",
+      hiaten: [
+        {
+          status: "ontbrekend",
+          doc: "Fysiotherapie eindverslag",
+          verwacht: "Juni 2022",
+          toelichting: "Fysiotherapie-intake is aanwezig (21-02-2022) maar er is geen afsluitend verslag of tussentijdse evaluatie aangetroffen. Behandelresultaat is daardoor niet objectief vast te stellen.",
+          actie: "Opvragen bij [ORGANISATIE-6]"
+        },
+        {
+          status: "ontbrekend",
+          doc: "Intake- of voortgangsverslag pijnrevalidatie",
+          verwacht: "November 2022",
+          toelichting: "Verwijzing pijnrevalidatie dateert van 12-10-2022, maar er is geen intake-verslag of behandelplan van [ORGANISATIE-7] aangetroffen. Het is onduidelijk of en welke behandeling heeft plaatsgevonden.",
+          actie: "Opvragen bij [ORGANISATIE-7]"
+        },
+        {
+          status: "ontbrekend",
+          doc: "Neuropsychologisch onderzoek (NPA)",
+          verwacht: "Q1 2024",
+          toelichting: "Neuroloog heeft verwezen voor NPA ter objectivering cognitieve klachten bij PCS. Er is geen NPA-rapport aangetroffen in het dossier.",
+          actie: "Opvragen bij verwijzend neuroloog of betrokkene"
+        }
+      ]
+    },
+    {
+      num: "5b", title: "Tegenstrijdigheden en aandachtspunten", badge: "ai", type: "tegenstrijdigheden",
+      items: [
+        {
+          thema: "Cervicale afwijkingen: pre-existent of traumatisch?",
+          bronnen: ["CT cervicaal 29-01-2022: \u201cspondylose C5\u2013C6, degeneratief, pre-existent\u201d (bron 1, p. 2)","MRI cervicaal 18-08-2022: \u201cprotrusie C5\u2013C6 mediaan-links, lichte foraminastenose\u201d (bron 5, p. 1)","Neuroloog 08-03-2023: \u201ccervicobrachialgie bij discusprotrusie C5\u2013C6, traumatisch geagraveerd\u201d (bron 8, p. 1)"],
+          relevantie: "Centraal voor causaliteitsbeoordeling (IWMD-vraag 5). De CT bij presentatie noemt de afwijkingen pre-existent; de neuroloog concludeert traumatische agravatie. De arts dient te beoordelen of de protrusie nieuw is of een progressie van pre-existente degeneratie."
+        },
+        {
+          thema: "Ulnaris neuropathie: traumatisch of pre-existent?",
+          bronnen: ["EMG 12-01-2023: \u201cmogelijk traumatisch dan wel door pre\u00ebxistente sulcus ulnaris syndroom dat manifest is geworden na het trauma\u201d (bron 7, p. 2)","Neuroloog: \u201culnaris neuropathie elleboog links, post-traumatisch\u201d (bron 8, p. 2)"],
+          relevantie: "De neurofysioloog laat de causaliteit expliciet open; de neuroloog concludeert post-traumatisch. Dit verschil is relevant voor de invaliditeitsbeoordeling."
+        },
+        {
+          thema: "Cognitieve klachten: PCS of stemmingsgerelateerd?",
+          bronnen: ["Neuroloog: \u201cPost Commotioneel Syndroom\u201d (bron 8, p. 1)","Intake CGT: diagnose PCS (bron 8, p. 1)","NPA ontbreekt \u2014 cognitieve klachten zijn niet geobjectiveerd"],
+          relevantie: "Zonder NPA is niet vast te stellen of de cognitieve klachten primair door de commotio worden verklaard of (mede) door de depressieve symptomatologie. Dit be\u00efnvloedt de causaliteitsbeoordeling."
+        }
+      ]
     },
     {
       num: "6", title: "Huidige klachten (anamnese)", badge: "ai", type: "text",
@@ -345,27 +425,40 @@ var EXAMPLE_RAPPORT = {
     {
       num: "7", title: "Lichamelijk onderzoek", badge: "arts", type: "arts_template",
       prompt: "Onderstaande bevindingen dienen door de onderzoekend arts te worden ingevuld op basis van eigen lichamelijk onderzoek.",
-      subfields: ["Algemene indruk", "Inspectie en palpatie cervicale wervelkolom", "Mobiliteit cervicaal (flexie, extensie, lateroflexie, rotatie)", "Neurologisch onderzoek bovenste extremiteiten", "Provocatietesten (Spurling, distraktie, Lhermitte)", "Aanvullend onderzoek (indien ge\u00efndiceerd)"]
+      subfields: [
+        {label: "Algemene indruk", context: null},
+        {label: "Inspectie en palpatie cervicale wervelkolom", context: "Dossier: drukpijn C5\u2013C6 bij SEH (29-01-2022). Fysiotherapie intake: flexie 35\u00b0, extensie 25\u00b0. Neuroloog (08-03-2023): rotatie L 40\u00b0, R 55\u00b0, Spurling positief links."},
+        {label: "Mobiliteit cervicaal (flexie, extensie, lateroflexie, rotatie)", context: "Vergelijk: fysiotherapie 21-02-2022 (flexie 35\u00b0, ext 25\u00b0) en neurologie 08-03-2023 (rot L 40\u00b0, R 55\u00b0)."},
+        {label: "Neurologisch onderzoek bovenste extremiteiten", context: "EMG 12-01-2023: ulnaris neuropathie elleboog links (geleidingssnelheid 42 m/s, normaal >50). Neuroloog: hypoesthesie C6 links, verminderde sensibiliteit dig IV\u2013V."},
+        {label: "Provocatietesten (Spurling, distraktie, Lhermitte)", context: "Neuroloog 08-03-2023: Spurling positief links."},
+        {label: "Aanvullend onderzoek (indien ge\u00efndiceerd)", context: null}
+      ]
     },
     {
       num: "8", title: "Diagnose en beschouwing", badge: "arts", type: "arts_template",
-      prompt: "De diagnose, causaliteitsbeoordeling en beschouwing dienen door de medisch specialist te worden opgesteld. Ter ondersteuning zijn de relevante dossiergegevens samengevat in secties 3\u20136.",
-      subfields: ["Diagnose op vakgebied", "Causaal verband met ongeval d.d. 29-01-2022", "Rol pre-existente factoren", "Prognose en eindtoestand", "Mate van blijvende invaliditeit (AMA Guides, 6e editie)"]
+      prompt: "De diagnose, causaliteitsbeoordeling en beschouwing dienen door de medisch specialist te worden opgesteld. Per subveld zijn de relevante dossiergegevens samengevat.",
+      subfields: [
+        {label: "Diagnose op vakgebied", context: "Gesteld door neuroloog (08-03-2023): 1. Cervicobrachialgie links bij protrusie C5\u2013C6. 2. Ulnaris neuropathie elleboog links. 3. Post Commotioneel Syndroom. Zie ook: tegenstrijdigheden sectie 5b."},
+        {label: "Causaal verband met ongeval d.d. 29-01-2022", context: "Let op: CT bij SEH noemt spondylose C5\u2013C6 als pre-existent. MRI 4 mnd later toont protrusie. Neuroloog: \u2018traumatisch geagraveerd.\u2019 EMG: ulnaris neuropathie \u2018mogelijk pre-existent, manifest na trauma.\u2019 Zie tegenstrijdigheden sectie 5b."},
+        {label: "Rol pre-existente factoren", context: "Pre-existent: spondylose C5\u2013C6 (CT 29-01-2022), spondylose L4\u2013L5 (r\u00f6ntgen 29-01-2022). Geen eerdere klachten hiervan in huisartsjournaal."},
+        {label: "Prognose en eindtoestand", context: "Neuroloog (08-03-2023): PCS-herstel verwacht binnen 6\u201312 maanden. Bedrijfsarts (15-03-2023): volledige werkhervatting niet voor sept 2023. Huidig (april 2024): nog steeds 40% arbeidsongeschikt."},
+        {label: "Mate van blijvende invaliditeit (AMA Guides, 6e editie)", context: null}
+      ]
     },
     {
       num: "9", title: "Beantwoording IWMD-vragen", badge: "arts", type: "iwmd_answers",
       intro: "De beantwoording van de IWMD-vragen geschiedt door de medisch specialist op basis van eigen onderzoek en de beschikbare medische documentatie.",
       questions: [
-        "Hoe luidt de anamnese voor wat betreft de aard, de ernst en het verloop van het letsel?",
-        "Wilt u een overzicht geven van de medische voorgeschiedenis?",
-        "Wilt u een beschrijving geven van uw bevindingen bij onderzoek?",
-        "Wat is de diagnose op uw vakgebied?",
-        "Bestaat er een causaal verband tussen het ongeval en de diagnose?",
-        "Is de huidige toestand als eindtoestand te beschouwen?",
-        "Welke beperkingen bestaan bij betrokkene?",
-        "Kunt u de mate van blijvende invaliditeit vaststellen (AMA Guides)?",
-        "Heeft u therapeutische suggesties?",
-        "Zijn er aspecten die u nog onder de aandacht wilt brengen?"
+        {q: "Hoe luidt de anamnese voor wat betreft de aard, de ernst en het verloop van het letsel?", context: "AI-voorbereiding beschikbaar in secties 4 en 6."},
+        {q: "Wilt u een overzicht geven van de medische voorgeschiedenis?", context: "AI-voorbereiding beschikbaar in sectie 3."},
+        {q: "Wilt u een beschrijving geven van uw bevindingen bij onderzoek?", context: null},
+        {q: "Wat is de diagnose op uw vakgebied?", context: null},
+        {q: "Bestaat er een causaal verband tussen het ongeval en de diagnose?", context: "Aandacht: tegenstrijdigheden gesignaleerd in sectie 5b. Pre-existente spondylose C5\u2013C6 vs. traumatische agravatie."},
+        {q: "Is de huidige toestand als eindtoestand te beschouwen?", context: "Neuroloog schatte PCS-herstel in op 6\u201312 maanden (feb 2023). Huidig: 26 maanden post-trauma, klachten persisteren."},
+        {q: "Welke beperkingen bestaan bij betrokkene?", context: "Bedrijfsarts (maart 2023): max 4 uur mentale belasting/dag, beperkt bovenhandswerk links, pijn bij zitten >45 min."},
+        {q: "Kunt u de mate van blijvende invaliditeit vaststellen (AMA Guides)?", context: null},
+        {q: "Heeft u therapeutische suggesties?", context: null},
+        {q: "Zijn er aspecten die u nog onder de aandacht wilt brengen?", context: "3 hiaten gesignaleerd (sectie 5a). 3 tegenstrijdigheden gesignaleerd (sectie 5b)."}
       ]
     },
     {
@@ -384,7 +477,7 @@ var EXAMPLE_RAPPORT = {
       ]
     }
   ],
-  stats: {aiSections: 7, artsSections: 3, bronnen: 10, hiaten: 2}
+  stats: {aiSections: 8, artsSections: 3, bronnen: 10, hiaten: 3, tegenstrijdigheden: 3}
 };
 
 function esc(s){if(!s)return"";var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
@@ -392,15 +485,37 @@ function esc(s){if(!s)return"";var d=document.createElement("div");d.textContent
 function renderRapport(data){
 var o=document.getElementById("output");
 var h='<div class="rapport">';
+
+// Header
 h+='<div class="rapport-header">';
 h+='<div class="rapport-meta"><span class="rapport-meta-label">Zaaknummer</span><span class="rapport-meta-value">'+esc(data.meta.zaaknummer)+'</span></div>';
 h+='<div class="rapport-meta"><span class="rapport-meta-label">Betrokkene</span><span class="rapport-meta-value rapport-meta-redacted">'+esc(data.meta.betrokkene)+'</span></div>';
 h+='<div class="rapport-meta"><span class="rapport-meta-label">Specialisme</span><span class="rapport-meta-value">'+esc(data.meta.specialisme)+'</span></div>';
 h+='<div class="rapport-meta"><span class="rapport-meta-label">Status</span><span class="rapport-status">'+esc(data.meta.status)+'</span></div>';
 h+='</div>';
+
+// Completeness bar
+if(data.compleetheid){
+var sc=data.compleetheid.score;
+var col=sc>=90?'var(--warm-teal)':sc>=70?'#C77B2E':'#D94F4F';
+h+='<div class="rp-completeness">';
+h+='<div class="rp-compl-header"><span class="rp-compl-title">Dossiercompleetheid</span><span class="rp-compl-score" style="color:'+col+'">'+sc+'%</span></div>';
+h+='<div class="rp-compl-bar"><div class="rp-compl-fill" style="width:'+sc+'%;background:'+col+'"></div></div>';
+h+='<div class="rp-compl-detail">';
+h+='<div class="rp-compl-col"><span class="rp-compl-label">Aanwezig ('+data.compleetheid.aanwezig.length+')</span>';
+data.compleetheid.aanwezig.forEach(function(d){h+='<span class="rp-compl-item rp-compl-ok">'+esc(d)+'</span>';});
+h+='</div>';
+h+='<div class="rp-compl-col"><span class="rp-compl-label">Ontbrekend ('+data.compleetheid.ontbrekend.length+')</span>';
+data.compleetheid.ontbrekend.forEach(function(d){h+='<span class="rp-compl-item rp-compl-miss">'+esc(d)+'</span>';});
+h+='</div>';
+h+='</div></div>';
+}
+
 h+='<div class="rapport-body">';
 h+='<div class="rapport-title">Concept Medisch Expertiserapport</div>';
 h+='<div class="rapport-subtitle">IWMD '+esc(data.meta.specialisme)+' \u2014 AI-voorbereiding door Kinetic</div>';
+
+// Sections
 data.sections.forEach(function(s){
 h+='<div class="rp-section">';
 h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
@@ -408,22 +523,26 @@ h+='<h3 class="rp-section-title">'+esc(s.title);
 if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">AI-voorbereid</span>';
 else h+='<span class="rp-badge rp-badge-arts">Arts</span>';
 h+='</h3>';
+
+// Fields
 if(s.type==="fields"){
 s.fields.forEach(function(f){
 h+='<div class="rp-field"><span class="rp-field-label">'+esc(f.label)+'</span><span class="rp-field-value'+(f.redacted?' rp-field-redacted':'')+'">'+esc(f.value)+'</span></div>';
 });
 }
+
+// IWMD questions (section 2)
 if(s.type==="iwmd"){
 h+='<p class="rp-text">'+esc(s.intro)+'</p>';
 s.questions.forEach(function(q,i){
 h+='<div class="rp-question"><span class="rp-q-num">Vraag '+(i+1)+'</span><p class="rp-q-text">'+esc(q)+'</p></div>';
 });
 }
+
+// Text sections
 if(s.type==="text"){
 s.paragraphs.forEach(function(p){
-var escaped=esc(p);
-escaped=escaped.replace(/\n/g,'<br>');
-h+='<p class="rp-text">'+escaped+'</p>';
+h+='<p class="rp-text">'+esc(p).replace(/\n/g,'<br>')+'</p>';
 });
 if(s.sources&&s.sources.length){
 h+='<div class="rp-sources"><div class="rp-sources-title">Bronverwijzingen</div>';
@@ -431,21 +550,63 @@ s.sources.forEach(function(src){h+='<div class="rp-source-item">'+esc(src)+'</di
 h+='</div>';
 }
 }
+
+// NEW: Hiaten section
+if(s.type==="hiaten"){
+s.hiaten.forEach(function(hi){
+h+='<div class="rp-hiaat">';
+h+='<div class="rp-hiaat-header">';
+h+='<span class="rp-hiaat-status">Ontbrekend</span>';
+h+='<span class="rp-hiaat-doc">'+esc(hi.doc)+'</span>';
+h+='<span class="rp-hiaat-verwacht">Verwacht: '+esc(hi.verwacht)+'</span>';
+h+='</div>';
+h+='<p class="rp-hiaat-text">'+esc(hi.toelichting)+'</p>';
+h+='<div class="rp-hiaat-actie"><span class="rp-hiaat-actie-label">Actie:</span> '+esc(hi.actie)+'</div>';
+h+='</div>';
+});
+}
+
+// NEW: Tegenstrijdigheden section
+if(s.type==="tegenstrijdigheden"){
+s.items.forEach(function(item){
+h+='<div class="rp-contra">';
+h+='<div class="rp-contra-thema">'+esc(item.thema)+'</div>';
+h+='<div class="rp-contra-bronnen">';
+item.bronnen.forEach(function(b){h+='<div class="rp-contra-bron">'+esc(b)+'</div>';});
+h+='</div>';
+h+='<div class="rp-contra-relevantie"><span class="rp-contra-rel-label">Relevantie voor de arts:</span> '+esc(item.relevantie)+'</div>';
+h+='</div>';
+});
+}
+
+// Arts template - NOW WITH CONTEXT
 if(s.type==="arts_template"){
 h+='<div class="rp-arts-template">';
 h+='<p class="rp-arts-prompt">'+esc(s.prompt)+'</p>';
 s.subfields.forEach(function(sf){
-h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span>'+esc(sf)+'</div>';
+var label=typeof sf==="string"?sf:sf.label;
+var ctx=typeof sf==="string"?null:sf.context;
+h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span><strong>'+esc(label)+'</strong>';
+if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossiercontext:</span> '+esc(ctx)+'</div>';}
+h+='</div>';
 });
 h+='</div>';
 }
+
+// IWMD answers - NOW WITH CONTEXT
 if(s.type==="iwmd_answers"){
 h+='<p class="rp-text">'+esc(s.intro)+'</p>';
-s.questions.forEach(function(q,i){
+var qs=s.questions;
+qs.forEach(function(item,i){
+var q=typeof item==="string"?item:item.q;
+var ctx=typeof item==="string"?null:item.context;
 h+='<div class="rp-question"><span class="rp-q-num">Vraag '+(i+1)+'</span><p class="rp-q-text">'+esc(q)+'</p>';
+if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossiercontext:</span> '+esc(ctx)+'</div>';}
 h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span>Te beantwoorden door specialist</div></div>';
 });
 }
+
+// Bronnenlijst
 if(s.type==="bronnen"){
 h+='<table class="rp-bronnen-table"><thead><tr><th>Nr.</th><th>Document</th><th>Bron</th><th>Datum</th><th>Pagina\'s</th></tr></thead><tbody>';
 s.bronnen.forEach(function(b){
@@ -453,18 +614,24 @@ h+='<tr><td>'+esc(b.nr)+'</td><td>'+esc(b.doc)+'</td><td>'+esc(b.bron)+'</td><td
 });
 h+='</tbody></table>';
 }
+
 h+='</div>';
 });
-h+='<div class="rp-page">p. 1\u201312</div>';
+
+h+='<div class="rp-page">p. 1\u201314</div>';
 h+='</div>';
 h+='<div class="rp-disclaimer"><strong>Fragment uit concept-rapport.</strong><br>AI ondersteunt bij ordening en bronverwijzing; de BIG-geregistreerde specialist beoordeelt en autoriseert het definitieve rapport.</div>';
 h+='</div>';
+
+// Stats
 h+='<div class="rp-summary">';
 h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.aiSections+'</div><div class="rp-stat-lbl">AI-voorbereid</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.artsSections+'</div><div class="rp-stat-lbl">Arts-secties</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.bronnen+'</div><div class="rp-stat-lbl">Bronverwijzingen</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#D94F4F">'+data.stats.hiaten+'</div><div class="rp-stat-lbl">Hiaten gesignaleerd</div></div>';
+h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#D94F4F">'+data.stats.hiaten+'</div><div class="rp-stat-lbl">Hiaten</div></div>';
+h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#C77B2E">'+data.stats.tegenstrijdigheden+'</div><div class="rp-stat-lbl">Aandachtspunten</div></div>';
 h+='</div>';
+
 o.innerHTML=h;
 }
 
@@ -492,7 +659,7 @@ headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
 model:"claude-sonnet-4-20250514",
 max_tokens:8000,
-messages:[{role:"user",content:"Je bent een medisch dossier-analist voor letselschade-expertises. Genereer een concept IWMD expertiserapport.\n\nRegels:\n- Vul secties die uit het dossier te halen zijn: gegevens, voorgeschiedenis, toedracht, medische samenvatting, klachten, bronnenlijst\n- Secties die medisch oordeel vereisen (lichamelijk onderzoek, diagnose, IWMD-antwoorden) als arts-templates\n- Gebruik [PERSOON-N] en [ORGANISATIE-N] placeholders\n- Voeg bronverwijzingen toe per sectie\n- Detecteer hiaten\n\nKRITIEK: ALLEEN valide JSON. Geen markdown. Alleen dubbele aanhalingstekens. Geen trailing commas.\n\nJSON format:\n{\"meta\":{\"zaaknummer\":\"...\",\"betrokkene\":\"...\",\"geboortedatum\":\"...\",\"status\":\"Concept\",\"specialisme\":\"...\",\"opdrachtgever\":\"...\",\"ongevalsdatum\":\"...\",\"onderzoeksdatum\":\"...\"},\"sections\":[{\"num\":\"1\",\"title\":\"Gegevens\",\"badge\":\"ai\",\"type\":\"fields\",\"fields\":[{\"label\":\"...\",\"value\":\"...\",\"redacted\":false}]},{\"num\":\"2\",\"title\":\"Vraagstelling\",\"badge\":\"ai\",\"type\":\"iwmd\",\"intro\":\"...\",\"questions\":[\"...\"]},{\"num\":\"3\",\"title\":\"...\",\"badge\":\"ai\",\"type\":\"text\",\"paragraphs\":[\"...\"],\"sources\":[\"...\"]},{\"num\":\"7\",\"title\":\"Lichamelijk onderzoek\",\"badge\":\"arts\",\"type\":\"arts_template\",\"prompt\":\"...\",\"subfields\":[\"...\"]},{\"num\":\"9\",\"title\":\"IWMD-vragen\",\"badge\":\"arts\",\"type\":\"iwmd_answers\",\"intro\":\"...\",\"questions\":[\"...\"]},{\"num\":\"10\",\"title\":\"Bronnenlijst\",\"badge\":\"ai\",\"type\":\"bronnen\",\"bronnen\":[{\"nr\":\"1\",\"doc\":\"...\",\"bron\":\"...\",\"datum\":\"...\",\"paginas\":\"...\"}]}],\"stats\":{\"aiSections\":0,\"artsSections\":0,\"bronnen\":0,\"hiaten\":0}}\n\nDossier:\n\n"+text}]
+messages:[{role:"user",content:"Je bent een medisch dossier-analist voor letselschade. Genereer een concept IWMD expertiserapport op basis van het dossier.\n\nRegels:\n- Vul secties die uit het dossier te halen zijn\n- Secties die medisch oordeel vereisen als arts-templates MET relevante dossiercontext per subveld\n- Detecteer hiaten met concrete acties\n- Detecteer tegenstrijdigheden tussen bronnen\n- Bereken dossiercompleetheid (aanwezige vs verwachte documenten)\n- Gebruik [PERSOON-N] en [ORGANISATIE-N] placeholders\n- Voeg bronverwijzingen toe per sectie\n\nKRITIEK: ALLEEN valide JSON. Geen markdown. Alleen dubbele aanhalingstekens. Geen trailing commas.\n\nJSON format (let op nieuwe velden: compleetheid, hiaten, tegenstrijdigheden, context bij arts-templates):\n{\"meta\":{\"zaaknummer\":\"...\",\"betrokkene\":\"...\",\"geboortedatum\":\"...\",\"status\":\"Concept\",\"specialisme\":\"...\",\"opdrachtgever\":\"...\",\"ongevalsdatum\":\"...\",\"onderzoeksdatum\":\"...\"},\"compleetheid\":{\"score\":0,\"aanwezig\":[\"...\"],\"ontbrekend\":[\"...\"]},\"sections\":[{\"num\":\"1\",\"title\":\"Gegevens\",\"badge\":\"ai\",\"type\":\"fields\",\"fields\":[{\"label\":\"...\",\"value\":\"...\",\"redacted\":false}]},{\"num\":\"5a\",\"title\":\"Hiaten\",\"badge\":\"ai\",\"type\":\"hiaten\",\"hiaten\":[{\"status\":\"ontbrekend\",\"doc\":\"...\",\"verwacht\":\"...\",\"toelichting\":\"...\",\"actie\":\"Opvragen bij ...\"}]},{\"num\":\"5b\",\"title\":\"Tegenstrijdigheden\",\"badge\":\"ai\",\"type\":\"tegenstrijdigheden\",\"items\":[{\"thema\":\"...\",\"bronnen\":[\"...\"],\"relevantie\":\"...\"}]},{\"num\":\"7\",\"title\":\"Lichamelijk onderzoek\",\"badge\":\"arts\",\"type\":\"arts_template\",\"prompt\":\"...\",\"subfields\":[{\"label\":\"...\",\"context\":\"...\"}]},{\"num\":\"9\",\"title\":\"IWMD-vragen\",\"badge\":\"arts\",\"type\":\"iwmd_answers\",\"intro\":\"...\",\"questions\":[{\"q\":\"...\",\"context\":\"...\"}]}],\"stats\":{\"aiSections\":0,\"artsSections\":0,\"bronnen\":0,\"hiaten\":0,\"tegenstrijdigheden\":0}}\n\nDossier:\n\n"+text}]
 })
 });
 var data=await response.json();
@@ -501,7 +668,14 @@ content=content.replace(/```json|```/g,"").trim();
 var si=content.indexOf("{");var ei=content.lastIndexOf("}");
 if(si>=0&&ei>si)content=content.substring(si,ei+1);
 content=content.replace(/,\s*([}\]])/g,"$1");
+content=content.replace(/[\x00-\x1f]/g,function(c){if(c==="\n"||c==="\r"||c==="\t")return c;return"";});
+content=content.replace(/:\s*'([^']*)'/g,':"$1"');
+content=content.replace(/([{,]\s*)(\w+)\s*:/g,'$1"$2":');
+try{var parsed=JSON.parse(content);}catch(e1){
+content=content.replace(/\n/g," ").replace(/\r/g," ").replace(/\t/g," ");
+content=content.replace(/,\s*([}\]])/g,"$1");
 var parsed=JSON.parse(content);
+}
 renderRapport(parsed);
 }catch(err){
 document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:#D94F4F"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0?"De AI-generatie is alleen beschikbaar in de Claude.ai sandbox.":"Controleer of de tekst een geldig medisch dossier bevat.")+'</p></div>';
