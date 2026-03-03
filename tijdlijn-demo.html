@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic Medische Expertises | Tijdlijn Extractie Demo</title>
+<meta name="description" content="AI-ondersteunde tijdlijn-extractie uit medische dossiers. Ordening, bronverwijzing en hiaatdetectie.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cpath d='M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z' fill='%23FAF9F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--warm-ink:#141414;--ivory:#FAF9F7;--fog:#F1F0ED;--stone:#5C5C58;
+--warm-teal:#2F6F6A;--warm-teal-hover:#265B57;--line:#EDECE9;
+--line-dark:rgba(255,255,255,0.1);
+--c-seh:#D94F4F;--c-ortho:#2F6F6A;--c-radio:#3B7DD8;--c-fysio:#5B8C5A;
+--c-pijn:#7B5EA7;--c-neuro:#C77B2E;--c-psych:#8B6B47;--c-huisarts:#5C5C58
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7;color:var(--stone);background:var(--ivory);font-size:16px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--warm-ink);font-weight:600}
+a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-offset:2px}
+.header{background:var(--warm-ink);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--line-dark)}
+.nav-content{max-width:1100px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;text-decoration:none}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:#A8A8A4;text-decoration:none;font-weight:500;font-size:.9375rem;transition:color .2s}
+.nav-links a:hover{color:#FFF}
+.nav-links .btn{color:#FFF}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.875rem 1.75rem;border-radius:4px;font-weight:600;font-size:.9375rem;text-decoration:none;transition:all .2s;cursor:pointer;border:1.5px solid transparent;font-family:inherit}
+.btn-primary{background:var(--warm-teal);color:#FFF;border-color:var(--warm-teal)}
+.btn-primary:hover{background:var(--warm-teal-hover);border-color:var(--warm-teal-hover)}
+.btn-secondary{background:transparent;color:var(--warm-ink);border-color:var(--warm-ink)}
+.btn-secondary:hover{background:var(--warm-ink);color:#FFF}
+.btn-sm{padding:.6rem 1.25rem;font-size:.8125rem}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.section{padding:5rem 2rem}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--warm-teal);margin-bottom:.5rem}
+.section-title{font-size:1.875rem;margin-bottom:.75rem;letter-spacing:-.01em}
+.section-subtitle{font-size:1rem;color:var(--stone);max-width:560px;margin:0 auto}
+.hero{padding:5rem 2rem 3rem;max-width:1100px;margin:0 auto}
+.hero h1{font-size:clamp(2rem,4vw,2.75rem);font-weight:600;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.2}
+.hero p{font-size:1rem;color:var(--stone);max-width:540px;line-height:1.7}
+.pipe{padding:1.5rem 2rem 3rem;max-width:900px;margin:0 auto}
+.pipe-row{display:flex;align-items:center;justify-content:center;gap:.5rem}
+.pipe-step{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;border-radius:6px;background:#FFF;border:1.5px solid var(--line);text-decoration:none;transition:all .2s}
+.pipe-step:hover{border-color:var(--warm-teal)}
+.pipe-step.active{border-color:var(--warm-teal)}
+.pipe-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.pipe-step.active .pipe-num{background:var(--warm-teal);color:#FFF}
+.pipe-step.done .pipe-num{background:var(--warm-ink);color:#FFF}
+.pipe-step.future .pipe-num{background:var(--fog);color:var(--stone)}
+.pipe-step.future{opacity:.4}
+.pipe-label{font-size:.8125rem;font-weight:600;white-space:nowrap;color:var(--warm-ink)}
+.pipe-tag{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .4rem;border-radius:3px}
+.pipe-step.active .pipe-tag{background:rgba(47,111,106,.1);color:var(--warm-teal)}
+.pipe-step.done .pipe-tag{background:rgba(20,20,20,.06);color:var(--stone)}
+.pipe-step.future .pipe-tag{background:var(--fog);color:var(--stone)}
+.pipe-connector{width:32px;height:1.5px;background:var(--line);flex-shrink:0}
+.demo-section{background:var(--fog);padding:3rem 2rem 4rem}
+.demo-inner{max-width:1100px;margin:0 auto}
+.demo-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.demo-title{font-size:1.875rem;letter-spacing:-.01em}
+.mode-toggle{display:flex;background:#FFF;border:1.5px solid var(--line);border-radius:4px;overflow:hidden}
+.mode-btn{padding:.5rem 1.25rem;font-size:.8125rem;font-weight:600;border:none;background:transparent;cursor:pointer;color:var(--stone);font-family:inherit;transition:all .2s}
+.mode-btn.active{background:var(--warm-ink);color:#FFF}
+.input-panel{background:#FFF;border:1px solid var(--line);border-radius:8px;margin-bottom:1.5rem;overflow:hidden}
+.input-panel.hidden{display:none}
+.input-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;border-bottom:1px solid var(--fog)}
+.input-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--stone)}
+.input-textarea{width:100%;min-height:200px;padding:1.25rem;border:none;outline:none;resize:vertical;font-family:'Inter',sans-serif;font-size:.8125rem;line-height:1.75;color:var(--warm-ink);background:#FFF}
+.input-actions{padding:.75rem 1.25rem;border-top:1px solid var(--fog);display:flex;align-items:center;justify-content:space-between}
+.input-note{font-size:.75rem;color:var(--stone)}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#FFF;border-radius:50%;animation:spin .6s linear infinite;margin-right:.5rem;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dossier-header{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:2rem}
+.dossier-meta{background:#FFF;padding:1rem 1.25rem}
+.dossier-label{display:block;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.25rem}
+.dossier-value{font-size:.9375rem;font-weight:600;color:var(--warm-ink)}
+.dossier-redacted{color:var(--c-seh);font-family:'Courier New',monospace;font-size:.8125rem}
+.section-heading{font-size:1.125rem;font-weight:600;color:var(--warm-ink);margin-bottom:1.75rem}
+.timeline{position:relative;padding-left:4.5rem}
+.timeline::before{content:'';position:absolute;left:2.75rem;top:0;bottom:0;width:1.5px;background:var(--line)}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-item:last-child{margin-bottom:0}
+.tl-tag{position:absolute;left:-4.5rem;top:.15rem;font-size:.5625rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .5rem;border-radius:3px;color:#FFF;white-space:nowrap;min-width:3rem;text-align:center}
+.tl-tag.seh{background:var(--c-seh)}.tl-tag.ortho{background:var(--c-ortho)}.tl-tag.radio{background:var(--c-radio)}.tl-tag.fysio{background:var(--c-fysio)}.tl-tag.pijn{background:var(--c-pijn)}.tl-tag.neuro{background:var(--c-neuro)}.tl-tag.psych{background:var(--c-psych)}.tl-tag.huisarts{background:var(--c-huisarts)}.tl-tag.overig,.tl-tag.mri{background:var(--stone)}
+.tl-item::before{content:'';position:absolute;left:-1.85rem;top:.55rem;width:8px;height:8px;border-radius:50%;background:var(--warm-ink);border:2px solid var(--fog);z-index:1}
+.tl-item.gap-item::before{background:var(--c-seh)}
+.tl-card{background:#FFF;border:1px solid var(--line);border-radius:8px;padding:1.25rem 1.5rem;transition:border-color .2s}
+.tl-card:hover{border-color:rgba(47,111,106,.3)}
+.tl-date{font-size:.75rem;color:var(--stone);margin-bottom:.35rem}
+.tl-date strong{color:var(--warm-ink);font-weight:600}
+.tl-event-title{font-size:.9375rem;font-weight:600;color:var(--warm-ink);margin-bottom:.5rem;line-height:1.3}
+.tl-body{font-size:.8125rem;color:var(--stone);line-height:1.65;margin-bottom:.75rem}
+.tl-source{font-size:.75rem;color:var(--stone);background:var(--fog);padding:.5rem .75rem;border-radius:4px;line-height:1.5}
+.tl-source strong{font-weight:600}
+.tl-gap{margin:1.5rem 0;position:relative}
+.tl-gap-card{background:rgba(217,79,79,.05);border:1.5px dashed rgba(217,79,79,.25);border-radius:8px;padding:1rem 1.5rem;display:flex;align-items:flex-start;gap:.75rem}
+.tl-gap-icon{flex-shrink:0;width:20px;height:20px;color:var(--c-seh);margin-top:.1rem}
+.tl-gap-text{font-size:.8125rem;color:#9a4040;line-height:1.5}
+.tl-gap-text strong{font-weight:600;color:var(--c-seh)}
+.tl-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:2.5rem;border:1px solid var(--line)}
+.tl-stat{background:#FFF;padding:1rem 1.25rem;text-align:center}
+.tl-stat-val{font-size:1.5rem;font-weight:600;color:var(--warm-ink);line-height:1;margin-bottom:.3rem}
+.tl-stat-lbl{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone)}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;max-width:1100px;margin:0 auto}
+.how-card{background:#FFF;border:1.5px solid var(--line);border-radius:8px;padding:1.75rem;transition:all .3s}
+.how-card:hover{border-color:var(--warm-teal);transform:translateY(-2px)}
+.how-num{font-size:2rem;font-weight:600;color:var(--warm-teal);opacity:.3;line-height:1;margin-bottom:1rem}
+.how-card h3{font-size:.9375rem;font-weight:600;margin-bottom:.5rem}
+.how-card p{font-size:.875rem;color:var(--stone);line-height:1.6}
+.footer{background:var(--warm-ink);color:#A8A8A4;padding:4rem 2rem 2rem}
+.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem}
+.footer-brand p{font-size:.875rem;max-width:280px;line-height:1.6;margin-top:1rem}
+.footer-links h4{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#A8A8A4;margin-bottom:1rem}
+.footer-links a{display:block;font-size:.875rem;color:#A8A8A4;text-decoration:none;padding:.375rem 0;transition:color .2s}
+.footer-links a:hover{color:#FFF}
+.footer-bottom{max-width:1100px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;font-size:.8125rem}
+@media(max-width:900px){.dossier-header{grid-template-columns:repeat(2,1fr)}.how-grid{grid-template-columns:repeat(2,1fr)}.pipe-row{flex-wrap:wrap}.pipe-connector{display:none}.footer-content{grid-template-columns:1fr;gap:2rem}}
+@media(max-width:600px){.how-grid{grid-template-columns:1fr}.nav-links a:not(.btn){display:none}.demo-top{flex-direction:column;gap:1rem;align-items:flex-start}.dossier-header{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:.5rem}.timeline{padding-left:3.5rem}.tl-tag{left:-3.5rem;font-size:.5rem}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInCard{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.hero,.pipe,.demo-section,.section{animation:fadeIn .5s ease-out both}
+.pipe{animation-delay:.05s}.demo-section{animation-delay:.1s}
+.tl-item{animation:fadeInCard .4s ease-out both}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+<nav class="nav-content">
+<a href="https://kineticmedical.nl" class="logo">
+<svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="k-cut-header"><path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/></clipPath></defs>
+<rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+<g clip-path="url(#k-cut-header)"><path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/></g>
+<text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
+</svg>
+</a>
+<div class="nav-links">
+<a href="https://kineticmedical.nl/#proces">Werkwijze</a>
+<a href="https://kineticmedical.nl/#voordelen">Voordelen</a>
+<a href="https://kineticmedical.nl/#faq">FAQ</a>
+<a href="https://kineticmedical.nl/#prijzen">Prijzen</a>
+<a href="https://kineticmedical.nl/#contact" class="btn btn-primary">Plan een gesprek</a>
+</div>
+</nav>
+</header>
+
+<div class="hero">
+<div class="section-label">Tooling Preview</div>
+<h1>Chronologische tijdlijn</h1>
+<p>AI-ondersteunde extractie, ordening en hiaatdetectie van medische dossiers. Elke gebeurtenis herleidbaar naar brondocument en paginanummer.</p>
+</div>
+
+<div class="pipe"><div class="pipe-row">
+<a href="tooling-demo.html" class="pipe-step done"><span class="pipe-num">1</span><span class="pipe-label">Pseudonymizer</span><span class="pipe-tag">Gereed</span></a>
+<div class="pipe-connector"></div>
+<div class="pipe-step active"><span class="pipe-num">2</span><span class="pipe-label">Tijdlijn Extract</span><span class="pipe-tag">Actief</span></div>
+<div class="pipe-connector"></div>
+<div class="pipe-step future"><span class="pipe-num">3</span><span class="pipe-label">Concept Rapport</span><span class="pipe-tag">Binnenkort</span></div>
+</div></div>
+
+<div class="demo-section"><div class="demo-inner">
+<div class="demo-top">
+<h2 class="demo-title">Tijdlijn Extractie</h2>
+<div class="mode-toggle">
+<button class="mode-btn active" id="modeExample" onclick="setMode('example')">Voorbeelddossier</button>
+<button class="mode-btn" id="modeCustom" onclick="setMode('custom')">Eigen tekst (AI)</button>
+</div>
+</div>
+
+<div class="input-panel hidden" id="inputPanel">
+<div class="input-header"><span class="input-label">Invoer &mdash; Gepseudonimiseerd dossier</span></div>
+<textarea class="input-textarea" id="customInput" placeholder="Plak hier een (gepseudonimiseerd) medisch dossier. De AI extraheert automatisch alle medische gebeurtenissen, ordent ze chronologisch en detecteert hiaten..."></textarea>
+<div class="input-actions">
+<span class="input-note">Tekst wordt verwerkt via Claude API. Geen data wordt opgeslagen.</span>
+<button class="btn btn-primary btn-sm" id="extractBtn" onclick="extractTimeline()">Extraheer tijdlijn</button>
+</div>
+</div>
+
+<div id="output"></div>
+</div></div>
+
+<div class="section">
+<div class="section-header">
+<div class="section-label">Onder de motorkap</div>
+<h2 class="section-title">Hoe de tijdlijn-extractie werkt</h2>
+</div>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">01</div><h3>Documentanalyse</h3><p>AI leest het complete dossier en identificeert alle medische gebeurtenissen met bijbehorende datums en bronnen.</p></div>
+<div class="how-card"><div class="how-num">02</div><h3>Chronologische ordening</h3><p>Gebeurtenissen worden gesorteerd op datum en voorzien van dag-tellingen relatief aan het ongevalsmoment.</p></div>
+<div class="how-card"><div class="how-num">03</div><h3>Hiaatdetectie</h3><p>Ontbrekende periodes en verwachte maar afwezige vervolgafspraken worden automatisch gesignaleerd.</p></div>
+<div class="how-card"><div class="how-num">04</div><h3>Bronverwijzing</h3><p>Elke tijdlijn-entry verwijst naar het exacte brondocument en paginanummer. Volledig reproduceerbaar.</p></div>
+</div>
+</div>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="k-cut-footer"><path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/></clipPath></defs>
+<rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+<g clip-path="url(#k-cut-footer)"><path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/></g>
+<text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
+</svg>
+<p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>
+</div>
+<div class="footer-links">
+<h4>Contact</h4>
+<a href="/cdn-cgi/l/email-protection#87eee9e1e8c7eceee9e2f3eee4eae2e3eee4e6eba9e9eb"><span class="__cf_email__" data-cfemail="acc5c2cac3ecc7c5c2c9d8c5cfc1c9c8c5cfcdc082c2c0">[email&#160;protected]</span></a>
+<a href="tel:+31612345678">+31 6 1234 5678</a>
+</div>
+<div class="footer-links">
+<h4>Juridisch</h4>
+<a href="tooling-demo.html">Pseudonymizer demo</a>
+<a href="tijdlijn-demo.html">Tijdlijn demo</a>
+<a href="https://kineticmedical.nl/privacy">Privacybeleid</a>
+<a href="https://kineticmedical.nl/voorwaarden">Algemene voorwaarden</a>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
+<span>SSL beveiligd</span>
+</div>
+</footer>
+
+<script>
+var EXAMPLE_DATA={
+zaak:{zaaknummer:"2024-KME-04892",betrokkene:"[PERSOON-1]",geboortedatum:"[GEBOORTEDATUM]",ongevalsdatum:"29-01-2022"},
+events:[
+{date:"29-01-2022",day:0,tag:"seh",tagLabel:"SEH",title:"SEH-presentatie na verkeersongeval",body:"Kop-staartbotsing op de A27 ter hoogte van afslag Lexmond. Betrokkene werd van achteren aangereden terwijl hij stilstond. Direct nekpijn en hoofdpijn. Whiplash Associated Disorder graad II vastgesteld door SEH-arts.",source:"Antonius Ziekenhuis Nieuwegein, SEH-verslag, p. 1\u20132"},
+{date:"14-02-2022",day:16,tag:"huisarts",tagLabel:"HUISARTS",title:"Controle huisarts",body:"Toenemende cervicobrachialgie links. Concentratiestoornissen. Hoofdpijn dagelijks, VAS-score 6\u20137. Tintelingen digiti III\u2013V links. Verwijzing fysiotherapie.",source:"Huisartsenpraktijk, brief, p. 1"},
+{date:"21-02-2022",day:23,tag:"fysio",tagLabel:"FYSIO",title:"Fysiotherapie \u2014 intake",body:"Start revalidatietraject bij FysioFit Utrecht. Cervicale mobiliteit beperkt: flexie 35\u00b0, extensie 25\u00b0. Behandelplan: 2x per week, 16 weken. Behandelaar: [PERSOON-5].",source:"FysioFit Utrecht, intake, p. 3"},
+{gap:true,afterDate:"13-06-2022",afterDay:135,text:"Geen eindverslag fysiotherapie aangetroffen. Verwacht: afsluitend verslag na 16 weken behandeling (gepland rond juni 2022). Effectiviteit behandeling niet gedocumenteerd."},
+{date:"18-08-2022",day:201,tag:"radio",tagLabel:"MRI",title:"MRI cervicale wervelkolom (HWK)",body:"Discusdegeneratie C5\u2013C6, lichte foraminastenose rechts. Geen HNP. Geen myelopathie. Lichte spondylartrose.",source:"Radiologie Antonius Ziekenhuis, verslag, p. 1"},
+{date:"12-10-2022",day:256,tag:"pijn",tagLabel:"PIJN",title:"Verwijzing pijnrevalidatie",body:"Persisterende cervicobrachialgie ondanks fysiotherapie. Verwijzing naar multidisciplinair pijnprogramma Sint Maartenskliniek.",source:"Sint Maartenskliniek Nijmegen, verwijsbrief, p. 1\u20132"},
+{gap:true,afterDate:"12-10-2022",afterDay:256,text:"Geen intake- of voortgangsverslag pijnrevalidatie aangetroffen. Verwacht: intakeverslag Sint Maartenskliniek na verwijzing oktober 2022. Status behandeltraject onduidelijk."},
+{date:"15-01-2023",day:351,tag:"neuro",tagLabel:"NEURO",title:"Facetdenervatie C4\u2013C5 en C5\u2013C6",body:"Radiofrequente denervatie onder fluoroscopie door [PERSOON-6], anesthesioloog. Procedure zonder complicaties. Verwachte pijnreductie na 2\u20134 weken.",source:"Anesthesiologie, operatieverslag, p. 1"},
+{date:"08-03-2023",day:403,tag:"psych",tagLabel:"CGT",title:"Start Cognitieve Gedragstherapie",body:"Behandeling concentratiestoornissen en pijncoping. Diagnose: Post Commotioneel Syndroom. Behandelplan: 12 sessies bij [PERSOON-7].",source:"Psychologenpraktijk, intake, p. 1\u20132"},
+{date:"23-04-2024",day:815,tag:"neuro",tagLabel:"NEURO",title:"Neurologisch expertiseonderzoek",body:"Cervicale mobiliteit: flexie 30\u00b0 (normaal 50\u00b0), extensie 20\u00b0 (normaal 60\u00b0), rotatie links 40\u00b0 (normaal 80\u00b0). Spurling positief links. Hypoesthesie C7 links. Tricepsreflex verlaagd. Conclusie: 7% blijvende invaliditeit (AMA Guides, 6e editie).",source:"Kliniek voor Neurologische Expertise, rapport, p. 4\u20136"}
+],
+stats:{events:8,gaps:2,sources:8,spanDays:815}
+};
+
+function fmtDay(d){
+if(d===0)return"Dag 0";
+if(d<=90)return"Dag "+d;
+if(d<=730){var w=Math.round(d/7);return"Week "+w+" (dag "+d+")";}
+var m=Math.round(d/30.44);
+if(m<=24)return"Maand "+m+" (dag "+d+")";
+var y=(d/365.25).toFixed(1);return y+" jaar (dag "+d+")";
+}
+
+function esc(s){if(!s)return"";var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+
+function renderTimeline(data){
+var o=document.getElementById("output");
+var h='<div class="dossier-header">';
+h+='<div class="dossier-meta"><span class="dossier-label">Zaaknummer</span><span class="dossier-value">'+esc(data.zaak.zaaknummer)+'</span></div>';
+h+='<div class="dossier-meta"><span class="dossier-label">Betrokkene</span><span class="dossier-value dossier-redacted">'+esc(data.zaak.betrokkene)+'</span></div>';
+h+='<div class="dossier-meta"><span class="dossier-label">Geboortedatum</span><span class="dossier-value dossier-redacted">'+esc(data.zaak.geboortedatum)+'</span></div>';
+h+='<div class="dossier-meta"><span class="dossier-label">Ongevalsdatum</span><span class="dossier-value">'+esc(data.zaak.ongevalsdatum)+'</span></div>';
+h+='</div>';
+h+='<h3 class="section-heading">Chronologisch overzicht</h3>';
+h+='<div class="timeline">';
+data.events.forEach(function(ev,i){
+var dl=(i*0.06)+"s";
+if(ev.gap){
+h+='<div class="tl-gap tl-item" style="animation-delay:'+dl+'">';
+h+='<div class="tl-gap-card">';
+h+='<svg class="tl-gap-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><line x1="10" y1="6" x2="10" y2="11"/><circle cx="10" cy="14" r=".5" fill="currentColor"/></svg>';
+h+='<div class="tl-gap-text"><strong>Hiaat gedetecteerd</strong><br>'+esc(ev.text)+'</div>';
+h+='</div></div>';
+}else{
+h+='<div class="tl-item" style="animation-delay:'+dl+'">';
+h+='<span class="tl-tag '+ev.tag+'">'+esc(ev.tagLabel)+'</span>';
+h+='<div class="tl-card">';
+h+='<div class="tl-date">'+esc(ev.date)+' &middot; <strong>'+fmtDay(ev.day)+'</strong></div>';
+h+='<div class="tl-event-title">'+esc(ev.title)+'</div>';
+h+='<div class="tl-body">'+esc(ev.body)+'</div>';
+h+='<div class="tl-source"><strong>Bron:</strong> '+esc(ev.source)+'</div>';
+h+='</div></div>';
+}
+});
+h+='</div>';
+h+='<div class="tl-summary">';
+h+='<div class="tl-stat"><div class="tl-stat-val">'+data.stats.events+'</div><div class="tl-stat-lbl">Gebeurtenissen</div></div>';
+h+='<div class="tl-stat"><div class="tl-stat-val" style="color:var(--c-seh)">'+data.stats.gaps+'</div><div class="tl-stat-lbl">Hiaten</div></div>';
+h+='<div class="tl-stat"><div class="tl-stat-val">'+data.stats.sources+'</div><div class="tl-stat-lbl">Bronverwijzingen</div></div>';
+h+='<div class="tl-stat"><div class="tl-stat-val">'+fmtDay(data.stats.spanDays)+'</div><div class="tl-stat-lbl">Totale periode</div></div>';
+h+='</div>';
+o.innerHTML=h;
+}
+
+var currentMode="example";
+function setMode(mode){
+currentMode=mode;
+document.getElementById("modeExample").classList.toggle("active",mode==="example");
+document.getElementById("modeCustom").classList.toggle("active",mode==="custom");
+document.getElementById("inputPanel").classList.toggle("hidden",mode==="example");
+if(mode==="example"){renderTimeline(EXAMPLE_DATA);}
+else{document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><p>Plak een gepseudonimiseerd medisch dossier hierboven en klik op <strong>Extraheer tijdlijn</strong>.</p></div>';}
+}
+
+async function extractTimeline(){
+var text=document.getElementById("customInput").value.trim();
+if(!text)return;
+var btn=document.getElementById("extractBtn");
+btn.disabled=true;
+btn.innerHTML='<span class="spinner"></span>Verwerken\u2026';
+document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">AI analyseert het dossier\u2026</p></div>';
+try{
+var response=await fetch("https://api.anthropic.com/v1/messages",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+model:"claude-sonnet-4-20250514",
+max_tokens:8000,
+messages:[{role:"user",content:"Je bent een medisch dossier-analist. Extraheer een chronologische tijdlijn uit het onderstaande dossier.\n\nRegels:\n- Identificeer ALLE medische gebeurtenissen met een datum\n- Bepaal de ongevalsdatum als T\u00b10 en bereken voor elke gebeurtenis het aantal dagen erna\n- Categoriseer per specialisme met deze exacte tag-waarden: seh, ortho, radio, fysio, pijn, neuro, psych, huisarts, overig\n- Geef per gebeurtenis de bron (naam instelling, type document, paginanummer)\n- Detecteer hiaten: ontbrekende vervolgafspraken, missende verslagen, onverklaarde gaten\n- Extraheer zaakgegevens\n\nKRITIEK: Antwoord met ALLEEN valide JSON. Geen markdown backticks. Geen toelichting voor of na de JSON. Gebruik ALLEEN dubbele aanhalingstekens in de JSON. Geen single quotes. Geen trailing commas. Geen comments.\n\nJSON structuur:\n{\"zaak\":{\"zaaknummer\":\"...\",\"betrokkene\":\"...\",\"geboortedatum\":\"...\",\"ongevalsdatum\":\"DD-MM-YYYY\"},\"events\":[{\"date\":\"DD-MM-YYYY\",\"day\":0,\"tag\":\"seh\",\"tagLabel\":\"SEH\",\"title\":\"korte titel\",\"body\":\"beschrijving max 2 zinnen\",\"source\":\"instelling, document, p. X\"},{\"gap\":true,\"afterDate\":\"DD-MM-YYYY\",\"afterDay\":0,\"text\":\"beschrijving van het hiaat\"}],\"stats\":{\"events\":0,\"gaps\":0,\"sources\":0,\"spanDays\":0}}\n\nDossier:\n\n"+text}]
+})
+});
+var data=await response.json();
+var content=data.content.map(function(c){return c.text||"";}).join("");
+content=content.replace(/```json|```/g,"").trim();
+var si=content.indexOf("{");var ei=content.lastIndexOf("}");
+if(si>=0&&ei>si)content=content.substring(si,ei+1);
+content=content.replace(/,\s*([}\]])/g,"$1");
+var parsed=JSON.parse(content);
+renderTimeline(parsed);
+}catch(err){
+document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--c-seh)"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0||err.message.indexOf("CORS")>=0?'De AI-extractie is alleen beschikbaar in de Claude.ai sandbox. Op de live site wordt binnenkort een API-proxy toegevoegd.':'Controleer of de tekst een geldig medisch dossier bevat.')+'</p></div>';
+}
+btn.disabled=false;
+btn.innerHTML="Extraheer tijdlijn";
+}
+
+renderTimeline(EXAMPLE_DATA);
+</script>
+</body>
+</html>
