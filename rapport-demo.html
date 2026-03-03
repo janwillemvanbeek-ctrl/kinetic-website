@@ -658,27 +658,21 @@ method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
 model:"claude-sonnet-4-20250514",
-max_tokens:8000,
+max_tokens:16000,
 messages:[{role:"user",content:"Je bent een medisch dossier-analist voor letselschade. Genereer een concept IWMD expertiserapport op basis van het dossier.\n\nRegels:\n- Vul secties die uit het dossier te halen zijn\n- Secties die medisch oordeel vereisen als arts-templates MET relevante dossiercontext per subveld\n- Detecteer hiaten met concrete acties\n- Detecteer tegenstrijdigheden tussen bronnen\n- Bereken dossiercompleetheid (aanwezige vs verwachte documenten)\n- Gebruik [PERSOON-N] en [ORGANISATIE-N] placeholders\n- Voeg bronverwijzingen toe per sectie\n\nKRITIEK: ALLEEN valide JSON. Geen markdown. Alleen dubbele aanhalingstekens. Geen trailing commas.\n\nJSON format (let op nieuwe velden: compleetheid, hiaten, tegenstrijdigheden, context bij arts-templates):\n{\"meta\":{\"zaaknummer\":\"...\",\"betrokkene\":\"...\",\"geboortedatum\":\"...\",\"status\":\"Concept\",\"specialisme\":\"...\",\"opdrachtgever\":\"...\",\"ongevalsdatum\":\"...\",\"onderzoeksdatum\":\"...\"},\"compleetheid\":{\"score\":0,\"aanwezig\":[\"...\"],\"ontbrekend\":[\"...\"]},\"sections\":[{\"num\":\"1\",\"title\":\"Gegevens\",\"badge\":\"ai\",\"type\":\"fields\",\"fields\":[{\"label\":\"...\",\"value\":\"...\",\"redacted\":false}]},{\"num\":\"5a\",\"title\":\"Hiaten\",\"badge\":\"ai\",\"type\":\"hiaten\",\"hiaten\":[{\"status\":\"ontbrekend\",\"doc\":\"...\",\"verwacht\":\"...\",\"toelichting\":\"...\",\"actie\":\"Opvragen bij ...\"}]},{\"num\":\"5b\",\"title\":\"Tegenstrijdigheden\",\"badge\":\"ai\",\"type\":\"tegenstrijdigheden\",\"items\":[{\"thema\":\"...\",\"bronnen\":[\"...\"],\"relevantie\":\"...\"}]},{\"num\":\"7\",\"title\":\"Lichamelijk onderzoek\",\"badge\":\"arts\",\"type\":\"arts_template\",\"prompt\":\"...\",\"subfields\":[{\"label\":\"...\",\"context\":\"...\"}]},{\"num\":\"9\",\"title\":\"IWMD-vragen\",\"badge\":\"arts\",\"type\":\"iwmd_answers\",\"intro\":\"...\",\"questions\":[{\"q\":\"...\",\"context\":\"...\"}]}],\"stats\":{\"aiSections\":0,\"artsSections\":0,\"bronnen\":0,\"hiaten\":0,\"tegenstrijdigheden\":0}}\n\nDossier:\n\n"+text}]
 })
 });
 var data=await response.json();
+if(data.stop_reason==="max_tokens"){throw new Error("TRUNCATED");}
 var content=data.content.map(function(c){return c.text||"";}).join("");
 content=content.replace(/```json|```/g,"").trim();
 var si=content.indexOf("{");var ei=content.lastIndexOf("}");
 if(si>=0&&ei>si)content=content.substring(si,ei+1);
 content=content.replace(/,\s*([}\]])/g,"$1");
-content=content.replace(/[\x00-\x1f]/g,function(c){if(c==="\n"||c==="\r"||c==="\t")return c;return"";});
-content=content.replace(/:\s*'([^']*)'/g,':"$1"');
-content=content.replace(/([{,]\s*)(\w+)\s*:/g,'$1"$2":');
-try{var parsed=JSON.parse(content);}catch(e1){
-content=content.replace(/\n/g," ").replace(/\r/g," ").replace(/\t/g," ");
-content=content.replace(/,\s*([}\]])/g,"$1");
 var parsed=JSON.parse(content);
-}
 renderRapport(parsed);
 }catch(err){
-document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:#D94F4F"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0?"De AI-generatie is alleen beschikbaar in de Claude.ai sandbox.":"Controleer of de tekst een geldig medisch dossier bevat.")+'</p></div>';
+document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:#D94F4F"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0?"De AI-generatie is alleen beschikbaar in de Claude.ai sandbox.":(err.message==="TRUNCATED"?"Het dossier is te groot voor een enkele API-call. Probeer een korter dossier.":"Controleer of de tekst een geldig medisch dossier bevat."))+'</p></div>';
 }
 btn.disabled=false;
 btn.innerHTML="Genereer concept-rapport";
