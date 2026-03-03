@@ -60,6 +60,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 .pipe-step.active .pipe-num{background:var(--warm-teal);color:#FFF}
 .pipe-step.future .pipe-num{background:var(--fog);color:var(--stone)}
 .pipe-step.future{opacity:.4}
+.pipe-step.done .pipe-num{background:var(--warm-ink);color:#FFF}
+.pipe-step.done .pipe-tag{background:rgba(20,20,20,.06);color:var(--stone)}
 .pipe-label{font-size:.8125rem;font-weight:600;white-space:nowrap}
 .pipe-tag{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .4rem;border-radius:3px}
 .pipe-step.active .pipe-tag{background:rgba(47,111,106,.1);color:var(--warm-teal)}
@@ -163,7 +165,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 <div class="pipe"><div class="pipe-row">
 <div class="pipe-step active"><span class="pipe-num">1</span><span class="pipe-label">Pseudonymizer</span><span class="pipe-tag">Actief</span></div>
 <div class="pipe-connector"></div>
-<div class="pipe-step future"><span class="pipe-num">2</span><span class="pipe-label">Tijdlijn Extract</span><span class="pipe-tag">Binnenkort</span></div>
+<a href="tijdlijn-demo.html" class="pipe-step done" style="text-decoration:none"><span class="pipe-num">2</span><span class="pipe-label">Tijdlijn Extract</span><span class="pipe-tag">Gereed</span></a>
 <div class="pipe-connector"></div>
 <div class="pipe-step future"><span class="pipe-num">3</span><span class="pipe-label">Concept Rapport</span><span class="pipe-tag">Binnenkort</span></div>
 </div></div>
@@ -225,7 +227,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 </div>
 <div class="footer-links">
 <h4>Contact</h4>
-<a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>
+<a href="/cdn-cgi/l/email-protection#8fe6e1e9e0cfe4e6e1eafbe6ece2eaebe6eceee3a1e1e3"><span class="__cf_email__" data-cfemail="8ce5e2eae3cce7e5e2e9f8e5efe1e9e8e5efede0a2e2e0">[email&#160;protected]</span></a>
 <a href="tel:+31612345678">+31 6 1234 5678</a>
 </div>
 <div class="footer-links">
@@ -237,7 +239,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 </div>
 </div>
 <div class="footer-bottom">
-<p>&copy; <script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
+<p>&copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear())</script> Kinetic Medische Expertises</p>
 <span>SSL beveiligd</span>
 </div>
 </footer>
@@ -420,13 +422,3 @@ outp.innerHTML='<span class="out-ph">Klik op \u201cPseudonimiseer\u201d om het r
 }
 
 document.getElementById('bp').addEventListener('click',run);
-document.getElementById('br').addEventListener('click',reset);
-
-function autoResize(){inp.style.height='auto';inp.style.height=inp.scrollHeight+'px';}
-inp.addEventListener('input',autoResize);
-reset();
-setTimeout(run,400);
-
-</script>
-</body>
-</html>
