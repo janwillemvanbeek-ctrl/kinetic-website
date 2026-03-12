@@ -26,6 +26,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 .header{background:var(--warm-ink);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--line-dark)}
 .nav-content{max-width:1100px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
 .logo{display:flex;align-items:center;text-decoration:none}
+.brand-lockup{display:inline-flex;align-items:center;gap:.625rem}
+.logo-mark{width:32px;height:32px;display:block;filter:invert(1)}
+.brand-wordmark{color:#FAF9F7;font-size:1.125rem;font-weight:600;letter-spacing:-.02em}
 .nav-links{display:flex;gap:2rem;align-items:center}
 .nav-links a{color:#A8A8A4;text-decoration:none;font-weight:500;font-size:.9375rem;transition:color .2s}
 .nav-links a:hover{color:#FFF}
@@ -188,12 +191,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 
 <header class="header">
 <nav class="nav-content">
-<a href="https://kineticmedical.nl" class="logo"><svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs><clipPath id="k-cut-header"><path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/></clipPath></defs>
-<rect width="32" height="32" rx="4" fill="#FAF9F7"/>
-<g clip-path="url(#k-cut-header)"><path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/></g>
-<text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
-</svg></a>
+<a href="https://kineticmedical.nl" class="logo"><span class="brand-lockup"><img src="forty-beeldmerk-zwart.png" alt="Kinetic logo" class="logo-mark" width="32" height="32"><span class="brand-wordmark">Kinetic</span></span></a>
 <div class="nav-links">
 <a href="https://kineticmedical.nl/#proces">Werkwijze</a>
 <a href="https://kineticmedical.nl/#voordelen">Voordelen</a>
@@ -254,12 +252,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-
 
 <footer class="footer">
 <div class="footer-content">
-<div class="footer-brand"><svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs><clipPath id="k-cut-footer"><path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/></clipPath></defs>
-<rect width="32" height="32" rx="4" fill="#FAF9F7"/>
-<g clip-path="url(#k-cut-footer)"><path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/></g>
-<text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>
-</svg>
+<div class="footer-brand"><span class="brand-lockup"><img src="forty-beeldmerk-zwart.png" alt="Kinetic logo" class="logo-mark" width="32" height="32" loading="lazy" decoding="async"><span class="brand-wordmark">Kinetic</span></span>
 <p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>
 </div>
 <div class="footer-links">
