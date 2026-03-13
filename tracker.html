@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic — Sales Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --ink: #141414; --ivory: #FAF9F7; --fog: #F1F0ED; --stone: #6B6B66;
+  --taupe: #A6A39A; --teal: #2F6F6A; --white: #FFFFFF;
+  --red: #C94040; --orange: #D4963A; --green: #2E7D32; --light-teal: #E8F0EF;
+}
+body { font-family: 'Inter', sans-serif; background: var(--ivory); color: var(--ink); font-size: 14px; line-height: 1.5; }
+.app { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--fog); }
+.header h1 { font-size: 1.5rem; font-weight: 600; }
+.header h1 span { color: var(--teal); }
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
+.sync-status { font-size: 0.75rem; color: var(--taupe); }
+.sync-status.saving { color: var(--orange); }
+.sync-status.saved { color: var(--green); }
+.sync-status.error { color: var(--red); }
+.btn { padding: 0.5rem 1rem; border: 1px solid var(--fog); border-radius: 4px; background: var(--white); font-family: inherit; font-size: 0.8125rem; cursor: pointer; transition: all 0.15s; }
+.btn:hover { border-color: var(--teal); }
+.btn-red { color: var(--red); border-color: var(--red); font-size: 0.75rem; padding: 0.375rem 0.75rem; }
+.btn-red:hover { background: #FDECEA; }
+
+.tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--fog); }
+.tab { padding: 0.75rem 1.25rem; font-weight: 500; color: var(--stone); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; font-size: 0.875rem; user-select: none; }
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.scores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.score-card { background: var(--white); border: 1px solid var(--fog); border-radius: 6px; padding: 1rem; }
+.score-card .label { font-size: 0.6875rem; color: var(--stone); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+.score-card .value { font-size: 1.75rem; font-weight: 600; color: var(--teal); }
+.score-card .sub { font-size: 0.75rem; color: var(--taupe); }
+.score-card.highlight { border-color: var(--teal); background: var(--light-teal); }
+
+.section-label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); padding: 0.75rem 0 0.25rem; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+th { background: var(--ink); color: var(--white); font-weight: 500; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.625rem 0.5rem; text-align: left; }
+td { padding: 0.375rem 0.5rem; border-bottom: 1px solid var(--fog); font-size: 0.8125rem; vertical-align: middle; }
+tr:hover td { background: var(--fog); }
+td input, td select { width: 100%; border: none; background: transparent; font-family: inherit; font-size: 0.8125rem; color: var(--ink); outline: none; padding: 2px 0; }
+td input:focus, td select:focus { background: var(--white); box-shadow: 0 0 0 1px var(--teal); border-radius: 3px; padding: 2px 4px; }
+td select { cursor: pointer; -webkit-appearance: none; appearance: none; }
+
+select.s-niet { color: var(--taupe); }
+select.s-stuur { color: var(--orange); font-weight: 500; }
+select.s-verstuurd { color: var(--teal); }
+select.s-opvolg { color: var(--teal); font-weight: 500; }
+select.s-gepland { color: var(--green); font-weight: 600; }
+select.s-bevestigd { color: var(--green); font-weight: 600; }
+select.s-nee { color: var(--red); }
+
+.script-card { background: var(--white); border: 1px solid var(--fog); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.script-card h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+.script-text { background: var(--fog); padding: 1.25rem; border-radius: 4px; font-size: 0.9375rem; line-height: 1.7; border-left: 3px solid var(--teal); margin-bottom: 1rem; }
+.script-response { padding: 0.5rem 0; font-size: 0.875rem; }
+.script-response strong { display: inline-block; min-width: 160px; }
+.response-ja { color: var(--green); }
+.response-nee { color: var(--red); }
+.response-vm { color: var(--orange); }
+
+.gonogo { background: var(--ink); color: var(--white); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.gonogo h3 { color: var(--teal); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.gonogo .big { font-size: 2.5rem; font-weight: 600; color: var(--teal); }
+.gonogo .target { color: var(--taupe); font-size: 0.875rem; }
+
+.todo-section { margin-bottom: 1.5rem; }
+.todo-section h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; }
+.todo-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--fog); }
+.todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--teal); cursor: pointer; }
+.todo-item label { cursor: pointer; font-size: 0.875rem; }
+.todo-item.done label { text-decoration: line-through; color: var(--taupe); }
+
+.loading { text-align: center; padding: 3rem; color: var(--stone); }
+
+@media (max-width: 768px) {
+  .scores { grid-template-columns: repeat(2, 1fr); }
+  th, td { padding: 0.25rem 0.375rem; font-size: 0.75rem; }
+  td input, td select { font-size: 0.75rem; }
+  .header h1 { font-size: 1.125rem; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1><span>K</span> Sales Tracker</h1>
+    <div class="header-right">
+      <span class="sync-status" id="sync">Laden...</span>
+      <button class="btn btn-red" onclick="if(confirm('Alle data wissen en opnieuw beginnen?')){resetData()}">Reset</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="pipeline">Pipeline</div>
+    <div class="tab" data-tab="todo">To-Do</div>
+    <div class="tab" data-tab="script">Belscript</div>
+  </div>
+
+  <div id="pipeline" class="tab-content active">
+    <div class="scores">
+      <div class="score-card"><div class="label">Gebeld</div><div class="value" id="sc-gebeld">0</div><div class="sub" id="sc-gebeld-sub">van 14</div></div>
+      <div class="score-card"><div class="label">Rapport verstuurd</div><div class="value" id="sc-rapport">0</div><div class="sub">stuur maar</div></div>
+      <div class="score-card"><div class="label">Gesprek gepland</div><div class="value" id="sc-gepland">0</div><div class="sub">verdiepend</div></div>
+      <div class="score-card highlight"><div class="label">Pilot bevestigd</div><div class="value" id="sc-pilot">0</div><div class="sub">doel: 3</div></div>
+    </div>
+
+    <div class="section-label">Stap 1 — Edwin's netwerk activeren (eerst)</div>
+    <table><thead><tr><th style="width:18%">Contact</th><th style="width:9%">Gebeld?</th><th style="width:18%">Resultaat</th><th style="width:18%">Introductie naar</th><th style="width:37%">Notities</th></tr></thead>
+    <tbody id="tbl-netwerk"></tbody></table>
+
+    <div class="section-label">Stap 2 — Tier 1: MA-bureaus bellen</div>
+    <table><thead><tr><th style="width:15%">Bureau</th><th style="width:8%">Gebeld?</th><th style="width:13%">Reactie</th><th style="width:8%">Rapport?</th><th style="width:11%">Opvolg</th><th style="width:13%">Status</th><th style="width:32%">Notities</th></tr></thead>
+    <tbody id="tbl-bureaus"></tbody></table>
+
+    <div class="section-label">Stap 3 — Tier 2: Verzekeraars (week 2)</div>
+    <table><thead><tr><th style="width:15%">Partij</th><th style="width:8%">Gebeld?</th><th style="width:13%">Reactie</th><th style="width:8%">Rapport?</th><th style="width:11%">Opvolg</th><th style="width:13%">Status</th><th style="width:32%">Notities</th></tr></thead>
+    <tbody id="tbl-verzekeraars"></tbody></table>
+  </div>
+
+  <div id="todo" class="tab-content">
+    <div class="gonogo">
+      <h3>Go/No-Go Trigger</h3>
+      <p style="margin-bottom:0.5rem">3 e-mailbevestigingen "wij doen mee aan de pilot"</p>
+      <div class="big" id="gonogo-count">0 / 3</div>
+      <div class="target">Deadline: eind week 6</div>
+    </div>
+
+    <div class="todo-section">
+      <h3>Edwin — t/m donderdag 20 maart</h3>
+      <div id="todo-edwin"></div>
+    </div>
+    <div class="todo-section">
+      <h3>Jan-Willem — t/m donderdag 20 maart</h3>
+      <div id="todo-jw"></div>
+    </div>
+  </div>
+
+  <div id="script" class="tab-content">
+    <div class="script-card">
+      <h3>Belscript MA-bureaus (30 seconden)</h3>
+      <div class="script-text">"Goedemorgen, u spreekt met Edwin Diepeveen, orthopedisch chirurg. Ik lever IWMD-expertises in 4 weken gegarandeerd, vast tarief €1.500 als tijdelijke pilotprijs. Mag ik u een voorbeeldrapport mailen zodat u kunt beoordelen of het bij uw dossiers past?"</div>
+      <div class="script-response"><strong class="response-ja">Bij "ja, stuur maar":</strong> Noteer naam + e-mail → app naar Jan-Willem → rapport dezelfde dag verstuurd</div>
+      <div class="script-response"><strong class="response-nee">Bij "nee":</strong> Vraag waarom. Noteer de reden. Elk "nee" is marktinformatie.</div>
+      <div class="script-response"><strong class="response-vm">Bij voicemail:</strong> Geen bericht achterlaten. Volgende dag opnieuw proberen.</div>
+    </div>
+    <div class="script-card">
+      <h3>Script collega-orthopeden</h3>
+      <div class="script-text">"Hoi [naam], ik start iets nieuws naast de kliniek. Ik lever orthopedische IWMD-expertises met AI-dossiervoorbereiding, 4 weken doorlooptijd. Ken jij medisch adviseurs of advocaten die expertises inkopen?"</div>
+      <div class="script-response"><strong>Doel:</strong> Minimaal 2-3 introducties bij MA-bureaus of advocatenkantoren</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://kzqejvhvjxjlzqcnjfsv.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt6cWVqdmh2anhqbHpxY25qZnN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzODkxMzMsImV4cCI6MjA4ODk2NTEzM30.QkykRmZAEwLRfyjMO1ZwILe08bih1Ly6NauslpKqoTk";
+
+const API = `${SUPABASE_URL}/rest/v1/tracker?id=eq.main`;
+const HEADERS = {
+  "apikey": SUPABASE_KEY,
+  "Authorization": `Bearer ${SUPABASE_KEY}`,
+  "Content-Type": "application/json",
+  "Prefer": "return=representation"
+};
+
+const STATUSES = ["Niet gebeld", "Gebeld — stuur rapport", "Rapport verstuurd", "Opvolgcall gedaan", "Gesprek gepland", "Pilot bevestigd", "Niet geïnteresseerd"];
+const JN = ["", "Ja", "Nee"];
+
+const DEFAULT_DATA = {
+  netwerk: [
+    { naam: "Collega-orthopeed 1", gebeld: "", resultaat: "", introductie: "", notities: "" },
+    { naam: "Collega-orthopeed 2", gebeld: "", resultaat: "", introductie: "", notities: "" },
+    { naam: "Collega-orthopeed 3", gebeld: "", resultaat: "", introductie: "", notities: "" },
+    { naam: "Collega-orthopeed 4", gebeld: "", resultaat: "", introductie: "", notities: "" },
+    { naam: "Collega-orthopeed 5", gebeld: "", resultaat: "", introductie: "", notities: "" },
+  ],
+  bureaus: [
+    { naam: "Triage Consult", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "triageconsult.nl" },
+    { naam: "MAB", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "medisch-advies-bureau.nl" },
+    { naam: "ArtsTotaal", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "artstotaal.com" },
+    { naam: "Medica", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "medica.nl" },
+    { naam: "Medische Meesters", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "medischemeesters.nl" },
+    { naam: "Het Medisch Kantoor", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "hetmedischkantoor.nl" },
+    { naam: "Medoa", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "medoa.nl" },
+    { naam: "Bollen Medisch Advies", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "bollenmedischadvies.nl" },
+    { naam: "Lechnerconsult", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "lechnerconsult.nl" },
+  ],
+  verzekeraars: [
+    { naam: "ASR", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "Manager personenschade" },
+    { naam: "Nationale-Nederlanden", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "Hoofd medische zaken" },
+    { naam: "Allianz", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "Manager letselschade" },
+    { naam: "Sedgwick Medas", gebeld: "", reactie: "", rapport: "", opvolg: "", status: "Niet gebeld", notities: "Martin de Haan" },
+  ],
+  todos_edwin: [
+    { text: "Collega-orthopeed 1 bellen", done: false },
+    { text: "Collega-orthopeed 2 bellen", done: false },
+    { text: "Collega-orthopeed 3 bellen", done: false },
+    { text: "Collega-orthopeed 4 bellen", done: false },
+    { text: "Collega-orthopeed 5 bellen", done: false },
+    { text: "Triage Consult bellen", done: false },
+    { text: "MAB bellen", done: false },
+    { text: "ArtsTotaal bellen", done: false },
+    { text: "Medica bellen", done: false },
+    { text: "Medische Meesters bellen", done: false },
+    { text: "Het Medisch Kantoor bellen", done: false },
+    { text: "Medoa bellen", done: false },
+    { text: "Bollen Medisch Advies bellen", done: false },
+    { text: "Lechnerconsult bellen", done: false },
+    { text: "Opvolgcalls doen (3 dagen na rapport)", done: false },
+  ],
+  todos_jw: [
+    { text: "Voorbeeldrapport schrijven (synthetische casus, IWMD)", done: false },
+    { text: "CV Edwin klaarzetten (1 pagina, PDF)", done: false },
+    { text: "One-pager Kinetic (PDF)", done: false },
+    { text: "Begeleidend e-mail klaarschrijven", done: false },
+    { text: "Materiaal versturen bij elke 'stuur maar'", done: false },
+    { text: "Website: pilotprijs → €1.500", done: false },
+    { text: "Website: telefoonnummer placeholder fixen", done: false },
+    { text: "Website: dode juridische links fixen", done: false },
+    { text: "LinkedIn: MA's zoeken bij niet-reagerende bureaus", done: false },
+  ]
+};
+
+let data = null;
+let saveTimeout = null;
+
+function setSync(state) {
+  const el = document.getElementById("sync");
+  el.textContent = state === "saving" ? "Opslaan..." : state === "saved" ? "Opgeslagen ✓" : state === "error" ? "Fout bij opslaan" : "Laden...";
+  el.className = "sync-status " + state;
+}
+
+async function loadData() {
+  try {
+    const res = await fetch(API + "&select=data", { headers: HEADERS });
+    const rows = await res.json();
+    if (rows.length && rows[0].data && Object.keys(rows[0].data).length > 0) {
+      data = rows[0].data;
+      // Ensure new fields exist
+      if (!data.todos_edwin) data.todos_edwin = DEFAULT_DATA.todos_edwin;
+      if (!data.todos_jw) data.todos_jw = DEFAULT_DATA.todos_jw;
+    } else {
+      data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+      await saveData();
+    }
+    setSync("saved");
+    render();
+  } catch (e) {
+    console.error(e);
+    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    setSync("error");
+    render();
+  }
+}
+
+async function saveData() {
+  setSync("saving");
+  try {
+    await fetch(API, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify({ data: data, updated_at: new Date().toISOString() })
+    });
+    setSync("saved");
+  } catch (e) {
+    console.error(e);
+    setSync("error");
+  }
+}
+
+function queueSave() {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(saveData, 500);
+}
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) Object.entries(attrs).forEach(([k,v]) => { if (k === "class") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e[k] = v; });
+  if (children) (Array.isArray(children) ? children : [children]).forEach(c => e.appendChild(typeof c === "string" ? document.createTextNode(c) : c));
+  return e;
+}
+
+function makeInput(val, onChange) {
+  return el("input", { value: val || "", onchange: function() { onChange(this.value); queueSave(); updateScores(); } });
+}
+
+function makeSelect(options, val, onChange, statusStyle) {
+  const s = el("select");
+  options.forEach(o => { const opt = el("option", { value: o, textContent: o || "—" }); if (o === val) opt.selected = true; s.appendChild(opt); });
+  if (statusStyle) applyStatusClass(s, val);
+  s.addEventListener("change", function() { onChange(this.value); if (statusStyle) applyStatusClass(this, this.value); queueSave(); updateScores(); });
+  return s;
+}
+
+function applyStatusClass(sel, val) {
+  sel.className = val.includes("Niet") ? "s-niet" : val.includes("stuur") ? "s-stuur" : val.includes("verstuurd") ? "s-verstuurd" : val.includes("Opvolg") ? "s-opvolg" : val.includes("gepland") ? "s-gepland" : val.includes("bevestigd") ? "s-bevestigd" : val.includes("geïnteresseerd") ? "s-nee" : "";
+}
+
+function renderNetwerk() {
+  const tbody = document.getElementById("tbl-netwerk");
+  tbody.innerHTML = "";
+  data.netwerk.forEach((r, i) => {
+    const tr = el("tr");
+    [makeInput(r.naam, v => data.netwerk[i].naam = v),
+     makeSelect(JN, r.gebeld, v => data.netwerk[i].gebeld = v),
+     makeInput(r.resultaat, v => data.netwerk[i].resultaat = v),
+     makeInput(r.introductie, v => data.netwerk[i].introductie = v),
+     makeInput(r.notities, v => data.netwerk[i].notities = v)
+    ].forEach(inp => { const td = el("td"); td.appendChild(inp); tr.appendChild(td); });
+    tbody.appendChild(tr);
+  });
+}
+
+function renderTable(key, tbodyId) {
+  const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = "";
+  data[key].forEach((r, i) => {
+    const tr = el("tr");
+    [makeInput(r.naam, v => data[key][i].naam = v),
+     makeSelect(JN, r.gebeld, v => data[key][i].gebeld = v),
+     makeInput(r.reactie, v => data[key][i].reactie = v),
+     makeSelect(JN, r.rapport, v => data[key][i].rapport = v),
+     makeInput(r.opvolg, v => data[key][i].opvolg = v),
+     makeSelect(STATUSES, r.status, v => data[key][i].status = v, true),
+     makeInput(r.notities, v => data[key][i].notities = v),
+    ].forEach(inp => { const td = el("td"); td.appendChild(inp); tr.appendChild(td); });
+    tbody.appendChild(tr);
+  });
+}
+
+function renderTodos(key, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  data[key].forEach((t, i) => {
+    const item = el("div", { class: "todo-item" + (t.done ? " done" : "") });
+    const cb = el("input", { type: "checkbox", checked: t.done });
+    cb.addEventListener("change", function() { data[key][i].done = this.checked; item.className = "todo-item" + (this.checked ? " done" : ""); queueSave(); });
+    const lbl = el("label", {}, t.text);
+    lbl.addEventListener("click", () => { cb.checked = !cb.checked; cb.dispatchEvent(new Event("change")); });
+    item.appendChild(cb);
+    item.appendChild(lbl);
+    container.appendChild(item);
+  });
+}
+
+function updateScores() {
+  if (!data) return;
+  const all = [...data.bureaus, ...data.verzekeraars];
+  const netwerkGebeld = data.netwerk.filter(r => r.gebeld === "Ja").length;
+  const bureausGebeld = all.filter(r => r.gebeld === "Ja").length;
+  document.getElementById("sc-gebeld").textContent = netwerkGebeld + bureausGebeld;
+  document.getElementById("sc-rapport").textContent = all.filter(r => r.rapport === "Ja").length;
+  document.getElementById("sc-gepland").textContent = all.filter(r => r.status === "Gesprek gepland").length;
+  const pilots = all.filter(r => r.status === "Pilot bevestigd").length;
+  document.getElementById("sc-pilot").textContent = pilots;
+  document.getElementById("gonogo-count").textContent = `${pilots} / 3`;
+}
+
+function render() {
+  if (!data) return;
+  renderNetwerk();
+  renderTable("bureaus", "tbl-bureaus");
+  renderTable("verzekeraars", "tbl-verzekeraars");
+  renderTodos("todos_edwin", "todo-edwin");
+  renderTodos("todos_jw", "todo-jw");
+  updateScores();
+}
+
+async function resetData() {
+  data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  await saveData();
+  render();
+}
+
+// Tabs
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", function() {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+    this.classList.add("active");
+    document.getElementById(this.dataset.tab).classList.add("active");
+  });
+});
+
+// Auto-refresh every 30 seconds
+setInterval(async () => {
+  try {
+    const res = await fetch(API + "&select=data", { headers: HEADERS });
+    const rows = await res.json();
+    if (rows.length && rows[0].data) {
+      const remote = rows[0].data;
+      if (JSON.stringify(remote) !== JSON.stringify(data)) {
+        data = remote;
+        render();
+        setSync("saved");
+      }
+    }
+  } catch {}
+}, 30000);
+
+// Init
+loadData();
+</script>
+</body>
+</html>
