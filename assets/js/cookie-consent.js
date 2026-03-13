@@ -1,18 +1,17 @@
 /**
- * Forty Cookie Consent
+ * Kinetic Cookie Consent
  * 
  * Laadt Snitcher alleen na expliciete toestemming.
- * Umami draait altijd (cookieloos, geen consent nodig).
  * 
  * Gebruik: voeg dit script toe vóór </body> op elke pagina:
- * <script src="/assets/js/cookie-consent.js"></script>
+ * <script src="cookie-consent.js"></script>
  *
  */
 (function () {
   'use strict';
 
   // Niet tonen als al gekozen
-  var consent = localStorage.getItem('forty_cookie_consent');
+  var consent = localStorage.getItem('kinetic_cookie_consent');
   if (consent === 'accepted') {
     loadSnitcher();
     return;
@@ -30,7 +29,7 @@
       '<div class="cookie-banner__text">' +
         '<strong>Cookies</strong>' +
         '<p>We gebruiken alleen wat nodig is. Met toestemming plaatsen we cookies om ons bereik beter te begrijpen. ' +
-        '<a href="/privacy/" style="color:var(--stone-500,#78716c);text-decoration:underline;font-size:13px">Meer info</a></p>' +
+        '<a href="/privacybeleid.html">Meer info</a></p>' +
       '</div>' +
       '<div class="cookie-banner__actions">' +
         '<button id="cookieReject" class="cookie-banner__btn cookie-banner__btn--secondary">Alleen noodzakelijk</button>' +
@@ -49,13 +48,13 @@
 
   // Handlers
   document.getElementById('cookieAccept').addEventListener('click', function () {
-    localStorage.setItem('forty_cookie_consent', 'accepted');
+    localStorage.setItem('kinetic_cookie_consent', 'accepted');
     closeBanner();
     loadSnitcher();
   });
 
   document.getElementById('cookieReject').addEventListener('click', function () {
-    localStorage.setItem('forty_cookie_consent', 'rejected');
+    localStorage.setItem('kinetic_cookie_consent', 'rejected');
     closeBanner();
   });
 
@@ -73,7 +72,7 @@
       "apiEndpoint": "radar.snitcher.com",
       "cdn": "cdn.snitcher.com",
       "namespace": "Snitcher",
-      "profileId": "s3cckcDVuO"
+      "profileId": "sGXPi1R3l8"
     });
   }
 })();

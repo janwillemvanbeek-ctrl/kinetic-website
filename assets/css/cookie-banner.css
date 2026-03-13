@@ -1,7 +1,6 @@
-/* Forty Cookie Banner
-   Past bij het Forty design system: DM Sans, Stone-kleuren, forty-orange accent.
-   Voeg toe aan elke pagina: <link rel="stylesheet" href="/assets/css/cookie-banner.css">
-   Of kopieer deze regels in je bestaande <style> block.
+/* Kinetic Cookie Banner
+   Past bij het Kinetic design system: Inter, Warm Ink, Ivory Grey, Warm Teal accent.
+   Voeg toe aan elke pagina: <link rel="stylesheet" href="cookie-banner.css">
 */
 
 .cookie-banner {
@@ -11,11 +10,11 @@
   transform: translateX(-50%) translateY(20px);
   width: calc(100% - 48px);
   max-width: 680px;
-  background: var(--white, #ffffff);
-  border: 1px solid var(--stone-200, #e7e5e4);
-  border-radius: 8px;
+  background: #FAF9F7;
+  border: 1px solid #F1F0ED;
+  border-radius: 6px;
   padding: 24px 28px;
-  box-shadow: 0 4px 24px rgba(28, 25, 23, 0.08), 0 1px 4px rgba(28, 25, 23, 0.04);
+  box-shadow: 0 4px 24px rgba(20, 20, 20, 0.06), 0 1px 4px rgba(20, 20, 20, 0.03);
   z-index: 9999;
   opacity: 0;
   transition: opacity 300ms ease, transform 300ms ease;
@@ -48,19 +47,31 @@
 
 .cookie-banner__text strong {
   display: block;
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 500;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
   font-size: 15px;
-  color: var(--stone-900, #1c1917);
+  color: #141414;
   margin-bottom: 4px;
 }
 
 .cookie-banner__text p {
   margin: 0;
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
+  font-weight: 400;
   line-height: 1.55;
-  color: var(--stone-600, #57534e);
+  color: #6B6B66;
+}
+
+.cookie-banner__text a {
+  color: #A6A39A;
+  text-decoration: underline;
+  font-size: 13px;
+  transition: color 200ms ease;
+}
+
+.cookie-banner__text a:hover {
+  color: #6B6B66;
 }
 
 .cookie-banner__actions {
@@ -70,12 +81,12 @@
 }
 
 .cookie-banner__btn {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
   padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
   white-space: nowrap;
@@ -83,28 +94,28 @@
 
 .cookie-banner__btn--secondary {
   background: transparent;
-  color: var(--stone-600, #57534e);
-  border: 1px solid var(--stone-300, #d6d3d1);
+  color: #6B6B66;
+  border: 1px solid #A6A39A;
 }
 
 .cookie-banner__btn--secondary:hover {
-  background: var(--stone-100, #f5f5f4);
-  border-color: var(--stone-400, #a8a29e);
-  color: var(--stone-900, #1c1917);
+  background: #F1F0ED;
+  border-color: #6B6B66;
+  color: #141414;
 }
 
 .cookie-banner__btn--primary {
-  background: var(--forty-orange, #F97316);
-  color: var(--white, #ffffff);
+  background: #2F6F6A;
+  color: #FAF9F7;
   border: 1px solid transparent;
 }
 
 .cookie-banner__btn--primary:hover {
-  background: #ea6c10;
+  background: #1F5A56;
 }
 
 .cookie-banner__btn:focus-visible {
-  outline: 2px solid var(--forty-orange, #F97316);
+  outline: 2px solid #2F6F6A;
   outline-offset: 2px;
 }
 
