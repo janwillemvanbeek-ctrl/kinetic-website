@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kinetic Sales Tracker</title>
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <style>html, body, #root { margin: 0; padding: 0; min-height: 100%; }</style>
-</head>
-<body>
-  <div id="root"></div>
-
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-  <script type="text/babel">
-const { useState, useEffect, useCallback, useRef } = React;
-
-if (!window.storage) {
-  window.storage = {
-    get: async (key) => {
-      const value = window.localStorage.getItem(key);
-      return value === null ? null : { value };
-    },
-    set: async (key, value) => {
-      window.localStorage.setItem(key, value);
-    },
-  };
-}
-
+import { useState, useEffect, useCallback, useRef } from "react";
 
 // ─── KINETIC SALES TRACKER ─────────────────────────────────
 // Supabase-backed CRM for Kinetic GTM v6
@@ -134,7 +101,7 @@ async function saveLeadsAsync(leads) {
 }
 
 // ─── MAIN COMPONENT ────────────────────────────────────────
-function KineticSalesTracker() {
+export default function KineticSalesTracker() {
   const [leads, setLeads] = useState(DEFAULT_LEADS);
   const [loaded, setLoaded] = useState(false);
   const [filter, setFilter] = useState("Alle");
@@ -427,11 +394,3 @@ const cellInput = {
   fontSize: 12, fontFamily: "'DM Sans', sans-serif", width: "100%",
   outline: "none", background: "#fff",
 };
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<KineticSalesTracker />);
-
-  </script>
-</body>
-</html>
