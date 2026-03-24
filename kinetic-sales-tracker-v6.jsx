@@ -29,10 +29,6 @@ const DEFAULT_LEADS = [
   { id: "vz-03", naam: "Allianz", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Internationaal, NL letselschade.", contact: "Manager letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
   { id: "vz-04", naam: "Achmea / Centraal Beheer", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Grootste verzekeraar NL.", contact: "Inkoop-contact (bestaand)", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
   { id: "vz-05", naam: "Aegon / a.s.r.", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Actief in persoonlijk letsel.", contact: "Hoofd medische zaken", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  // Geparkeerd: MA-bureaus
-  { id: "ma-01", naam: "Triage Consult", tier: "Geparkeerd (MA)", eigenaar: "—", profiel: "Marktleider — ziet Kinetic als concurrent.", contact: "Directeur", status: "Geparkeerd", reactie: "", notities: "Herbenader na 3+ pilots", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ma-02", naam: "MAB", tier: "Geparkeerd (MA)", eigenaar: "—", profiel: "Verbonden aan JBL&G.", contact: "", status: "Geparkeerd", reactie: "", notities: "Via JBL&G-relatie na pilot", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ma-03", naam: "ArtsTotaal", tier: "Geparkeerd (MA)", eigenaar: "—", profiel: "Eigen platform.", contact: "", status: "Geparkeerd", reactie: "", notities: "Na pilotresultaten", rapport_verstuurd: false, opvolg_datum: "" },
 ];
 
 const STATUSES = [
@@ -61,8 +57,13 @@ const TIER_COLORS = {
   "Letselschadekantoor": "#2F6F6A",
   "Rechtsbijstand": "#1E40AF",
   "Verzekeraar": "#7C3AED",
-  "Geparkeerd (MA)": "#9CA3AF",
 };
+
+function withoutMABureaus(items) {
+  return (items || []).filter(
+    (lead) => !String(lead.id || "").startsWith("ma-") && lead.tier !== "Geparkeerd (MA)"
+  );
+}
 
 // ─── SUPABASE HELPERS ───────────────────────────────────────
 async function supaFetch(path, opts = {}) {
@@ -118,7 +119,7 @@ export default function KineticSalesTracker() {
   // Load persisted data on mount
   useEffect(() => {
     loadLeadsAsync().then(stored => {
-      if (stored && stored.length > 0) setLeads(stored);
+      if (stored && stored.length > 0) setLeads(withoutMABureaus(stored));
       setLoaded(true);
     });
   }, []);
@@ -245,7 +246,6 @@ export default function KineticSalesTracker() {
               <option>Letselschadekantoor</option>
               <option>Rechtsbijstand</option>
               <option>Verzekeraar</option>
-              <option>Geparkeerd (MA)</option>
             </select>
             <input placeholder="Profiel" value={newLead.profiel} onChange={e => setNewLead(p => ({ ...p, profiel: e.target.value }))} style={{ ...inputStyle, flex: 2 }} />
             <input placeholder="Contact" value={newLead.contact} onChange={e => setNewLead(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
@@ -257,12 +257,12 @@ export default function KineticSalesTracker() {
       {/* Filters */}
       <div style={{ padding: "12px 32px", display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
         <span style={{ fontSize: 11, fontWeight: 600, color: "#78716C", textTransform: "uppercase", letterSpacing: "0.06em", marginRight: 4 }}>Track:</span>
-        {["Alle", "Edwin", "Jan-Willem", "—"].map(e => (
+        {["Alle", "Edwin", "Jan-Willem"].map(e => (
           <button key={e} onClick={() => setEigenaarFilter(e)} style={{
             padding: "4px 12px", borderRadius: 4, border: "1px solid #E7E5E0", cursor: "pointer", fontSize: 12, fontWeight: 500,
             background: eigenaarFilter === e ? (e === "Edwin" ? "#2F6F6A" : e === "Jan-Willem" ? "#7C3AED" : "#1A2332") : "#fff",
             color: eigenaarFilter === e ? "#FAF9F7" : "#2C2926",
-          }}>{e === "—" ? "Geparkeerd" : e}</button>
+          }}>{e}</button>
         ))}
         <span style={{ fontSize: 11, fontWeight: 600, color: "#78716C", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 4px 0 16px" }}>Tier:</span>
         {tiers.map(t => (
