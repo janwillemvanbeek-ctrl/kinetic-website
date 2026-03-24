@@ -8,26 +8,28 @@ const SUPABASE_URL = "";
 const SUPABASE_KEY = "";
 const USE_SUPABASE = SUPABASE_URL && SUPABASE_KEY;
 
-// ─── DEFAULT LEADS (GTM v6 shortlist) ───────────────────────
+// ─── DEFAULT LEADS (GTM v6.1 — validated shortlist) ─────────
 const DEFAULT_LEADS = [
-  // Tier 1: Letselschadekantoren (Edwin)
-  { id: "ls-01", naam: "SAP Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Marktleider belangenbehartiging. Hoog volume.", contact: "Managing partner", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ls-02", naam: "JBL&G", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Groot letselschadekantoor, landelijk.", contact: "Partner letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ls-03", naam: "Beer Advocaten", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Gespecialiseerd letselschade, Amsterdam.", contact: "Senior advocaat", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ls-04", naam: "De Ridder Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Actief in persoonlijk letsel.", contact: "Directeur", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ls-05", naam: "Slot Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Middelgroot, korte lijnen.", contact: "Eigenaar", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ls-06", naam: "Pals Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Gevestigde naam.", contact: "Managing partner", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "ls-07", naam: "Hofmans Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Specialist persoonlijk letsel.", contact: "Senior adviseur", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  // Tier 1: Letselschadekantoren — LSA/NKL, zwaar letsel, hoog volume (Edwin)
+  { id: "ls-01", naam: "SAP Letselschade Advocaten", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Grootste LSA-kantoor NL. Meeste LSA-advocaten. Hoog volume zwaar letsel.", contact: "Managing partner", status: "Niet gebeld", reactie: "", notities: "Bel als eerste — sterkste referentie als ze ja zeggen", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-02", naam: "JBL&G", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Grootste onafhankelijke letselschadekantoor NL. 60+ medewerkers, 5 vestigingen.", contact: "Partner letselschade", status: "Niet gebeld", reactie: "", notities: "Hoog volume, landelijk. Verbonden aan MAB (geparkeerd)", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-03", naam: "Brugman Letselschade Advocaten", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "30+ medewerkers, 8 LSA-advocaten, landelijk. NKL-keurmerk.", contact: "Senior LSA-advocaat", status: "Niet gebeld", reactie: "", notities: "Groot volume, procedeert veel — heeft structureel expertises nodig", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-04", naam: "Jurilex / Letselschade.nl", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "14 vestigingen NL. NKL-keurmerk. Hoog volume dossiers.", contact: "Directie / senior expert", status: "Niet gebeld", reactie: "", notities: "Volume-speler, niet alleen advocaten maar ook NIVRE-experts", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-05", naam: "Slot Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "LSA-advocatenkantoor. Uitsluitend letselschade. NKL.", contact: "LSA-advocaat / eigenaar", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-06", naam: "Van der Toorn Personenschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "Sinds 1999, landelijk. NKL-keurmerk. Register-experts.", contact: "Directeur / senior expert", status: "Niet gebeld", reactie: "", notities: "Een van eerste NKL-kantoren", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-07", naam: "Wolthers Jagersma Advocaten", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "LSA-kantoor. Hoogste cliëntbeoordeling NL (9.8). Gespecialiseerd.", contact: "LSA-advocaat", status: "Niet gebeld", reactie: "", notities: "Klein maar gespecialiseerd — korte beslislijnen", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-08", naam: "Letsel Lawyers", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "LSA-kantoor Eindhoven. Eerder ook voor verzekeraars gewerkt — kent beide kanten.", contact: "Fabian of Marloes (oprichters)", status: "Niet gebeld", reactie: "", notities: "Interessant: kennen verzekeraars-perspectief", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "ls-09", naam: "Ottenschot Letselschade", tier: "Letselschadekantoor", eigenaar: "Edwin", profiel: "NKL-keurmerk. Gevestigd kantoor.", contact: "Senior expert", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
   // Tier 1b: Rechtsbijstandverzekeraars (Edwin)
-  { id: "rb-01", naam: "DAS Rechtsbijstand", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Groot volume, eigen letselschade-afdeling.", contact: "Manager letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "rb-01", naam: "DAS Rechtsbijstand", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Groot volume, eigen letselschade-afdeling. Koopt structureel expertises in.", contact: "Manager letselschade / hoofd medische zaken", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
   { id: "rb-02", naam: "ARAG", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Actief in letselschade, koopt extern in.", contact: "Teamleider letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "rb-03", naam: "Achmea Rechtsbijstand", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Verbonden aan Interpolis.", contact: "Manager personenschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "rb-04", naam: "Univé Rechtshulp", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Regionale dekking.", contact: "Coördinator letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  // Tier 2: Schadeverzekeraars (Jan-Willem)
-  { id: "vz-01", naam: "ASR", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Grote personenschade-afdeling.", contact: "Manager personenschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "vz-02", naam: "Nationale-Nederlanden", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Breed schadebedrijf.", contact: "Jeroen (bestaand contact)", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "vz-03", naam: "Allianz", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Internationaal, NL letselschade.", contact: "Manager letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
-  { id: "vz-04", naam: "Achmea / Centraal Beheer", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Grootste verzekeraar NL.", contact: "Inkoop-contact (bestaand)", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "rb-03", naam: "Achmea Rechtsbijstand", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Verbonden aan Interpolis. Groot bereik.", contact: "Manager personenschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "rb-04", naam: "Univé Rechtshulp", tier: "Rechtsbijstand", eigenaar: "Edwin", profiel: "Regionale dekking, eigen letselschadetak.", contact: "Coördinator letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  // Tier 2: Schadeverzekeraars (Jan-Willem — parallel)
+  { id: "vz-01", naam: "ASR", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Grote personenschade-afdeling. Koopt extern in.", contact: "Manager personenschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "vz-02", naam: "Nationale-Nederlanden", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Breed schadebedrijf. Eigen letselschade-afdeling.", contact: "Jeroen (bestaand contact)", status: "Niet gebeld", reactie: "", notities: "Warme ingang via bestaand contact", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "vz-03", naam: "Allianz", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Internationaal, actieve NL letselschade-afdeling.", contact: "Manager letselschade", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
+  { id: "vz-04", naam: "Achmea / Centraal Beheer", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Grootste verzekeraar NL. Breed schadebedrijf.", contact: "Inkoop-contact (bestaand)", status: "Niet gebeld", reactie: "", notities: "Warme ingang via bestaand contact", rapport_verstuurd: false, opvolg_datum: "" },
   { id: "vz-05", naam: "Aegon / a.s.r.", tier: "Verzekeraar", eigenaar: "Jan-Willem", profiel: "Actief in persoonlijk letsel.", contact: "Hoofd medische zaken", status: "Niet gebeld", reactie: "", notities: "", rapport_verstuurd: false, opvolg_datum: "" },
 ];
 
@@ -39,7 +41,6 @@ const STATUSES = [
   "Gesprek gepland",
   "Pilot bevestigd",
   "Niet geïnteresseerd",
-  "Geparkeerd",
 ];
 
 const STATUS_COLORS = {
@@ -58,12 +59,6 @@ const TIER_COLORS = {
   "Rechtsbijstand": "#1E40AF",
   "Verzekeraar": "#7C3AED",
 };
-
-function withoutMABureaus(items) {
-  return (items || []).filter(
-    (lead) => !String(lead.id || "").startsWith("ma-") && lead.tier !== "Geparkeerd (MA)"
-  );
-}
 
 // ─── SUPABASE HELPERS ───────────────────────────────────────
 async function supaFetch(path, opts = {}) {
@@ -119,7 +114,7 @@ export default function KineticSalesTracker() {
   // Load persisted data on mount
   useEffect(() => {
     loadLeadsAsync().then(stored => {
-      if (stored && stored.length > 0) setLeads(withoutMABureaus(stored));
+      if (stored && stored.length > 0) setLeads(stored);
       setLoaded(true);
     });
   }, []);
@@ -176,20 +171,27 @@ export default function KineticSalesTracker() {
   const tiers = ["Alle", ...new Set(leads.map(l => l.tier))];
 
   return (
-    <div style={{ fontFamily: "'DM Sans', 'Inter', -apple-system, sans-serif", background: "#FAF9F7", minHeight: "100vh", color: "#2C2926" }}>
-      {/* Header */}
-      <div style={{ background: "#1A2332", padding: "24px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div>
-          <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 24, fontWeight: 700, color: "#FAF9F7", letterSpacing: "-0.01em" }}>
-            KINETIC
-            <span style={{ color: "#E8A838", marginLeft: 8, fontSize: 14, fontWeight: 400, fontFamily: "'DM Sans', sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>Sales Tracker</span>
+    <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", background: "#FAF9F7", minHeight: "100vh", color: "#1A2332" }}>
+      {/* Header — Kinetic Medical website style */}
+      <div style={{ background: "#FAF9F7", borderBottom: "1px solid #E7E5E0" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 32px", maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2F6F6A", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "#FAF9F7", fontSize: 16, fontWeight: 700 }}>K</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 600, color: "#1A2332", letterSpacing: "-0.01em" }}>Kinetic Medische Expertises</div>
+              <div style={{ fontSize: 11, color: "#78716C", fontWeight: 400 }}>Sales Tracker — GTM v6.1</div>
+            </div>
           </div>
-          <div style={{ fontSize: 12, color: "#78716C", marginTop: 4 }}>GTM v6 — Letselschade & Verzekeraars</div>
-        </div>
-        <div style={{ display: "flex", gap: 8 }}>
-          <button onClick={() => setShowAdd(!showAdd)} style={btnStyle("#2F6F6A")}>+ Lead</button>
-          <button onClick={() => setShowConfig(!showConfig)} style={btnStyle("#78716C")}>⚙ Supabase</button>
-          <button onClick={resetData} style={btnStyle("#991B1B")}>↺ Reset</button>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ padding: "6px 14px", borderRadius: 6, background: stats.pilot >= 3 ? "#059669" : "#1A2332", color: "#FAF9F7", fontSize: 13, fontWeight: 600 }}>
+              {stats.pilot}/3 pilots
+            </div>
+            <button onClick={() => setShowAdd(!showAdd)} style={btnStyle("#2F6F6A")}>+ Lead</button>
+            <button onClick={() => setShowConfig(!showConfig)} style={{ ...btnStyle("#FAF9F7"), color: "#1A2332", border: "1px solid #E7E5E0" }}>Supabase</button>
+            <button onClick={resetData} style={{ ...btnStyle("#FAF9F7"), color: "#78716C", border: "1px solid #E7E5E0" }}>Reset</button>
+          </div>
         </div>
       </div>
 
@@ -212,8 +214,8 @@ export default function KineticSalesTracker() {
 
       {/* Supabase config panel */}
       {showConfig && (
-        <div style={{ padding: "16px 32px", background: "#FEF3C7", borderBottom: "1px solid #E8A838" }}>
-          <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, color: "#92400E" }}>Supabase configuratie</div>
+        <div style={{ padding: "16px 32px", background: "#F0FDFA", borderBottom: "1px solid #2F6F6A" }}>
+          <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, color: "#1A2332" }}>Supabase configuratie</div>
           <div style={{ fontSize: 12, color: "#78716C", marginBottom: 12 }}>Maak een tabel 'kinetic_leads' met kolommen: id (text, PK), naam, tier, profiel, contact, status, reactie, notities, rapport_verstuurd (bool), opvolg_datum (text). Zet RLS uit voor development.</div>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             <input placeholder="Supabase URL" value={supaUrl} onChange={e => setSupaUrl(e.target.value)} style={inputStyle} />
@@ -246,6 +248,7 @@ export default function KineticSalesTracker() {
               <option>Letselschadekantoor</option>
               <option>Rechtsbijstand</option>
               <option>Verzekeraar</option>
+              <option>Geparkeerd (MA)</option>
             </select>
             <input placeholder="Profiel" value={newLead.profiel} onChange={e => setNewLead(p => ({ ...p, profiel: e.target.value }))} style={{ ...inputStyle, flex: 2 }} />
             <input placeholder="Contact" value={newLead.contact} onChange={e => setNewLead(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
@@ -268,14 +271,14 @@ export default function KineticSalesTracker() {
         {tiers.map(t => (
           <button key={t} onClick={() => setTierFilter(t)} style={{
             padding: "4px 12px", borderRadius: 4, border: "1px solid #E7E5E0", cursor: "pointer", fontSize: 12, fontWeight: 500,
-            background: tierFilter === t ? "#1A2332" : "#fff", color: tierFilter === t ? "#FAF9F7" : "#2C2926",
+            background: tierFilter === t ? "#2F6F6A" : "#fff", color: tierFilter === t ? "#FAF9F7" : "#2C2926",
           }}>{t}</button>
         ))}
         <span style={{ fontSize: 11, fontWeight: 600, color: "#78716C", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 4px 0 16px" }}>Status:</span>
         {["Alle", ...STATUSES].map(s => (
           <button key={s} onClick={() => setFilter(s)} style={{
             padding: "4px 12px", borderRadius: 4, border: "1px solid #E7E5E0", cursor: "pointer", fontSize: 12, fontWeight: 500,
-            background: filter === s ? "#1A2332" : "#fff", color: filter === s ? "#FAF9F7" : "#2C2926",
+            background: filter === s ? "#2F6F6A" : "#fff", color: filter === s ? "#FAF9F7" : "#2C2926",
           }}>{s === "Alle" ? "Alle" : s}</button>
         ))}
       </div>
@@ -284,7 +287,7 @@ export default function KineticSalesTracker() {
       <div style={{ padding: "0 32px 32px", overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
-            <tr style={{ background: "#1A2332", color: "#FAF9F7" }}>
+            <tr style={{ background: "#2F6F6A", color: "#FAF9F7" }}>
               {["Naam", "Tier", "Eigenaar", "Contact", "Status", "Rapport?", "Reactie / Notities", "Opvolg", ""].map(h => (
                 <th key={h} style={{ padding: "10px 12px", textAlign: "left", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>{h}</th>
               ))}
@@ -369,8 +372,8 @@ export default function KineticSalesTracker() {
 
       {/* Footer */}
       <div style={{ padding: "16px 32px", borderTop: "1px solid #E7E5E0", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 11, color: "#78716C" }}>
-        <div>Klik op een rij om te bewerken. Data wordt persistent opgeslagen.</div>
-        <div>Kinetic GTM v6 — Edwin: {stats.edwinTotal} leads | Jan-Willem: {stats.jwTotal} leads — {stats.pilot}/3 pilots bevestigd</div>
+        <div>Klik op een rij om te bewerken. Data persisteert tussen sessies.</div>
+        <div>Edwin: {stats.edwinTotal} leads | Jan-Willem: {stats.jwTotal} leads</div>
       </div>
     </div>
   );
