@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic Tooling — AI</title>
+<style>
+:root {
+  --ink:        #141414;
+  --teal:       #2F6F6A;
+  --teal-light: #E8F4F3;
+  --teal-mid:   #A8D4D1;
+  --teal-dark:  #1E4E4A;
+  --ivory:      #FAF9F7;
+  --fog:        #F0EFEB;
+  --stone:      #6B6B68;
+  --border:     #E2E0DA;
+  --amber:      #C8860A;
+  --amber-light:#FDF3E0;
+  --coral:      #C0503A;
+  --white:      #FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       background: var(--ivory); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+/* ── HEADER ── */
+.app-header {
+  background: var(--ink); color: white;
+  padding: 0 32px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-k {
+  width: 28px; height: 28px; background: var(--teal); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 600; color: white; font-family: Georgia, serif;
+}
+.logo-name { font-size: 13px; font-weight: 500; letter-spacing: 0.01em; }
+.logo-badge {
+  font-size: 10px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
+  padding: 2px 8px; border-radius: 10px; letter-spacing: 0.05em; margin-left: 4px;
+}
+
+/* ── TABS ── */
+.app-tabs {
+  display: flex; background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+}
+.tab-btn {
+  padding: 14px 20px; font-size: 13px; font-weight: 400; color: var(--stone);
+  border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: all .15s; white-space: nowrap;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--teal-dark); font-weight: 500; border-bottom-color: var(--teal); }
+.tab-pip {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal-mid); margin-left: 6px; vertical-align: middle;
+  opacity: 0; transition: opacity .2s;
+}
+.tab-btn.done .tab-pip { opacity: 1; }
+
+/* ── PANELS ── */
+.panel { display: none; max-width: 960px; margin: 0 auto; padding: 32px; }
+.panel.active { display: block; }
+
+/* ── SECTION HEADERS ── */
+.section-label {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal); font-weight: 600; margin-bottom: 6px;
+}
+.section-title {
+  font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 8px;
+  font-family: Georgia, 'Times New Roman', serif; line-height: 1.2;
+}
+.section-intro { font-size: 13px; color: var(--stone); line-height: 1.7; margin-bottom: 24px; max-width: 640px; }
+
+/* ── FORMS ── */
+.field-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--stone); margin-bottom: 6px; display: block;
+}
+.field-row { margin-bottom: 16px; }
+.input-text {
+  width: 100%; padding: 9px 12px; font-size: 13px; font-family: inherit;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--white);
+  color: var(--ink); transition: border-color .15s;
+}
+.input-text:focus { outline: none; border-color: var(--teal); }
+.input-date {
+  padding: 9px 12px; font-size: 13px; font-family: inherit;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--white);
+  color: var(--ink);
+}
+.input-date:focus { outline: none; border-color: var(--teal); }
+
+/* ── EDITOR SPLIT ── */
+.editor-split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+}
+.editor-pane { display: flex; flex-direction: column; }
+.editor-pane-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--stone); margin-bottom: 6px;
+}
+textarea {
+  width: 100%; min-height: 320px; padding: 12px 14px;
+  font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--white);
+  color: var(--ink); resize: vertical; line-height: 1.65;
+}
+textarea:focus { outline: none; border-color: var(--teal); }
+.output-area {
+  min-height: 320px; padding: 12px 14px; border-radius: 6px;
+  background: var(--teal-light); border: 1px solid var(--teal-mid);
+  font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px;
+  line-height: 1.65; color: var(--teal-dark); white-space: pre-wrap;
+  word-break: break-word; overflow-y: auto;
+}
+.output-area.empty { color: var(--stone); font-family: inherit; font-size: 13px; }
+
+/* ── BUTTONS ── */
+.btn-row { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
+.btn-primary {
+  padding: 10px 20px; background: var(--teal); color: white; border: none;
+  border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer;
+  font-family: inherit; transition: background .15s;
+}
+.btn-primary:hover { background: var(--teal-dark); }
+.btn-secondary {
+  padding: 10px 16px; background: transparent; color: var(--ink);
+  border: 1px solid var(--border); border-radius: 6px; font-size: 13px;
+  cursor: pointer; font-family: inherit; transition: background .15s;
+}
+.btn-secondary:hover { background: var(--fog); }
+.btn-next {
+  padding: 10px 20px; background: var(--ink); color: white; border: none;
+  border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer;
+  font-family: inherit; transition: background .15s; margin-left: auto;
+}
+.btn-next:hover { background: #333; }
+.btn-copy {
+  padding: 6px 12px; background: transparent; color: var(--teal-dark);
+  border: 1px solid var(--teal-mid); border-radius: 4px; font-size: 11px;
+  cursor: pointer; font-family: inherit;
+}
+.btn-copy:hover { background: var(--teal-light); }
+
+/* ── STATS ── */
+.stats-row {
+  display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.stat-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px 16px; min-width: 100px;
+}
+.stat-num { font-size: 20px; font-weight: 600; color: var(--teal-dark); }
+.stat-label { font-size: 11px; color: var(--stone); margin-top: 2px; }
+
+/* ── TIJDLIJN ── */
+.tl-empty { padding: 32px; text-align: center; color: var(--stone); font-size: 13px; background: var(--fog); border-radius: 6px; }
+
+/* ── TIJDLIJN KAART-STIJL ── */
+.tl-timeline { position:relative; padding-left:4.5rem; margin-bottom:16px; }
+.tl-timeline::before { content:''; position:absolute; left:2.75rem; top:0; bottom:0; width:1.5px; background:var(--border); }
+.tl-item { position:relative; margin-bottom:1.25rem; animation:fadeIn .3s ease both; }
+.tl-item:last-child { margin-bottom:0; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+.tl-item::before { content:''; position:absolute; left:-1.85rem; top:.65rem; width:8px; height:8px; border-radius:50%; background:var(--ink); border:2px solid var(--ivory); z-index:1; }
+.tl-tag { position:absolute; left:-4.5rem; top:.25rem; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:3px 6px; border-radius:3px; color:#FFF; white-space:nowrap; min-width:2.8rem; text-align:center; }
+.tl-tag.diag { background:#534AB7; }
+.tl-tag.beh  { background:var(--teal); }
+.tl-tag.toe  { background:#C8860A; }
+.tl-tag.onb  { background:var(--stone); }
+.tl-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:14px 18px; transition:border-color .2s; }
+.tl-card:hover { border-color:var(--teal-mid); }
+.tl-card-top { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:5px; gap:12px; }
+.tl-t-label { font-family:'SFMono-Regular','Consolas',monospace; font-size:12px; font-weight:700; color:var(--teal-dark); white-space:nowrap; }
+.tl-card-title { font-size:13px; font-weight:600; color:var(--ink); line-height:1.4; flex:1; }
+.tl-card-body { font-size:12px; color:var(--stone); line-height:1.65; margin-bottom:8px; }
+.tl-card-source { font-size:11px; color:var(--stone); background:var(--fog); padding:5px 10px; border-radius:4px; }
+.tl-card-source strong { font-weight:600; color:var(--ink); }
+.tl-gap-item { margin-bottom:1.25rem; }
+.tl-gap-item::before { content:''; position:absolute; left:-1.85rem; top:.65rem; width:8px; height:8px; border-radius:50%; background:var(--coral); border:2px solid var(--ivory); z-index:1; }
+.tl-gap { background:#FAEDEA; border:1px dashed #F5C4B3; border-radius:6px; padding:10px 14px; font-size:12px; color:#7A1F10; }
+
+/* ── RAPPORT DOCUMENT STIJL ── */
+.rapport-section { display:none; } /* oud systeem verborgen */
+.rapport-doc { background:var(--white); border:1px solid var(--border); border-radius:10px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:16px; }
+.rapport-doc-header { background:var(--ink); color:white; padding:20px 32px; display:flex; align-items:flex-start; justify-content:space-between; }
+.rapport-doc-title { font-size:15px; font-weight:600; margin-bottom:4px; }
+.rapport-doc-sub { font-size:11px; color:rgba(255,255,255,0.5); }
+.rapport-doc-badge { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:3px; background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); }
+.rapport-doc-body { padding:28px 32px; }
+.rp-section { margin-bottom:28px; }
+.rp-section:last-child { margin-bottom:0; }
+.rp-section-num { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:4px; }
+.rp-section-title { font-size:14px; font-weight:600; color:var(--ink); padding-bottom:8px; border-bottom:1px solid var(--border); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.rp-badge { font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 7px; border-radius:3px; }
+.rp-badge-ai { background:var(--teal-light); color:var(--teal-dark); }
+.rp-badge-arts { background:var(--amber-light); color:#7A4A00; }
+.rp-text { font-size:13px; color:var(--ink); line-height:1.8; white-space:pre-wrap; }
+.rp-text.loading { color:var(--stone); font-style:italic; animation:pulse 1.5s ease-in-out infinite; }
+.rp-context { font-size:12px; color:var(--stone); background:#FFFBF3; border-left:3px solid var(--amber); padding:10px 14px; border-radius:4px; margin-bottom:12px; font-style:italic; }
+.rp-context.loading { color:var(--stone); background:var(--fog); border-left-color:var(--border); animation:pulse 1.5s ease-in-out infinite; }
+.rp-arts-template { background:#FFFBF3; border:1.5px dashed #E8C87A; border-radius:6px; padding:14px 18px; margin-top:4px; }
+.rp-arts-prompt { font-size:12px; color:#7A4A00; font-style:italic; line-height:1.6; margin-bottom:10px; }
+.rp-arts-field { display:grid; grid-template-columns:180px 1fr; gap:8px; align-items:center; margin-bottom:8px; }
+.rp-arts-field label { font-size:12px; color:var(--stone); font-weight:500; }
+.rp-arts-field input, .rp-arts-field select, .rp-arts-field textarea { font-family:inherit; font-size:12px; border:1px solid var(--border); border-radius:4px; padding:6px 8px; background:var(--white); color:var(--ink); }
+.rp-arts-field input:focus, .rp-arts-field select:focus, .rp-arts-field textarea:focus { outline:none; border-color:var(--teal); }
+.rp-rom-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px; }
+.rp-rom-cell { display:flex; flex-direction:column; gap:3px; }
+.rp-rom-cell label { font-size:11px; color:var(--stone); font-weight:500; }
+.rp-rom-cell input { padding:6px 8px; font-size:12px; font-family:inherit; border:1px solid var(--border); border-radius:4px; text-align:center; }
+.rp-rom-norm { font-size:10px; color:var(--teal); font-weight:500; }
+.rp-disclaimer { background:var(--fog); border-top:1px solid var(--border); padding:12px 32px; font-size:11px; color:var(--stone); line-height:1.6; }
+.rp-stats { display:flex; gap:0; border-top:1px solid var(--border); }
+.rp-stat { flex:1; padding:14px 16px; text-align:center; border-right:1px solid var(--border); }
+.rp-stat:last-child { border-right:none; }
+.rp-stat-val { font-size:22px; font-weight:600; color:var(--teal); line-height:1; }
+.rp-stat-val.warn { color:var(--coral); }
+.rp-stat-lbl { font-size:11px; color:var(--stone); margin-top:3px; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+/* open-fields voor terugwaartse compat in s5/s7 */
+.open-fields { display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.open-field-row { display:grid; grid-template-columns:180px 1fr; gap:10px; align-items:center; }
+.open-field-row label { font-size:12px; color:var(--stone); font-weight:500; }
+.open-field-row input, .open-field-row select { padding:8px 10px; font-size:12px; font-family:inherit; border:1px solid var(--border); border-radius:5px; background:var(--white); color:var(--ink); }
+.open-field-row input:focus, .open-field-row select:focus { outline:none; border-color:var(--teal); }
+.rom-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+.rom-cell { display:flex; flex-direction:column; gap:3px; }
+.rom-cell label { font-size:11px; color:var(--stone); font-weight:500; }
+.rom-cell input { padding:7px 9px; font-size:12px; font-family:inherit; border:1px solid var(--border); border-radius:4px; text-align:center; }
+.rom-cell input:focus { outline:none; border-color:var(--teal); }
+.rom-norm { font-size:10px; color:var(--teal); font-weight:500; }
+
+
+/* ── DOSSIERCOMPLEETHEID ── */
+.dc-bar { background:var(--fog); border-bottom:1px solid var(--border); padding:16px 32px; }
+.dc-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.dc-title { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--stone); }
+.dc-pct { font-size:22px; font-weight:700; color:var(--teal); }
+.dc-progress { height:6px; background:var(--border); border-radius:3px; margin-bottom:12px; overflow:hidden; }
+.dc-progress-fill { height:100%; background:var(--teal); border-radius:3px; transition:width .4s ease; }
+.dc-cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.dc-col-title { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--stone); margin-bottom:8px; }
+.dc-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--stone); margin-bottom:4px; }
+.dc-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.dc-dot.ok { background:var(--teal); }
+.dc-dot.miss { background:var(--coral); }
+.dc-item.missing { color:var(--coral); }
+
+/* ── HIATEN & TEGENSTRIJDIGHEDEN ── */
+.ht-item { border:1px solid var(--border); border-radius:6px; margin-bottom:8px; overflow:hidden; }
+.ht-item:last-child { margin-bottom:0; }
+.ht-head { display:flex; align-items:center; gap:8px; padding:8px 12px; }
+.ht-kritiek .ht-head { background:#FEF2F2; border-bottom:1px solid #FECACA; }
+.ht-belangrijk .ht-head { background:#FFFBF3; border-bottom:1px solid #FDE68A; }
+.ht-aandacht .ht-head { background:var(--fog); border-bottom:1px solid var(--border); }
+.ht-badge { font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 6px; border-radius:3px; }
+.ht-badge.kritiek { background:#FEE2E2; color:#B91C1C; }
+.ht-badge.belangrijk { background:#FEF3C7; color:#92400E; }
+.ht-badge.aandacht { background:var(--fog); color:var(--stone); }
+.ht-title { font-size:12px; font-weight:600; color:var(--ink); }
+.ht-body { padding:10px 12px; font-size:12px; color:var(--stone); line-height:1.6; }
+.ht-action { font-size:11px; color:var(--teal); font-weight:500; margin-top:4px; }
+
+
+/* ── BRONVERWIJZINGEN PER SECTIE ── */
+.rp-sources { background:var(--fog); border-radius:6px; padding:10px 14px; margin-top:12px; }
+.rp-sources-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); margin-bottom:6px; }
+.rp-source-item { font-size:12px; color:var(--stone); line-height:1.6; padding:2px 0; }
+.rp-source-item::before { content:'4a0'; color:var(--border); }
+
+/* ── BRONNENLIJST TABEL ── */
+.rp-bronnen-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
+.rp-bronnen-table th { text-align:left; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--stone); padding:6px 10px; border-bottom:2px solid var(--border); background:var(--fog); }
+.rp-bronnen-table td { padding:7px 10px; border-bottom:1px solid var(--border); color:var(--stone); vertical-align:top; }
+.rp-bronnen-table tr:last-child td { border-bottom:none; }
+.rp-bronnen-table tr:hover td { background:rgba(47,111,106,.03); }
+.rp-bronnen-table td:first-child { font-weight:600; color:var(--teal-dark); width:30px; }
+.rp-bronnen-table td:last-child { font-family:'SFMono-Regular',monospace; font-size:11px; color:var(--teal); }
+
+/* ── IWMD VRAGEN ── */
+.rp-q-item { margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+.rp-q-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.rp-q-num { font-size:11px; font-weight:700; color:var(--teal); text-transform:uppercase; letter-spacing:.06em; margin-bottom:3px; }
+.rp-q-text { font-size:12px; font-weight:600; color:var(--ink); margin-bottom:6px; line-height:1.4; }
+.rp-q-context { font-size:11px; color:var(--stone); background:var(--fog); padding:5px 9px; border-radius:4px; margin-bottom:6px; font-style:italic; }
+.rp-q-answer { width:100%; min-height:52px; font-family:inherit; font-size:12px; border:1px solid var(--border); border-radius:4px; padding:7px 9px; resize:vertical; color:var(--ink); background:var(--white); }
+.rp-q-answer:focus { outline:none; border-color:var(--teal); }
+
+/* ── ARTS FIELD LABEL ── */
+.rp-arts-field-wrap { margin-bottom:8px; }
+.rp-arts-field-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#7A4A00; margin-bottom:4px; }
+.rp-arts-field-hint { font-size:11px; color:var(--stone); font-style:italic; background:rgba(200,134,10,.06); padding:4px 8px; border-radius:3px; margin-bottom:5px; }
+
+/* ── CONFLICT BANNER ── */
+.conflict-banner {
+  background: #FAEDEA; border: 1px solid #F5C4B3; border-radius: 6px;
+  padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: #7A1F10;
+}
+.conflict-banner strong { font-weight: 600; }
+
+/* ── PRIVACY NOTE ── */
+.privacy-note {
+  background: var(--teal-light); border: 1px solid var(--teal-mid); border-radius: 6px;
+  padding: 10px 14px; margin-bottom: 20px; font-size: 12px; color: var(--teal-dark);
+  display: flex; gap: 8px; align-items: flex-start;
+}
+
+/* ── PROVIDER SWITCHER ── */
+.provider-bar { display: none; } /* verborgen — niet meer nodig */
+
+.provider-selector {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.provider-selector-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--stone);
+  white-space: nowrap;
+}
+.provider-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .15s;
+  min-width: 200px;
+}
+.provider-choice:hover { border-color: var(--teal-mid); background: var(--teal-light); }
+.provider-choice.active {
+  border-color: var(--teal);
+  background: var(--teal-light);
+}
+.provider-choice-flag { font-size: 22px; line-height: 1; }
+.provider-choice-info { text-align: left; }
+.provider-choice-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+.provider-choice-sub {
+  font-size: 11px;
+  color: var(--stone);
+  display: block;
+  margin-top: 1px;
+}
+.provider-choice.active .provider-choice-name { color: var(--teal-dark); }
+.provider-choice.active .provider-choice-sub { color: var(--teal); }
+.provider-active-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-left: auto;
+  display: none;
+}
+.provider-choice.active .provider-active-dot { display: block; }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="logo">
+    <div class="logo-k">K</div>
+    <span class="logo-name">Kinetic Medische Expertises</span>
+    <span class="logo-badge" id="provider-badge">AI — Anthropic</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <span style="font-size:11px;color:rgba(255,255,255,0.5)" id="user-email-display"></span>
+    <button onclick="doLogout()" style="padding:4px 12px;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:4px;color:rgba(255,255,255,0.6);font-size:11px;cursor:pointer;font-family:inherit;">Uitloggen</button>
+  </div>
+</header>
+
+<div class="provider-bar" style="display:none">
+  <span class="provider-label">AI Provider:</span>
+  <button class="provider-btn active" id="btn-anthropic" onclick="setProvider('anthropic')">🇺🇸 Anthropic Claude</button>
+  <button class="provider-btn" id="btn-mistral" onclick="setProvider('mistral')">🇪🇺 Mistral AI</button>
+  <input class="api-key-input" id="api-key-input" type="password"
+    placeholder="API-sleutel (bijv. sk-ant-... of mis-...)"
+    oninput="updateApiKey(this.value)" autocomplete="off" spellcheck="false">
+  <span class="provider-status warn" id="provider-status">⚠ Geen API-sleutel</span>
+</div>
+
+<!-- Prominente provider-selector -->
+<div class="provider-selector">
+  <span class="provider-selector-label">AI-model:</span>
+  <button class="provider-choice" id="choice-mistral" onclick="setProvider('mistral')">
+    <span class="provider-choice-flag">🇪🇺</span>
+    <span class="provider-choice-info">
+      <span class="provider-choice-name">Mistral AI</span>
+      <span class="provider-choice-sub">Europees · GDPR-compliant</span>
+    </span>
+    <span class="provider-active-dot"></span>
+  </button>
+  <button class="provider-choice" id="choice-anthropic" onclick="setProvider('anthropic')">
+    <span class="provider-choice-flag">🇺🇸</span>
+    <span class="provider-choice-info">
+      <span class="provider-choice-name">Anthropic Claude</span>
+      <span class="provider-choice-sub">Hoogste kwaliteit</span>
+    </span>
+    <span class="provider-active-dot"></span>
+  </button>
+</div>
+
+
+<div class="app-tabs">
+  <button class="tab-btn active" onclick="showTab('pseudo')">
+    01 — Pseudonymizer<span class="tab-pip" id="pip-pseudo"></span>
+  </button>
+  <button class="tab-btn" onclick="showTab('tijdlijn')">
+    02 — Tijdlijn extractor<span class="tab-pip" id="pip-tijdlijn"></span>
+  </button>
+  <button class="tab-btn" onclick="showTab('rapport')">
+    03 — Rapportgenerator<span class="tab-pip" id="pip-rapport"></span>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODULE 1: PSEUDONYMIZER
+══════════════════════════════════════ -->
+<div class="panel active" id="panel-pseudo">
+  <div class="section-label">Module 01</div>
+  <h2 class="section-title">Pseudonymizer</h2>
+  <p class="section-intro">Plak het ruwe dossier links in. Geef de referentiedatum op (= datum van het accident, wordt T+0). Klik Pseudonimiseer. De output rechts is AVG-veilig en klaar voor module 2.</p>
+
+  <div class="privacy-note">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L2 3.5V8C2 11.5 4.5 14.75 8 15.5C11.5 14.75 14 11.5 14 8V3.5L8 1Z" stroke="#2F6F6A" stroke-width="1.1" fill="none"/><path d="M5.5 8L7 9.5L10.5 6.5" stroke="#2F6F6A" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <span><strong>Privacy by design.</strong> De tekst verlaat uw browser niet. Alle verwerking gebeurt lokaal in JavaScript.</span>
+  </div>
+
+  <div class="field-row" style="max-width:280px">
+    <label class="field-label">Referentiedatum (T+0 = datum accident)</label>
+    <input type="date" id="refdate" class="input-date">
+  </div>
+
+  <div class="pseudo-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#FAEEDA"></div>BSN</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#E1F5EE"></div>Persoon</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#EEEDFE"></div>Datum → T-notatie</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FAECE7"></div>Telefoon / Email / IBAN</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#F0EFEB"></div>Adres / Organisatie</div>
+  </div>
+
+  <div class="editor-split">
+    <div class="editor-pane">
+      <div class="editor-pane-label">Input — origineel dossier</div>
+      <textarea id="pseudo-input" placeholder="Plak hier het ruwe dossier..."></textarea>
+    </div>
+    <div class="editor-pane">
+      <div class="editor-pane-label" style="display:flex;justify-content:space-between">
+        <span>Output — gepseudonimiseerd</span>
+        <button class="btn-copy" onclick="copyOutput('pseudo-output-plain')">Kopieer tekst</button>
+      </div>
+      <div class="output-area empty" id="pseudo-output">Resultaat verschijnt hier na verwerking...</div>
+      <textarea id="pseudo-output-plain" style="display:none"></textarea>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" onclick="runPseudo()">Pseudonimiseer</button>
+    <button class="btn-secondary" onclick="loadPseudoExample()">Laad voorbeeld</button>
+    <button class="btn-secondary" onclick="clearPseudo()">Wissen</button>
+  </div>
+
+  <div class="stats-row" id="pseudo-stats" style="display:none">
+    <div class="stat-card"><div class="stat-num" id="stat-bsn">0</div><div class="stat-label">BSN's</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-namen">0</div><div class="stat-label">Namen</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-datums">0</div><div class="stat-label">Datums</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-overig">0</div><div class="stat-label">Overig</div></div>
+  </div>
+
+  <div class="btn-row" style="justify-content:flex-end;margin-top:8px">
+    <button class="btn-next" onclick="goToTijdlijn()">Ga naar Tijdlijn extractor →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODULE 2: TIJDLIJN EXTRACTOR
+══════════════════════════════════════ -->
+<div class="panel" id="panel-tijdlijn">
+  <div class="section-label">Module 02</div>
+  <h2 class="section-title">Tijdlijn extractor</h2>
+  <p class="section-intro">De gepseudonimiseerde tekst wordt gescand op datums en medische events. Het resultaat is een geordende tijdlijn op T-schaal die direct als input dient voor module 3.</p>
+
+  <div class="editor-split">
+    <div class="editor-pane">
+      <div class="editor-pane-label">Input — gepseudonimiseerde tekst</div>
+      <textarea id="tl-input" placeholder="Plak hier de gepseudonimiseerde tekst, of gebruik de output van module 1..."></textarea>
+    </div>
+    <div class="editor-pane">
+      <div class="editor-pane-label">Gevonden events (ruwe detectie)</div>
+      <div class="output-area empty" id="tl-raw-output">Events verschijnen hier...</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" onclick="runTijdlijn()">Extraheer tijdlijn</button>
+    <button class="btn-secondary" onclick="loadTlExample()">Laad voorbeeld</button>
+    <button class="btn-secondary" onclick="clearTl()">Wissen</button>
+  </div>
+
+  <div id="tl-conflict-zone"></div>
+
+
+  <div id="tl-result-zone" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="section-label" style="margin:0">Gestructureerde tijdlijn</span>
+        <span id="tl-stats-bar" style="display:flex;gap:6px;font-size:11px"></span>
+      </div>
+      <button class="btn-copy" onclick="copyTijdlijn()">Kopieer tijdlijn</button>
+    </div>
+    <!-- Samenvatting stats -->
+    <div id="tl-summary-stats" style="display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px;background:var(--white)">
+      <div style="flex:1;padding:12px 16px;text-align:center;border-right:1px solid var(--border)">
+        <div style="font-size:20px;font-weight:600;color:var(--teal)" id="stat-events">—</div>
+        <div style="font-size:11px;color:var(--stone);margin-top:2px">Gebeurtenissen</div>
+      </div>
+      <div style="flex:1;padding:12px 16px;text-align:center;border-right:1px solid var(--border)">
+        <div style="font-size:20px;font-weight:600;color:var(--coral)" id="stat-gaps">—</div>
+        <div style="font-size:11px;color:var(--stone);margin-top:2px">Vlaggen</div>
+      </div>
+      <div style="flex:1;padding:12px 16px;text-align:center;border-right:1px solid var(--border)">
+        <div style="font-size:20px;font-weight:600;color:var(--teal)" id="stat-bronnen">—</div>
+        <div style="font-size:11px;color:var(--stone);margin-top:2px">Bronverwijzingen</div>
+      </div>
+      <div style="flex:1;padding:12px 16px;text-align:center">
+        <div style="font-size:20px;font-weight:600;color:var(--ink)" id="stat-periode">—</div>
+        <div style="font-size:11px;color:var(--stone);margin-top:2px">Totale periode</div>
+      </div>
+    </div>
+    <!-- Verticale tijdlijn -->
+    <div class="tl-timeline" id="tl-timeline"></div>
+  </div>
+
+  <div class="btn-row" style="justify-content:flex-end">
+    <button class="btn-next" onclick="goToRapport()">Ga naar Rapportgenerator →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODULE 3: RAPPORTGENERATOR
+══════════════════════════════════════ -->
+<div class="panel" id="panel-rapport">
+  <div class="section-label">Module 03</div>
+  <h2 class="section-title">Rapportgenerator</h2>
+  <p class="section-intro">Op basis van de tijdlijn worden de IWMD-secties automatisch voorbereid. Groene secties zijn ingevuld vanuit het dossier. Amber secties vereisen uw medisch oordeel.</p>
+
+  <div id="rapport-letseltype-row" class="field-row" style="max-width:320px">
+    <label class="field-label">Letseltype (bepaalt veldstructuur sectie 5)</label>
+    <select id="rapport-letseltype" class="input-text">
+      <option value="cervicaal">Cervicaal (whiplash, hernia C-wervelkolom)</option>
+      <option value="lumbaal">Lumbaal (hernia L-wervelkolom)</option>
+      <option value="schouder">Schouder (rotator cuff, SLAP)</option>
+      <option value="knie">Knie (meniscus, kruisband)</option>
+    </select>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" onclick="runRapport()">Genereer concept rapport</button>
+    <button class="btn-secondary" onclick="exportRapport()">Exporteer als tekst</button>
+  </div>
+
+  <div id="rapport-content" style="display:none">
+    <div class="rapport-doc" id="rapport-doc">
+
+      <!-- Document header -->
+      <div class="rapport-doc-header">
+        <div>
+          <div class="rapport-doc-title">Concept Expertiserapport — IWMD</div>
+          <div class="rapport-doc-sub">Orthopedische expertise &middot; Letselschade &middot; Concept — niet geautoriseerd</div>
+        </div>
+        <span class="rapport-doc-badge">Concept</span>
+      </div>
+
+      <!-- Dossiercompleetheid -->
+      <div class="dc-bar" id="dc-bar" style="display:none">
+        <div class="dc-header">
+          <span class="dc-title">Dossiercompleetheid</span>
+          <span class="dc-pct" id="dc-pct">—</span>
+        </div>
+        <div class="dc-progress"><div class="dc-progress-fill" id="dc-fill" style="width:0%"></div></div>
+        <div class="dc-cols">
+          <div>
+            <div class="dc-col-title">Aanwezig</div>
+            <div id="dc-aanwezig"></div>
+          </div>
+          <div>
+            <div class="dc-col-title" style="color:var(--coral)">Ontbrekend / op te vragen</div>
+            <div id="dc-ontbrekend"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rapport-doc-body">
+
+        <!-- VRAAGSTELLING -->
+        <div class="rp-section">
+          <div class="rp-section-num">Vraagstelling</div>
+          <div class="rp-section-title">IWMD-vraagstelling <span class="rp-badge rp-badge-ai">Standaard</span></div>
+          <div class="rp-text" style="font-size:12px;color:var(--stone)">Conform IWMD-richtlijnen voor medische expertises bij letselschade. Vraag 1 t/m 10 worden door de arts beantwoord in sectie 9.</div>
+        </div>
+
+        <!-- S1: Voorgeschiedenis -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 1</div>
+          <div class="rp-section-title">Medische voorgeschiedenis <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div class="rp-text loading" id="s2-content">AI genereert voorgeschiedenis...</div>
+        </div>
+
+        <!-- S2: Toedracht en klachtenbeloop -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 2</div>
+          <div class="rp-section-title">Toedracht en klachtenbeloop <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div class="rp-text loading" id="s1-content">AI genereert anamnese...</div>
+        </div>
+
+        <!-- S3: Samenvatting medische informatie -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 3</div>
+          <div class="rp-section-title">Behandelchronologie <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div class="rp-text loading" id="s3-content">AI genereert chronologie...</div>
+        </div>
+
+        <!-- S3a: Hiaten -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 3a</div>
+          <div class="rp-section-title">Hiaten in het dossier <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div id="s-hiaten-cards">
+            <div class="rp-text loading" id="s-hiaten">AI detecteert hiaten...</div>
+          </div>
+        </div>
+
+        <!-- S3b: Tegenstrijdigheden -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 3b</div>
+          <div class="rp-section-title">Tegenstrijdigheden en aandachtspunten <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div id="s-tegenstrijdigheden-cards">
+            <div class="rp-text loading" id="s-tegenstrijdigheden">AI analyseert tegenstrijdigheden...</div>
+          </div>
+        </div>
+
+        <!-- S4: Huidige klachten -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 4</div>
+          <div class="rp-section-title">Huidige klachten (anamnese) <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div class="rp-text loading" id="s4-auto">AI genereert huidige toestand...</div>
+        </div>
+
+        <!-- S5: Lichamelijk onderzoek -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 5</div>
+          <div class="rp-section-title">Lichamelijk onderzoek <span class="rp-badge rp-badge-arts">Edwin invult</span></div>
+          <div class="rp-arts-template">
+            <div class="rp-arts-prompt">Vul de bevindingen van het lichamelijk onderzoek in. Gebruik de meetwaarden uit het fysiek consult met betrokkene.</div>
+            <div id="s5-body"></div>
+          </div>
+        </div>
+
+        <!-- S6: Diagnose & causaliteit -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 6</div>
+          <div class="rp-section-title">Diagnose en causaliteit <span class="rp-badge rp-badge-arts">Edwin invult</span></div>
+          <div class="rp-context loading" id="s6-context">AI genereert causaliteitscontext...</div>
+          <div class="rp-arts-template">
+            <div class="rp-arts-prompt">Stel de diagnose vast op basis van uw medisch oordeel en beoordeel het causale verband met het letselgebeurtenis.</div>
+            <div class="rp-arts-field"><label>Diagnose</label><input type="text" id="s6-diagnose" placeholder="Bijv. Hernia nuclei pulposi C5-C6..."></div>
+            <div class="rp-arts-field"><label>Nevendiagnose</label><input type="text" placeholder="Indien van toepassing..."></div>
+            <div class="rp-arts-field"><label>Causaal verband</label>
+              <select id="s6-causaliteit">
+                <option value="">— Beoordeel het verband —</option>
+                <option>Ja, het verband is aannemelijk</option>
+                <option>Nee, het verband is niet aannemelijk</option>
+                <option>Waarschijnlijk, maar niet met zekerheid</option>
+              </select>
+            </div>
+            <div class="rp-arts-field" style="align-items:flex-start"><label style="margin-top:6px">Motivering</label><textarea style="min-height:72px" placeholder="Verplicht: onderbouw het causale verband..."></textarea></div>
+            <div class="rp-arts-field"><label>Pre-existentie</label>
+              <select><option value="">—</option><option>Nee</option><option>Ja, niet van invloed</option><option>Ja, gedeeltelijk van invloed</option><option>Ja, sterk van invloed</option></select>
+            </div>
+            <div class="rp-arts-field"><label>Medische eindsituatie</label>
+              <select><option value="">—</option><option>Ja, bereikt</option><option>Nee, nog niet bereikt</option><option>Nog niet te beoordelen</option></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- S7: Prognose & BI -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 7</div>
+          <div class="rp-section-title">Prognose en blijvende invaliditeit <span class="rp-badge rp-badge-arts">Edwin invult</span></div>
+          <div class="rp-arts-template">
+            <div class="rp-arts-prompt">Beoordeel het herstelverloop en de blijvende invaliditeit op basis van uw bevindingen en de AMA Guides.</div>
+            <div class="rp-arts-field"><label>Herstelverloop</label><input type="text" placeholder="Verwacht herstel..."></div>
+            <div class="rp-arts-field"><label>Behandeling nog nodig</label><select><option value="">—</option><option>Nee</option><option>Ja, fysiotherapie</option><option>Ja, chirurgie</option><option>Ja, pijnbehandeling</option><option>Ja, revalidatie</option></select></div>
+            <div class="rp-arts-field"><label>Blijvend functieverlies</label><select><option value="">—</option><option>Nee</option><option>Ja</option><option>Nog niet te beoordelen</option></select></div>
+            <div style="margin-top:12px">
+              <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin-bottom:8px">ROM-gebaseerde BI (AMA Guides) — vul gemeten graden in</div>
+              <div class="rp-rom-grid" id="rom-grid"></div>
+            </div>
+            <div style="margin-top:12px">
+              <div class="rp-arts-field"><label>Totaal BI (%)</label><input type="number" min="0" max="100" id="bi-pct" placeholder="0–100" style="max-width:80px"></div>
+              <div class="rp-arts-field"><label>Geschikt eigen werk</label><select><option value="">—</option><option>Ja, volledig</option><option>Ja, gedeeltelijk</option><option>Nee</option></select></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S9: IWMD-vragen -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 9</div>
+          <div class="rp-section-title">Beantwoording IWMD-vragen <span class="rp-badge rp-badge-arts">Edwin invult</span></div>
+          <div class="rp-arts-template">
+            <div class="rp-arts-prompt">Beantwoord de IWMD-vragen conform de richtlijnen. De dossiercontext per vraag is hieronder samengevat als leidraad.</div>
+            <div id="s9-vragen"></div>
+          </div>
+        </div>
+
+        <!-- S10: Bronnenlijst -->
+        <div class="rp-section">
+          <div class="rp-section-num">Sectie 10</div>
+          <div class="rp-section-title">Bronnenlijst <span class="rp-badge rp-badge-ai">AI gegenereerd</span></div>
+          <div id="s10-bronnen">
+            <div class="rp-text loading" id="s-bronnenlijst">AI genereert bronnenlijst...</div>
+          </div>
+        </div>
+
+      </div><!-- rapport-doc-body -->
+
+      <!-- Disclaimer -->
+      <div class="rp-disclaimer">
+        <strong>Concept-rapport.</strong> AI ondersteunt bij ordening en bronverwijzing op basis van de aangeleverde tijdlijn. De BIG-geregistreerde specialist beoordeelt, vult aan en autoriseert het definitieve rapport.
+      </div>
+
+      <!-- Stats balk -->
+      <div class="rp-stats" id="rp-stats-bar">
+        <div class="rp-stat"><div class="rp-stat-val" id="rp-stat-ai">4</div><div class="rp-stat-lbl">AI-voorbereid</div></div>
+        <div class="rp-stat"><div class="rp-stat-val rp-badge-arts" id="rp-stat-arts" style="font-size:22px;font-weight:600;color:#7A4A00">3</div><div class="rp-stat-lbl">Arts-secties</div></div>
+        <div class="rp-stat"><div class="rp-stat-val" id="rp-stat-bronnen">—</div><div class="rp-stat-lbl">Bronverwijzingen</div></div>
+        <div class="rp-stat"><div class="rp-stat-val warn" id="rp-stat-hiaten">—</div><div class="rp-stat-lbl">Vlaggen</div></div>
+      </div>
+
+    </div><!-- rapport-doc -->
+  </div><!-- rapport-content -->
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// PROVIDER CONFIGURATIE — wissel hier tussen Anthropic en Mistral
+// ══════════════════════════════════════════════════════
+var CONFIG = {
+  // Zet provider op 'anthropic' of 'mistral'
+  provider: 'mistral',
+
+  providers: {
+    anthropic: {
+      name: 'Anthropic Claude',
+      label: 'Anthropic',
+      flag: '🇺🇸',
+      model: 'claude-sonnet-4-20250514',
+      endpoint: 'https://api.anthropic.com/v1/messages',
+      headers: function() {
+        return { 'Content-Type': 'application/json' };
+      },
+      buildBody: function(systemPrompt, userPrompt, maxTokens) {
+        return JSON.stringify({
+          model: CONFIG.providers.anthropic.model,
+          max_tokens: maxTokens || 2000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }]
+        });
+      },
+      extractText: function(data) {
+        if (data.content && data.content[0] && data.content[0].text) {
+          return data.content[0].text;
+        }
+        throw new Error('Onverwacht Anthropic response formaat');
+      }
+    },
+
+    mistral: {
+      name: 'Mistral AI',
+      label: 'Mistral',
+      flag: '🇪🇺',
+      model: 'mistral-large-latest',
+      endpoint: 'https://api.mistral.ai/v1/chat/completions',
+      headers: function() {
+        return { 'Content-Type': 'application/json' };
+      },
+      buildBody: function(systemPrompt, userPrompt, maxTokens) {
+        return JSON.stringify({
+          model: CONFIG.providers.mistral.model,
+          max_tokens: maxTokens || 2000,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt }
+          ]
+        });
+      },
+      extractText: function(data) {
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          return data.choices[0].message.content;
+        }
+        throw new Error('Onverwacht Mistral response formaat');
+      }
+    }
+  },
+
+  // Centrale aanroepfunctie — werkt voor beide providers identiek
+  callLLM: async function(systemPrompt, userPrompt, maxTokens) {
+    var p = CONFIG.providers[CONFIG.provider];
+    var resp = await fetch(p.endpoint, {
+      method: 'POST',
+      headers: p.headers(),
+      body: p.buildBody(systemPrompt, userPrompt, maxTokens || 2000)
+    });
+    if (!resp.ok) {
+      var err = await resp.text();
+      throw new Error(p.name + ' API fout ' + resp.status + ': ' + err);
+    }
+    var data = await resp.json();
+    return p.extractText(data);
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// SUPABASE AUTH
+// ══════════════════════════════════════════════════════
+var _sb = supabase.createClient(
+  'https://nzetoeewvnznoyuhdiga.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56ZXRvZWV3dm56bm95dWhkaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NzUwNTYsImV4cCI6MjA5MjM1MTA1Nn0.oO2s1vA_NppY-8-GUs-HOWsQ5n2wrkgCBDoJyY924c8'
+);
+_sb.auth.getSession().then(function(result) {
+  var session = result.data && result.data.session;
+  if (!session) { window.location.replace("./index.html"); return; }
+  var el = document.getElementById("user-email-display");
+  if (el && session.user) el.textContent = session.user.email;
+});
+function doLogout() {
+  _sb.auth.signOut().then(function() { window.location.replace("./index.html"); });
+}
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+var STATE = {
+  pseudoOutput: '',
+  pseudoMapping: {},
+  refDate: null,
+  tijdlijn: [],
+  conflicts: []
+};
+
+// ══════════════════════════════════════════════════════
+// TAB NAVIGATIE
+// ══════════════════════════════════════════════════════
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('panel-' + name).classList.add('active');
+  document.querySelector('[onclick="showTab(\'' + name + '\')"]').classList.add('active');
+}
+function goToTijdlijn() {
+  if (STATE.pseudoOutput) {
+    document.getElementById('tl-input').value = STATE.pseudoOutput;
+  }
+  showTab('tijdlijn');
+}
+function goToRapport() {
+  showTab('rapport');
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE 1: PSEUDONYMIZER
+// ══════════════════════════════════════════════════════
+
+var MEDISCH_WOORDENBOEK = [
+  'hernia nuclei pulposi','hernia','nervus medianus','nervus ulnaris','nervus radialis',
+  'morbus bechterew','morbus parkinson','morbus crohn','artritis','artrose',
+  'whiplash','cervicaal','lumbaal','thoracaal','cervicale','lumbale',
+  'mri','ct-scan','röntgen','röntgenonderzoek','beeldvorming','echografie',
+  'fysiotherapie','fysiotherapeut','revalidatie','ergotherapie','oefentherapie',
+  'operatie','artroscopie','discectomie','laminectomie','nucleotomie',
+  'spinale stenose','radiculopathie','myelopathie','neuropathie',
+  'carpaal tunnel syndroom','tennis elbow','frozen shoulder',
+  'rotator cuff','meniscus','kruisband','acl','pcl',
+  'fractuur','contusie','distorsie','luxatie','subluxatie',
+  'hypertensie','diabetes','astma','copd',
+  'c3','c4','c5','c6','c7','c8','l1','l2','l3','l4','l5','s1',
+  'vas','mrc','rom','abi','bi','adl'
+];
+
+// Elfproef BSN
+function elfProef(s) {
+  if (!/^\d{9}$/.test(s)) return false;
+  var som = 0;
+  for (var i = 0; i < 8; i++) som += parseInt(s[i]) * (9 - i);
+  som += parseInt(s[8]) * -1;
+  return som > 0 && som % 11 === 0;
+}
+
+// Parse datum string naar Date
+function parseDatum(s) {
+  var m;
+  m = s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
+  if (m) {
+    var dag = parseInt(m[1]), mnd = parseInt(m[2]), jaar = parseInt(m[3]);
+    if (dag < 1 || dag > 31 || mnd < 1 || mnd > 12) return null;
+    return new Date(jaar, mnd - 1, dag);
+  }
+  var maanden = {'januari':0,'februari':1,'maart':2,'april':3,'mei':4,'juni':5,
+                 'juli':6,'augustus':7,'september':8,'oktober':9,'november':10,'december':11};
+  m = s.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/i);
+  if (m && maanden[m[2].toLowerCase()] !== undefined) {
+    var dag2 = parseInt(m[1]);
+    if (dag2 < 1 || dag2 > 31) return null;
+    return new Date(parseInt(m[3]), maanden[m[2].toLowerCase()], dag2);
+  }
+  m = s.match(/^([a-z]+)\s+(\d{4})$/i);
+  if (m && maanden[m[1].toLowerCase()] !== undefined)
+    return new Date(parseInt(m[2]), maanden[m[1].toLowerCase()], 1);
+  return null;
+}
+
+function datumNaarT(datumStr, refDate) {
+  var d = parseDatum(datumStr);
+  if (!d || !refDate) return null;
+  var diff = Math.round((d - refDate) / (1000 * 60 * 60 * 24));
+  return diff;
+}
+
+// Pre-compileer regexes voor korte medische termen (≤3 tekens) — eenmalig bij init
+var MEDISCH_KORT_REGEX_CACHE = {};
+MEDISCH_WOORDENBOEK.forEach(function(t){
+  if (t.length <= 3) MEDISCH_KORT_REGEX_CACHE[t] = new RegExp('\\b' + t + '\\b');
+});
+
+function isMedischTerm(word) {
+  var w = word.toLowerCase().trim();
+  // Korte termen: alleen als volledig woord (via pre-gecompileerde regex)
+  // Lange termen: substring-match volstaat
+  return MEDISCH_WOORDENBOEK.some(function(t){
+    if (t.length <= 3) return MEDISCH_KORT_REGEX_CACHE[t].test(w);
+    return w.indexOf(t) !== -1;
+  });
+}
+
+function pseudonimiseerNamen(tekst, mapping, persoonCountRef, stats) {
+  // Werkt op plain tekst (geen HTML) zodat \b word boundaries intact zijn.
+  // Volgorde: eerst lange patronen (titel + volledige naam), dan initialen, dan losse achternamen.
+
+  var tussenvoegsel = '(?:van\\s+(?:den?\\s+|der\\s+|het\\s+)?|de\\s+(?:la\\s+)?|den?\\s+|der\\s+|ten?\\s+|ter\\s+)?';
+  var achternaam    = '[A-Z][a-zéëïöüáàè]+(?:-[A-Z][a-zéëïöüáàè]+)?(?:-[A-Z][a-zéëïöüáàè]+)?';
+
+  // Patroon 1: titel + (initialen/voornaam) + tussenvoegsel + achternaam
+  var p1 = new RegExp(
+    '(?:dhr\\.|mw\\.|dr\\.|prof\\.|drs\\.|ir\\.|de heer|mevrouw)(?:\\.)?\\s+' +
+    '(?:[A-Z][a-z]*\\.\\s*){0,4}' +
+    tussenvoegsel + achternaam +
+    '(?:\\s*-\\s*' + achternaam + ')?',
+    'g'
+  );
+
+  // Patroon 2: initialen + tussenvoegsel + achternaam (bijv. J.A.M. van der Berg)
+  var p2 = new RegExp(
+    '(?:[A-Z]\\.){1,5}\\s*' + tussenvoegsel + achternaam,
+    'g'
+  );
+
+  // Noot: patroon voornaam+achternaam zonder titel is bewust weggelaten — te veel false positives
+  // op zinnen als "Bij opname" of "Na behandeling"
+
+  function vervang(tekst, regex) {
+    return tekst.replace(regex, function(m) {
+      var key = m.replace(/\s+/g, ' ').trim();
+      if (isMedischTerm(key)) return m;
+      // Sla bekende losse woorden over die geen naam zijn
+      var skipWords = /^(?:Het|Een|Deze|Dit|Zijn|Haar|Hun|Aan|Bij|Tot|Van|Met|Voor|Als|Dan|Dat|Die|Dit|Wat|Wie)$/;
+      if (skipWords.test(key)) return m;
+      if (!mapping[key]) { persoonCountRef[0]++; mapping[key] = '[PERSOON_' + persoonCountRef[0] + ']'; }
+      if (stats) stats.namen++;
+      return mapping[key];
+    });
+  }
+
+  // Pas patronen toe van lang naar kort zodat langere matches eerst worden gevangen
+  tekst = vervang(tekst, p1);
+  tekst = vervang(tekst, p2);
+  // p3 voorzichtig: alleen als het gevonden woord al in de mapping zit als achternaam,
+  // of expliciet de "Naam:" / "Naam betrokkene:" context heeft
+  tekst = tekst.replace(/(?:Naam|Patiënt|Benadeelde|Betrokkene)\s*:\s*([A-Z][^\n,;]+)/gi, function(full, naam) {
+    var key = naam.replace(/\s+/g, ' ').trim();
+    if (!key) return full; // guard: lege capture overslaan
+    if (isMedischTerm(key)) return full;
+    if (!mapping[key]) { persoonCountRef[0]++; mapping[key] = '[PERSOON_' + persoonCountRef[0] + ']'; }
+    if (stats) stats.namen++;
+    return full.replace(naam, mapping[key]);
+  });
+
+  // Nu ook losse achternamen die al in de mapping zitten (tweede vermelding)
+  // Alleen vervangen als ze met hoofdletter staan (voorkomt match op "groot deel van" etc.)
+  Object.keys(mapping).forEach(function(key) {
+    var delen = key.replace(/^\[.*?\]\s*/, '').split(/\s+/);
+    var achter = delen[delen.length - 1];
+    if (achter && achter.length > 3 && !isMedischTerm(achter)) {
+      // Vereist hoofdletter aan het begin van het woord
+      var re = new RegExp('\\b([A-Z])(' + achter.slice(1).replace(/[-]/g, '\\-') + ')\\b', 'g');
+      tekst = tekst.replace(re, function(m2, first, rest) {
+        // Alleen vervangen als de volledige match overeenkomt met de achternaam (case-sensitive)
+        if ((first + rest) === achter) return mapping[key];
+        return m2;
+      });
+    }
+  });
+
+  return tekst;
+}
+
+function runPseudo() {
+  var input = document.getElementById('pseudo-input').value.trim();
+  if (!input) { alert('Plak eerst een dossier in het invoerveld.'); return; }
+
+  var refVal = document.getElementById('refdate').value;
+  STATE.refDate = refVal ? new Date(refVal) : null;
+
+  // Reset alle downstream state zodat er geen inconsistentie ontstaat
+  STATE.tijdlijn = [];
+  STATE.conflicts = [];
+  STATE.pseudoMapping = {};
+  document.getElementById('tl-result-zone').style.display = 'none';
+  var tlt = document.getElementById('tl-timeline'); if(tlt) tlt.innerHTML = '';
+  document.getElementById('tl-conflict-zone').innerHTML = '';
+  document.getElementById('rapport-content').style.display = 'none';
+  document.querySelector('[onclick="showTab(\'tijdlijn\')"]').classList.remove('done');
+  document.querySelector('[onclick="showTab(\'rapport\')"]').classList.remove('done');
+
+  var mapping = {};
+  var persoonCountRef = [0];
+  var stats = {bsn:0, namen:0, datums:0, overig:0};
+
+  // Werk op plain tekst gedurende alle stappen; HTML pas helemaal aan het einde
+  var plain = input;
+
+  // 1. BSN (elfproef) — op plain
+  plain = plain.replace(/\b(\d{9})\b/g, function(m, p1) {
+    if (elfProef(p1)) { stats.bsn++; return '[BSN]'; }
+    return m;
+  });
+
+  // 2. Namen — vóór datums zodat \b boundaries intact zijn
+  plain = pseudonimiseerNamen(plain, mapping, persoonCountRef, stats);
+
+  // 3. Datums → T-notatie — op plain (na namen, zodat namen niet per ongeluk datums verstoren)
+  var datumPatterns = [
+    /\b(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})\b/g,
+    /\b(\d{1,2})\s+(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\s+(\d{4})\b/gi,
+    /\b(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december)\s+(\d{4})\b/gi
+  ];
+  var allDatums = [];
+  datumPatterns.forEach(function(pat) {
+    var m; var tmp = new RegExp(pat.source, pat.flags);
+    while ((m = tmp.exec(plain)) !== null) {
+      allDatums.push({match: m[0], index: m.index});
+    }
+  });
+  // Dedup op match-string: zelfde datumstring meerdere keren in de array samenvoegen tot één vervanging
+  // split/join vervangt daarna alle occurrences in één keer — geen positiesortering nodig
+  var seenDatums = {};
+  allDatums = allDatums.filter(function(item) {
+    if (seenDatums[item.match]) return false;
+    seenDatums[item.match] = true;
+    return true;
+  });
+  allDatums.forEach(function(item) {
+    var tVal = datumNaarT(item.match, STATE.refDate);
+    var label;
+    if (tVal !== null) {
+      stats.datums++;
+      label = 'T' + (tVal >= 0 ? '+' : '') + tVal;
+    } else {
+      label = '[DATUM_' + (++stats.datums) + ']';
+    }
+    // split/join vervangt alle occurrences betrouwbaar zonder regex-escape risico's
+    plain = plain.split(item.match).join(label);
+  });
+
+  // 4. Telefoon
+  plain = plain.replace(/\b(06|0[1-9]\d)[\s-]?\d{7,8}\b/g, function(){ stats.overig++; return '[TELEFOON]'; });
+
+  // 5. Email
+  plain = plain.replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, function(){ stats.overig++; return '[EMAIL]'; });
+
+  // 6. IBAN
+  plain = plain.replace(/\bNL\d{2}[A-Z]{4}\d{10}\b/g, function(){ stats.overig++; return '[IBAN]'; });
+
+  // 7. Postcode
+  plain = plain.replace(/\b\d{4}\s?[A-Z]{2}\b/g, function(){ stats.overig++; return '[POSTCODE]'; });
+
+  // 8. Bouw HTML vanuit plain door placeholders te highlighten (geen COLORS object nodig — kleuren direct inline)
+  var html = plain
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\[PERSOON_\d+\]/g, function(m){
+      return '<mark style="background:#E1F5EE;border-radius:3px;padding:0 2px">' + m + '</mark>';
+    })
+    .replace(/T[+-]\d+/g, function(m){
+      return '<mark style="background:#EEEDFE;border-radius:3px;padding:0 2px">' + m + '</mark>';
+    })
+    .replace(/\[DATUM_\d+\]/g, function(m){
+      return '<mark style="background:#EEEDFE;border-radius:3px;padding:0 2px">' + m + '</mark>';
+    })
+    .replace(/\[(BSN|TELEFOON|EMAIL|IBAN|POSTCODE|ORG_\d+)\]/g, function(m, key){
+      var bg = key==='BSN' ? '#FAEEDA' : key.startsWith('ORG') ? '#F0EFEB' : '#FAECE7';
+      return '<mark style="' + bg + ';border-radius:3px;padding:0 2px">[' + key + ']</mark>';
+    });
+  html = html.replace(/\n/g, '<br>');
+
+  // Output
+  var outEl = document.getElementById('pseudo-output');
+  outEl.classList.remove('empty');
+  outEl.innerHTML = html;
+  document.getElementById('pseudo-output-plain').value = plain;
+
+  // Stats
+  document.getElementById('stat-bsn').textContent = stats.bsn;
+  document.getElementById('stat-namen').textContent = stats.namen;
+  document.getElementById('stat-datums').textContent = stats.datums;
+  document.getElementById('stat-overig').textContent = stats.overig;
+  document.getElementById('pseudo-stats').style.display = 'flex';
+
+  STATE.pseudoOutput = plain;
+  STATE.pseudoMapping = mapping;
+  document.querySelector('[onclick="showTab(\'pseudo\')"]').classList.add('done');
+}
+
+function copyOutput(id) {
+  var el = document.getElementById(id);
+  navigator.clipboard.writeText(el.value || el.textContent).then(function(){
+    // OK
+  });
+}
+
+function loadPseudoExample() {
+  document.getElementById('refdate').value = '2023-03-12';
+  document.getElementById('pseudo-input').value = 'Patiënt: de heer J.A.M. van der Berg, BSN: 123456782\nGeboren: 15-08-1978, woonachtig Hoofdstraat 14, 3512 AB Utrecht\nTelefoon: 06-12345678, e-mail: j.vanderberg@gmail.com\n\nBetrokkene werd op 12-03-2023 opgenomen na een verkeersongeval.\nMRI-onderzoek op 26-03-2023 toonde een hernia nuclei pulposi op C5-C6.\nFysiotherapie gestart op 09-04-2023 bij Praktijk Gezond B.V., 3 sessies per week.\nOp 11-06-2023 hervatte betrokkene de werkzaamheden voor 50%.\n\nBehandeld door dr. P.J. Smeets, orthopedisch chirurg.\nDiagnose: hernia nuclei pulposi C5-C6 na verkeersongeval.\nBSN behandelaar: 987654321 (controle: niet geldig).';
+}
+
+function clearPseudo() {
+  document.getElementById('pseudo-input').value = '';
+  var outEl = document.getElementById('pseudo-output');
+  outEl.innerHTML = 'Resultaat verschijnt hier na verwerking...';
+  outEl.classList.add('empty');
+  document.getElementById('pseudo-stats').style.display = 'none';
+  // Reset alle state inclusief downstream
+  STATE.pseudoOutput = '';
+  STATE.pseudoMapping = {};
+  STATE.tijdlijn = [];
+  STATE.conflicts = [];
+  document.getElementById('tl-result-zone').style.display = 'none';
+  var tlt = document.getElementById('tl-timeline'); if(tlt) tlt.innerHTML = '';
+  document.getElementById('tl-conflict-zone').innerHTML = '';
+  document.getElementById('rapport-content').style.display = 'none';
+  document.querySelector('[onclick="showTab(\'pseudo\')"]').classList.remove('done');
+  document.querySelector('[onclick="showTab(\'tijdlijn\')"]').classList.remove('done');
+  document.querySelector('[onclick="showTab(\'rapport\')"]').classList.remove('done');
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE 2: TIJDLIJN EXTRACTOR
+// ══════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════
+// MODULE 2: TIJDLIJN EXTRACTOR — AI-aangedreven
+// ══════════════════════════════════════════════════════
+
+async function runTijdlijn() {
+  var input = document.getElementById('tl-input').value.trim();
+  if (!input) { alert('Plak eerst de gepseudonimiseerde tekst in het invoerveld.'); return; }
+
+  var rawOut = document.getElementById('tl-raw-output');
+  rawOut.textContent = 'AI extraheert tijdlijn via ' + CONFIG.providers[CONFIG.provider].name + '...';
+  rawOut.classList.remove('empty');
+
+  var systemPrompt = [
+    'Je bent een medisch-juridisch dossieranalyst die gepseudonimiseerde letselschadedossiers verwerkt.',
+    'Extraheer ALLE medisch relevante tijdlijn-events uit de aangeleverde tekst.',
+    '',
+    'INSTRUCTIES:',
+    '- T-waarden (T+0, T+14, T-365 etc.) en [DATUM_x] markeringen zijn tijdstipindicatoren.',
+    '- Geef voor elk event: t (integer of null), t_label (string bijv. "T-14"), type, omschrijving en bron.',
+    '- type is één van: "diagnostiek", "behandeling", "toestand", "onbekend".',
+    '- bron: naam van het brondocument (bijv. "SEH-verslag OLVG", "HA-journaal", "MRI-rapport", "Neuroloogbrief").',
+    '- Pre-existente events hebben negatieve T-waarden.',
+    '- Detecteer conflicten: tegenstrijdige datums, gaps >180d, discrepanties werkhervatting.',
+    '- Omschrijvingen: MAXIMAAL 80 tekens, feitelijk, geen uitleg.',
+    '- Groepeer events op dezelfde T-waarde als ze dezelfde bron hebben (max 1 event per T-waarde per type).',
+    '- GEEN medische conclusies.',
+    '',
+    'KRITISCH: Antwoord UITSLUITEND als geldig compact JSON, geen markdown:',
+    '{"events":[{"t":-1527,"t_label":"T-1527","type":"toestand","omschrijving":"SEH-presentatie na kop-staartbotsing A9","bron":"SEH-verslag OLVG"}],"conflicts":["Conflict omschrijving"]}'
+  ].join('\n');
+
+  // Begrens input — Mistral heeft moeite met >4000 woorden in één aanroep
+  // Mistral Large ondersteunt 131K tokens context — ruimschoots voldoende voor grote dossiers
+  var MAX_CHARS = 40000;
+  if (input.length > MAX_CHARS) {
+    input = input.substring(0, MAX_CHARS);
+    rawOut.textContent = 'Dossier ingekort tot ' + MAX_CHARS + ' tekens voor verwerking...';
+  }
+
+  var userPrompt = 'Extraheer de tijdlijn uit dit gepseudonimiseerde dossier:\n\n' + input;
+
+  try {
+    var raw = await CONFIG.callLLM(systemPrompt, userPrompt, 6000);
+
+    if (!raw || raw.trim().length < 10) {
+      throw new Error('Leeg antwoord ontvangen van ' + CONFIG.providers[CONFIG.provider].name + '. Probeer het opnieuw.');
+    }
+
+    var clean = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+
+    // Zoek het JSON-blok — soms staat er tekst voor of na
+    var jsonStart = clean.indexOf('{');
+    var jsonEnd = clean.lastIndexOf('}');
+    if (jsonStart > 0) clean = clean.substring(jsonStart);
+    if (jsonEnd > 0 && jsonEnd < clean.length - 1) clean = clean.substring(0, jsonEnd + 1);
+
+    // Herstel afgekapte JSON
+    var parsed;
+    try {
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      // Vind het laatste volledig afgesloten event object
+      var lastComplete = -1;
+      var depth = 0;
+      var inEvents = false;
+      for (var ci = 0; ci < clean.length; ci++) {
+        if (clean[ci] === '{') depth++;
+        if (clean[ci] === '}') {
+          depth--;
+          if (depth === 1) lastComplete = ci; // event afgesloten op niveau 1
+        }
+      }
+      if (lastComplete > 0) {
+        var trimmed = clean.substring(0, lastComplete + 1) + '],"conflicts":["Antwoord deels afgekapt — tijdlijn mogelijk onvolledig"]}';
+        try {
+          parsed = JSON.parse(trimmed);
+        } catch(e2) {
+          // Laatste redmiddel: lege structuur
+          parsed = { events: [], conflicts: ['JSON kon niet worden verwerkt. Probeer het dossier op te splitsen in kleinere delen.'] };
+        }
+      } else {
+        parsed = { events: [], conflicts: ['Geen geldig JSON ontvangen. Probeer opnieuw of splits het dossier.'] };
+      }
+    }
+
+    var events = parsed.events || [];
+    var conflicts = parsed.conflicts || [];
+
+    // Normaliseer events: voeg ev.desc alias toe voor compatibiliteit met rapport
+    events = events.map(function(ev) {
+      ev.desc = ev.omschrijving || ev.desc || '';
+      if (ev.tLabel === undefined) ev.tLabel = ev.t_label || null;
+      return ev;
+    });
+
+    // Sorteer
+    events.sort(function(a, b) {
+      if (a.t === null && b.t === null) return 0;
+      if (a.t === null) return 1;
+      if (b.t === null) return -1;
+      if (a.t !== b.t) return a.t - b.t;
+      var order = {diagnostiek:0, behandeling:1, toestand:2, onbekend:3};
+      return (order[a.type]||3) - (order[b.type]||3);
+    });
+
+    STATE.tijdlijn = events;
+    STATE.conflicts = conflicts;
+
+    rawOut.textContent = events.length + ' events gedetecteerd door ' + CONFIG.providers[CONFIG.provider].name + '.';
+
+    // Conflict banners (boven de tijdlijn)
+    var conflictZone = document.getElementById('tl-conflict-zone');
+    conflictZone.innerHTML = '';
+    if (conflicts.length) {
+      var banner = document.createElement('div');
+      banner.className = 'conflict-banner';
+      var strong = document.createElement('strong');
+      strong.textContent = 'Vlaggen (' + conflicts.length + '):';
+      banner.appendChild(strong);
+      banner.appendChild(document.createTextNode(' ' + conflicts.join(' | ')));
+      conflictZone.appendChild(banner);
+    }
+
+    // ── Verticale tijdlijn kaarten ──
+    var tl = document.getElementById('tl-timeline');
+    tl.innerHTML = '';
+    var tagClass = {diagnostiek:'diag', behandeling:'beh', toestand:'toe', onbekend:'onb'};
+    var tagLabel = {diagnostiek:'Diagnostiek', behandeling:'Behandeling', toestand:'Toestand', onbekend:'Onbekend'};
+
+    events.forEach(function(ev, idx) {
+      var tLabel = ev.t_label || ev.tLabel || (ev.t !== null ? ('T' + (ev.t >= 0 ? '+' : '') + ev.t) : '?');
+      var typeKey = ev.type || 'onbekend';
+      var item = document.createElement('div');
+      item.className = 'tl-item';
+      item.style.animationDelay = (idx * 40) + 'ms';
+
+      // Gekleurde tag badge
+      var tag = document.createElement('span');
+      tag.className = 'tl-tag ' + (tagClass[typeKey] || 'onb');
+      tag.textContent = tagLabel[typeKey] || typeKey;
+      item.appendChild(tag);
+
+      // Kaart
+      var card = document.createElement('div');
+      card.className = 'tl-card';
+
+      // Bovenste rij: T-waarde + titel
+      var top = document.createElement('div');
+      top.className = 'tl-card-top';
+      var tlbl = document.createElement('span');
+      tlbl.className = 'tl-t-label';
+      tlbl.textContent = tLabel;
+      var title = document.createElement('span');
+      title.className = 'tl-card-title';
+      title.textContent = ev.desc || ev.omschrijving || '';
+      top.appendChild(tlbl);
+      top.appendChild(title);
+      card.appendChild(top);
+
+      // Review-vlag indien onbekend
+      if (typeKey === 'onbekend') {
+        var flag = document.createElement('div');
+        flag.className = 'tl-card-body';
+        flag.style.color = 'var(--coral)';
+        flag.style.fontStyle = 'italic';
+        flag.textContent = '→ Type niet herkend — review nodig';
+        card.appendChild(flag);
+      }
+
+      // Bronverwijzing
+      if (ev.bron && ev.bron !== '—') {
+        var src = document.createElement('div');
+        src.className = 'tl-card-source';
+        src.innerHTML = '<strong>Bron:</strong> ' + ev.bron.replace(/</g,'&lt;');
+        card.appendChild(src);
+      }
+
+      item.appendChild(card);
+      tl.appendChild(item);
+    });
+
+    document.getElementById('tl-result-zone').style.display = 'block';
+    document.querySelector('[onclick="showTab(\'tijdlijn\')"]').classList.add('done');
+
+    // Stats-balk (chips boven tijdlijn)
+    var counts = {diagnostiek:0, behandeling:0, toestand:0, onbekend:0};
+    events.forEach(function(ev){ if (counts[ev.type] !== undefined) counts[ev.type]++; });
+    var statsBar = document.getElementById('tl-stats-bar');
+    if (statsBar) {
+      var labels = [
+        {key:'diagnostiek', label:'diagnostiek', bg:'#EEEDFE', color:'#3C3489'},
+        {key:'behandeling',  label:'behandeling', bg:'#E8F4F3', color:'#1E4E4A'},
+        {key:'toestand',     label:'toestand',    bg:'#FDF3E0', color:'#7A4A00'},
+        {key:'onbekend',     label:'onbekend',    bg:'#FCEBEB', color:'#791F1F'}
+      ];
+      statsBar.innerHTML = '';
+      labels.forEach(function(l) {
+        if (counts[l.key] > 0) {
+          var chip = document.createElement('span');
+          chip.style.cssText = 'background:' + l.bg + ';color:' + l.color + ';padding:2px 8px;border-radius:3px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:10px;';
+          chip.textContent = counts[l.key] + ' ' + l.label;
+          statsBar.appendChild(chip);
+        }
+      });
+    }
+
+    // Samenvattings-stats
+    var bronCount = events.filter(function(ev){ return ev.bron && ev.bron !== '—'; }).length;
+    var tVals = events.filter(function(ev){ return ev.t !== null; }).map(function(ev){ return ev.t; });
+    var periode = tVals.length >= 2 ? Math.max.apply(null,tVals) - Math.min.apply(null,tVals) : 0;
+    var el = document.getElementById('stat-events'); if(el) el.textContent = events.length;
+    el = document.getElementById('stat-gaps'); if(el) el.textContent = conflicts.length || '0';
+    el = document.getElementById('stat-bronnen'); if(el) el.textContent = bronCount;
+    el = document.getElementById('stat-periode'); if(el) el.textContent = periode > 0 ? periode + 'd' : '—';
+
+  } catch(e) {
+    rawOut.textContent = 'Fout bij tijdlijn-extractie: ' + e.message;
+    console.error(e);
+  }
+}
+
+function copyTijdlijn() {
+  var lines = STATE.tijdlijn.map(function(ev) {
+    var tLabel = ev.t !== null ? ('T' + (ev.t >= 0 ? '+' : '') + ev.t) : (ev.tLabel || '?');
+    return tLabel + '\t' + ev.type + '\t' + ev.desc + '\t' + (ev.bron || '—');
+  });
+  navigator.clipboard.writeText(lines.join('\n')).then(function() {
+    var btn = document.querySelector('[onclick="copyTijdlijn()"]');
+    if (btn) {
+      var orig = btn.textContent;
+      btn.textContent = 'Gekopieerd!';
+      setTimeout(function(){ btn.textContent = orig; }, 1800);
+    }
+  });
+}
+
+function loadTlExample() {
+  document.getElementById('tl-input').value = 'Betrokkene [PERSOON_1] werd na het verkeersongeval op T+0 opgenomen.\nBij opname werden klachten vermeld passend bij een cervicaal letsel.\n\nMRI-onderzoek op T+14 toonde een hernia nuclei pulposi op niveau C5-C6.\n\nFysiotherapeutische behandeling gestart op T+28, frequentie 3 maal per week gedurende 6 weken.\n\nBetrokkene bezocht op T+42 het spreekuur; pijnklachten aanhoudend, VAS 6.\n\nOp T+90 hervatte betrokkene de werkzaamheden gedeeltelijk (50%).\nTijdens consult op T+120 beschreef betrokkene nog restkrachten cervicaal.';
+}
+
+function clearTl() {
+  document.getElementById('tl-input').value = '';
+  document.getElementById('tl-raw-output').textContent = 'Events verschijnen hier...';
+  document.getElementById('tl-raw-output').classList.add('empty');
+  document.getElementById('tl-conflict-zone').innerHTML = '';
+  document.getElementById('tl-result-zone').style.display = 'none';
+  var tlt = document.getElementById('tl-timeline'); if(tlt) tlt.innerHTML = '';
+  STATE.tijdlijn = [];
+  STATE.conflicts = []; // L4: ook conflicts resetten
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE 3: RAPPORTGENERATOR
+// ══════════════════════════════════════════════════════
+
+async function runRapport() {
+  var tl = STATE.tijdlijn;
+  if (!tl.length) {
+    alert('Voer eerst de tijdlijn extractor uit (module 2), of laad een voorbeeld in module 2.');
+    return;
+  }
+
+  // Waarschuw bij overschrijven
+  var rapportZichtbaar = document.getElementById('rapport-content').style.display !== 'none';
+  if (rapportZichtbaar) {
+    var bevestig = confirm('Het rapport is al gegenereerd. Opnieuw genereren overschrijft de secties 1–4 en de veldstructuur van sectie 5.\n\nDoorgaan?');
+    if (!bevestig) return;
+  }
+
+  // Bepaal hoofdpersoon
+  var persoon = '[PERSOON_1]';
+  var mappingKeys = Object.keys(STATE.pseudoMapping);
+  if (mappingKeys.length > 0) persoon = STATE.pseudoMapping[mappingKeys[0]];
+
+  var letseltype = document.getElementById('rapport-letseltype').value;
+
+  // Bouw tijdlijn-samenvatting voor de prompt
+  var tlSamenvatting = tl.map(function(ev) {
+    var tLabel = ev.t_label || ev.tLabel || (ev.t !== null ? ('T' + (ev.t >= 0 ? '+' : '') + ev.t) : '?');
+    return tLabel + ' [' + ev.type + '] ' + ev.desc;
+  }).join('\n');
+
+  var conflictenTekst = STATE.conflicts.length
+    ? STATE.conflicts.join('\n')
+    : 'Geen conflicten gedetecteerd.';
+
+  // Sectie 5 veldset ophalen op letseltype
+  var s5Bodies = {
+    cervicaal: buildS5Fields([
+      {label:'Inspectie (houding/stand)', type:'text'},
+      {label:'Palpatie (paravertebrale spieren)', type:'text'},
+      {label:'ROM — Flexie (norm 45°)', type:'number', unit:'°'},
+      {label:'ROM — Extensie (norm 45°)', type:'number', unit:'°'},
+      {label:'ROM — Lat.flex li (norm 45°)', type:'number', unit:'°'},
+      {label:'ROM — Lat.flex re (norm 45°)', type:'number', unit:'°'},
+      {label:'ROM — Rotatie li (norm 80°)', type:'number', unit:'°'},
+      {label:'ROM — Rotatie re (norm 80°)', type:'number', unit:'°'},
+      {label:'Sensibiliteit C5-C6-C7', type:'text'},
+      {label:'Kracht (MRC-schaal)', type:'text'},
+      {label:'Reflexen', type:'text'},
+      {label:'Spurling test', type:'select', options:['—','Positief','Negatief']},
+      {label:'Lhermitte teken', type:'select', options:['—','Positief','Negatief']}
+    ]),
+    lumbaal: buildS5Fields([
+      {label:'Inspectie (houding/stand)', type:'text'},
+      {label:'Palpatie (paravertebrale spieren)', type:'text'},
+      {label:'ROM — Flexie (norm 90°)', type:'number', unit:'°'},
+      {label:'ROM — Extensie (norm 30°)', type:'number', unit:'°'},
+      {label:'ROM — Lat.flex li (norm 30°)', type:'number', unit:'°'},
+      {label:'ROM — Lat.flex re (norm 30°)', type:'number', unit:'°'},
+      {label:'Sensibiliteit L4-L5-S1', type:'text'},
+      {label:'Kracht (MRC-schaal)', type:'text'},
+      {label:'Reflexen (patellaire, achillespeesreflex)', type:'text'},
+      {label:'Lasègue test', type:'select', options:['—','Positief','Negatief']},
+      {label:'Bragard test', type:'select', options:['—','Positief','Negatief']}
+    ]),
+    schouder: buildS5Fields([
+      {label:'Inspectie (atrofie, stand)', type:'text'},
+      {label:'Palpatie (AC-gewricht, bicepsgroeve)', type:'text'},
+      {label:'ROM — Abductie (norm 180°)', type:'number', unit:'°'},
+      {label:'ROM — Anteflexie (norm 180°)', type:'number', unit:'°'},
+      {label:'ROM — Exorotatie (norm 90°)', type:'number', unit:'°'},
+      {label:'ROM — Endorotatie (norm 90°)', type:'number', unit:'°'},
+      {label:'Kracht abductie (MRC)', type:'text'},
+      {label:'Hawkins test', type:'select', options:['—','Positief','Negatief']},
+      {label:'Neer test', type:'select', options:['—','Positief','Negatief']},
+      {label:'Speed test', type:'select', options:['—','Positief','Negatief']}
+    ]),
+    knie: buildS5Fields([
+      {label:'Inspectie (zwelling, stand)', type:'text'},
+      {label:'Palpatie (gewrichtsspleet)', type:'text'},
+      {label:'ROM — Flexie (norm 135°)', type:'number', unit:'°'},
+      {label:'ROM — Extensie (norm 0°)', type:'number', unit:'°'},
+      {label:'Lachman test', type:'select', options:['—','Positief','Negatief']},
+      {label:'Anterior drawer test', type:'select', options:['—','Positief','Negatief']},
+      {label:'McMurray test', type:'select', options:['—','Positief','Negatief']},
+      {label:'Valgus/varus stress', type:'text'}
+    ])
+  };
+  document.getElementById('s5-body').innerHTML = s5Bodies[letseltype] || s5Bodies['cervicaal'];
+
+  // ROM-grid sectie 7
+  var romFields = {
+    cervicaal: [{label:'Flexie (45°)',norm:45},{label:'Extensie (45°)',norm:45},{label:'Lat.flex li (45°)',norm:45},{label:'Lat.flex re (45°)',norm:45},{label:'Rotatie li (80°)',norm:80},{label:'Rotatie re (80°)',norm:80}],
+    lumbaal:   [{label:'Flexie (90°)',norm:90},{label:'Extensie (30°)',norm:30},{label:'Lat.flex li (30°)',norm:30},{label:'Lat.flex re (30°)',norm:30}],
+    schouder:  [{label:'Abductie (180°)',norm:180},{label:'Anteflexie (180°)',norm:180},{label:'Exorotatie (90°)',norm:90},{label:'Endorotatie (90°)',norm:90}],
+    knie:      [{label:'Flexie (135°)',norm:135},{label:'Extensie (0°)',norm:0}]
+  };
+  document.getElementById('rom-grid').innerHTML = (romFields[letseltype] || romFields.cervicaal).map(function(f){
+    return '<div class="rp-rom-cell"><label>' + f.label + '</label><input type="number" min="0" max="' + f.norm + '" placeholder="—"><span class="rp-rom-norm">Norm: ' + f.norm + '\u00b0</span></div>';
+  }).join('');
+
+  // Toon rapport-shell alvast
+  document.getElementById('rapport-content').style.display = 'block';
+  document.querySelector('[onclick="showTab(\'rapport\')"]').classList.add('done');
+  window.scrollTo(0,0);
+
+  // Laad-indicator per sectie
+  function setSectie(id, tekst) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = tekst;
+    el.classList.add('loading');
+  }
+  function vulSectie(id, tekst) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = tekst || '—';
+    el.classList.remove('loading');
+  }
+  setSectie('s1-content', 'AI genereert toedracht...');
+  setSectie('s2-content', 'AI genereert voorgeschiedenis...');
+  setSectie('s3-content', 'AI genereert chronologie...');
+  setSectie('s4-auto', 'AI genereert huidige klachten...');
+  setSectie('s6-context', 'AI genereert causaliteitscontext...');
+  setSectie('s-hiaten', 'AI detecteert hiaten...');
+  setSectie('s-tegenstrijdigheden', 'AI analyseert tegenstrijdigheden...');
+  setSectie('s-bronnenlijst', 'AI genereert bronnenlijst...');
+
+  var systemPrompt = [
+    'Je bent een orthopedisch-medisch expert die IWMD-conforme expertiserapporten opstelt.',
+    'Op basis van een tijdlijn genereer je een uitgebreid concept-rapport. Letseltype: ' + letseltype + '.',
+    '',
+    'REGELS:',
+    '- Schrijf in derde persoon over betrokkene (' + persoon + ').',
+    '- Baseer je UITSLUITEND op de tijdlijn — geen aannames buiten de tijdlijn.',
+    '- Geef GEEN medische conclusies of causaliteitsoordelen — die zijn voorbehouden aan de arts.',
+    '- Zakelijk, medisch-juridisch Nederlands.',
+    '- Elke sectie krijgt een bronnen-array met gebruikte brondocumenten.',
+    '',
+    'Geef UITSLUITEND geldig compact JSON terug zonder markdown:',
+    '{',
+    '  "s1": "Toedracht en klachtenbeloop als lopende tekst (2-4 alineas)",',
+    '  "s1_bronnen": ["SEH-verslag OLVG","Huisartsbrief"],',
+    '  "s2": "Medische voorgeschiedenis voor het accident (1-2 alineas)",',
+    '  "s2_bronnen": ["HA-journaal"],',
+    '  "s3": "Behandelchronologie als lopende tekst (2-4 alineas)",',
+    '  "s3_bronnen": ["SEH-verslag","MRI-rapport","Fysiotherapieverslag"],',
+    '  "s4": "Huidige klachten op basis van meest recente events (1-2 alineas)",',
+    '  "s4_bronnen": ["Revalidatieverslag","AD-rapport"],',
+    '  "s6_context": "Relevante dossierfeiten voor causaliteitsbeoordeling (max 120 woorden)",',
+    '  "s6_bronnen": ["MRI-rapport","Neurologiebrief"],',
+    '  "hiaten": [{"ernst":"kritiek","titel":"Naam ontbrekend document","toelichting":"Impact op beoordeling","actie":"Opvragen bij organisatie"}],',
+    '  "tegenstrijdigheden": [{"ernst":"kritiek","titel":"Naam tegenstrijdigheid","toelichting":"Omschrijving inconsistentie","relevantie":"Relevant voor IWMD-vraag X"}],',
+    '  "aanwezig": ["SEH-verslag","MRI-rapport"],',
+    '  "ontbrekend": ["Fysiotherapie eindverslag"],',
+    '  "bronnen": [{"nr":1,"document":"SEH-verslag","bron":"Naam instelling","twaarde":"T+0","pagina":"1-2"}]',
+    '}'
+  ].join('\n');
+
+  var userPrompt = [
+    'TIJDLIJN (' + tl.length + ' events):',
+    tlSamenvatting,
+    '',
+    'CONFLICTEN/VLAGGEN:',
+    conflictenTekst
+  ].join('\n');
+
+  try {
+    var raw = await CONFIG.callLLM(systemPrompt, userPrompt, 5000);
+    var clean = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    var parsed = JSON.parse(clean);
+
+    // Helper: bronverwijzingen toevoegen onder een sectie
+    function addBronnen(containerId, bronnen) {
+      var el = document.getElementById(containerId);
+      if (!el || !bronnen || !bronnen.length) return;
+      var src = document.createElement('div');
+      src.className = 'rp-sources';
+      var title = document.createElement('div');
+      title.className = 'rp-sources-title';
+      title.textContent = 'Bronverwijzingen';
+      src.appendChild(title);
+      bronnen.forEach(function(b) {
+        var item = document.createElement('div');
+        item.className = 'rp-source-item';
+        item.textContent = b;
+        src.appendChild(item);
+      });
+      var parent = el.closest('.rp-section');
+      if (parent) parent.appendChild(src);
+    }
+
+    vulSectie('s1-content', parsed.s1 || 'Onvoldoende data voor toedracht.');
+    vulSectie('s2-content', parsed.s2 || 'Geen pre-existente klachten gedocumenteerd.');
+    vulSectie('s3-content', parsed.s3 || 'Zie tijdlijn.');
+    vulSectie('s4-auto', parsed.s4 || 'Zie meest recente tijdlijn-event.');
+    vulSectie('s6-context', parsed.s6_context || '');
+
+    // Bronverwijzingen per sectie
+    addBronnen('s1-content', parsed.s1_bronnen);
+    addBronnen('s2-content', parsed.s2_bronnen);
+    addBronnen('s3-content', parsed.s3_bronnen);
+    addBronnen('s4-auto',    parsed.s4_bronnen);
+    addBronnen('s6-context', parsed.s6_bronnen);
+
+    // Bronnenlijst als tabel in sectie 10
+    var bronnenEl = document.getElementById('s-bronnenlijst');
+    var bronnenArr = Array.isArray(parsed.bronnen) ? parsed.bronnen : [];
+    if (bronnenEl && bronnenArr.length) {
+      var table = document.createElement('table');
+      table.className = 'rp-bronnen-table';
+      table.innerHTML = '<thead><tr><th>Nr.</th><th>Document</th><th>Bron</th><th>T-waarde</th><th>Pagina</th></tr></thead>';
+      var tbody = document.createElement('tbody');
+      bronnenArr.forEach(function(b) {
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td>' + (b.nr||'') + '</td>' +
+          '<td>' + (b.document||'') + '</td>' +
+          '<td>' + (b.bron||'') + '</td>' +
+          '<td>' + (b.twaarde||'') + '</td>' +
+          '<td>' + (b.pagina||'—') + '</td>';
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      bronnenEl.parentNode.replaceChild(table, bronnenEl);
+    } else if (bronnenEl) {
+      bronnenEl.textContent = 'Geen bronnen gedetecteerd in tijdlijn.';
+      bronnenEl.classList.remove('loading');
+    }
+
+    // ── Hiaten als kaarten ──
+    var hiatContainer = document.getElementById('s-hiaten-cards');
+    if (hiatContainer) {
+      var hiatenArr = Array.isArray(parsed.hiaten) ? parsed.hiaten : [];
+      if (hiatenArr.length) {
+        hiatContainer.innerHTML = '';
+        hiatenArr.forEach(function(h) {
+          var div = document.createElement('div');
+          div.className = 'ht-item ht-' + (h.ernst || 'aandacht');
+          div.innerHTML =
+            '<div class="ht-head">' +
+              '<span class="ht-badge ' + (h.ernst||'aandacht') + '">' + (h.ernst||'aandacht') + '</span>' +
+              '<span class="ht-title">' + (h.titel||'') + '</span>' +
+            '</div>' +
+            '<div class="ht-body">' + (h.toelichting||'') +
+              (h.actie ? '<div class="ht-action">→ ' + h.actie + '</div>' : '') +
+            '</div>';
+          hiatContainer.appendChild(div);
+        });
+      } else {
+        hiatContainer.innerHTML = '<div class="rp-text" style="color:var(--stone);font-style:italic">Geen hiaten gedetecteerd op basis van de tijdlijn.</div>';
+      }
+      var oldH = document.getElementById('s-hiaten');
+      if (oldH && oldH.parentNode === hiatContainer) hiatContainer.removeChild(oldH);
+    }
+
+    // ── Tegenstrijdigheden als kaarten ──
+    var tegenContainer = document.getElementById('s-tegenstrijdigheden-cards');
+    if (tegenContainer) {
+      var tegenArr = Array.isArray(parsed.tegenstrijdigheden) ? parsed.tegenstrijdigheden : [];
+      if (tegenArr.length) {
+        tegenContainer.innerHTML = '';
+        tegenArr.forEach(function(t) {
+          var div = document.createElement('div');
+          div.className = 'ht-item ht-' + (t.ernst || 'aandacht');
+          div.innerHTML =
+            '<div class="ht-head">' +
+              '<span class="ht-badge ' + (t.ernst||'aandacht') + '">' + (t.ernst||'aandacht') + '</span>' +
+              '<span class="ht-title">' + (t.titel||'') + '</span>' +
+            '</div>' +
+            '<div class="ht-body">' + (t.toelichting||'') +
+              (t.relevantie ? '<div class="ht-action">Relevant: ' + t.relevantie + '</div>' : '') +
+            '</div>';
+          tegenContainer.appendChild(div);
+        });
+      } else {
+        tegenContainer.innerHTML = '<div class="rp-text" style="color:var(--stone);font-style:italic">Geen tegenstrijdigheden gedetecteerd.</div>';
+      }
+      var oldT = document.getElementById('s-tegenstrijdigheden');
+      if (oldT && oldT.parentNode === tegenContainer) tegenContainer.removeChild(oldT);
+    }
+
+    // ── Dossiercompleetheid ──
+    var aanwezig = Array.isArray(parsed.aanwezig) ? parsed.aanwezig : [];
+    var ontbrekend = Array.isArray(parsed.ontbrekend) ? parsed.ontbrekend : [];
+    var totaal = aanwezig.length + ontbrekend.length;
+    var pct = totaal > 0 ? Math.round(aanwezig.length / totaal * 100) : 0;
+    var dcBar = document.getElementById('dc-bar');
+    if (dcBar && (aanwezig.length || ontbrekend.length)) {
+      dcBar.style.display = 'block';
+      document.getElementById('dc-pct').textContent = pct + '%';
+      document.getElementById('dc-fill').style.width = pct + '%';
+      var aanEl = document.getElementById('dc-aanwezig');
+      if (aanEl) aanEl.innerHTML = aanwezig.map(function(d){
+        return '<div class="dc-item"><span class="dc-dot ok"></span>' + d + '</div>';
+      }).join('');
+      var ontEl = document.getElementById('dc-ontbrekend');
+      if (ontEl) ontEl.innerHTML = ontbrekend.map(function(d){
+        return '<div class="dc-item missing"><span class="dc-dot miss"></span>' + d + '</div>';
+      }).join('');
+    }
+
+    // IWMD-vragen sectie 9 renderen
+    var iwmdVragen = [
+      {nr:1, vraag:'Anamnese: aard, ernst, verloop letsel en behandelingen?', context: parsed.s1 ? 'Zie sectie 2 (toedracht) en sectie 4 (huidige klachten).' : ''},
+      {nr:2, vraag:'Medische voorgeschiedenis op uw vakgebied?', context: parsed.s2 ? 'Zie sectie 1 (voorgeschiedenis).' : ''},
+      {nr:3, vraag:'Bevindingen bij lichamelijk en hulponderzoek?', context: ''},
+      {nr:4, vraag:'Diagnose en differentiaaldiagnostische overwegingen?', context: ''},
+      {nr:5, vraag:'Causaal verband klachten/stoornissen met het ongeval?', context: parsed.s6_context || (STATE.conflicts.length ? 'Let op: ' + STATE.conflicts.join('. ') : '')},
+      {nr:6, vraag:'Is de huidige toestand een eindtoestand? Zo ja, per welke datum?', context: ''},
+      {nr:7, vraag:'Beperkingen in huidige toestand (incl. FML)?', context: ''},
+      {nr:8, vraag:'Beperkingen toe te schrijven aan het ongeval? Pre-existent?', context: parsed.tegenstrijdigheden ? 'Zie tegenstrijdigheden sectie 3b.' : ''},
+      {nr:9, vraag:'Therapeutische suggesties?', context: ''},
+      {nr:10, vraag:'Overige relevante feiten of omstandigheden?', context: parsed.hiaten ? 'Zie hiaten sectie 3a.' : ''}
+    ];
+    var s9el = document.getElementById('s9-vragen');
+    if (s9el) {
+      s9el.innerHTML = '';
+      iwmdVragen.forEach(function(v) {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:12px;';
+        var label = document.createElement('div');
+        label.style.cssText = 'font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px;';
+        label.textContent = 'Vraag ' + v.nr + ' — ' + v.vraag;
+        wrap.appendChild(label);
+        if (v.context) {
+          var ctx = document.createElement('div');
+          ctx.style.cssText = 'font-size:11px;color:var(--stone);background:var(--fog);padding:6px 10px;border-radius:4px;margin-bottom:6px;font-style:italic;';
+          ctx.textContent = 'Dossier: ' + v.context;
+          wrap.appendChild(ctx);
+        }
+        var ta = document.createElement('textarea');
+        ta.style.cssText = 'width:100%;min-height:56px;font-family:inherit;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:7px 9px;resize:vertical;';
+        ta.placeholder = 'Antwoord arts...';
+        wrap.appendChild(ta);
+        s9el.appendChild(wrap);
+      });
+    }
+
+    // Update stats balk
+    var bronCount = STATE.tijdlijn.filter(function(ev){ return ev.bron && ev.bron !== '—'; }).length;
+    var flagCount = STATE.conflicts.length;
+    var bronEl = document.getElementById('rp-stat-bronnen');
+    var flagEl = document.getElementById('rp-stat-hiaten');
+    if (bronEl) bronEl.textContent = bronCount || '—';
+    if (flagEl) flagEl.textContent = flagCount || '—';
+
+  } catch(e) {
+    vulSectie('s1-content', 'Fout bij genereren: ' + e.message);
+    vulSectie('s2-content', '');
+    vulSectie('s3-content', '');
+    vulSectie('s4-auto', '');
+    vulSectie('s6-context', '');
+    console.error(e);
+  }
+}
+
+function buildS5Fields(fields) {
+  return fields.map(function(f){
+    var input = '';
+    if (f.type === 'select') {
+      input = '<select>' + f.options.map(function(o){ return '<option>' + o + '</option>'; }).join('') + '</select>';
+    } else if (f.type === 'number') {
+      input = '<input type="number" min="0" max="360" placeholder="—" style="max-width:80px">' + (f.unit ? '<span style="font-size:11px;color:var(--stone);margin-left:4px">' + f.unit + '</span>' : '');
+    } else {
+      input = '<input type="text" placeholder="...">';
+    }
+    return '<div class="rp-arts-field"><label>' + f.label + '</label><div style="display:flex;align-items:center;gap:4px">' + input + '</div></div>';
+  }).join('');
+}
+
+function exportRapport() {
+  // L3: guard — export alleen als rapport is gegenereerd
+  if (document.getElementById('rapport-content').style.display === 'none') {
+    alert('Genereer eerst het rapport voordat u exporteert.');
+    return;
+  }
+
+  // K2 fix: verzamelVelden werkt nu op een specifiek container-ID (niet heel panel)
+  function verzamelVelden(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return '[Niet ingevuld]';
+    var regels = [];
+    el.querySelectorAll('input, select, textarea').forEach(function(f) {
+      var label = '';
+      var row = f.closest('.open-field-row');
+      if (row) {
+        var lbl = row.querySelector('label');
+        if (lbl) label = lbl.textContent.trim() + ': ';
+      }
+      var waarde = f.value ? f.value.trim() : '';
+      if (waarde && waarde !== '—') regels.push(label + waarde);
+    });
+    return regels.length ? regels.join('\n') : '[Niet ingevuld]';
+  }
+
+  // ROM-grid sectie 7
+  function verzamelRom() {
+    var regels = [];
+    document.querySelectorAll('#rom-grid .rom-cell').forEach(function(cell) {
+      var lbl = cell.querySelector('label');
+      var inp = cell.querySelector('input');
+      if (lbl && inp && inp.value) {
+        regels.push(lbl.textContent.trim() + ': ' + inp.value + '°');
+      }
+    });
+    return regels.length ? regels.join('\n') : '[Niet ingevuld]';
+  }
+
+  // L4: conflicten als aparte sectie in de export
+  var conflictenTekst = STATE.conflicts.length
+    ? STATE.conflicts.map(function(c, i){ return (i+1) + '. ' + c; }).join('\n')
+    : 'Geen conflicten gedetecteerd.';
+
+  var lines = [
+    'CONCEPT ORTHOPEDISCH EXPERTRAPPORT',
+    'Kinetic Medische Expertises — IWMD-conform',
+    'Gegenereerd: ' + new Date().toLocaleDateString('nl-NL'),
+    '═══════════════════════════════════════════',
+    '',
+    'SECTIE 1 — ANAMNESE',
+    document.getElementById('s1-content').textContent || '[Niet gegenereerd]',
+    '',
+    'SECTIE 2 — MEDISCHE VOORGESCHIEDENIS',
+    document.getElementById('s2-content').textContent || '[Niet gegenereerd]',
+    '',
+    'SECTIE 3 — BEHANDELCHRONOLOGIE',
+    document.getElementById('s3-content').textContent || '[Niet gegenereerd]',
+    '',
+    'SECTIE 4 — HUIDIGE KLACHTEN',
+    '[ Uit dossier ]',
+    document.getElementById('s4-auto').textContent || '[Niet beschikbaar]',
+    '[ Eigen consult — ingevuld door Edwin ]',
+    verzamelVelden('s4-open'),
+    '',
+    'SECTIE 5 — LICHAMELIJK ONDERZOEK',
+    verzamelVelden('s5-body'),
+    '',
+    'SECTIE 6 — DIAGNOSE EN CAUSALITEIT',
+    '[ Context tijdlijn ]',
+    document.getElementById('s6-context').textContent || '[Niet beschikbaar]',
+    '[ Oordeel Edwin ]',
+    verzamelVelden('s6-open'),
+    '',
+    'SECTIE 7 — PROGNOSE EN BLIJVENDE INVALIDITEIT',
+    '[ Prognose en arbeid ]',
+    verzamelVelden('s7-open'),
+    '[ ROM-metingen (AMA Guides) ]',
+    verzamelRom(),
+    '[ BI en arbeidsgeschiktheid ]',
+    verzamelVelden('s7-bi'),
+    '',
+    'TIJDLIJNVLAGGEN',
+    conflictenTekst,
+    '',
+    '═══════════════════════════════════════════',
+    'Naam deskundige: dr. E. Diepeveen',
+    'BIG-registratie: 99908881401',
+    'Datum: ___________     Handtekening: ___________'
+  ];
+  var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'kinetic-concept-rapport-' + new Date().toISOString().slice(0,10) + '.txt';
+  a.click();
+}
+
+
+// ══════════════════════════════════════════════════════
+// PROVIDER MANAGEMENT
+// ══════════════════════════════════════════════════════
+
+function setProvider(name) {
+  if (!CONFIG.providers[name]) return;
+  CONFIG.provider = name;
+
+  // Update buttons
+  document.getElementById('btn-anthropic').classList.toggle('active', name === 'anthropic');
+  document.getElementById('btn-mistral').classList.toggle('active', name === 'mistral');
+
+  // Update header badge
+  var p = CONFIG.providers[name];
+  document.getElementById('provider-badge').textContent = 'AI — ' + p.label;
+
+  // Update API key placeholder
+  var placeholder = name === 'anthropic' ? 'API-sleutel (sk-ant-...)' : 'API-sleutel (mis-...)';
+  document.getElementById('api-key-input').placeholder = placeholder;
+
+  // Clear key and recheck status
+  CONFIG.apiKey = '';
+  document.getElementById('api-key-input').value = '';
+  updateProviderStatus();
+}
+
+function updateApiKey(val) {
+  CONFIG.apiKey = val.trim();
+  updateProviderStatus();
+}
+
+function updateProviderStatus() {
+  var statusEl = document.getElementById('provider-status');
+  var p = CONFIG.providers[CONFIG.provider];
+  if (!CONFIG.apiKey) {
+    statusEl.textContent = '⚠ Geen API-sleutel';
+    statusEl.className = 'provider-status warn';
+  } else {
+    // Basis-validatie prefix
+    var ok = (CONFIG.provider === 'anthropic' && CONFIG.apiKey.startsWith('sk-ant-'))
+           || (CONFIG.provider === 'mistral' && (CONFIG.apiKey.length > 20));
+    if (ok) {
+      statusEl.textContent = '✓ ' + p.name + ' gereed';
+      statusEl.className = 'provider-status ok';
+    } else {
+      statusEl.textContent = '⚠ Sleutel lijkt onjuist';
+      statusEl.className = 'provider-status warn';
+    }
+  }
+}
+
+// Inject apiKey in CONFIG
+CONFIG.apiKey = '';
+
+// Override callLLM to inject key in headers
+CONFIG.callLLM = async function(systemPrompt, userPrompt, maxTokens) {
+  if (!CONFIG.apiKey) throw new Error('Geen API-sleutel ingesteld.');
+  var p = CONFIG.providers[CONFIG.provider];
+  var headers = { 'Content-Type': 'application/json' };
+  if (CONFIG.provider === 'anthropic') {
+    headers['x-api-key'] = CONFIG.apiKey;
+    headers['anthropic-version'] = '2023-06-01';
+  } else if (CONFIG.provider === 'mistral') {
+    headers['Authorization'] = 'Bearer ' + CONFIG.apiKey;
+  }
+  var resp = await fetch(p.endpoint, {
+    method: 'POST',
+    headers: headers,
+    body: p.buildBody(systemPrompt, userPrompt, maxTokens || 2000)
+  });
+  if (!resp.ok) {
+    var err = await resp.text();
+    throw new Error(p.name + ' API fout ' + resp.status + ': ' + err.slice(0, 200));
+  }
+  var data = await resp.json();
+  return p.extractText(data);
+};
+
+// Init
+document.getElementById('refdate').value = new Date().toISOString().slice(0,10);
+
+// ── Vaste sleutels ──────────────────────────────────────
+var KEYS = {
+  mistral:   'uqiV4LlpNucAPLlXe6RzxBqbsUr0jrJg',
+  anthropic: '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'
+};
+
+// ── Provider switch: knoppen zichtbaar, sleutelveld verborgen ──
+document.querySelectorAll('.api-key-input, .provider-status, .provider-label').forEach(function(el){
+  el.style.display = 'none';
+});
+
+// Overschrijf setProvider zodat key automatisch mee-switcht
+var _origSetProvider = setProvider;
+setProvider = function(name) {
+  _origSetProvider(name);
+  CONFIG.apiKey = KEYS[name] || '';
+  // Update prominente kaarten
+  document.querySelectorAll('.provider-choice').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  var activeCard = document.getElementById('choice-' + name);
+  if (activeCard) activeCard.classList.add('active');
+  // Update badge in header
+  var badge = document.getElementById('provider-badge');
+  if (badge) badge.textContent = name === 'mistral' ? 'Mistral EU' : 'Anthropic';
+};
+
+// ── Start met Mistral ──
+setProvider('mistral');
+// Activeer de Mistral-kaart direct bij laden
+var _mc = document.getElementById('choice-mistral');
+if (_mc) _mc.classList.add('active');
+
+</script>
+</body>
+</html>
