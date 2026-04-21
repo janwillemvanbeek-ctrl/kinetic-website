@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic — Inloggen</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --teal: #2F6F6A;
+  --teal-dark: #1E4E4A;
+  --teal-light: #E8F4F3;
+  --ink: #141414;
+  --stone: #6B6B68;
+  --border: #E2E0DA;
+  --ivory: #FAF9F7;
+  --white: #FFFFFF;
+  --amber: #C8860A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--ivory);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Logo / header */
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.logo-k {
+  width: 36px; height: 36px;
+  background: var(--teal);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 600; color: white;
+  font-family: Georgia, serif;
+}
+.logo-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+/* Card */
+.login-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 36px 40px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.login-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.login-sub {
+  font-size: 13px;
+  color: var(--stone);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* Form */
+.field {
+  margin-bottom: 16px;
+}
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 6px;
+}
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--ivory);
+  transition: border-color .15s;
+  outline: none;
+}
+.field input:focus {
+  border-color: var(--teal);
+  background: var(--white);
+}
+
+.btn-login {
+  width: 100%;
+  padding: 11px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-login:hover { background: var(--teal-dark); }
+.btn-login:disabled { background: var(--border); color: var(--stone); cursor: not-allowed; }
+
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: none;
+}
+.btn-login.loading .spinner { display: block; }
+.btn-login.loading .btn-label { opacity: 0.6; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-msg {
+  margin-top: 14px;
+  padding: 10px 12px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #B91C1C;
+  display: none;
+}
+.error-msg.show { display: block; }
+
+/* Footer */
+.login-footer {
+  margin-top: 32px;
+  font-size: 11px;
+  color: var(--stone);
+  text-align: center;
+  line-height: 1.6;
+}
+.login-footer a {
+  color: var(--teal);
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div class="login-logo">
+  <div class="logo-k">K</div>
+  <span class="logo-name">Kinetic Medische Expertises</span>
+</div>
+
+<div class="login-card">
+  <div class="login-title">Inloggen bij Tooling</div>
+  <div class="login-sub">Toegang voor geautoriseerde gebruikers. Neem contact op met Kinetic als u geen account heeft.</div>
+
+  <div class="field">
+    <label>E-mailadres</label>
+    <input type="email" id="email" placeholder="uw@emailadres.nl" autocomplete="email">
+  </div>
+
+  <div class="field">
+    <label>Wachtwoord</label>
+    <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+  </div>
+
+  <button class="btn-login" id="btn-login" onclick="doLogin()">
+    <div class="spinner"></div>
+    <span class="btn-label">Inloggen</span>
+  </button>
+
+  <div class="error-msg" id="error-msg"></div>
+</div>
+
+<div class="login-footer">
+  <a href="https://kineticmedical.nl">← Terug naar kineticmedical.nl</a><br>
+  Beveiligd met Supabase Auth · Privacy-by-design
+</div>
+
+<script>
+// ── Supabase init ──
+var SUPABASE_URL  = 'https://nzetoeewvnznoyuhdiga.supabase.co';
+var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56ZXRvZWV3dm56bm95dWhkaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NzUwNTYsImV4cCI6MjA5MjM1MTA1Nn0.oO2s1vA_NppY-8-GUs-HOWsQ5n2wrkgCBDoJyY924c8';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+// Als al ingelogd: direct door naar tooling
+sb.auth.getSession().then(function(r) {
+  if (r.data && r.data.session) {
+    window.location.replace('./app.html');
+  }
+});
+
+// Enter-toets werkt ook
+document.getElementById('password').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('email').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('password').focus();
+});
+
+async function doLogin() {
+  var email    = document.getElementById('email').value.trim();
+  var password = document.getElementById('password').value;
+  var btn      = document.getElementById('btn-login');
+  var errEl    = document.getElementById('error-msg');
+
+  if (!email || !password) {
+    showError('Vul uw e-mailadres en wachtwoord in.');
+    return;
+  }
+
+  // Loading state
+  btn.classList.add('loading');
+  btn.disabled = true;
+  errEl.classList.remove('show');
+
+  var result = await sb.auth.signInWithPassword({ email: email, password: password });
+
+  btn.classList.remove('loading');
+  btn.disabled = false;
+
+  if (result.error) {
+    var msg = result.error.message || 'Inloggen mislukt.';
+    if (msg.includes('Invalid login')) msg = 'E-mailadres of wachtwoord onjuist.';
+    if (msg.includes('Email not confirmed')) msg = 'E-mailadres nog niet bevestigd. Check uw inbox.';
+    showError(msg);
+  } else {
+    window.location.replace('./app.html');
+  }
+}
+
+function showError(msg) {
+  var el = document.getElementById('error-msg');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+</script>
+</body>
+</html>
