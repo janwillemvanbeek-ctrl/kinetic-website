@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic Tooling</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #FAF9F7;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh;
+  color: #141414;
+}
+.check-wrap { text-align: center; }
+.spinner-lg {
+  width: 32px; height: 32px;
+  border: 3px solid #E2E0DA;
+  border-top-color: #2F6F6A;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.check-msg { font-size: 13px; color: #6B6B68; }
+</style>
+</head>
+<body>
+<div class="check-wrap" id="check">
+  <div class="spinner-lg"></div>
+  <div class="check-msg">Sessie controleren…</div>
+</div>
+
+<script>
+var SUPABASE_URL  = 'https://nzetoewvnznoyuhdiga.supabase.co';
+var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56ZXRvZWV3dm56bm95dWhkaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NzUwNTYsImV4cCI6MjA5MjM1MTA1Nn0.oO2s1vA_NppY-8-GUs-HOWsQ5n2wrkgCBDoJyY924c8';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+sb.auth.getSession().then(function(result) {
+  var session = result.data && result.data.session;
+  if (!session) {
+    // Geen sessie: terug naar login
+    window.location.replace('./index.html');
+    return;
+  }
+  // Sessie geldig: laad de tooling in dezelfde pagina
+  window.location.replace('./kinetic-tooling-ai.html');
+});
+</script>
+</body>
+</html>
