@@ -1047,25 +1047,46 @@ async function runTijdlijn() {
     '',
     'INSTRUCTIES:',
     '- T-waarden (T+0, T+14, T-365 etc.) en [DATUM_x] markeringen zijn tijdstipindicatoren.',
-    '- Geef voor elk event: t (integer of null), t_label (string bijv. "T+14"), type en omschrijving.',
-    '- type is één van: "diagnostiek" (onderzoek, beeldvorming, diagnose), "behandeling" (ingreep,',
-    '  therapie, medicatie), "toestand" (klachten, werkhervatting, consult), "onbekend".',
-    '- Pre-existente events (vóór referentiedatum) hebben negatieve T-waarden.',
-    '- Detecteer conflicten: behandeling >3 dagen vóór eerste diagnose, documentatiegaps >180 dagen,',
-    '  aanwezigheid pre-existentie, tegenstrijdige datums tussen verslagen.',
-    '- Geef GEEN medische conclusies — structureer alleen wat in de tekst staat.',
-    '- Omschrijvingen: feitelijk, max 120 tekens, derde persoon.',
+    '- Geef voor elk event: t (integer of null), t_label (string bijv. "T-14"), type en omschrijving.',
+    '- type is één van: "diagnostiek", "behandeling", "toestand", "onbekend".',
+    '- Pre-existente events hebben negatieve T-waarden.',
+    '- Detecteer conflicten: tegenstrijdige datums, gaps >180d, discrepanties werkhervatting.',
+    '- Omschrijvingen: MAXIMAAL 80 tekens, feitelijk, geen uitleg.',
+    '- Groepeer events op dezelfde T-waarde als ze dezelfde bron hebben (max 1 event per T-waarde per type).',
+    '- GEEN medische conclusies.',
     '',
-    'Antwoord UITSLUITEND als geldig JSON zonder markdown of uitleg:',
-    '{"events":[{"t":0,"t_label":"T+0","type":"toestand","omschrijving":"Betrokkene gepresenteerd na val, VAS 9"}],"conflicts":["Beschrijving conflict"]}'
+    'KRITISCH: Antwoord UITSLUITEND als geldig compact JSON, geen spaties buiten strings, geen markdown:',
+    '{"events":[{"t":-1527,"t_label":"T-1527","type":"toestand","omschrijving":"SEH-presentatie na kop-staartbotsing A9"}],"conflicts":["Conflict omschrijving"]}'
   ].join('\n');
 
   var userPrompt = 'Extraheer de tijdlijn uit dit gepseudonimiseerde dossier:\n\n' + input;
 
   try {
-    var raw = await CONFIG.callLLM(systemPrompt, userPrompt, 3000);
+    var raw = await CONFIG.callLLM(systemPrompt, userPrompt, 4500);
     var clean = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-    var parsed = JSON.parse(clean);
+
+    // Herstel afgekapte JSON — sluit open arrays/objecten
+    var parsed;
+    try {
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      // Probeer te repareren: vind laatste complete event en sluit de JSON
+      var lastBrace = clean.lastIndexOf(',"omschrijving"');
+      if (lastBrace === -1) lastBrace = clean.lastIndexOf('}');
+      if (lastBrace > 0) {
+        var trimmed = clean.substring(0, lastBrace + 1);
+        // Sluit open structuren
+        var opens = (trimmed.match(/\[/g)||[]).length - (trimmed.match(/\]/g)||[]).length;
+        var openBraces = (trimmed.match(/\{/g)||[]).length - (trimmed.match(/\}/g)||[]).length;
+        for (var i=0; i<openBraces; i++) trimmed += '}';
+        for (var j=0; j<opens; j++) trimmed += ']';
+        if (!trimmed.includes('"conflicts"')) trimmed += ',"conflicts":["Antwoord afgekapt — grotere dossiers kunnen worden opgesplitst"]}';
+        else trimmed += '}';
+        try { parsed = JSON.parse(trimmed); } catch(e2) { throw new Error('JSON kon niet worden geparsed: ' + e.message); }
+      } else {
+        throw new Error('JSON kon niet worden geparsed: ' + e.message);
+      }
+    }
 
     var events = parsed.events || [];
     var conflicts = parsed.conflicts || [];
@@ -1309,7 +1330,7 @@ async function runRapport() {
   ].join('\n');
 
   try {
-    var raw = await CONFIG.callLLM(systemPrompt, userPrompt, 2500);
+    var raw = await CONFIG.callLLM(systemPrompt, userPrompt, 4000);
     var clean = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
     var parsed = JSON.parse(clean);
 
