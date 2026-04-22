@@ -2128,7 +2128,7 @@ async function loadApiKey() {
     var statusEl = document.getElementById('vault-status');
     if (statusEl) { statusEl.textContent = '\u26a0 ' + e.message; statusEl.style.color = 'var(--coral)'; }
   }
-
+}
 // ── Provider switch: knoppen zichtbaar, sleutelveld verborgen ──
 document.querySelectorAll('.api-key-input, .provider-status, .provider-label').forEach(function(el){
   el.style.display = 'none';
