@@ -75,8 +75,9 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .logo .wordmark {
   font-family: var(--font);
   font-size: 1.22rem; font-weight: 600; color: var(--white);
-  letter-spacing: -0.03em; line-height: 1;
+  letter-spacing: -0.015em; line-height: 1;
 }
+.logo .wordmark .wm-dot { color: var(--accent); }
 
 .nav-links { display: flex; gap: 2rem; align-items: center; }
 .nav-links a {
@@ -379,22 +380,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .output-preview-text { flex: 1; }
 .output-preview-text .btn { margin-bottom: 0.5rem; }
 .output-preview-note { font-size: 0.875rem; color: var(--stone); margin-top: 0.85rem; max-width: 320px; line-height: 1.5; }
-.tool-links {
-  display: flex; flex-wrap: wrap; gap: 0.6rem;
-  margin-top: 1rem; max-width: 420px;
-}
-.tool-link {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 0.55rem 0.8rem; border-radius: 999px;
-  border: 1px solid var(--line-2); background: var(--fog);
-  color: var(--warm-ink); text-decoration: none;
-  font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
-  letter-spacing: 0.02em; transition: all .18s var(--ease);
-}
-.tool-link:hover {
-  border-color: var(--accent); background: var(--accent-tint);
-  color: var(--accent);
-}
 
 /* governance statement */
 .governance-statement {
@@ -536,7 +521,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
    FOOTER — dark
    ============================================================ */
 .footer { background: var(--warm-ink); color: var(--stone-light); padding: clamp(3.5rem, 6vw, 4.5rem) 0 2rem; }
-.footer-content { max-width: var(--container); margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); }
+.footer-content { max-width: var(--container); margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); }
 .footer-brand .logo { margin-bottom: 1.1rem; }
 .footer-brand p { font-size: 0.875rem; max-width: 300px; line-height: 1.6; color: var(--stone-light); }
 .footer-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
