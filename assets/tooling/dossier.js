@@ -24,7 +24,7 @@ var state = {
   lastPseudo: null,
   profiles: [],     // andere gebruikers (voor toewijzing)
   myId: null,       // huidige gebruiker
-  artsMode: false   // viewer is de toegewezen arts (niet de eigenaar)
+  artsFill: false   // arts-invulweergave aan/uit (handmatig te togglen, voor iedereen)
 };
 
 async function ensureProfile(session){
@@ -195,11 +195,11 @@ function showResult(type){
   if(host.children.length>0 && !host.querySelector(".gen-empty")) return; // al gerenderd
   var r = state.results[type];
   if(r){
-    if(type==="rapport" && state.artsMode) renderArtsView(r.payload, host);
+    if(type==="rapport" && state.artsFill) renderArtsView(r.payload, host);
     else renderInto(type, r.payload, host);
   }
   else{
-    host.innerHTML = '<div class="gen-empty notice">'+(state.artsMode
+    host.innerHTML = '<div class="gen-empty notice">'+(state.artsFill
       ? 'Nog geen concept-rapport beschikbaar voor dit dossier.'
       : 'Nog geen '+(type==="tijdlijn"?"tijdlijn":"rapport")+' gegenereerd. Gebruik de knop hierboven om te genereren uit de opgeslagen documenten.')+'</div>';
   }
@@ -302,16 +302,20 @@ async function sendBack(){
   }
 }
 
-function applyArtsMode(){
-  var arts = state.artsMode;
-  $("saveArtsBtn").style.display = arts ? "" : "none";
-  $("sendBackBtn").style.display = arts ? "" : "none";
-  $("regenBtn").style.display = arts ? "none" : "";
-  $("assignBtn").style.display = arts ? "none" : "";
-  if(arts){ // arts genereert niet zelf
-    $("genTijdlijnBtn").style.display = "none";
-    $("genRapportBtn").style.display = "none";
-  }
+function applyArtsButtons(){
+  var fill = state.artsFill;
+  $("saveArtsBtn").style.display = fill ? "" : "none";
+  $("sendBackBtn").style.display = fill ? "" : "none";
+  var t = $("artsToggleBtn");
+  if(t) t.textContent = fill ? "Toon concept" : "Arts-invulling";
+}
+
+function toggleArtsFill(){
+  state.artsFill = !state.artsFill;
+  applyArtsButtons();
+  var host = $("rapportHost");
+  host.innerHTML = "";          // forceer opnieuw renderen in de juiste modus
+  showResult("rapport");
 }
 
 /* ── Actiebalk ───────────────────────────────────────────────────────────── */
@@ -394,7 +398,6 @@ async function init(){
     return;
   }
   state.dossier = res.data;
-  state.artsMode = state.dossier.owner !== state.myId && state.dossier.toegewezen_aan_id === state.myId;
   renderInfobar();
 
   // Tabs
@@ -407,14 +410,15 @@ async function init(){
   // Stap 2/3
   $("genTijdlijnBtn").addEventListener("click", function(){ generate("tijdlijn"); });
   $("genRapportBtn").addEventListener("click", function(){ generate("rapport"); });
+  $("artsToggleBtn").addEventListener("click", toggleArtsFill);
   bindActions();
 
   await loadProfiles();
   await loadDocuments();
   await loadResults();
-  applyArtsMode();
+  applyArtsButtons();
   updateFinalAvailability();
-  switchTab(state.artsMode ? "rapport" : "pseudo");
+  switchTab("pseudo");
 }
 
 if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
