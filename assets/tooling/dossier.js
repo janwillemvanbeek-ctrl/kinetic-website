@@ -16,6 +16,10 @@ var sb = supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPAB
 
 var STATUS_LABEL = { nieuw:"Nieuw", voorbereiding:"Voorbereiding", bij_arts:"Bij arts", definitief:"Definitief" };
 
+// Advies-template (geen IWMD/AMA). Levert dezelfde JSON-structuur als het
+// expertise-rapport zodat de bestaande renderer hergebruikt kan worden.
+var ADVIES_PROMPT = "Je bent een medisch adviseur voor letselschade. Schrijf een concept MEDISCH ADVIES (GEEN expertise). Er vindt GEEN persoonlijk onderzoek van betrokkene plaats; beoordeel uitsluitend het aangeleverde (gepseudonimiseerde) dossier en beantwoord de vraagstelling van de opdrachtgever (zie bovenaan de invoer).\n\nREGELS:\n- GEEN IWMD-vraagstelling en GEEN AMA Guides; dit is een advies, geen expertise.\n- Beantwoord de specifieke VRAAGSTELLING OPDRACHTGEVER.\n- Mag op een incompleet dossier; benoem hiaten als aandachtspunt maar blokkeer niet.\n- AI-secties (badge \"ai\"): Vraagstelling (type text), Samenvatting medische informatie (type text met bronverwijzingen in sources), Hiaten (type hiaten), Bronnenlijst (type bronnen).\n- Arts-secties (badge \"arts\", type arts_template): 'Medische beoordeling' en 'Advies en conclusie' — in te vullen door de medisch adviseur, met compacte dossiercontext per subveld (max 2 regels feiten + bronverwijzing).\n- Gebruik [PERSOON-N] en [ORGANISATIE-N] placeholders.\n\nKRITIEK: ALLEEN valide JSON. Geen markdown. Dubbele aanhalingstekens. Geen trailing commas.\n\nJSON structuur:\n{\"meta\":{\"zaaknummer\":\"\",\"betrokkene\":\"\",\"geboortedatum\":\"\",\"status\":\"Concept\",\"titel\":\"Concept Medisch Advies\",\"subtitel\":\"Medisch advies — AI-voorbereiding door Kinetic\",\"specialisme\":\"\",\"opdrachtgever\":\"\",\"ongevalsdatum\":\"\",\"onderzoeksdatum\":\"\"},\"compleetheid\":{\"score\":0,\"aanwezig\":[\"string\"],\"ontbrekend\":[{\"doc\":\"string\",\"prio\":\"kritiek|belangrijk|wenselijk\"}]},\"sections\":[{\"num\":\"1\",\"title\":\"\",\"badge\":\"ai|arts\",\"type\":\"fields|text|hiaten|arts_template|bronnen\",\"fields\":[{\"label\":\"\",\"value\":\"\"}],\"paragraphs\":[\"\"],\"sources\":[\"\"],\"hiaten\":[{\"status\":\"ontbrekend\",\"prio\":\"kritiek|belangrijk|wenselijk\",\"doc\":\"\",\"verwacht\":\"\",\"toelichting\":\"\",\"actie\":\"\"}],\"prompt\":\"\",\"subfields\":[{\"label\":\"\",\"context\":\"\"}],\"bronnen\":[{\"nr\":\"\",\"doc\":\"\",\"bron\":\"\",\"datum\":\"\",\"paginas\":\"\"}]}],\"stats\":{\"aiSections\":0,\"artsSections\":0,\"bronnen\":0,\"hiaten\":0,\"tegenstrijdigheden\":0}}";
+
 var state = {
   id: new URLSearchParams(location.search).get("id"),
   dossier: null,
@@ -162,9 +166,16 @@ async function generate(type){
   btn.disabled = true;
   loadingHost(host, "AI genereert "+(type==="tijdlijn"?"tijdlijn":"concept-rapport")+"…");
   try{
-    var data = (type==="tijdlijn")
-      ? await window.Kinetic.generateTimeline(combinedText())
-      : await window.Kinetic.generateRapport(combinedText());
+    var data;
+    if(type==="tijdlijn"){
+      data = await window.Kinetic.generateTimeline(combinedText());
+    } else if(state.dossier.rapport_type === "advies"){
+      var vraag = (state.dossier.vraagstelling || "").trim();
+      var payloadText = (vraag ? "VRAAGSTELLING OPDRACHTGEVER:\n"+vraag+"\n\n" : "") + combinedText();
+      data = await window.Kinetic.generateRapport(payloadText, ADVIES_PROMPT);
+    } else {
+      data = await window.Kinetic.generateRapport(combinedText());
+    }
     renderInto(type, data, host);
     await saveResult(type, data);
   }catch(err){
