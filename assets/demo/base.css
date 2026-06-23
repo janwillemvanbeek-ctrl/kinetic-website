@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Kinetic demo's — gedeelde basis-stijl
+   Layout, header, footer, pipeline, hero, knoppen, demo-omhulsel.
+   Demo-specifieke stijl staat in tooling-demo.css / tijdlijn-demo.css /
+   rapport-demo.css. Categorie-kleuren (--c-*) staan per demo gedefinieerd.
+   ========================================================================== */
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--warm-ink:#141414;--ivory:#FAF9F7;--fog:#F1F0ED;--stone:#5C5C58;
+--warm-teal:#2F6F6A;--warm-teal-hover:#265B57;--line:#EDECE9;
+--line-dark:rgba(255,255,255,0.1)
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7;color:var(--stone);background:var(--ivory);font-size:16px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--warm-ink);font-weight:600}
+a:focus-visible,button:focus-visible{outline:2px solid var(--warm-teal);outline-offset:2px}
+
+/* HEADER */
+.header{background:var(--warm-ink);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--line-dark)}
+.nav-content{max-width:1100px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;text-decoration:none}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:#A8A8A4;text-decoration:none;font-weight:500;font-size:.9375rem;transition:color .2s}
+.nav-links a:hover{color:#FFF}
+.nav-links .btn{color:#FFF}
+
+/* KNOPPEN */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.875rem 1.75rem;border-radius:4px;font-weight:600;font-size:.9375rem;text-decoration:none;transition:all .2s;cursor:pointer;border:1.5px solid transparent;font-family:inherit}
+.btn-primary{background:var(--warm-teal);color:#FFF;border-color:var(--warm-teal)}
+.btn-primary:hover{background:var(--warm-teal-hover);border-color:var(--warm-teal-hover)}
+.btn-secondary{background:transparent;color:var(--warm-ink);border-color:var(--warm-ink)}
+.btn-secondary:hover{background:var(--warm-ink);color:#FFF}
+.btn-sm{padding:.7rem 1.5rem;font-size:.8125rem;gap:.4rem;box-shadow:0 1px 3px rgba(47,111,106,.2)}
+.btn-sm:hover{box-shadow:0 2px 6px rgba(47,111,106,.3);transform:translateY(-1px)}
+.btn-sm:active{transform:translateY(0)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* SECTIES */
+.section{padding:5rem 2rem}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--warm-teal);margin-bottom:.5rem}
+.section-title{font-size:1.875rem;margin-bottom:.75rem;letter-spacing:-.01em}
+.section-subtitle{font-size:1rem;color:var(--stone);max-width:560px;margin:0 auto}
+.section-heading{font-size:1.125rem;font-weight:600;color:var(--warm-ink);margin-bottom:1.75rem}
+
+/* HERO */
+.hero{padding:5rem 2rem 3rem;max-width:1100px;margin:0 auto}
+.hero h1{font-size:clamp(2rem,4vw,2.75rem);font-weight:600;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.2}
+.hero p{font-size:1rem;color:var(--stone);max-width:540px;line-height:1.7}
+
+/* PIPELINE */
+.pipe{padding:1.5rem 2rem 3rem;max-width:900px;margin:0 auto}
+.pipe-row{display:flex;align-items:center;justify-content:center;gap:.5rem}
+.pipe-step{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;border-radius:6px;background:#FFF;border:1.5px solid var(--line);text-decoration:none;transition:all .2s;cursor:default}
+a.pipe-step{cursor:pointer}
+a.pipe-step:hover{border-color:var(--warm-teal);transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+a.pipe-step:hover .pipe-label{color:var(--warm-teal)}
+.pipe-step.active{border-color:var(--warm-teal)}
+.pipe-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.pipe-step.active .pipe-num{background:var(--warm-teal);color:#FFF}
+.pipe-step.done .pipe-num{background:var(--warm-ink);color:#FFF}
+.pipe-step.future .pipe-num{background:var(--fog);color:var(--stone)}
+.pipe-step.future{opacity:.4}
+.pipe-label{font-size:.8125rem;font-weight:600;white-space:nowrap;color:var(--warm-ink)}
+.pipe-tag{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .4rem;border-radius:3px}
+.pipe-step.active .pipe-tag{background:rgba(47,111,106,.1);color:var(--warm-teal)}
+.pipe-step.done .pipe-tag{background:rgba(20,20,20,.06);color:var(--stone)}
+.pipe-step.future .pipe-tag{background:var(--fog);color:var(--stone)}
+.pipe-connector{width:32px;height:1.5px;background:var(--line);flex-shrink:0}
+
+/* DEMO-OMHULSEL */
+.demo-section{background:var(--fog);padding:3rem 2rem 4rem}
+.demo-inner{max-width:1100px;margin:0 auto}
+.demo-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.demo-title{font-size:1.875rem;letter-spacing:-.01em}
+.demo-actions{display:flex;gap:.75rem}
+
+/* MODE-TOGGLE */
+.mode-toggle{display:inline-flex;background:#FFF;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.mode-btn{padding:.625rem 1.5rem;font-size:.8125rem;font-weight:600;border:none;background:transparent;cursor:pointer;color:var(--stone);font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.mode-btn.active{background:var(--warm-ink);color:#FFF;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
+.mode-btn:not(.active):hover{background:var(--fog);color:var(--warm-ink)}
+
+/* INVOER-PANEEL */
+.input-panel{background:#FFF;border:1px solid var(--line);border-radius:8px;margin-bottom:1.5rem;overflow:hidden}
+.input-panel.hidden{display:none}
+.input-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;border-bottom:1px solid var(--fog)}
+.input-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--stone)}
+.input-textarea{width:100%;min-height:200px;padding:1.25rem;border:none;outline:none;resize:vertical;font-family:'Inter',sans-serif;font-size:.8125rem;line-height:1.75;color:var(--warm-ink);background:#FFF}
+.input-actions{padding:.75rem 1.25rem;border-top:1px solid var(--fog);display:flex;align-items:center;justify-content:space-between}
+.input-note{font-size:.75rem;color:var(--stone)}
+
+/* SPINNER */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#FFF;border-radius:50%;animation:spin .6s linear infinite;margin-right:.5rem;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* HOE WERKT HET */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;max-width:1100px;margin:0 auto}
+.how-card{background:#FFF;border:1.5px solid var(--line);border-radius:8px;padding:1.75rem;transition:all .3s}
+.how-card:hover{border-color:var(--warm-teal);transform:translateY(-2px)}
+.how-num{font-size:2rem;font-weight:600;color:var(--warm-teal);opacity:.3;line-height:1;margin-bottom:1rem}
+.how-card h3{font-size:.9375rem;font-weight:600;margin-bottom:.5rem}
+.how-card p{font-size:.875rem;color:var(--stone);line-height:1.6}
+
+/* FOOTER */
+.footer{background:var(--warm-ink);color:#A8A8A4;padding:4rem 2rem 2rem}
+.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem}
+.footer-brand p{font-size:.875rem;max-width:280px;line-height:1.6;margin-top:1rem}
+.footer-links h4{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#A8A8A4;margin-bottom:1rem}
+.footer-links a{display:block;font-size:.875rem;color:#A8A8A4;text-decoration:none;padding:.375rem 0;transition:color .2s}
+.footer-links a:hover{color:#FFF}
+.footer-bottom{max-width:1100px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;font-size:.8125rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){.how-grid{grid-template-columns:repeat(2,1fr)}.pipe-row{flex-wrap:wrap}.pipe-connector{display:none}.footer-content{grid-template-columns:1fr;gap:2rem}}
+@media(max-width:600px){.how-grid{grid-template-columns:1fr}.nav-links a:not(.btn){display:none}.demo-top{flex-direction:column;gap:1rem;align-items:flex-start}.footer-bottom{flex-direction:column;gap:.5rem}}
+
+/* ANIMATIES */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero,.pipe,.demo-section,.section{animation:fadeIn .5s ease-out both}
+.pipe{animation-delay:.05s}.demo-section{animation-delay:.1s}

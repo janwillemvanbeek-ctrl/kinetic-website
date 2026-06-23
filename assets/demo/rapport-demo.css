@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Concept Rapport-demo — demo-specifieke stijl
+   Vereist assets/demo/base.css
+   ========================================================================== */
+
+:root{
+--c-seh:#D94F4F;--c-ortho:#2F6F6A;--c-radio:#3B7DD8;--c-fysio:#5B8C5A;
+--c-pijn:#7B5EA7;--c-neuro:#C77B2E;--c-psych:#8B6B47;--c-huisarts:#5C5C58
+}
+
+/* RAPPORT-DOCUMENT */
+.rapport{background:#FFF;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.rapport-header{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
+.rapport-meta{background:#FFF;padding:1rem 1.25rem}
+.rapport-meta-label{display:block;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.25rem}
+.rapport-meta-value{font-size:.9375rem;font-weight:600;color:var(--warm-ink)}
+.rapport-meta-redacted{color:#D94F4F;font-family:'Courier New',monospace;font-size:.8125rem}
+.rapport-status{display:inline-block;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .6rem;border-radius:3px;background:rgba(199,123,46,.1);color:#C77B2E}
+.rapport-body{padding:2.5rem 3rem}
+.rapport-title{font-size:1.25rem;font-weight:600;text-align:center;margin-bottom:.5rem}
+.rapport-subtitle{font-size:.875rem;color:var(--stone);text-align:center;margin-bottom:2.5rem}
+
+/* SECTIES */
+.rp-section{margin-bottom:2.5rem;page-break-inside:avoid}
+.rp-section:last-child{margin-bottom:0}
+.rp-section-num{font-size:.75rem;font-weight:600;color:var(--warm-teal);margin-bottom:.25rem}
+.rp-section-title{font-size:1rem;font-weight:600;color:var(--warm-ink);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+.rp-text{font-size:.8125rem;color:var(--stone);line-height:1.75;margin-bottom:.75rem}
+.rp-field{display:grid;grid-template-columns:180px 1fr;gap:.5rem;margin-bottom:.5rem;font-size:.8125rem}
+.rp-field-label{font-weight:600;color:var(--warm-ink)}
+.rp-field-value{color:var(--stone)}
+.rp-field-redacted{color:#D94F4F;font-family:'Courier New',monospace}
+.rp-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .5rem;border-radius:3px;margin-left:.75rem;vertical-align:middle}
+.rp-badge-ai{background:rgba(47,111,106,.08);color:var(--warm-teal)}
+.rp-badge-arts{background:rgba(199,123,46,.08);color:#C77B2E}
+
+/* ARTS-TEMPLATE */
+.rp-arts-template{background:rgba(199,123,46,.06);border:1.5px dashed rgba(199,123,46,.2);border-radius:6px;padding:1.25rem 1.5rem;margin-top:.75rem}
+.rp-arts-prompt{font-size:.8125rem;color:#C77B2E;font-style:italic;line-height:1.6}
+.rp-arts-field{background:#FFF;border:1px solid var(--line);border-radius:4px;padding:.75rem 1rem;margin-top:.75rem;min-height:48px;font-size:.8125rem;color:var(--stone);line-height:1.6;position:relative}
+.rp-arts-label{position:absolute;top:.5rem;right:.75rem;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#C77B2E}
+
+/* IWMD-VRAGEN */
+.rp-question{margin-bottom:1.25rem}
+.rp-q-num{font-weight:600;color:var(--warm-ink);font-size:.8125rem}
+.rp-q-text{font-size:.8125rem;color:var(--stone);line-height:1.6;margin-top:.25rem}
+
+/* BRONNEN */
+.rp-sources{background:var(--fog);border-radius:6px;padding:1rem 1.25rem;margin-top:1rem}
+.rp-sources-title{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.5rem}
+.rp-source-item{font-size:.75rem;color:var(--stone);line-height:1.6;padding:.15rem 0}
+.rp-bronnen-table{width:100%;border-collapse:collapse;font-size:.8125rem;margin-top:.75rem}
+.rp-bronnen-table th{text-align:left;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);padding:.5rem .75rem;border-bottom:2px solid var(--line);background:var(--fog)}
+.rp-bronnen-table td{padding:.5rem .75rem;border-bottom:1px solid var(--fog);color:var(--stone);vertical-align:top}
+.rp-bronnen-table tr:hover td{background:rgba(47,111,106,.02)}
+
+.rp-page{text-align:right;font-size:.75rem;color:var(--stone);margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--line)}
+.rp-disclaimer{text-align:center;font-size:.75rem;color:var(--stone);padding:1.5rem 3rem;border-top:1px solid var(--line);background:var(--fog);line-height:1.6}
+
+/* SAMENVATTING */
+.rp-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:2rem;border:1px solid var(--line)}
+.rp-stat{background:#FFF;padding:1rem 1.25rem;text-align:center}
+.rp-stat-val{font-size:1.5rem;font-weight:600;color:var(--warm-ink);line-height:1;margin-bottom:.3rem}
+.rp-stat-lbl{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone)}
+
+/* DOSSIERCOMPLEETHEID */
+.rp-completeness{padding:1.5rem 2rem;border-bottom:1px solid var(--line)}
+.rp-compl-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.rp-compl-title{font-size:.8125rem;font-weight:600;color:var(--warm-ink)}
+.rp-compl-score{font-size:1.5rem;font-weight:600}
+.rp-compl-bar{height:6px;background:var(--fog);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+.rp-compl-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.rp-compl-detail{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.rp-compl-col{display:flex;flex-direction:column;gap:.25rem}
+.rp-compl-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.25rem}
+.rp-compl-item{font-size:.75rem;color:var(--stone);padding:.2rem 0 .2rem 1rem;position:relative}
+.rp-compl-ok::before{content:'';position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:var(--warm-teal)}
+.rp-compl-miss::before{content:'';position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:#D94F4F}
+
+/* HIATEN */
+.rp-hiaat{background:#FFF8F5;border:1.5px solid #F5D5C8;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.rp-hiaat-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.rp-hiaat-status{font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .5rem;border-radius:3px;background:#D94F4F;color:#FFF}
+.rp-hiaat-doc{font-size:.875rem;font-weight:600;color:var(--warm-ink)}
+.rp-hiaat-verwacht{font-size:.75rem;color:var(--stone);margin-left:auto}
+.rp-hiaat-text{font-size:.8125rem;color:var(--stone);line-height:1.6;margin-bottom:.75rem}
+.rp-hiaat-actie{font-size:.8125rem;color:#D94F4F;font-weight:500;padding:.5rem .75rem;background:rgba(217,79,79,.06);border-radius:4px}
+.rp-hiaat-actie-label{font-weight:600}
+
+/* TEGENSTRIJDIGHEDEN */
+.rp-contra{background:#FFFBF5;border:1.5px solid #F5E6C8;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.rp-contra-bronnen{margin-bottom:.75rem}
+.rp-contra-bron{font-size:.75rem;color:var(--stone);line-height:1.6;padding:.25rem 0 .25rem 1rem;border-left:2px solid #E8C88A;margin-bottom:.25rem}
+.rp-contra-relevantie{font-size:.8125rem;color:var(--stone);line-height:1.6;padding:.5rem .75rem;background:rgba(199,123,46,.06);border-radius:4px}
+.rp-contra-rel-label{font-weight:600;color:#C77B2E}
+.rp-contra-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.rp-contra-sev{font-size:.5625rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .4rem;border-radius:3px;color:#FFF;white-space:nowrap}
+.rp-contra-thema{font-size:.875rem;font-weight:600;color:var(--warm-ink)}
+
+/* ARTS-CONTEXT */
+.rp-arts-context{font-size:.75rem;color:var(--warm-teal);line-height:1.5;margin-top:.5rem;padding:.5rem .75rem;background:rgba(47,111,106,.04);border-radius:4px;border-left:2px solid var(--warm-teal)}
+.rp-arts-ctx-label{font-weight:600}
+
+.rp-prio-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle}
+
+@media(max-width:900px){.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:1.5rem}.rp-field{grid-template-columns:1fr}}
+@media(max-width:600px){.rapport-body{padding:1.25rem 1rem}.rapport-header{grid-template-columns:1fr}.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}}
