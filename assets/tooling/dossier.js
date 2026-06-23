@@ -12,7 +12,7 @@
 "use strict";
 
 var esc = window.Kinetic.esc;
-var sb = supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON);
+var sb = supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON_KEY);
 
 var STATUS_LABEL = { nieuw:"Nieuw", voorbereiding:"Voorbereiding", bij_arts:"Bij arts", definitief:"Definitief" };
 

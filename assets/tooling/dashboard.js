@@ -1,14 +1,14 @@
 /* ==========================================================================
    Dashboard — overzicht van dossiers (auth-gated).
    Vereist: supabase-js (global `supabase`) en assets/demo/layout.js
-   (Kinetic.SUPABASE_URL / SUPABASE_ANON / esc).
+   (Kinetic.SUPABASE_URL / SUPABASE_ANON_KEY / esc).
    ========================================================================== */
 (function () {
 "use strict";
 
 var esc = (window.Kinetic && window.Kinetic.esc) || function(s){ return s==null?"":String(s); };
-var sb = (typeof supabase !== "undefined" && window.Kinetic && window.Kinetic.SUPABASE_URL)
-  ? supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON)
+var sb = (typeof supabase !== "undefined" && window.Kinetic && window.Kinetic.SUPABASE_URL && window.Kinetic.SUPABASE_ANON_KEY)
+  ? supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON_KEY)
   : null;
 
 function showFatal(msg){
