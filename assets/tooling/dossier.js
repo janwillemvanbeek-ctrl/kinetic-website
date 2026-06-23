@@ -194,10 +194,14 @@ function showResult(type){
   var host = $(type+"Host");
   if(host.children.length>0 && !host.querySelector(".gen-empty")) return; // al gerenderd
   var r = state.results[type];
-  if(r){ renderInto(type, r.payload, host); }
+  if(r){
+    if(type==="rapport" && state.artsMode) renderArtsView(r.payload, host);
+    else renderInto(type, r.payload, host);
+  }
   else{
-    host.innerHTML = '<div class="gen-empty notice">Nog geen '+(type==="tijdlijn"?"tijdlijn":"rapport")+
-      ' gegenereerd. Gebruik de knop hierboven om te genereren uit de opgeslagen documenten.</div>';
+    host.innerHTML = '<div class="gen-empty notice">'+(state.artsMode
+      ? 'Nog geen concept-rapport beschikbaar voor dit dossier.'
+      : 'Nog geen '+(type==="tijdlijn"?"tijdlijn":"rapport")+' gegenereerd. Gebruik de knop hierboven om te genereren uit de opgeslagen documenten.')+'</div>';
   }
 }
 
@@ -207,6 +211,107 @@ async function loadResults(){
     if(!state.results[r.type]) state.results[r.type] = r; // hoogste versie eerst
   });
   refreshTabState();
+}
+
+/* ── Arts-weergave (scherm 4) ────────────────────────────────────────────── */
+// Verzamel de in te vullen arts-velden uit het rapport (arts_template + iwmd_answers).
+function artsFields(data){
+  var out = [];
+  (data && data.sections || []).forEach(function(s){
+    if(s.badge !== "arts") return;
+    if(s.type === "arts_template" && s.subfields){
+      s.subfields.forEach(function(sf,i){
+        out.push({ key:s.num+"::"+i, section:s.title,
+          label:(typeof sf==="string"?sf:sf.label),
+          context:(typeof sf==="string"?null:sf.context) });
+      });
+    } else if(s.type === "iwmd_answers" && s.questions){
+      s.questions.forEach(function(q,i){
+        out.push({ key:s.num+"::"+i, section:s.title,
+          label:(typeof q==="string"?q:q.q),
+          context:(typeof q==="string"?null:q.context) });
+      });
+    }
+  });
+  return out;
+}
+
+function renderArtsView(data, host){
+  var inputs = state.dossier.arts_inputs || {};
+  var h = '<div class="arts-banner">Arts-weergave — vul je secties in. Het AI-concept staat ingeklapt als referentie.</div>';
+  h += '<details class="ai-ref"><summary>AI-concept tonen als referentie</summary><div id="aiRefHost"></div></details>';
+  var fields = artsFields(data);
+  var curSection = null;
+  h += '<div class="arts-form">';
+  fields.forEach(function(f){
+    if(f.section !== curSection){ curSection = f.section; h += '<h3 class="arts-sec-title">'+esc(f.section)+'</h3>'; }
+    h += '<div class="arts-field">';
+    h += '<label class="arts-label">'+esc(f.label)+'</label>';
+    if(f.context) h += '<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossier:</span> '+esc(f.context)+'</div>';
+    h += '<textarea class="arts-input" data-key="'+esc(f.key)+'" placeholder="Bevindingen / oordeel arts…">'+esc(inputs[f.key]||"")+'</textarea>';
+    h += '</div>';
+  });
+  if(fields.length === 0) h += '<div class="notice">Dit rapport bevat geen arts-secties om in te vullen.</div>';
+  h += '</div>';
+  host.innerHTML = h;
+  // AI-concept volledig renderen in de inklapbare referentie
+  window.Kinetic.renderRapport(data, document.getElementById("aiRefHost"));
+}
+
+function artsRequiredKeys(){
+  var r = state.results.rapport;
+  return r ? artsFields(r.payload).map(function(f){ return f.key; }) : [];
+}
+function artsComplete(){
+  var keys = artsRequiredKeys();
+  if(keys.length === 0) return false;
+  var inp = state.dossier.arts_inputs || {};
+  return keys.every(function(k){ return inp[k] && String(inp[k]).trim().length > 0; });
+}
+function updateFinalAvailability(){
+  var btn = $("finalBtn"); if(!btn) return;
+  var ok = !!state.results.rapport && artsComplete();
+  btn.disabled = !ok;
+  btn.title = ok ? "" : "Beschikbaar zodra alle arts-secties zijn ingevuld";
+}
+
+function showSaved(){
+  var s = $("savedInd"); if(!s) return;
+  s.style.display = "inline-flex";
+  setTimeout(function(){ s.style.display = "none"; }, 2500);
+}
+
+async function saveArtsInputs(){
+  var map = {};
+  document.querySelectorAll(".arts-input").forEach(function(t){ map[t.getAttribute("data-key")] = t.value; });
+  var btn = $("saveArtsBtn"); btn.disabled = true; btn.textContent = "Opslaan…";
+  var res = await sb.from("dossiers").update({ arts_inputs: map }).eq("id", state.id).select().single();
+  btn.disabled = false; btn.textContent = "Secties opslaan";
+  if(res.error){ alert("Opslaan mislukt: "+res.error.message); return; }
+  state.dossier = res.data;
+  showSaved();
+  updateFinalAvailability();
+}
+
+async function sendBack(){
+  var notitie = prompt("Notitie bij terugsturen (optioneel):", "");
+  if(notitie === null) return; // geannuleerd
+  if(await updateStatus("voorbereiding", { terugstuur_notitie: notitie })){
+    alert("Rapport teruggestuurd naar voorbereiding.");
+    window.location.href = "dashboard.html";
+  }
+}
+
+function applyArtsMode(){
+  var arts = state.artsMode;
+  $("saveArtsBtn").style.display = arts ? "" : "none";
+  $("sendBackBtn").style.display = arts ? "" : "none";
+  $("regenBtn").style.display = arts ? "none" : "";
+  $("assignBtn").style.display = arts ? "none" : "";
+  if(arts){ // arts genereert niet zelf
+    $("genTijdlijnBtn").style.display = "none";
+    $("genRapportBtn").style.display = "none";
+  }
 }
 
 /* ── Actiebalk ───────────────────────────────────────────────────────────── */
@@ -264,6 +369,8 @@ function bindActions(){
   $("assignCancel").addEventListener("click", closeAssignModal);
   $("assignConfirm").addEventListener("click", confirmAssign);
   $("assignModal").addEventListener("click", function(e){ if(e.target.id==="assignModal") closeAssignModal(); });
+  $("saveArtsBtn").addEventListener("click", saveArtsInputs);
+  $("sendBackBtn").addEventListener("click", sendBack);
   $("finalBtn").addEventListener("click", async function(){
     if(!state.results.rapport){ alert("Genereer eerst een concept-rapport voordat je het dossier definitief maakt."); return; }
     if(confirm("Dossier markeren als definitief?")) await updateStatus("definitief");
@@ -305,7 +412,9 @@ async function init(){
   await loadProfiles();
   await loadDocuments();
   await loadResults();
-  switchTab("pseudo");
+  applyArtsMode();
+  updateFinalAvailability();
+  switchTab(state.artsMode ? "rapport" : "pseudo");
 }
 
 if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }

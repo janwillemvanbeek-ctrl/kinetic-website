@@ -157,6 +157,22 @@ table.dossiers tbody tr:hover{background:var(--fog)}
 .notice{padding:12px 16px;border-radius:6px;font-size:13px;background:var(--fog);color:var(--stone);margin-bottom:14px}
 .notice.warn{background:rgba(217,79,79,.08);color:#9a4040;border:1px solid rgba(217,79,79,.25)}
 
+/* ── ARTS-WEERGAVE (scherm 4) ───────────────────────────────────────────── */
+.arts-banner{padding:12px 16px;border-radius:6px;font-size:13px;background:rgba(232,168,56,.14);color:#9A6B14;border:1px solid rgba(232,168,56,.4);margin-bottom:16px;font-weight:500}
+.ai-ref{margin-bottom:20px;border:1px solid var(--line);border-radius:8px;background:var(--white)}
+.ai-ref summary{cursor:pointer;padding:12px 16px;font-size:13px;font-weight:600;color:var(--teal);list-style:none}
+.ai-ref summary::-webkit-details-marker{display:none}
+.ai-ref summary::before{content:'\25B8';margin-right:.5rem;display:inline-block;transition:transform .2s}
+.ai-ref[open] summary::before{transform:rotate(90deg)}
+.ai-ref > div{padding:0 16px 16px}
+.arts-form{display:flex;flex-direction:column;gap:14px}
+.arts-sec-title{font-size:15px;font-weight:600;color:var(--ink);margin-top:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.arts-field{background:rgba(232,168,56,.05);border:1.5px solid rgba(232,168,56,.4);border-radius:8px;padding:14px 16px}
+.arts-label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.arts-input{width:100%;min-height:90px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px;line-height:1.7;color:var(--ink);background:var(--white);resize:vertical}
+.arts-input:focus{outline:none;border-color:var(--amber)}
+.arts-field .rp-arts-context{margin-bottom:8px}
+
 /* ── ACTIEBALK ──────────────────────────────────────────────────────────── */
 .action-bar{position:sticky;bottom:0;margin-top:24px;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 20px;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;box-shadow:0 -2px 12px rgba(0,0,0,.04)}
 .action-bar .spacer{flex:1}
