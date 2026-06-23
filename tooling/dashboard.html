@@ -70,8 +70,19 @@
         <select id="f-spec"><option value="">— Kies —</option></select>
       </div>
       <div class="field">
+        <label class="label" for="f-type">Type rapport</label>
+        <select id="f-type">
+          <option value="expertise">Expertise (IWMD + AMA)</option>
+          <option value="advies">Advies (beoordeling op dossier)</option>
+        </select>
+      </div>
+      <div class="field">
         <label class="label" for="f-datum">Ongevalsdatum</label>
         <input type="date" id="f-datum">
+      </div>
+      <div class="field">
+        <label class="label" for="f-vraag">Vraagstelling</label>
+        <textarea id="f-vraag" placeholder="De specifieke vraag van de opdrachtgever (vooral bij Advies)"></textarea>
       </div>
       <div class="field">
         <label class="label" for="f-notities">Notities</label>

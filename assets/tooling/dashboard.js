@@ -33,6 +33,12 @@ function statusBadge(s){
   return '<span class="badge badge-'+esc(s)+'">'+esc(lbl)+'</span>';
 }
 
+function typeTag(t){
+  var type = (t === "advies") ? "advies" : "expertise";
+  var lbl = (type === "advies") ? "Advies" : "Expertise";
+  return ' <span class="type-tag type-'+type+'">'+lbl+'</span>';
+}
+
 function visible(){
   return state.dossiers.filter(function(d){
     if(state.filter!=="alle" && d.status!==state.filter) return false;
@@ -68,7 +74,7 @@ function render(){
     h += '<tr data-id="'+esc(d.id)+'">'
       + '<td><span class="zaaknr">'+esc(d.zaaknummer||"—")+'</span></td>'
       + '<td><span class="redacted">'+esc(d.betrokkene||"—")+'</span></td>'
-      + '<td>'+esc(d.specialisme||"—")+'</td>'
+      + '<td>'+esc(d.specialisme||"—")+typeTag(d.rapport_type)+'</td>'
       + '<td>'+esc(d.opdrachtgever||"—")+'</td>'
       + '<td>'+statusBadge(d.status)+'</td>'
       + '<td>'+esc(fmtDate(d.ongevalsdatum))+'</td>'
@@ -129,6 +135,8 @@ async function submitDossier(){
     zaaknummer: zaak,
     opdrachtgever: document.getElementById("f-opdr").value.trim() || null,
     specialisme: document.getElementById("f-spec").value || null,
+    rapport_type: document.getElementById("f-type").value || "expertise",
+    vraagstelling: document.getElementById("f-vraag").value.trim() || null,
     ongevalsdatum: document.getElementById("f-datum").value || null,
     notities: document.getElementById("f-notities").value.trim() || null,
     status: "nieuw",

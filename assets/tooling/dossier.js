@@ -49,9 +49,12 @@ function fmtDateTime(s){ var d=new Date(s); if(isNaN(d)) return ""; return ("0"+
 /* ── Infobar ─────────────────────────────────────────────────────────────── */
 function renderInfobar(){
   var d = state.dossier;
+  var type = (d.rapport_type === "advies") ? "advies" : "expertise";
+  var typeLbl = (type === "advies") ? "Advies" : "Expertise";
   $("infobar").innerHTML =
     ib("Zaaknummer", esc(d.zaaknummer||"—")) +
     ib("Betrokkene", '<span class="redacted">'+esc(d.betrokkene||"—")+'</span>') +
+    ib("Type", '<span class="type-tag type-'+type+'">'+typeLbl+'</span>') +
     ib("Specialisme", esc(d.specialisme||"—")) +
     ib("Opdrachtgever", esc(d.opdrachtgever||"—")) +
     ib("Status", '<span class="badge badge-'+esc(d.status)+'">'+esc(STATUS_LABEL[d.status]||d.status)+'</span>') +
