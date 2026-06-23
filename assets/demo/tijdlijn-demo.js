@@ -34,8 +34,8 @@ if(m<=24)return"Maand "+m+" (dag "+d+")";
 var y=(d/365.25).toFixed(1);return y+" jaar (dag "+d+")";
 }
 
-function renderTimeline(data){
-var o=document.getElementById("output");
+function renderTimeline(data,target){
+var o=target||document.getElementById("output");
 var h='<div class="dossier-header">';
 h+='<div class="dossier-meta"><span class="dossier-label">Zaaknummer</span><span class="dossier-value">'+esc(data.zaak.zaaknummer)+'</span></div>';
 h+='<div class="dossier-meta"><span class="dossier-label">Betrokkene</span><span class="dossier-value dossier-redacted">'+esc(data.zaak.betrokkene)+'</span></div>';
@@ -83,6 +83,16 @@ if(mode==="example"){renderTimeline(EXAMPLE_DATA);}
 else{document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><p>Plak een gepseudonimiseerd medisch dossier hierboven en klik op <strong>Extraheer tijdlijn</strong>.</p></div>';}
 }
 
+async function generateTimeline(text){
+var content=await window.Kinetic.generate("tijdlijn",text,"Je bent een medisch dossier-analist. Extraheer een chronologische tijdlijn uit het onderstaande dossier.\n\nRegels:\n- Identificeer ALLE medische gebeurtenissen met een datum\n- Bepaal de ongevalsdatum als T±0 en bereken voor elke gebeurtenis het aantal dagen erna\n- Categoriseer per specialisme met deze exacte tag-waarden: seh, ortho, radio, fysio, pijn, neuro, psych, huisarts, overig\n- Geef per gebeurtenis de bron (naam instelling, type document, paginanummer)\n- Detecteer hiaten: ontbrekende vervolgafspraken, missende verslagen, onverklaarde gaten\n- Extraheer zaakgegevens\n\nKRITIEK: Antwoord met ALLEEN valide JSON. Geen markdown backticks. Geen toelichting voor of na de JSON. Gebruik ALLEEN dubbele aanhalingstekens in de JSON. Geen single quotes. Geen trailing commas. Geen comments.\n\nJSON structuur:\n{\"zaak\":{\"zaaknummer\":\"...\",\"betrokkene\":\"...\",\"geboortedatum\":\"...\",\"ongevalsdatum\":\"DD-MM-YYYY\"},\"events\":[{\"date\":\"DD-MM-YYYY\",\"day\":0,\"tag\":\"seh\",\"tagLabel\":\"SEH\",\"title\":\"korte titel\",\"body\":\"beschrijving max 2 zinnen\",\"source\":\"instelling, document, p. X\"},{\"gap\":true,\"afterDate\":\"DD-MM-YYYY\",\"afterDay\":0,\"text\":\"beschrijving van het hiaat\"}],\"stats\":{\"events\":0,\"gaps\":0,\"sources\":0,\"spanDays\":0}}\n\nDossier:\n\n");
+content=content.replace(/```json|```/g,"").trim();
+var si=content.indexOf("{");var ei=content.lastIndexOf("}");
+if(si>=0&&ei>si)content=content.substring(si,ei+1);
+content=content.replace(/,\s*([}\]])/g,"$1");
+var parsed=JSON.parse(content);
+return parsed;
+}
+
 async function extractTimeline(){
 var text=document.getElementById("customInput").value.trim();
 if(!text)return;
@@ -91,12 +101,7 @@ btn.disabled=true;
 btn.innerHTML='<span class="spinner"></span>Verwerken…';
 document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">AI analyseert het dossier…</p></div>';
 try{
-var content=await window.Kinetic.generate("tijdlijn",text,"Je bent een medisch dossier-analist. Extraheer een chronologische tijdlijn uit het onderstaande dossier.\n\nRegels:\n- Identificeer ALLE medische gebeurtenissen met een datum\n- Bepaal de ongevalsdatum als T±0 en bereken voor elke gebeurtenis het aantal dagen erna\n- Categoriseer per specialisme met deze exacte tag-waarden: seh, ortho, radio, fysio, pijn, neuro, psych, huisarts, overig\n- Geef per gebeurtenis de bron (naam instelling, type document, paginanummer)\n- Detecteer hiaten: ontbrekende vervolgafspraken, missende verslagen, onverklaarde gaten\n- Extraheer zaakgegevens\n\nKRITIEK: Antwoord met ALLEEN valide JSON. Geen markdown backticks. Geen toelichting voor of na de JSON. Gebruik ALLEEN dubbele aanhalingstekens in de JSON. Geen single quotes. Geen trailing commas. Geen comments.\n\nJSON structuur:\n{\"zaak\":{\"zaaknummer\":\"...\",\"betrokkene\":\"...\",\"geboortedatum\":\"...\",\"ongevalsdatum\":\"DD-MM-YYYY\"},\"events\":[{\"date\":\"DD-MM-YYYY\",\"day\":0,\"tag\":\"seh\",\"tagLabel\":\"SEH\",\"title\":\"korte titel\",\"body\":\"beschrijving max 2 zinnen\",\"source\":\"instelling, document, p. X\"},{\"gap\":true,\"afterDate\":\"DD-MM-YYYY\",\"afterDay\":0,\"text\":\"beschrijving van het hiaat\"}],\"stats\":{\"events\":0,\"gaps\":0,\"sources\":0,\"spanDays\":0}}\n\nDossier:\n\n");
-content=content.replace(/```json|```/g,"").trim();
-var si=content.indexOf("{");var ei=content.lastIndexOf("}");
-if(si>=0&&ei>si)content=content.substring(si,ei+1);
-content=content.replace(/,\s*([}\]])/g,"$1");
-var parsed=JSON.parse(content);
+var parsed=await generateTimeline(text);
 renderTimeline(parsed);
 }catch(err){
 document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--c-seh)"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0||err.message.indexOf("CORS")>=0?'De AI-service is momenteel niet bereikbaar. Controleer je verbinding en probeer het opnieuw.':'Controleer of de tekst een geldig (gepseudonimiseerd) medisch dossier bevat.')+'</p></div>';
@@ -106,11 +111,17 @@ btn.innerHTML="Extraheer tijdlijn";
 }
 
 function init(){
+if(!document.getElementById("modeExample")||!document.getElementById("output"))return;
 document.getElementById("modeExample").addEventListener("click",function(){setMode("example");});
 document.getElementById("modeCustom").addEventListener("click",function(){setMode("custom");});
 document.getElementById("extractBtn").addEventListener("click",extractTimeline);
 renderTimeline(EXAMPLE_DATA);
 }
+
+// Herbruikbaar voor de tooling-werkruimte.
+window.Kinetic=window.Kinetic||{};
+window.Kinetic.renderTimeline=renderTimeline;
+window.Kinetic.generateTimeline=generateTimeline;
 
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();

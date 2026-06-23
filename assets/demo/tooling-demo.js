@@ -187,11 +187,20 @@ function autoResize(){inp.style.height='auto';inp.style.height=inp.scrollHeight+
 
 function init(){
 inp=document.getElementById('inp');outp=document.getElementById('outp');
+if(!inp||!outp)return;
 document.getElementById('bp').addEventListener('click',run);
 document.getElementById('br').addEventListener('click',reset);
 inp.addEventListener('input',autoResize);
 reset();
 }
+
+// Herbruikbaar voor de tooling-werkruimte: pseudonimiseer + kleur de output.
+window.Kinetic=window.Kinetic||{};
+window.Kinetic.pseudonymize=function(text){
+var res=pseudo(text);
+var escd=res.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+return {text:res.text,stats:res.stats,html:colorize(escd)};
+};
 
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();

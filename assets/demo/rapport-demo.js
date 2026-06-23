@@ -179,8 +179,8 @@ function prioLabel(p){return p==="kritiek"?"Kritiek":p==="belangrijk"?"Belangrij
 function sevColor(s){return s==="kritiek"?"#D94F4F":s==="belangrijk"?"#C77B2E":"var(--warm-teal)";}
 function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk":"Aandacht";}
 
-function renderRapport(data){
-var o=document.getElementById("output");
+function renderRapport(data,target){
+var o=target||document.getElementById("output");
 var h='<div class="rapport">';
 
 // Header
@@ -349,14 +349,7 @@ if(mode==="example"){renderRapport(EXAMPLE_RAPPORT);}
 else{document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><p>Plak een gepseudonimiseerd medisch dossier hierboven en klik op <strong>Genereer concept-rapport</strong>.</p></div>';}
 }
 
-async function generateRapport(){
-var text=document.getElementById("customInput").value.trim();
-if(!text)return;
-var btn=document.getElementById("extractBtn");
-btn.disabled=true;
-btn.innerHTML='<span class="spinner"></span>Verwerken\u2026';
-document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">AI genereert concept-rapport\u2026</p></div>';
-try{
+async function generateRapportData(text){
 var content=await window.Kinetic.generate("rapport",text,"Je bent een medisch dossier-analist voor letselschade-expertises. Genereer een concept IWMD expertiserapport.\n\nREGELS:\n- Gebruik EXACT de officiele IWMD-vraagstelling (10 vragen, letterlijke tekst)\n- AI-secties: gegevens, vraagstelling, voorgeschiedenis, toedracht, samenvatting, klachten, bronnenlijst\n- Arts-secties: lichamelijk onderzoek, diagnose/beschouwing, beantwoording IWMD-vragen\n- Hiaten: prioriteit per item (kritiek/belangrijk/wenselijk). Kritiek = nodig voor expertise. Belangrijk = versterkt rapport. Wenselijk = nice to have.\n- Tegenstrijdigheden: severity per item (kritiek/belangrijk/aandacht). Signaleer ALTIJD pre-existent vs traumatisch discussies.\n- Arts-templates: compact dossiercontext per subveld (max 2 regels feiten + bronverwijzing). Geen lange verhalen.\n- IWMD-vragen: gebruik de officiele IWMD-tekst. Voeg per vraag compacte dossiercontext toe (max 1-2 regels).\n- Dossiercompleetheid: bereken score, lijst aanwezige docs (strings), ontbrekende docs met prio (objects: {doc,prio}).\n- Bronnenlijst als laatste sectie.\n- Gebruik [PERSOON-N] en [ORGANISATIE-N] placeholders.\n\nKRITIEK: ALLEEN valide JSON. Geen markdown. Dubbele aanhalingstekens. Geen trailing commas.\n\nOfficiele IWMD-vragen (gebruik LETTERLIJK):\n1. Hoe luidt de anamnese voor wat betreft de aard en de ernst van het letsel, het verloop van de klachten, de toegepaste behandelingen en het resultaat van deze behandelingen?\n2. Wilt u op basis van het medisch dossier een beschrijving geven van de medische voorgeschiedenis op uw vakgebied?\n3. Wilt u een beschrijving geven van uw bevindingen bij lichamelijk en eventueel hulponderzoek?\n4. Wat is de diagnose op uw vakgebied? Wilt u daarbij differentiaal diagnostische overwegingen geven?\n5. Bestaat er een causaal verband met het ongeval?\n6. Is de huidige toestand als eindtoestand te beschouwen?\n7. Welke beperkingen bestaan bij betrokkene in zijn huidige toestand?\n8. Zijn beperkingen toe te schrijven aan het ongeval? Pre-existent?\n9. Heeft u therapeutische suggesties?\n10. Overige relevante feiten of omstandigheden?\n\nAMA GUIDES 6e EDITIE - DIAGNOSE-CHAPTER MAPPING:\nVoeg bij invaliditeits-velden de relevante AMA chapter/tabel referenties toe:\n- Cervicaal/lumbaal: Ch.17 Spine, Table 17-2 (Cervical) of 17-4 (Lumbar)\n- Schouder/AC-luxatie: Ch.15 Upper Ext, Table 15-5\n- Knie: Ch.16 Lower Ext, Table 16-3\n- Perifere zenuw: Ch.13, Table 13-12\n- Hersenletsel/PCS: Ch.13, Table 13-6 + 13-8\n- PTSS: Ch.14 Mental Disorders\n- Pijn: Ch.3 Pain\n\nJSON structuur:\n{\"meta\":{\"zaaknummer\":\"\",\"betrokkene\":\"\",\"geboortedatum\":\"\",\"status\":\"Concept\",\"specialisme\":\"\",\"opdrachtgever\":\"\",\"ongevalsdatum\":\"\",\"onderzoeksdatum\":\"\"},\"compleetheid\":{\"score\":0,\"aanwezig\":[\"string\"],\"ontbrekend\":[{\"doc\":\"string\",\"prio\":\"kritiek|belangrijk|wenselijk\"}]},\"sections\":[{\"num\":\"1\",\"title\":\"\",\"badge\":\"ai|arts\",\"type\":\"fields|text|iwmd|hiaten|tegenstrijdigheden|arts_template|iwmd_answers|bronnen\",\"fields\":[{\"label\":\"\",\"value\":\"\",\"redacted\":false}],\"paragraphs\":[\"\"],\"sources\":[\"\"],\"hiaten\":[{\"status\":\"ontbrekend\",\"prio\":\"kritiek|belangrijk|wenselijk\",\"doc\":\"\",\"verwacht\":\"\",\"toelichting\":\"\",\"actie\":\"\"}],\"items\":[{\"thema\":\"\",\"severity\":\"kritiek|belangrijk|aandacht\",\"bronnen\":[\"\"],\"relevantie\":\"\"}],\"prompt\":\"\",\"subfields\":[{\"label\":\"\",\"context\":\"\"}],\"intro\":\"\",\"questions\":[{\"q\":\"\",\"context\":\"\"}],\"bronnen\":[{\"nr\":\"\",\"doc\":\"\",\"bron\":\"\",\"datum\":\"\",\"paginas\":\"\"}]}],\"stats\":{\"aiSections\":0,\"artsSections\":0,\"bronnen\":0,\"hiaten\":0,\"tegenstrijdigheden\":0}}\n\nDossier:\n\n");
 content=content.replace(/```json|```/g,"").trim();
 var si=content.indexOf("{");var ei=content.lastIndexOf("}");
@@ -368,6 +361,18 @@ content=content.replace(/\n/g," ").replace(/\r/g," ").replace(/\t/g," ");
 content=content.replace(/,\s*([}\]])/g,"$1");
 var parsed=JSON.parse(content);
 }
+return parsed;
+}
+
+async function generateRapport(){
+var text=document.getElementById("customInput").value.trim();
+if(!text)return;
+var btn=document.getElementById("extractBtn");
+btn.disabled=true;
+btn.innerHTML='<span class="spinner"></span>Verwerken…';
+document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">AI genereert concept-rapport…</p></div>';
+try{
+var parsed=await generateRapportData(text);
 renderRapport(parsed);
 }catch(err){
 var msg=(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0||err.message.indexOf("CORS")>=0)?"De AI-service is momenteel niet bereikbaar. Controleer je verbinding en probeer het opnieuw.":"Controleer of de tekst een geldig (gepseudonimiseerd) medisch dossier bevat.";
@@ -378,11 +383,17 @@ btn.innerHTML="Genereer concept-rapport";
 }
 
 function init(){
+if(!document.getElementById("modeExample")||!document.getElementById("output"))return;
 document.getElementById("modeExample").addEventListener("click",function(){setMode("example");});
 document.getElementById("modeCustom").addEventListener("click",function(){setMode("custom");});
 document.getElementById("extractBtn").addEventListener("click",generateRapport);
 renderRapport(EXAMPLE_RAPPORT);
 }
+
+// Herbruikbaar voor de tooling-werkruimte.
+window.Kinetic=window.Kinetic||{};
+window.Kinetic.renderRapport=renderRapport;
+window.Kinetic.generateRapport=generateRapportData;
 
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();

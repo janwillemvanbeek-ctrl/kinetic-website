@@ -108,10 +108,65 @@ table.dossiers tbody tr:hover{background:var(--fog)}
 @keyframes spin-t{to{transform:rotate(360deg)}}
 .saved-indicator{display:inline-flex;align-items:center;gap:.35rem;color:var(--green);font-size:12px;font-weight:600}
 
+/* ── WERKRUIMTE: infobar ────────────────────────────────────────────────── */
+.back-link{display:inline-flex;align-items:center;gap:.3rem;font-size:13px;font-weight:600;color:var(--stone);margin-bottom:14px}
+.back-link:hover{color:var(--teal)}
+.infobar{display:flex;flex-wrap:wrap;gap:24px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 20px;margin-bottom:24px}
+.infobar .ib{display:flex;flex-direction:column;gap:2px;min-width:0}
+.infobar .ib .label{margin:0}
+.infobar .ib .val{font-size:13px;font-weight:600;color:var(--ink)}
+.infobar .ib .val.redacted{font-weight:400}
+
+/* ── TABS ───────────────────────────────────────────────────────────────── */
+.tabs{display:flex;gap:.5rem;margin-bottom:20px;flex-wrap:wrap}
+.tab{display:inline-flex;align-items:center;gap:.55rem;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:var(--white);color:var(--ink);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.tab:hover{border-color:var(--teal)}
+.tab.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.tab .tab-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--fog);color:var(--stone);font-size:11px;font-weight:700;flex-shrink:0}
+.tab.active .tab-num{background:rgba(255,255,255,.25);color:#fff}
+.tab.done .tab-num{background:var(--green);color:#fff}
+
+.panel{display:none}
+.panel.active{display:block}
+.panel-card{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:20px}
+.panel-card + .panel-card{margin-top:16px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:14px;flex-wrap:wrap}
+.panel-head h3{font-size:16px;font-weight:600}
+
+/* ── STAP 1: pseudonimiseren ────────────────────────────────────────────── */
+.ws-textarea{width:100%;min-height:180px;padding:14px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px;line-height:1.7;color:var(--ink);background:var(--white);resize:vertical}
+.ws-textarea:focus{outline:none;border-color:var(--teal)}
+.row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-top:12px}
+.row .label-input{flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px}
+.row .label-input:focus{outline:none;border-color:var(--teal)}
+.pseudo-out{margin-top:16px;padding:14px;background:var(--paper);border:1px solid var(--line);border-radius:6px;font-size:13px;line-height:1.7;white-space:pre-wrap;word-wrap:break-word;max-height:340px;overflow:auto}
+.statline{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--stone)}
+.statline b{color:var(--ink)}
+.doc-list{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.doc-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:var(--white);font-size:13px}
+.doc-item .doc-label{font-weight:600;color:var(--ink)}
+.doc-item .doc-meta{color:var(--stone);font-size:12px;margin-left:auto}
+.doc-item .doc-del{background:none;border:none;color:var(--stone);cursor:pointer;font-size:16px;line-height:1;padding:0 4px}
+.doc-item .doc-del:hover{color:var(--red)}
+.doc-empty{color:var(--stone);font-size:13px;font-style:italic;padding:8px 0}
+
+/* ── STAP 2/3: generatie-host ───────────────────────────────────────────── */
+.gen-host{margin-top:16px}
+.gen-host .section-heading{color:var(--ink)}
+.gen-loading{text-align:center;padding:48px;color:var(--stone)}
+.notice{padding:12px 16px;border-radius:6px;font-size:13px;background:var(--fog);color:var(--stone);margin-bottom:14px}
+.notice.warn{background:rgba(217,79,79,.08);color:#9a4040;border:1px solid rgba(217,79,79,.25)}
+
+/* ── ACTIEBALK ──────────────────────────────────────────────────────────── */
+.action-bar{position:sticky;bottom:0;margin-top:24px;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 20px;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;box-shadow:0 -2px 12px rgba(0,0,0,.04)}
+.action-bar .spacer{flex:1}
+.disclaimer{font-size:12px;color:var(--stone);text-align:center;margin-top:16px;line-height:1.6}
+
 @media(max-width:760px){
   .app-header{padding:0 20px}
   .page{padding:24px 20px}
   .search{margin-left:0}
   table.dossiers th:nth-child(4),table.dossiers td:nth-child(4),
   table.dossiers th:nth-child(6),table.dossiers td:nth-child(6){display:none}
+  .infobar{gap:14px}
 }

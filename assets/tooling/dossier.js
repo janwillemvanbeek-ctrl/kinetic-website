@@ -1,0 +1,260 @@
+/* ==========================================================================
+   Dossier-werkruimte — drie stappen (pseudonimiseren, tijdlijn, rapport).
+   Hergebruikt de demo-logica via het Kinetic-namespace:
+     Kinetic.pseudonymize(text)         -> {text, stats, html}
+     Kinetic.generateTimeline(text)     -> tijdlijn-data (async)
+     Kinetic.renderTimeline(data, el)
+     Kinetic.generateRapport(text)      -> rapport-data (async)
+     Kinetic.renderRapport(data, el)
+   Vereist: supabase-js (global `supabase`) en assets/demo/layout.js.
+   ========================================================================== */
+(function () {
+"use strict";
+
+var esc = window.Kinetic.esc;
+var sb = supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON);
+
+var STATUS_LABEL = { nieuw:"Nieuw", voorbereiding:"Voorbereiding", bij_arts:"Bij arts", definitief:"Definitief" };
+
+var state = {
+  id: new URLSearchParams(location.search).get("id"),
+  dossier: null,
+  documents: [],
+  results: { tijdlijn:null, rapport:null }, // laatste versie per type
+  lastPseudo: null
+};
+
+function $(id){ return document.getElementById(id); }
+function fmtDate(d){ if(!d) return "—"; var p=String(d).slice(0,10).split("-"); return p.length===3?p[2]+"-"+p[1]+"-"+p[0]:d; }
+function fmtDateTime(s){ var d=new Date(s); if(isNaN(d)) return ""; return ("0"+d.getDate()).slice(-2)+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+d.getFullYear(); }
+
+/* ── Infobar ─────────────────────────────────────────────────────────────── */
+function renderInfobar(){
+  var d = state.dossier;
+  $("infobar").innerHTML =
+    ib("Zaaknummer", esc(d.zaaknummer||"—")) +
+    ib("Betrokkene", '<span class="redacted">'+esc(d.betrokkene||"—")+'</span>') +
+    ib("Specialisme", esc(d.specialisme||"—")) +
+    ib("Opdrachtgever", esc(d.opdrachtgever||"—")) +
+    ib("Status", '<span class="badge badge-'+esc(d.status)+'">'+esc(STATUS_LABEL[d.status]||d.status)+'</span>') +
+    ib("Toegewezen aan", esc(d.toegewezen_aan||"—"));
+  function ib(label,val){ return '<div class="ib"><span class="label">'+label+'</span><span class="val">'+val+'</span></div>'; }
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+function switchTab(name){
+  ["pseudo","tijdlijn","rapport"].forEach(function(t){
+    $("tab-"+t).classList.toggle("active", t===name);
+    $("panel-"+t).classList.toggle("active", t===name);
+  });
+  if(name==="tijdlijn") showResult("tijdlijn");
+  if(name==="rapport") showResult("rapport");
+}
+function refreshTabState(){
+  $("tab-pseudo").classList.toggle("done", state.documents.length>0);
+  $("tab-tijdlijn").classList.toggle("done", !!state.results.tijdlijn);
+  $("tab-rapport").classList.toggle("done", !!state.results.rapport);
+}
+
+/* ── Stap 1: pseudonimiseren ─────────────────────────────────────────────── */
+function runPseudo(){
+  var text = $("rawInput").value.trim();
+  if(!text) return;
+  var res = window.Kinetic.pseudonymize(text);
+  state.lastPseudo = { text: res.text, stats: res.stats, charCount: res.text.length };
+  $("pseudoOut").innerHTML = res.html;
+  $("pseudoOut").style.display = "block";
+  var s = res.stats;
+  $("statline").innerHTML =
+    "<span><b>"+s.total+"</b> vervangingen</span>"+
+    "<span><b>"+s.names+"</b> namen</span>"+
+    "<span><b>"+s.bsn+"</b> BSN&rsquo;s</span>"+
+    "<span><b>"+s.dates+"</b> datums</span>"+
+    "<span><b>"+s.contact+"</b> contact</span>"+
+    "<span><b>"+s.orgs+"</b> overig</span>";
+  $("statline").style.display = "flex";
+  $("saveDocBtn").disabled = false;
+}
+
+async function saveDocument(){
+  if(!state.lastPseudo) return;
+  var label = $("docLabel").value.trim() || "Document " + (state.documents.length+1);
+  var btn = $("saveDocBtn"); btn.disabled = true; btn.textContent = "Opslaan…";
+  var res = await sb.from("dossier_documents").insert({
+    dossier_id: state.id,
+    label: label,
+    content: state.lastPseudo.text,
+    stats: state.lastPseudo.stats,
+    char_count: state.lastPseudo.charCount
+  }).select().single();
+  btn.textContent = "Opslaan als document";
+  if(res.error){ alert("Opslaan mislukt: "+res.error.message); return; }
+  // Reset invoer voor het volgende document
+  $("rawInput").value = ""; $("docLabel").value = "";
+  $("pseudoOut").style.display = "none"; $("statline").style.display = "none";
+  state.lastPseudo = null;
+  await loadDocuments();
+}
+
+async function loadDocuments(){
+  var res = await sb.from("dossier_documents").select("*").eq("dossier_id", state.id).order("created_at",{ascending:true});
+  state.documents = (res.data||[]);
+  renderDocList();
+  refreshTabState();
+  // generatieknoppen alleen actief met documenten
+  $("genTijdlijnBtn").disabled = state.documents.length===0;
+  $("genRapportBtn").disabled = state.documents.length===0;
+}
+
+function renderDocList(){
+  var host = $("docList");
+  if(state.documents.length===0){ host.innerHTML = '<div class="doc-empty">Nog geen documenten opgeslagen.</div>'; return; }
+  host.innerHTML = state.documents.map(function(d){
+    return '<div class="doc-item"><span class="doc-label">'+esc(d.label)+'</span>'+
+      '<span class="doc-meta">'+esc(fmtDateTime(d.created_at))+' &middot; '+(d.char_count||0)+' tekens</span>'+
+      '<button class="doc-del" data-id="'+esc(d.id)+'" title="Verwijderen">&times;</button></div>';
+  }).join("");
+  host.querySelectorAll(".doc-del").forEach(function(b){
+    b.addEventListener("click", async function(){
+      if(!confirm("Document verwijderen?")) return;
+      await sb.from("dossier_documents").delete().eq("id", b.getAttribute("data-id"));
+      await loadDocuments();
+    });
+  });
+}
+
+function combinedText(){
+  return state.documents.map(function(d){
+    return "=== "+d.label+" ===\n"+d.content;
+  }).join("\n\n");
+}
+
+/* ── Stap 2/3: generatie ─────────────────────────────────────────────────── */
+function loadingHost(host, msg){
+  host.innerHTML = '<div class="gen-loading"><span class="spinner-t"></span>'+esc(msg)+'</div>';
+}
+
+async function generate(type){
+  if(state.documents.length===0) return;
+  var host = $(type+"Host");
+  var btn = $("gen"+(type==="tijdlijn"?"Tijdlijn":"Rapport")+"Btn");
+  btn.disabled = true;
+  loadingHost(host, "AI genereert "+(type==="tijdlijn"?"tijdlijn":"concept-rapport")+"…");
+  try{
+    var data = (type==="tijdlijn")
+      ? await window.Kinetic.generateTimeline(combinedText())
+      : await window.Kinetic.generateRapport(combinedText());
+    renderInto(type, data, host);
+    await saveResult(type, data);
+  }catch(err){
+    host.innerHTML = '<div class="notice warn"><strong>Fout bij verwerking:</strong> '+esc(err.message)+
+      '<br>'+( /Failed to fetch|NetworkError|CORS/.test(err.message)
+        ? "De AI-service is momenteel niet bereikbaar. Probeer het opnieuw."
+        : "Controleer of de documenten geldige (gepseudonimiseerde) dossiertekst bevatten." )+'</div>';
+  }
+  btn.disabled = false;
+}
+
+function renderInto(type, data, host){
+  host.innerHTML = "";
+  if(type==="tijdlijn") window.Kinetic.renderTimeline(data, host);
+  else window.Kinetic.renderRapport(data, host);
+}
+
+async function saveResult(type, data){
+  var prev = state.results[type];
+  var version = prev ? (prev.version+1) : 1;
+  var res = await sb.from("dossier_results").insert({
+    dossier_id: state.id, type: type, payload: data, version: version
+  }).select().single();
+  if(!res.error){ state.results[type] = res.data; refreshTabState(); }
+  // Eerste generatie zet status naar 'voorbereiding'
+  if(state.dossier.status==="nieuw") await updateStatus("voorbereiding");
+}
+
+function showResult(type){
+  var host = $(type+"Host");
+  if(host.children.length>0 && !host.querySelector(".gen-empty")) return; // al gerenderd
+  var r = state.results[type];
+  if(r){ renderInto(type, r.payload, host); }
+  else{
+    host.innerHTML = '<div class="gen-empty notice">Nog geen '+(type==="tijdlijn"?"tijdlijn":"rapport")+
+      ' gegenereerd. Gebruik de knop hierboven om te genereren uit de opgeslagen documenten.</div>';
+  }
+}
+
+async function loadResults(){
+  var res = await sb.from("dossier_results").select("*").eq("dossier_id", state.id).order("version",{ascending:false});
+  (res.data||[]).forEach(function(r){
+    if(!state.results[r.type]) state.results[r.type] = r; // hoogste versie eerst
+  });
+  refreshTabState();
+}
+
+/* ── Actiebalk ───────────────────────────────────────────────────────────── */
+async function updateStatus(status, extra){
+  var patch = Object.assign({ status: status }, extra||{});
+  var res = await sb.from("dossiers").update(patch).eq("id", state.id).select().single();
+  if(res.error){ alert("Status bijwerken mislukt: "+res.error.message); return false; }
+  state.dossier = res.data; renderInfobar(); return true;
+}
+
+function activePanel(){
+  return $("panel-tijdlijn").classList.contains("active") ? "tijdlijn"
+       : $("panel-rapport").classList.contains("active") ? "rapport" : "pseudo";
+}
+
+function bindActions(){
+  $("regenBtn").addEventListener("click", function(){
+    var p = activePanel();
+    if(p==="tijdlijn" || p==="rapport") generate(p);
+    else alert("Selecteer de tijdlijn- of rapport-stap om opnieuw te genereren.");
+  });
+  $("wordBtn").addEventListener("click", function(){
+    alert("Word-export (.docx met read-only AI-secties en bewerkbare arts-velden) volgt in een latere stap.");
+  });
+  $("assignBtn").addEventListener("click", async function(){
+    if(await updateStatus("bij_arts", { toegewezen_aan: "Edwin" })) refreshTabState();
+  });
+  $("finalBtn").addEventListener("click", async function(){
+    if(!state.results.rapport){ alert("Genereer eerst een concept-rapport voordat je het dossier definitief maakt."); return; }
+    if(confirm("Dossier markeren als definitief?")) await updateStatus("definitief");
+  });
+}
+
+/* ── Init ────────────────────────────────────────────────────────────────── */
+async function init(){
+  var sess = await sb.auth.getSession();
+  if(!(sess.data && sess.data.session)){ window.location.replace("./index.html"); return; }
+  $("userEmail").textContent = sess.data.session.user.email || "";
+  $("logout").addEventListener("click", function(){ sb.auth.signOut().then(function(){ window.location.replace("./index.html"); }); });
+
+  if(!state.id){ document.querySelector(".page").innerHTML = '<div class="notice warn">Geen dossier opgegeven.</div>'; return; }
+
+  var res = await sb.from("dossiers").select("*").eq("id", state.id).single();
+  if(res.error || !res.data){
+    document.querySelector(".page").innerHTML = '<div class="notice warn">Dossier niet gevonden of geen toegang.</div>';
+    return;
+  }
+  state.dossier = res.data;
+  renderInfobar();
+
+  // Tabs
+  ["pseudo","tijdlijn","rapport"].forEach(function(t){
+    $("tab-"+t).addEventListener("click", function(){ switchTab(t); });
+  });
+  // Stap 1
+  $("pseudoBtn").addEventListener("click", runPseudo);
+  $("saveDocBtn").addEventListener("click", saveDocument);
+  // Stap 2/3
+  $("genTijdlijnBtn").addEventListener("click", function(){ generate("tijdlijn"); });
+  $("genRapportBtn").addEventListener("click", function(){ generate("rapport"); });
+  bindActions();
+
+  await loadDocuments();
+  await loadResults();
+  switchTab("pseudo");
+}
+
+if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
+})();

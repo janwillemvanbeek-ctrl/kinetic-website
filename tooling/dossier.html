@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic Tooling — Dossier</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cpath d='M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z' fill='%23FAF9F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Render-componenten uit de demo's (timeline, rapport, placeholders) -->
+<link rel="stylesheet" href="../assets/demo/base.css">
+<link rel="stylesheet" href="../assets/demo/tooling-demo.css">
+<link rel="stylesheet" href="../assets/demo/tijdlijn-demo.css">
+<link rel="stylesheet" href="../assets/demo/rapport-demo.css">
+<!-- Tooling-shell (laatst geladen: overschrijft body-achtergrond e.d.) -->
+<link rel="stylesheet" href="../assets/tooling/tooling.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="app-header">
+  <a class="app-logo" href="dashboard.html">
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+      <path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/>
+    </svg>
+    Kinetic <span style="color:#8FA6A3;font-weight:500">Tooling</span>
+  </a>
+  <div class="app-user">
+    <span class="email" id="userEmail"></span>
+    <button class="app-logout" id="logout">Uitloggen</button>
+  </div>
+</header>
+
+<main class="page">
+  <a class="back-link" href="dashboard.html">&larr; Terug naar dossiers</a>
+
+  <div class="infobar" id="infobar"></div>
+
+  <div class="tabs">
+    <button class="tab active" id="tab-pseudo"><span class="tab-num">1</span> Pseudonimiseren</button>
+    <button class="tab" id="tab-tijdlijn"><span class="tab-num">2</span> Tijdlijn</button>
+    <button class="tab" id="tab-rapport"><span class="tab-num">3</span> Concept Rapport</button>
+  </div>
+
+  <!-- Stap 1 -->
+  <section class="panel active" id="panel-pseudo">
+    <div class="panel-card">
+      <div class="panel-head"><h3>Pseudonimiseren</h3><span class="small">Verwerking is 100% lokaal in je browser</span></div>
+      <textarea class="ws-textarea" id="rawInput" placeholder="Plak hier de ruwe dossiertekst van één document (bv. SEH-verslag)…"></textarea>
+      <div class="row">
+        <button class="btn btn-primary" id="pseudoBtn">Pseudonimiseer</button>
+      </div>
+      <div class="statline" id="statline" style="display:none"></div>
+      <div class="pseudo-out" id="pseudoOut" style="display:none"></div>
+      <div class="row">
+        <input class="label-input" id="docLabel" placeholder="Label, bv. &ldquo;MRI cervicaal&rdquo;" autocomplete="off">
+        <button class="btn btn-secondary" id="saveDocBtn" disabled>Opslaan als document</button>
+      </div>
+    </div>
+    <div class="panel-card">
+      <div class="panel-head"><h3>Opgeslagen documenten</h3></div>
+      <div class="doc-list" id="docList"></div>
+    </div>
+  </section>
+
+  <!-- Stap 2 -->
+  <section class="panel" id="panel-tijdlijn">
+    <div class="panel-card">
+      <div class="panel-head">
+        <h3>Tijdlijn</h3>
+        <button class="btn btn-primary" id="genTijdlijnBtn" disabled>Genereer tijdlijn uit opgeslagen documenten</button>
+      </div>
+      <div class="gen-host" id="tijdlijnHost"></div>
+    </div>
+  </section>
+
+  <!-- Stap 3 -->
+  <section class="panel" id="panel-rapport">
+    <div class="panel-card">
+      <div class="panel-head">
+        <h3>Concept Rapport</h3>
+        <button class="btn btn-primary" id="genRapportBtn" disabled>Genereer concept-rapport uit opgeslagen documenten</button>
+      </div>
+      <div class="gen-host" id="rapportHost"></div>
+    </div>
+  </section>
+
+  <!-- Actiebalk -->
+  <div class="action-bar">
+    <button class="btn btn-secondary" id="regenBtn">Opnieuw genereren</button>
+    <span class="spacer"></span>
+    <button class="btn btn-amber" id="wordBtn">Download als Word</button>
+    <button class="btn btn-blue" id="assignBtn">Toewijzen aan Edwin</button>
+    <button class="btn btn-green" id="finalBtn">Markeer als definitief</button>
+  </div>
+
+  <p class="disclaimer">AI ondersteunt bij ordening; de BIG-geregistreerde specialist beoordeelt en autoriseert het definitieve rapport.</p>
+</main>
+
+<script src="../assets/demo/layout.js"></script>
+<script src="../assets/demo/tooling-demo.js"></script>
+<script src="../assets/demo/tijdlijn-demo.js"></script>
+<script src="../assets/demo/rapport-demo.js"></script>
+<script src="../assets/tooling/dossier.js"></script>
+</body>
+</html>
