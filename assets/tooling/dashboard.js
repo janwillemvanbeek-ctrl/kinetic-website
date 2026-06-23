@@ -6,8 +6,16 @@
 (function () {
 "use strict";
 
-var esc = window.Kinetic.esc;
-var sb = supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON);
+var esc = (window.Kinetic && window.Kinetic.esc) || function(s){ return s==null?"":String(s); };
+var sb = (typeof supabase !== "undefined" && window.Kinetic && window.Kinetic.SUPABASE_URL)
+  ? supabase.createClient(window.Kinetic.SUPABASE_URL, window.Kinetic.SUPABASE_ANON)
+  : null;
+
+function showFatal(msg){
+  var l = document.getElementById("list");
+  if(l) l.innerHTML = '<div class="empty"><p style="color:var(--red)">'+esc(msg)+'</p></div>';
+  if(window.console) console.error("[dashboard]", msg);
+}
 
 var STATUS_LABEL = { nieuw:"Nieuw", voorbereiding:"Voorbereiding", bij_arts:"Bij arts", definitief:"Definitief" };
 var SPECIALISMEN = ["Orthopedisch","Neurologisch","Psychiatrisch","Multidisciplinair"];
@@ -139,7 +147,16 @@ async function submitDossier(){
 
 /* ── Init ────────────────────────────────────────────────────────────────── */
 async function init(){
-  var sess = await sb.auth.getSession();
+ try{
+  if(!sb){ showFatal("Kan de database-verbinding niet starten (Supabase-bibliotheek niet geladen). Ververs de pagina."); return; }
+  var sess;
+  try{
+    sess = await Promise.race([
+      sb.auth.getSession(),
+      new Promise(function(_,rej){ setTimeout(function(){ rej(new Error("time-out bij sessie-check")); }, 6000); })
+    ]);
+  }
+  catch(e){ showFatal("Sessiefout: "+e.message+". Log opnieuw in via /tooling/."); return; }
   if(!(sess.data && sess.data.session)){
     window.location.replace("./index.html");
     return;
@@ -183,6 +200,9 @@ async function init(){
   });
 
   await loadDossiers();
+ }catch(e){
+  showFatal("Initialisatiefout: "+(e&&e.message?e.message:e));
+ }
 }
 
 if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
