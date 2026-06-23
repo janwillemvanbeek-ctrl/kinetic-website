@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Kinetic tooling — beschermde werkomgeving (dashboard + dossier-werkruimte)
+   Design tokens conform kinetic-design-brief.md. Render-componenten voor
+   tijdlijn/rapport/pseudonymizer komen uit de demo-CSS (assets/demo/*).
+   ========================================================================== */
+
+:root{
+  --paper:#F7F3EA;--ink:#1A1916;--stone:#8B8579;--fog:#EDEAE4;--line:#D8D4CC;
+  --white:#FFFFFF;--teal:#2F6F6A;--teal-hover:#295F5A;--amber:#E8A838;
+  --red:#D94F4F;--green:#0F6E56;--blue:#1A56DB;--header:#2C3E3D;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--ink);font-weight:600}
+a{color:var(--teal);text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* ── APP HEADER ─────────────────────────────────────────────────────────── */
+.app-header{height:56px;background:var(--header);display:flex;align-items:center;justify-content:space-between;padding:0 80px;position:sticky;top:0;z-index:100}
+.app-logo{display:flex;align-items:center;gap:.6rem;color:#fff;font-weight:600;font-size:1rem;letter-spacing:-.01em}
+.app-logo svg{display:block}
+.app-user{display:flex;align-items:center;gap:1rem;color:#C9D2D0;font-size:.8125rem}
+.app-user .email{font-weight:500}
+.app-logout{background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:.4rem .8rem;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:background .2s}
+.app-logout:hover{background:rgba(255,255,255,.1)}
+
+/* ── PAGE LAYOUT ────────────────────────────────────────────────────────── */
+.page{max-width:1200px;margin:0 auto;padding:40px 80px}
+.page-title{font-size:28px;font-weight:600;letter-spacing:-.01em}
+.page-sub{font-size:20px;font-weight:600}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--stone)}
+.small{font-size:12px;color:var(--stone)}
+.redacted{color:var(--red);font-family:'IBM Plex Mono','Courier New',monospace;font-size:13px}
+
+/* ── KNOPPEN ────────────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:background .2s,border-color .2s,color .2s;white-space:nowrap}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn-primary:hover:not(:disabled){background:var(--teal-hover);border-color:var(--teal-hover)}
+.btn-secondary{background:var(--white);color:var(--teal);border-color:var(--teal)}
+.btn-secondary:hover:not(:disabled){background:var(--fog)}
+.btn-amber{background:var(--amber);color:#3a2c08;border-color:var(--amber)}
+.btn-amber:hover:not(:disabled){filter:brightness(.94)}
+.btn-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-blue:hover:not(:disabled){filter:brightness(.92)}
+.btn-green{background:var(--green);color:#fff;border-color:var(--green)}
+.btn-green:hover:not(:disabled){filter:brightness(.92)}
+.btn-ghost{background:transparent;color:var(--stone);border-color:transparent}
+.btn-ghost:hover:not(:disabled){background:var(--fog);color:var(--ink)}
+
+/* ── TOOLBAR (titel + acties + filters + zoek) ──────────────────────────── */
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:1rem;flex-wrap:wrap}
+.controls{display:flex;align-items:center;gap:1rem;margin-bottom:24px;flex-wrap:wrap}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap}
+.pill{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--fog);color:var(--stone);transition:all .2s}
+.pill:hover{border-color:var(--stone)}
+.pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.search{flex:1;min-width:200px;max-width:340px;margin-left:auto}
+.search input{width:100%;padding:9px 14px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--white)}
+.search input::placeholder{color:var(--stone)}
+.search input:focus{outline:none;border-color:var(--teal)}
+
+/* ── TABEL ──────────────────────────────────────────────────────────────── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table.dossiers{width:100%;border-collapse:collapse;font-size:13px}
+table.dossiers th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--stone);padding:12px 16px;border-bottom:1px solid var(--line);background:var(--fog);white-space:nowrap}
+table.dossiers td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.dossiers tr:last-child td{border-bottom:none}
+table.dossiers tbody tr{cursor:pointer;transition:background .2s}
+table.dossiers tbody tr:hover{background:var(--fog)}
+.zaaknr{font-weight:600;color:var(--ink)}
+.zaaknr:hover{color:var(--teal)}
+
+/* ── STATUS BADGES ──────────────────────────────────────────────────────── */
+.badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;white-space:nowrap}
+.badge-nieuw{background:rgba(217,79,79,.12);color:var(--red)}
+.badge-voorbereiding{background:rgba(232,168,56,.16);color:#9A6B14}
+.badge-bij_arts{background:rgba(26,86,219,.12);color:var(--blue)}
+.badge-definitief{background:rgba(15,110,86,.12);color:var(--green)}
+
+/* ── EMPTY STATE ────────────────────────────────────────────────────────── */
+.empty{text-align:center;padding:72px 24px;background:var(--white);border:1px solid var(--line);border-radius:8px}
+.empty p{color:var(--stone);margin-bottom:1.25rem;font-size:14px}
+
+/* ── MODAL ──────────────────────────────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;background:rgba(26,25,22,.45);display:none;align-items:flex-start;justify-content:center;z-index:200;padding:60px 20px;overflow:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:8px;width:100%;max-width:520px;box-shadow:0 12px 40px rgba(0,0,0,.2)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+.modal-head h2{font-size:20px}
+.modal-close{background:none;border:none;font-size:22px;line-height:1;color:var(--stone);cursor:pointer;padding:0 4px}
+.modal-body{padding:24px}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:.75rem}
+.field{margin-bottom:16px}
+.field label{display:block;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--white)}
+.field textarea{resize:vertical;min-height:72px;line-height:1.6}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal)}
+.field input.invalid,.field select.invalid{border-color:var(--red)}
+.field .req{color:var(--red)}
+.form-error{color:var(--red);font-size:12px;margin-top:4px;min-height:1em}
+
+/* ── FEEDBACK ───────────────────────────────────────────────────────────── */
+.loading-row{text-align:center;padding:48px;color:var(--stone)}
+.spinner-t{display:inline-block;width:18px;height:18px;border:2px solid rgba(47,111,106,.25);border-top-color:var(--teal);border-radius:50%;animation:spin-t .6s linear infinite;vertical-align:middle;margin-right:.5rem}
+@keyframes spin-t{to{transform:rotate(360deg)}}
+.saved-indicator{display:inline-flex;align-items:center;gap:.35rem;color:var(--green);font-size:12px;font-weight:600}
+
+@media(max-width:760px){
+  .app-header{padding:0 20px}
+  .page{padding:24px 20px}
+  .search{margin-left:0}
+  table.dossiers th:nth-child(4),table.dossiers td:nth-child(4),
+  table.dossiers th:nth-child(6),table.dossiers td:nth-child(6){display:none}
+}

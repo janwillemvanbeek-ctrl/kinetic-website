@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic Tooling — Dossiers</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cpath d='M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z' fill='%23FAF9F7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tooling/tooling.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="app-header">
+  <a class="app-logo" href="dashboard.html">
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="4" fill="#FAF9F7"/>
+      <path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/>
+    </svg>
+    Kinetic <span style="color:#8FA6A3;font-weight:500">Tooling</span>
+  </a>
+  <div class="app-user">
+    <span class="email" id="userEmail"></span>
+    <button class="app-logout" id="logout">Uitloggen</button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="toolbar">
+    <h1 class="page-title">Dossiers</h1>
+    <button class="btn btn-primary" id="newBtn">+ Nieuw dossier</button>
+  </div>
+
+  <div class="controls">
+    <div class="filters">
+      <button class="pill active" data-status="alle">Alle</button>
+      <button class="pill" data-status="nieuw">Nieuw</button>
+      <button class="pill" data-status="voorbereiding">Voorbereiding</button>
+      <button class="pill" data-status="bij_arts">Bij arts</button>
+      <button class="pill" data-status="definitief">Definitief</button>
+    </div>
+    <div class="search">
+      <input type="search" id="search" placeholder="Zoek op zaaknummer of betrokkene…" autocomplete="off">
+    </div>
+  </div>
+
+  <div id="list"></div>
+</main>
+
+<!-- Nieuw dossier -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 id="modalTitle">Nieuw dossier</h2>
+      <button class="modal-close" id="modalClose" aria-label="Sluiten">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="label" for="f-zaak">Zaaknummer <span class="req">*</span></label>
+        <input type="text" id="f-zaak" placeholder="bv. 2024-KME-04892" autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="label" for="f-opdr">Opdrachtgever</label>
+        <input type="text" id="f-opdr" placeholder="bv. Aon Letselschade B.V." autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="label" for="f-spec">Specialisme</label>
+        <select id="f-spec"><option value="">— Kies —</option></select>
+      </div>
+      <div class="field">
+        <label class="label" for="f-datum">Ongevalsdatum</label>
+        <input type="date" id="f-datum">
+      </div>
+      <div class="field">
+        <label class="label" for="f-notities">Notities</label>
+        <textarea id="f-notities" placeholder="Optioneel"></textarea>
+      </div>
+      <div class="form-error" id="form-error"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="cancelBtn">Annuleren</button>
+      <button class="btn btn-primary" id="createBtn">Dossier aanmaken</button>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/demo/layout.js"></script>
+<script src="../assets/tooling/dashboard.js"></script>
+</body>
+</html>
