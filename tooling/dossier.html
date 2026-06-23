@@ -92,12 +92,30 @@
     <button class="btn btn-secondary" id="regenBtn">Opnieuw genereren</button>
     <span class="spacer"></span>
     <button class="btn btn-amber" id="wordBtn">Download als Word</button>
-    <button class="btn btn-blue" id="assignBtn">Toewijzen aan Edwin</button>
+    <button class="btn btn-blue" id="assignBtn">Toewijzen aan arts</button>
     <button class="btn btn-green" id="finalBtn">Markeer als definitief</button>
   </div>
 
   <p class="disclaimer">AI ondersteunt bij ordening; de BIG-geregistreerde specialist beoordeelt en autoriseert het definitieve rapport.</p>
 </main>
+
+<!-- Toewijzen aan arts -->
+<div class="modal-overlay" id="assignModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head"><h2>Toewijzen aan arts</h2><button class="modal-close" id="assignClose" aria-label="Sluiten">&times;</button></div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="label" for="assignSelect">Arts</label>
+        <select id="assignSelect"></select>
+      </div>
+      <div class="form-error" id="assignError"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="assignCancel">Annuleren</button>
+      <button class="btn btn-blue" id="assignConfirm">Toewijzen</button>
+    </div>
+  </div>
+</div>
 
 <script src="../assets/demo/layout.js"></script>
 <script src="../assets/demo/tooling-demo.js"></script>

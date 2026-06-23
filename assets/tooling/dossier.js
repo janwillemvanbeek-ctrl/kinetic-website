@@ -21,8 +21,26 @@ var state = {
   dossier: null,
   documents: [],
   results: { tijdlijn:null, rapport:null }, // laatste versie per type
-  lastPseudo: null
+  lastPseudo: null,
+  profiles: [],     // andere gebruikers (voor toewijzing)
+  myId: null,       // huidige gebruiker
+  artsMode: false   // viewer is de toegewezen arts (niet de eigenaar)
 };
+
+async function ensureProfile(session){
+  try{
+    var u = session.user;
+    await sb.from("profiles").upsert(
+      { id: u.id, naam: u.email },
+      { onConflict: "id", ignoreDuplicates: true }
+    );
+  }catch(e){ /* niet kritiek */ }
+}
+
+async function loadProfiles(){
+  var res = await sb.from("profiles").select("id,naam");
+  state.profiles = (res.data || []).filter(function(p){ return p.id !== state.myId; });
+}
 
 function $(id){ return document.getElementById(id); }
 function fmtDate(d){ if(!d) return "—"; var p=String(d).slice(0,10).split("-"); return p.length===3?p[2]+"-"+p[1]+"-"+p[0]:d; }
@@ -204,6 +222,34 @@ function activePanel(){
        : $("panel-rapport").classList.contains("active") ? "rapport" : "pseudo";
 }
 
+/* ── Toewijzen aan arts ──────────────────────────────────────────────────── */
+function openAssignModal(){
+  var sel = $("assignSelect"); sel.innerHTML = "";
+  if(state.profiles.length === 0){
+    $("assignError").textContent = "Geen andere gebruikers gevonden. Laat de arts eerst één keer inloggen op /tooling/.";
+    $("assignConfirm").disabled = true;
+  }else{
+    $("assignError").textContent = "";
+    $("assignConfirm").disabled = false;
+    state.profiles.forEach(function(p){
+      var o = document.createElement("option");
+      o.value = p.id; o.textContent = p.naam || p.id; o.setAttribute("data-naam", p.naam || p.id);
+      sel.appendChild(o);
+    });
+  }
+  $("assignModal").classList.add("open");
+}
+function closeAssignModal(){ $("assignModal").classList.remove("open"); }
+async function confirmAssign(){
+  var sel = $("assignSelect");
+  if(!sel.value){ $("assignError").textContent = "Kies een arts."; return; }
+  var opt = sel.options[sel.selectedIndex];
+  var btn = $("assignConfirm"); btn.disabled = true; btn.textContent = "Toewijzen…";
+  var ok = await updateStatus("bij_arts", { toegewezen_aan_id: sel.value, toegewezen_aan: opt.getAttribute("data-naam") });
+  btn.disabled = false; btn.textContent = "Toewijzen";
+  if(ok){ closeAssignModal(); refreshTabState(); }
+}
+
 function bindActions(){
   $("regenBtn").addEventListener("click", function(){
     var p = activePanel();
@@ -213,9 +259,11 @@ function bindActions(){
   $("wordBtn").addEventListener("click", function(){
     alert("Word-export (.docx met read-only AI-secties en bewerkbare arts-velden) volgt in een latere stap.");
   });
-  $("assignBtn").addEventListener("click", async function(){
-    if(await updateStatus("bij_arts", { toegewezen_aan: "Edwin" })) refreshTabState();
-  });
+  $("assignBtn").addEventListener("click", openAssignModal);
+  $("assignClose").addEventListener("click", closeAssignModal);
+  $("assignCancel").addEventListener("click", closeAssignModal);
+  $("assignConfirm").addEventListener("click", confirmAssign);
+  $("assignModal").addEventListener("click", function(e){ if(e.target.id==="assignModal") closeAssignModal(); });
   $("finalBtn").addEventListener("click", async function(){
     if(!state.results.rapport){ alert("Genereer eerst een concept-rapport voordat je het dossier definitief maakt."); return; }
     if(confirm("Dossier markeren als definitief?")) await updateStatus("definitief");
@@ -228,6 +276,8 @@ async function init(){
   if(!(sess.data && sess.data.session)){ window.location.replace("./index.html"); return; }
   $("userEmail").textContent = sess.data.session.user.email || "";
   $("logout").addEventListener("click", function(){ sb.auth.signOut().then(function(){ window.location.replace("./index.html"); }); });
+  state.myId = sess.data.session.user.id;
+  await ensureProfile(sess.data.session);
 
   if(!state.id){ document.querySelector(".page").innerHTML = '<div class="notice warn">Geen dossier opgegeven.</div>'; return; }
 
@@ -237,6 +287,7 @@ async function init(){
     return;
   }
   state.dossier = res.data;
+  state.artsMode = state.dossier.owner !== state.myId && state.dossier.toegewezen_aan_id === state.myId;
   renderInfobar();
 
   // Tabs
@@ -251,6 +302,7 @@ async function init(){
   $("genRapportBtn").addEventListener("click", function(){ generate("rapport"); });
   bindActions();
 
+  await loadProfiles();
   await loadDocuments();
   await loadResults();
   switchTab("pseudo");
