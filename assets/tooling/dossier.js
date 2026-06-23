@@ -359,15 +359,100 @@ async function confirmAssign(){
   if(ok){ closeAssignModal(); refreshTabState(); }
 }
 
+/* ── Word-export (.docx) ─────────────────────────────────────────────────── */
+// Bouwt een Word-vriendelijke HTML: AI-secties grijs (read-only look),
+// arts-secties als witte kaders (in te vullen / ingevuld).
+function buildRapportDocHtml(data, inputs){
+  inputs = inputs || {};
+  var m = data.meta || {};
+  var aiBox = 'background:#EFEFEF;border:1px solid #CCCCCC;padding:8px;';
+  var artsBox = 'background:#FFFFFF;border:1px solid #888888;padding:8px;min-height:42px;';
+  var ctx = 'color:#2F6F6A;font-size:10pt;margin:2px 0 6px;';
+  var nl = function(s){ return esc(s).replace(/\n/g,"<br>"); };
+  var h = '';
+  h += '<h1 style="font-size:16pt">Concept Medisch Expertiserapport</h1>';
+  h += '<p style="color:#666">IWMD '+esc(m.specialisme||"")+' — AI-voorbereiding door Kinetic ('+esc(m.status||"Concept")+')</p>';
+  h += '<table style="border-collapse:collapse;font-size:10pt;margin:8px 0">';
+  [["Zaaknummer",m.zaaknummer],["Betrokkene",m.betrokkene],["Specialisme",m.specialisme],["Opdrachtgever",m.opdrachtgever],["Ongevalsdatum",m.ongevalsdatum],["Onderzoeksdatum",m.onderzoeksdatum]].forEach(function(p){
+    if(p[1]) h += '<tr><td style="padding:2px 14px 2px 0;font-weight:bold">'+esc(p[0])+'</td><td>'+esc(p[1])+'</td></tr>';
+  });
+  h += '</table>';
+  if(data.compleetheid) h += '<p style="font-size:10pt"><b>Dossiercompleetheid:</b> '+esc(String(data.compleetheid.score))+'%</p>';
+
+  (data.sections||[]).forEach(function(s){
+    h += '<h2 style="font-size:12pt;border-bottom:1px solid #ccc;padding-bottom:3px">Sectie '+esc(s.num)+' — '+esc(s.title)+' '+(s.badge==="arts"?"[Arts]":"[AI-voorbereid]")+'</h2>';
+    if(s.type==="fields"){
+      (s.fields||[]).forEach(function(f){ h += '<p style="margin:2px 0"><b>'+esc(f.label)+':</b> '+esc(f.value)+'</p>'; });
+    } else if(s.type==="text"){
+      h += '<div style="'+aiBox+'">'; (s.paragraphs||[]).forEach(function(p){ h += '<p style="margin:0 0 6px">'+nl(p)+'</p>'; }); h += '</div>';
+      if(s.sources&&s.sources.length) h += '<p style="font-size:9pt;color:#666"><b>Bronnen:</b> '+s.sources.map(esc).join("; ")+'</p>';
+    } else if(s.type==="iwmd"){
+      if(s.intro) h += '<p style="font-size:10pt">'+esc(s.intro)+'</p>';
+      h += '<div style="'+aiBox+'"><ol>'; (s.questions||[]).forEach(function(q){ h += '<li style="margin-bottom:4px">'+esc(q)+'</li>'; }); h += '</ol></div>';
+    } else if(s.type==="hiaten"){
+      (s.hiaten||[]).forEach(function(hi){ h += '<div style="'+aiBox+'border-color:#D94F4F;margin-bottom:6px"><b>['+esc(hi.prio||"")+'] '+esc(hi.doc||"")+'</b> (verwacht: '+esc(hi.verwacht||"")+')<br>'+esc(hi.toelichting||"")+'<br><i>Actie: '+esc(hi.actie||"")+'</i></div>'; });
+    } else if(s.type==="tegenstrijdigheden"){
+      (s.items||[]).forEach(function(it){ h += '<div style="'+aiBox+'border-color:#C77B2E;margin-bottom:6px"><b>['+esc(it.severity||"")+'] '+esc(it.thema||"")+'</b><br>'+(it.bronnen||[]).map(function(b){return "• "+esc(b);}).join("<br>")+'<br><i>Relevantie: '+esc(it.relevantie||"")+'</i></div>'; });
+    } else if(s.type==="arts_template"){
+      if(s.prompt) h += '<p style="font-size:10pt;color:#C77B2E"><i>'+esc(s.prompt)+'</i></p>';
+      (s.subfields||[]).forEach(function(sf,i){
+        var label = typeof sf==="string"?sf:sf.label, c = typeof sf==="string"?null:sf.context, v = inputs[s.num+"::"+i]||"";
+        h += '<p style="margin:6px 0 2px;font-weight:bold">'+esc(label)+'</p>';
+        if(c) h += '<p style="'+ctx+'">Dossier: '+esc(c)+'</p>';
+        h += '<div style="'+artsBox+'">'+(v?nl(v):"&nbsp;")+'</div>';
+      });
+    } else if(s.type==="iwmd_answers"){
+      if(s.intro) h += '<p style="font-size:10pt">'+esc(s.intro)+'</p>';
+      (s.questions||[]).forEach(function(q,i){
+        var qt = typeof q==="string"?q:q.q, c = typeof q==="string"?null:q.context, v = inputs[s.num+"::"+i]||"";
+        h += '<p style="margin:6px 0 2px;font-weight:bold">'+esc(qt)+'</p>';
+        if(c) h += '<p style="'+ctx+'">Dossier: '+esc(c)+'</p>';
+        h += '<div style="'+artsBox+'">'+(v?nl(v):"&nbsp;")+'</div>';
+      });
+    } else if(s.type==="bronnen"){
+      h += '<table style="border-collapse:collapse;font-size:9pt;width:100%"><tr style="background:#EFEFEF">'+
+        ["Nr","Document","Bron","Datum","Pag."].map(function(c){return '<td style="border:1px solid #ccc;padding:3px"><b>'+c+'</b></td>';}).join("")+'</tr>';
+      (s.bronnen||[]).forEach(function(b){
+        h += '<tr>'+[b.nr,b.doc,b.bron,b.datum,b.paginas].map(function(c){return '<td style="border:1px solid #ccc;padding:3px">'+esc(c)+'</td>';}).join("")+'</tr>';
+      });
+      h += '</table>';
+    }
+  });
+
+  h += '<p style="font-size:9pt;color:#666;margin-top:16px;border-top:1px solid #ccc;padding-top:8px">AI ondersteunt bij ordening; de BIG-geregistreerde specialist beoordeelt en autoriseert het definitieve rapport.</p>';
+  h += '<p style="font-size:9pt;color:#666"><span style="background:#EFEFEF;border:1px solid #ccc;padding:1px 4px">Grijs = AI-voorbereid</span> &nbsp; <span style="border:1px solid #888;padding:1px 4px">Wit kader = door arts in te vullen/ingevuld</span></p>';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt;color:#1A1916}</style></head><body>'+h+'</body></html>';
+}
+
+function downloadBlob(blob, name){
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 1000);
+}
+
+function exportWord(){
+  var r = state.results.rapport;
+  if(!r){ alert("Genereer eerst een concept-rapport voordat je exporteert."); return; }
+  var html = buildRapportDocHtml(r.payload, state.dossier.arts_inputs || {});
+  var base = (state.dossier.zaaknummer || "concept").replace(/[^\w.-]+/g,"_") + "-concept-rapport";
+  try{
+    if(window.htmlDocx && window.htmlDocx.asBlob){
+      downloadBlob(window.htmlDocx.asBlob(html), base + ".docx");
+    } else {
+      // Fallback: HTML met Word-MIME (.doc) — opent ook in Word.
+      downloadBlob(new Blob(["﻿"+html], { type:"application/msword" }), base + ".doc");
+    }
+  }catch(e){ alert("Export mislukt: "+e.message); }
+}
+
 function bindActions(){
   $("regenBtn").addEventListener("click", function(){
     var p = activePanel();
     if(p==="tijdlijn" || p==="rapport") generate(p);
     else alert("Selecteer de tijdlijn- of rapport-stap om opnieuw te genereren.");
   });
-  $("wordBtn").addEventListener("click", function(){
-    alert("Word-export (.docx met read-only AI-secties en bewerkbare arts-velden) volgt in een latere stap.");
-  });
+  $("wordBtn").addEventListener("click", exportWord);
   $("assignBtn").addEventListener("click", openAssignModal);
   $("assignClose").addEventListener("click", closeAssignModal);
   $("assignCancel").addEventListener("click", closeAssignModal);
