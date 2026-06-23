@@ -1,7 +1,7 @@
 /* ==========================================================================
    Tijdlijn-demo — chronologische extractie
-   Voorbeeldmodus: hardcoded whiplash-casus. AI-modus: Claude API
-   (werkt alleen in de Claude.ai sandbox, niet op de live site).
+   Voorbeeldmodus: hardcoded whiplash-casus. AI-modus: Mistral via de
+   Supabase Edge Function "generate" (Kinetic.generate).
    Vereist assets/demo/layout.js (Kinetic.esc).
    ========================================================================== */
 (function () {

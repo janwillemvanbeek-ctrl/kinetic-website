@@ -1,7 +1,7 @@
 /* ==========================================================================
    Concept Rapport-demo — IWMD expertiserapport generator
    Voorbeeldmodus: volledig IWMD orthopedisch concept-rapport.
-   AI-modus: Claude API (werkt alleen in de Claude.ai sandbox).
+   AI-modus: Mistral via de Supabase Edge Function "generate" (Kinetic.generate).
    IWMD-vraagstelling en AMA Guides-verwijzingen zijn officieel: niet
    wijzigen zonder overleg (zie CLAUDE.md).
    Vereist assets/demo/layout.js (Kinetic.esc).

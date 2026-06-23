@@ -101,7 +101,7 @@
 .rp-arts-context{font-size:.75rem;color:var(--warm-teal);line-height:1.5;margin-top:.5rem;padding:.5rem .75rem;background:rgba(47,111,106,.04);border-radius:4px;border-left:2px solid var(--warm-teal)}
 .rp-arts-ctx-label{font-weight:600}
 
-.rp-prio-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.rp-prio-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
 
 @media(max-width:900px){.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:1.5rem}.rp-field{grid-template-columns:1fr}}
 @media(max-width:600px){.rapport-body{padding:1.25rem 1rem}.rapport-header{grid-template-columns:1fr}.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}}
