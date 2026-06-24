@@ -112,8 +112,9 @@
     <div class="modal-head"><h2>Toewijzen aan arts</h2><button class="modal-close" id="assignClose" aria-label="Sluiten">&times;</button></div>
     <div class="modal-body">
       <div class="field">
-        <label class="label" for="assignSelect">Arts</label>
-        <select id="assignSelect"></select>
+        <label class="label" for="assignName">Arts</label>
+        <input type="text" id="assignName" list="assignList" placeholder="Naam arts (bv. Edwin)" autocomplete="off">
+        <datalist id="assignList"></datalist>
       </div>
       <div class="form-error" id="assignError"></div>
     </div>

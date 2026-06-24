@@ -347,28 +347,25 @@ function activePanel(){
 
 /* ── Toewijzen aan arts ──────────────────────────────────────────────────── */
 function openAssignModal(){
-  var sel = $("assignSelect"); sel.innerHTML = "";
-  if(state.profiles.length === 0){
-    $("assignError").textContent = "Geen andere gebruikers gevonden. Laat de arts eerst één keer inloggen op /tooling/.";
-    $("assignConfirm").disabled = true;
-  }else{
-    $("assignError").textContent = "";
-    $("assignConfirm").disabled = false;
-    state.profiles.forEach(function(p){
-      var o = document.createElement("option");
-      o.value = p.id; o.textContent = p.naam || p.id; o.setAttribute("data-naam", p.naam || p.id);
-      sel.appendChild(o);
-    });
-  }
+  var dl = $("assignList"); dl.innerHTML = "";
+  // Bekende profielen als suggesties; vrij typen blijft mogelijk.
+  state.profiles.forEach(function(p){
+    var o = document.createElement("option"); o.value = p.naam || p.id; dl.appendChild(o);
+  });
+  $("assignError").textContent = "";
+  $("assignConfirm").disabled = false;
+  $("assignName").value = "";
   $("assignModal").classList.add("open");
+  $("assignName").focus();
 }
 function closeAssignModal(){ $("assignModal").classList.remove("open"); }
 async function confirmAssign(){
-  var sel = $("assignSelect");
-  if(!sel.value){ $("assignError").textContent = "Kies een arts."; return; }
-  var opt = sel.options[sel.selectedIndex];
+  var name = $("assignName").value.trim();
+  if(!name){ $("assignError").textContent = "Vul de naam van de arts in."; return; }
+  // Koppel aan een echt profiel als de naam overeenkomt (anders alleen naam).
+  var match = state.profiles.filter(function(p){ return (p.naam||"") === name; })[0];
   var btn = $("assignConfirm"); btn.disabled = true; btn.textContent = "Toewijzen…";
-  var ok = await updateStatus("bij_arts", { toegewezen_aan_id: sel.value, toegewezen_aan: opt.getAttribute("data-naam") });
+  var ok = await updateStatus("bij_arts", { toegewezen_aan: name, toegewezen_aan_id: match ? match.id : null });
   btn.disabled = false; btn.textContent = "Toewijzen";
   if(ok){ closeAssignModal(); refreshTabState(); }
 }
