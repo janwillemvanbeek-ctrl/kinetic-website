@@ -174,7 +174,11 @@ async function generate(type){
       var payloadText = (vraag ? "VRAAGSTELLING OPDRACHTGEVER:\n"+vraag+"\n\n" : "") + combinedText();
       data = await window.Kinetic.generateRapport(payloadText, ADVIES_PROMPT);
     } else {
-      data = await window.Kinetic.generateRapport(combinedText());
+      // Expertise: voeg de AMA-instructies + geselecteerde tabellen toe aan de
+      // invoer (na het dossier). De IWMD-systeemprompt blijft ongemoeid.
+      var ct = combinedText();
+      var amaBlock = window.Kinetic.amaPromptBlock ? window.Kinetic.amaPromptBlock(ct) : "";
+      data = await window.Kinetic.generateRapport(ct + amaBlock);
     }
     renderInto(type, data, host);
     await saveResult(type, data);
