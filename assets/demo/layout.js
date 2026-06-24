@@ -69,7 +69,7 @@
       '<div class="footer-links">' +
       '<h4>Contact</h4>' +
       '<a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>' +
-      '<a href="tel:+31612345678">+31 6 1234 5678</a>' +
+      '<a href="tel:0852502747">085 250 2747</a>' +
       '</div>' +
       '<div class="footer-links">' +
       '<h4>Juridisch</h4>' +
