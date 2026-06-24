@@ -105,9 +105,27 @@ async function loadDossiers(){
 }
 
 /* ── Nieuw dossier modal ─────────────────────────────────────────────────── */
-function openModal(){
+// Genereer een uniek zaaknummer: KME-[jaar]-[volgnummer, 3 cijfers].
+async function nextZaaknummer(){
+  var year = new Date().getFullYear();
+  var prefix = "KME-" + year + "-";
+  var res = await sb.from("dossiers").select("zaaknummer").like("zaaknummer", prefix + "%");
+  var max = 0;
+  (res.data || []).forEach(function(d){
+    var m = /-(\d+)\s*$/.exec(d.zaaknummer || "");
+    if(m){ var n = parseInt(m[1], 10); if(n > max) max = n; }
+  });
+  return prefix + String(max + 1).padStart(3, "0");
+}
+
+async function openModal(){
+  var f = document.getElementById("f-zaak");
   document.getElementById("modal").classList.add("open");
-  document.getElementById("f-zaak").focus();
+  // Pre-fill met automatisch nummer (bewerkbaar — opdrachtgever-referentie kan dit overschrijven).
+  f.value = "…";
+  try { f.value = await nextZaaknummer(); }
+  catch(e) { f.value = ""; }
+  f.focus(); f.select();
 }
 function closeModal(){
   document.getElementById("modal").classList.remove("open");
