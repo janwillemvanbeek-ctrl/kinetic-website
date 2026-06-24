@@ -285,4 +285,74 @@ var AMA_TABLES = {
 };
 
 window.Kinetic.AMA_TABLES = AMA_TABLES;
+
+/* ── Selectielogica: diagnose-trefwoorden -> relevante tabellen ──────────── */
+var GROUPS = [
+  { keys:["ch17_cervical","ch17_fh","ch17_pe","ch17_cs"], kw:["cervicaal","cervicale","whiplash","wad","nekklach","nekpijn","hnp cervic","cervicobrachialgie","c5-c6","c6-c7"] },
+  { keys:["ch17_lumbar","ch17_fh","ch17_pe","ch17_cs"], kw:["lumbaal","lumbale","rughernia","spondylolisthesis","hnp l","l4-l5","l5-s1","lwk","lage rug"] },
+  { keys:["ch15_shoulder","ch15_fh","ch15_pe","ch15_cs"], kw:["schouder","rotatorcuff","rotator cuff","ac-luxatie","ac luxatie","ac-gewricht","clavicula","supraspinatus","infraspinatus"] },
+  { keys:["ch15_elbow","ch15_fh","ch15_pe","ch15_cs"], kw:["elleboog","olecranon","epicondyl"] },
+  { keys:["ch15_wrist","ch15_fh","ch15_pe","ch15_cs"], kw:["pols","scaphoid","carpaal"] },
+  { keys:["ch15_nerve"], kw:["ulnaris","medianus","radialis","sulcus ulnaris","perifere zenuw"] },
+  { keys:["ch16_knee","ch16_fh","ch16_pe","ch16_cs"], kw:["knie","meniscus","kruisband","tibiaplateau","patella","vkb","akb"] },
+  { keys:["ch16_ankle","ch16_fh","ch16_pe","ch16_cs"], kw:["enkel","voet","calcaneus","achilles","subtalair"] },
+  { keys:["ch16_hip","ch16_fh","ch16_pe","ch16_cs"], kw:["heup","femur","bekken","acetabulum"] },
+  { keys:["ch13_tbi","ch13_consciousness","ch13_emotional"], kw:["tbi","commotio","post commotioneel","postcommotioneel","pcs","hersenletsel"] },
+  { keys:["ch14_dbi"], kw:["ptss","posttraumatisch stress","depressie","angststoornis","psychiatr"] },
+  { keys:["ch03_pain"], kw:["chronische pijn","crps","pijnsyndroom","sudeck","fibromyalgie"] }
+];
+
+// Geeft de relevante tabel-keys terug (ch02_method altijd; appendix_combined bij meerdere groepen).
+function selectAMATables(text){
+  var t = (text || "").toLowerCase();
+  var keys = ["ch02_method"];
+  var matchedGroups = 0;
+  GROUPS.forEach(function(g){
+    var hit = g.kw.some(function(k){ return t.indexOf(k) >= 0; });
+    if(hit){
+      matchedGroups++;
+      g.keys.forEach(function(k){ if(keys.indexOf(k) < 0) keys.push(k); });
+    }
+  });
+  if(matchedGroups >= 2 && keys.indexOf("appendix_combined") < 0) keys.push("appendix_combined");
+  return keys;
+}
+
+function tableText(key){
+  var t = AMA_TABLES[key];
+  if(!t) return "";
+  var body = t.text ? t.text : (t.missing || "");
+  if(!t.text && t.fallback) body += "\n" + t.fallback;
+  return "\n## " + t.title + "\n" + body + "\n";
+}
+
+var AMA_INSTRUCTIONS =
+"=== AMA GUIDES 6E EDITIE — VOORLOPIGE IMPAIRMENT RATING ===\n" +
+"Op basis van de diagnosen in dit dossier, doe een voorlopige impairment rating.\n" +
+"STAP 1: identificeer per diagnose de juiste Regional Grid tabel.\n" +
+"STAP 2: bepaal de Class of Diagnosis (CDX) en default WPI.\n" +
+"STAP 3: bepaal Grade Modifiers uit het dossier: GMFH (functional history / klachten, ADL), GMPE (lichamelijk onderzoek), GMCS (clinical studies / beeldvorming).\n" +
+"STAP 4: Net Adjustment = (GMFH-CDX) + (GMPE-CDX) + (GMCS-CDX).\n" +
+"STAP 5: bepaal Grade (A-E) binnen de class (-2=A, -1=B, 0=C, +1=D, +2=E). Class verandert NIET.\n" +
+"STAP 6: bij meerdere diagnosen bereken de Combined Value.\n" +
+"BELANGRIJK: dit is een AI-voorbereiding. Markeer onzekerheden met [VERIFICATIE ARTS]. " +
+"Als een relevante tabel ontbreekt, neem de ONTBREEKT-markering letterlijk over in opmerkingen. " +
+"De BIG-geregistreerde specialist verifieert en autoriseert.\n\n" +
+"Voeg aan \"sections\" exact één extra sectie toe met deze structuur:\n" +
+"{\"num\":\"AMA\",\"title\":\"Voorlopige Impairment Rating (AMA Guides 6e editie)\",\"badge\":\"ai\",\"type\":\"ama_rating\"," +
+"\"ratings\":[{\"diagnose\":\"\",\"tabel\":\"\",\"cdx\":0,\"default_wpi\":0," +
+"\"gmfh\":{\"waarde\":0,\"onderbouwing\":\"\"},\"gmpe\":{\"waarde\":0,\"onderbouwing\":\"\"},\"gmcs\":{\"waarde\":0,\"onderbouwing\":\"\"}," +
+"\"net_adjustment\":\"\",\"grade\":\"\",\"wpi\":\"\",\"opmerkingen\":[\"\"]}]," +
+"\"combined_value\":\"\"}\n" +
+"Verhoog stats.aiSections met 1 voor deze sectie.";
+
+// Volledig tekstblok om aan de invoer (dossier) toe te voegen bij EXPERTISE.
+function amaPromptBlock(text){
+  var keys = selectAMATables(text);
+  var tablesTxt = keys.map(tableText).join("");
+  return "\n\n" + AMA_INSTRUCTIONS + "\n\nRelevante AMA-tabellen voor dit dossier:\n" + tablesTxt;
+}
+
+window.Kinetic.selectAMATables = selectAMATables;
+window.Kinetic.amaPromptBlock = amaPromptBlock;
 })();
