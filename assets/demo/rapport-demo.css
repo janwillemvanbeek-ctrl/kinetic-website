@@ -103,5 +103,27 @@
 
 .rp-prio-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
 
+/* AMA Guides voorlopige impairment rating */
+.rp-ama{border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;background:#FFF}
+.rp-ama-head{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem}
+.rp-ama-diag{font-weight:600;color:var(--warm-ink);font-size:.9375rem}
+.rp-ama-tabel{font-size:.75rem;color:var(--stone)}
+.rp-ama-row{display:flex;gap:.75rem;align-items:center;margin-bottom:.75rem}
+.rp-ama-class{font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:rgba(47,111,106,.1);color:var(--warm-teal);padding:.2rem .5rem;border-radius:4px}
+.rp-ama-wpi{font-size:.75rem;color:var(--stone)}
+.rp-ama-gm{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.rp-ama-gmcol{background:var(--fog);border-radius:6px;padding:.5rem .65rem}
+.rp-ama-gmlabel{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--stone)}
+.rp-ama-gmval{font-size:1.25rem;font-weight:600;color:var(--warm-ink);line-height:1.2}
+.rp-ama-gmtxt{font-size:.75rem;color:var(--stone);line-height:1.5;margin-top:.15rem}
+.rp-ama-calc{font-size:.8125rem;color:var(--stone);font-family:'Courier New',monospace;margin-bottom:.5rem}
+.rp-ama-result{display:flex;align-items:center;gap:.75rem}
+.rp-ama-grade{font-size:.8125rem;font-weight:700;background:var(--warm-ink);color:#fff;padding:.25rem .6rem;border-radius:4px}
+.rp-ama-finalwpi{font-size:1.125rem;font-weight:600;color:var(--warm-teal)}
+.rp-ama-notes{margin-top:.6rem;display:flex;flex-direction:column;gap:.4rem}
+.rp-ama-note{font-size:.75rem;color:#9a6b14;background:rgba(232,168,56,.1);border-left:2px solid #E8A838;padding:.4rem .6rem;border-radius:4px}
+.rp-ama-combined{margin-top:.5rem;padding:.6rem .8rem;background:rgba(47,111,106,.06);border-radius:6px;font-size:.8125rem;color:var(--warm-ink)}
+@media(max-width:600px){.rp-ama-gm{grid-template-columns:1fr}}
+
 @media(max-width:900px){.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:1.5rem}.rp-field{grid-template-columns:1fr}}
 @media(max-width:600px){.rapport-body{padding:1.25rem 1rem}.rapport-header{grid-template-columns:1fr}.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}}

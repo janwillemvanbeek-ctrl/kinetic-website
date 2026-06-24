@@ -319,6 +319,31 @@ h+='<tr><td>'+esc(b.nr)+'</td><td>'+esc(b.doc)+'</td><td>'+esc(b.bron)+'</td><td
 h+='</tbody></table>';
 }
 
+// AMA Guides voorlopige impairment rating
+if(s.type==="ama_rating"){
+h+='<p class="rp-text"><span class="rp-badge rp-badge-ai">AI-voorbereiding</span> Voorberekening ter voorbereiding; de BIG-geregistreerde specialist verifieert en autoriseert de definitieve rating. AMA Guides berekening is optioneel onder IWMD 2025 (vraag 1l).</p>';
+(s.ratings||[]).forEach(function(r){
+h+='<div class="rp-ama">';
+h+='<div class="rp-ama-head"><span class="rp-ama-diag">'+esc(r.diagnose)+'</span><span class="rp-ama-tabel">'+esc(r.tabel)+'</span></div>';
+h+='<div class="rp-ama-row"><span class="rp-ama-class">Class '+esc(String(r.cdx))+'</span><span class="rp-ama-wpi">default '+esc(String(r.default_wpi))+'% WPI</span></div>';
+h+='<div class="rp-ama-gm">';
+[['FH',r.gmfh],['PE',r.gmpe],['CS',r.gmcs]].forEach(function(g){
+var gm=g[1]||{};
+h+='<div class="rp-ama-gmcol"><div class="rp-ama-gmlabel">GM '+g[0]+'</div><div class="rp-ama-gmval">'+esc(String(gm.waarde!=null?gm.waarde:"—"))+'</div><div class="rp-ama-gmtxt">'+esc(gm.onderbouwing||"")+'</div></div>';
+});
+h+='</div>';
+if(r.net_adjustment)h+='<div class="rp-ama-calc">Net adjustment: <strong>'+esc(r.net_adjustment)+'</strong></div>';
+h+='<div class="rp-ama-result"><span class="rp-ama-grade">Grade '+esc(r.grade||"")+'</span><span class="rp-ama-finalwpi">'+esc(r.wpi||"")+'</span></div>';
+if(r.opmerkingen&&r.opmerkingen.length){
+h+='<div class="rp-ama-notes">';
+r.opmerkingen.forEach(function(o){if(o)h+='<div class="rp-ama-note">'+esc(o)+'</div>';});
+h+='</div>';
+}
+h+='</div>';
+});
+if(s.combined_value)h+='<div class="rp-ama-combined"><strong>Combined Value (meerdere diagnosen):</strong> '+esc(s.combined_value)+'</div>';
+}
+
 h+='</div>';
 });
 
