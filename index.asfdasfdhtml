@@ -903,8 +903,8 @@
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-content">
-            <a href="tel:+31612345678">
-                <span>📞</span> +31 6 1234 5678
+            <a href="tel:0852502747">
+                <span>📞</span> 085 250 2747
             </a>
             <a href="mailto:info@kineticexpertises.nl">
                 <span>✉️</span> info@kineticexpertises.nl
@@ -1205,7 +1205,7 @@
             <div class="footer-links">
                 <h4>Contact</h4>
                 <a href="mailto:info@kineticexpertises.nl">info@kineticexpertises.nl</a>
-                <a href="tel:+31612345678">+31 6 1234 5678</a>
+                <a href="tel:0852502747">085 250 2747</a>
             </div>
             <div class="footer-links">
                 <h4>Juridisch</h4>

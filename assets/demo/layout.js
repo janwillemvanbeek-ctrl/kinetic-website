@@ -19,21 +19,17 @@
     { n: 3, label: "Concept Rapport", href: "rapport-demo.html" }
   ];
 
-  // Logo-SVG; clipPath-id moet uniek zijn per instantie (header/footer).
-  function logoSVG(idSuffix) {
-    var id = "k-cut-" + idSuffix;
-    return '<svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-      '<defs><clipPath id="' + id + '"><path d="M0 0H32V32H0V0Z M14 15H18V17H14V15Z" clip-rule="evenodd"/></clipPath></defs>' +
-      '<rect width="32" height="32" rx="4" fill="#FAF9F7"/>' +
-      '<g clip-path="url(#' + id + ')"><path d="M10 8V24H14V18L21 24H26L17 16L25 8H20L14 14V8H10Z" fill="#141414"/></g>' +
-      '<text x="44" y="22" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FAF9F7" letter-spacing="-0.02em">Kinetic</text>' +
-      '</svg>';
+  // Woordmerk "Kinetic." conform de homepage (tekst, geen SVG-badge).
+  // Op de donkere demo-header/footer: witte tekst met teal punt.
+  function logoWordmark() {
+    return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.01em;color:#FAF9F7;">' +
+      'Kinetic<span style="color:#5FB3A6;">.</span></span>';
   }
 
   function headerHTML() {
     return '<header class="header">' +
       '<nav class="nav-content">' +
-      '<a href="https://kineticmedical.nl" class="logo">' + logoSVG("header") + '</a>' +
+      '<a href="https://kineticmedical.nl" class="logo">' + logoWordmark() + '</a>' +
       '<div class="nav-links">' +
       '<a href="https://kineticmedical.nl/#proces">Werkwijze</a>' +
       '<a href="https://kineticmedical.nl/#voordelen">Voordelen</a>' +
@@ -63,7 +59,7 @@
     var year = new Date().getFullYear();
     return '<footer class="footer">' +
       '<div class="footer-content">' +
-      '<div class="footer-brand">' + logoSVG("footer") +
+      '<div class="footer-brand">' + logoWordmark() +
       '<p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>' +
       '</div>' +
       '<div class="footer-links">' +
