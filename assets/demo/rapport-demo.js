@@ -248,7 +248,11 @@ h+='<p class="rp-text">'+esc(p).replace(/\n/g,'<br>')+'</p>';
 if(s.sources&&s.sources.length){
 h+='<div class="rp-sources"><div class="rp-sources-title">Bronverwijzingen</div>';
 s.sources.forEach(function(src){h+='<div class="rp-source-item">'+esc(src)+'</div>';});
-h+='</div>';
+h+='<button class="rp-source-toggle" type="button" aria-expanded="false">Bekijk de bronroute <span>↓</span></button>';
+h+='<div class="rp-source-route" hidden>';
+h+='<div class="rp-source-step"><b>01</b><span>Medisch dossier</span></div>';
+s.sources.forEach(function(src,i){h+='<div class="rp-source-step"><b>'+String(i+2).padStart(2,"0")+'</b><span>'+esc(src)+'</span></div>';});
+h+='</div></div>';
 }
 }
 
@@ -362,6 +366,30 @@ h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#C77B2E">'+(data.
 h+='</div>';
 
 o.innerHTML=h;
+o.querySelectorAll('.rp-source-toggle').forEach(function(button){
+  button.addEventListener('click',function(){
+    var route=button.nextElementSibling;
+    var open=button.getAttribute('aria-expanded')==='true';
+    button.setAttribute('aria-expanded',String(!open));
+    route.hidden=open;
+  });
+});
+setupReveal(o.querySelectorAll('.rp-section'));
+}
+
+function setupReveal(elements){
+if(!('IntersectionObserver' in window))return;
+elements.forEach(function(element){element.classList.add('is-reveal-pending');});
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.remove('is-reveal-pending');
+      entry.target.classList.add('is-reveal-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.08});
+elements.forEach(function(element){observer.observe(element);});
 }
 
 var currentMode="example";
@@ -413,6 +441,7 @@ document.getElementById("modeExample").addEventListener("click",function(){setMo
 document.getElementById("modeCustom").addEventListener("click",function(){setMode("custom");});
 document.getElementById("extractBtn").addEventListener("click",generateRapport);
 renderRapport(EXAMPLE_RAPPORT);
+setupReveal(document.querySelectorAll('.how-card'));
 }
 
 // Herbruikbaar voor de tooling-werkruimte.

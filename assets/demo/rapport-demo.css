@@ -49,6 +49,13 @@
 .rp-sources{background:var(--fog);border-radius:6px;padding:1rem 1.25rem;margin-top:1rem}
 .rp-sources-title{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.5rem}
 .rp-source-item{font-size:.75rem;color:var(--stone);line-height:1.6;padding:.15rem 0}
+.rp-source-toggle{display:inline-flex;align-items:center;gap:.45rem;margin-top:.7rem;padding:0;border:0;border-bottom:1px solid var(--warm-teal);background:transparent;color:var(--warm-teal);font:600 .75rem/1.5 'Inter',sans-serif;cursor:pointer}
+.rp-source-toggle span{transition:transform .2s ease}
+.rp-source-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
+.rp-source-route{display:grid;grid-template-columns:1fr;gap:.35rem;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--line)}
+.rp-source-route[hidden]{display:none}
+.rp-source-step{display:grid;grid-template-columns:24px 1fr;gap:.5rem;font-size:.75rem;line-height:1.5;color:var(--stone)}
+.rp-source-step b{color:var(--warm-teal);font-family:'IBM Plex Mono',monospace;font-size:.6875rem}
 .rp-bronnen-table{width:100%;border-collapse:collapse;font-size:.8125rem;margin-top:.75rem}
 .rp-bronnen-table th{text-align:left;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);padding:.5rem .75rem;border-bottom:2px solid var(--line);background:var(--fog)}
 .rp-bronnen-table td{padding:.5rem .75rem;border-bottom:1px solid var(--fog);color:var(--stone);vertical-align:top}
@@ -124,6 +131,12 @@
 .rp-ama-note{font-size:.75rem;color:#9a6b14;background:rgba(232,168,56,.1);border-left:2px solid #E8A838;padding:.4rem .6rem;border-radius:4px}
 .rp-ama-combined{margin-top:.5rem;padding:.6rem .8rem;background:rgba(47,111,106,.06);border-radius:6px;font-size:.8125rem;color:var(--warm-ink)}
 @media(max-width:600px){.rp-ama-gm{grid-template-columns:1fr}}
+
+/* Subtiele beweging: inhoud komt rustig in beeld, met respect voor reduced motion. */
+.rp-section,.how-card{transition:opacity .38s ease,transform .38s ease}
+.is-reveal-pending{opacity:0;transform:translateY(12px)}
+.is-reveal-visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rp-section,.how-card,.rp-source-toggle span{transition:none}.is-reveal-pending{opacity:1;transform:none}}
 
 @media(max-width:900px){.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:1.5rem}.rp-field{grid-template-columns:1fr}}
 @media(max-width:600px){.rapport-body{padding:1.25rem 1rem}.rapport-header{grid-template-columns:1fr}.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}}
