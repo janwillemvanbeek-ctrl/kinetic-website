@@ -182,6 +182,11 @@ function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk
 function renderRapport(data,target){
 var o=target||document.getElementById("output");
 var h='<div class="rp-demo-notice"><span class="rp-demo-notice-dot"></span><div><strong>Geanonimiseerd voorbeeld</strong><span>Geen persoonsgegevens, zaakgegevens of herleidbare medische informatie.</span></div></div>';
+h+='<nav class="rp-document-nav" aria-label="Rapportonderdelen">';
+h+='<button type="button" class="rp-document-nav-item is-active" aria-pressed="true" data-report-target="Gegevens opdrachtgever en betrokkene"><span>01</span>Dossier</button>';
+h+='<button type="button" class="rp-document-nav-item" aria-pressed="false" data-report-target="Samenvatting medische informatie"><span>02</span>Tijdlijn</button>';
+h+='<button type="button" class="rp-document-nav-item" aria-pressed="false" data-report-target="Diagnose en beschouwing"><span>03</span>Oordeel</button>';
+h+='</nav>';
 h+='<div class="rapport">';
 
 // Header
@@ -197,7 +202,7 @@ if(data.compleetheid){
 var sc=data.compleetheid.score;
 var col=sc>=90?'var(--warm-teal)':sc>=70?'#C77B2E':'#D94F4F';
 h+='<div class="rp-completeness">';
-h+='<div class="rp-compl-header"><span class="rp-compl-title">Dossiercompleetheid</span><span class="rp-compl-score" style="color:'+col+'"><span>'+sc+'%</span></span></div>';
+h+='<div class="rp-compl-header"><span class="rp-compl-title">Dossiercompleetheid</span><span class="rp-compl-score" style="--score:'+sc+';color:'+col+'"><span>'+sc+'%</span></span></div>';
 h+='<div class="rp-compl-bar"><div class="rp-compl-fill" style="width:'+sc+'%;background:'+col+'"></div></div>';
 h+='<div class="rp-compl-detail">';
 h+='<div class="rp-compl-col"><span class="rp-compl-label">Aanwezig ('+data.compleetheid.aanwezig.length+')</span>';
@@ -383,6 +388,19 @@ o.querySelectorAll('.rp-source-toggle').forEach(function(button){
     var open=button.getAttribute('aria-expanded')==='true';
     button.setAttribute('aria-expanded',String(!open));
     route.hidden=open;
+  });
+});
+o.querySelectorAll('.rp-document-nav-item').forEach(function(button){
+  button.addEventListener('click',function(){
+    var target=button.getAttribute('data-report-target');
+    var heading=Array.prototype.slice.call(o.querySelectorAll('.rp-section-title')).filter(function(title){return title.firstChild.textContent.trim()===target;})[0];
+    if(!heading)return;
+    o.querySelectorAll('.rp-document-nav-item').forEach(function(item){
+      var selected=item===button;
+      item.classList.toggle('is-active',selected);
+      item.setAttribute('aria-pressed',String(selected));
+    });
+    heading.closest('.rp-section').scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
 }
