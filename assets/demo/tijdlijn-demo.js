@@ -26,12 +26,12 @@ stats:{events:8,gaps:2,sources:8,spanDays:815}
 };
 
 function fmtDay(d){
-if(d===0)return"Dag 0";
-if(d<=90)return"Dag "+d;
-if(d<=730){var w=Math.round(d/7);return"Week "+w+" (dag "+d+")";}
+if(d===0)return"ongevalsdatum";
+if(d<=90)return d+" dagen na ongeval";
+if(d<=730){var w=Math.round(d/7);return w+" weken na ongeval";}
 var m=Math.round(d/30.44);
-if(m<=24)return"Maand "+m+" (dag "+d+")";
-var y=(d/365.25).toFixed(1);return y+" jaar (dag "+d+")";
+if(m<=24)return m+" maanden na ongeval";
+var y=(d/365.25).toFixed(1);return y+" jaar na ongeval";
 }
 
 function splitSource(source){
@@ -76,20 +76,9 @@ h+='</div>';
 h+='<div class="tl-summary">';
 h+='<div class="tl-stat"><div class="tl-stat-val">'+data.stats.events+'</div><div class="tl-stat-lbl">Gebeurtenissen</div></div>';
 h+='<div class="tl-stat"><div class="tl-stat-val" style="color:var(--c-seh)">'+data.stats.gaps+'</div><div class="tl-stat-lbl">Hiaten</div></div>';
-h+='<div class="tl-stat"><div class="tl-stat-val">'+data.stats.sources+'</div><div class="tl-stat-lbl">Bronverwijzingen</div></div>';
-h+='<div class="tl-stat"><div class="tl-stat-val">'+fmtDay(data.stats.spanDays)+'</div><div class="tl-stat-lbl">Totale periode</div></div>';
+h+='<div class="tl-stat"><div class="tl-stat-val">'+data.stats.sources+'/'+data.stats.events+'</div><div class="tl-stat-lbl">Brondekking</div></div>';
 h+='</div>';
 o.innerHTML=h;
-}
-
-var currentMode="example";
-function setMode(mode){
-currentMode=mode;
-document.getElementById("modeExample").classList.toggle("active",mode==="example");
-document.getElementById("modeCustom").classList.toggle("active",mode==="custom");
-document.getElementById("inputPanel").classList.toggle("hidden",mode==="example");
-if(mode==="example"){renderTimeline(EXAMPLE_DATA);}
-else{document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><p>Plak een gepseudonimiseerd medisch dossier hierboven en klik op <strong>Extraheer tijdlijn</strong>.</p></div>';}
 }
 
 async function generateTimeline(text){
@@ -102,28 +91,8 @@ var parsed=JSON.parse(content);
 return parsed;
 }
 
-async function extractTimeline(){
-var text=document.getElementById("customInput").value.trim();
-if(!text)return;
-var btn=document.getElementById("extractBtn");
-btn.disabled=true;
-btn.innerHTML='<span class="spinner"></span>Verwerken…';
-document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">AI analyseert het dossier…</p></div>';
-try{
-var parsed=await generateTimeline(text);
-renderTimeline(parsed);
-}catch(err){
-document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--c-seh)"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("NetworkError")>=0||err.message.indexOf("CORS")>=0?'De AI-service is momenteel niet bereikbaar. Controleer je verbinding en probeer het opnieuw.':'Controleer of de tekst een geldig (gepseudonimiseerd) medisch dossier bevat.')+'</p></div>';
-}
-btn.disabled=false;
-btn.innerHTML="Extraheer tijdlijn";
-}
-
 function init(){
-if(!document.getElementById("modeExample")||!document.getElementById("output"))return;
-document.getElementById("modeExample").addEventListener("click",function(){setMode("example");});
-document.getElementById("modeCustom").addEventListener("click",function(){setMode("custom");});
-document.getElementById("extractBtn").addEventListener("click",extractTimeline);
+if(!document.getElementById("output"))return;
 renderTimeline(EXAMPLE_DATA);
 }
 
