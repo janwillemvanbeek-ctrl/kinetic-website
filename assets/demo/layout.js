@@ -19,17 +19,16 @@
     { n: 3, label: "Concept Rapport", href: "rapport-demo.html" }
   ];
 
-  // Woordmerk "Kinetic." conform de homepage (tekst, geen SVG-badge).
-  // Op de donkere demo-header/footer: witte tekst met teal punt.
-  function logoWordmark() {
-    return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.01em;color:#FAF9F7;">' +
+  // Woordmerk conform de homepage; de footer gebruikt de inverse variant.
+  function logoWordmark(inverse) {
+    return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.01em;color:' + (inverse ? '#FAF9F7' : '#1A1916') + ';">' +
       'Kinetic<span style="color:#5FB3A6;">.</span></span>';
   }
 
   function headerHTML() {
     return '<header class="header">' +
       '<nav class="nav-content">' +
-      '<a href="https://kineticmedical.nl" class="logo">' + logoWordmark() + '</a>' +
+      '<a href="https://kineticmedical.nl" class="logo">' + logoWordmark(false) + '</a>' +
       '<div class="nav-links">' +
       '<a href="https://kineticmedical.nl/#proces">Werkwijze</a>' +
       '<a href="https://kineticmedical.nl/#voordelen">Voordelen</a>' +
@@ -59,8 +58,9 @@
     var year = new Date().getFullYear();
     return '<footer class="footer">' +
       '<div class="footer-content">' +
-      '<div class="footer-brand">' + logoWordmark() +
-      '<p>Geautomatiseerde dossiervoorbereiding voor medische expertises. Sneller, nauwkeuriger, compliant.</p>' +
+      '<div class="footer-brand">' + logoWordmark(true) +
+      '<p>Onafhankelijke medische expertises, navolgbaar tot de bron.</p>' +
+      '<div class="footer-trust"><span>AVG</span><span>NEN 7510</span><span>EU-hosting</span></div>' +
       '</div>' +
       '<div class="footer-links">' +
       '<h4>Contact</h4>' +
@@ -69,10 +69,9 @@
       '</div>' +
       '<div class="footer-links">' +
       '<h4>Juridisch</h4>' +
-      '<a href="tooling-demo.html">Pseudonymizer demo</a>' +
-      '<a href="tijdlijn-demo.html">Tijdlijn demo</a>' +
-      '<a href="rapport-demo.html">Rapport demo</a>' +
-      '<a href="https://kineticmedical.nl/privacy">Privacybeleid</a>' +
+      '<a href="privacy.html">Privacybeleid</a>' +
+      '<a href="voorwaarden.html">Algemene voorwaarden</a>' +
+      '<a href="verwerkersovereenkomst.html">Verwerkersovereenkomst</a>' +
       '</div>' +
       '</div>' +
       '<div class="footer-bottom">' +
