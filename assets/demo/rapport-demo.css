@@ -15,7 +15,8 @@
 .rp-demo-notice span:not(.rp-demo-notice-dot){display:block;color:var(--stone);margin-top:.1rem}
 .rapport{background:#FFF;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .rapport-header{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
-.rapport-meta{background:#FFF;padding:1rem 1.25rem}
+.rapport-meta{background:#FFF;padding:1rem 1.25rem;position:relative}
+.rapport-meta:first-child::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--warm-teal)}
 .rapport-meta-label{display:block;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.25rem}
 .rapport-meta-value{font-size:.9375rem;font-weight:600;color:var(--warm-ink)}
 .rapport-meta-redacted{color:#D94F4F;font-family:'Courier New',monospace;font-size:.8125rem}
@@ -27,7 +28,7 @@
 /* SECTIES */
 .rp-section{margin-bottom:2.5rem;page-break-inside:avoid}
 .rp-section:last-child{margin-bottom:0}
-.rp-section-num{font-size:.75rem;font-weight:600;color:var(--warm-teal);margin-bottom:.25rem}
+.rp-section-num{display:inline-flex;align-items:center;min-height:22px;padding:0 .5rem;border-radius:100px;background:rgba(14,94,87,.08);font-size:.625rem;font-weight:700;letter-spacing:.05em;color:var(--warm-teal);margin-bottom:.45rem}
 .rp-section-title{font-size:1rem;font-weight:600;color:var(--warm-ink);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
 .rp-text{font-size:.8125rem;color:var(--stone);line-height:1.75;margin-bottom:.75rem}
 .rp-field{display:grid;grid-template-columns:180px 1fr;gap:.5rem;margin-bottom:.5rem;font-size:.8125rem}
@@ -60,6 +61,12 @@
 .rp-source-route[hidden]{display:none}
 .rp-source-step{display:grid;grid-template-columns:24px 1fr;gap:.5rem;font-size:.75rem;line-height:1.5;color:var(--stone)}
 .rp-source-step b{color:var(--warm-teal);font-family:'IBM Plex Mono',monospace;font-size:.6875rem}
+.rp-medical-timeline{position:relative;margin:1rem 0 1.15rem;padding-left:1.2rem;border-left:1px solid rgba(14,94,87,.24)}
+.rp-timeline-event{position:relative;display:grid;grid-template-columns:90px 1fr;gap:.8rem;padding:0 0 .85rem}
+.rp-timeline-event:last-child{padding-bottom:0}
+.rp-timeline-event::before{content:'';position:absolute;left:-1.47rem;top:.27rem;width:8px;height:8px;border:2px solid var(--warm-teal);border-radius:50%;background:#FFF}
+.rp-timeline-date{font:600 .625rem/1.5 'IBM Plex Mono',monospace;color:var(--warm-teal);letter-spacing:.02em}
+.rp-timeline-content{font-size:.8125rem;line-height:1.55;color:var(--stone)}
 .rp-bronnen-table{width:100%;border-collapse:collapse;font-size:.8125rem;margin-top:.75rem}
 .rp-bronnen-table th{text-align:left;font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);padding:.5rem .75rem;border-bottom:2px solid var(--line);background:var(--fog)}
 .rp-bronnen-table td{padding:.5rem .75rem;border-bottom:1px solid var(--fog);color:var(--stone);vertical-align:top}
@@ -78,7 +85,9 @@
 .rp-completeness{padding:1.35rem 2rem;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#FCFBF8 100%)}
 .rp-compl-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
 .rp-compl-title{font-size:.8125rem;font-weight:600;color:var(--warm-ink)}
-.rp-compl-score{font-size:1.5rem;font-weight:600}
+.rp-compl-score{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:conic-gradient(currentColor 0 78%,var(--fog) 78% 100%);font-size:.8125rem;font-weight:700;position:relative}
+.rp-compl-score::after{content:'';position:absolute;inset:5px;border-radius:50%;background:#FFF;z-index:0}
+.rp-compl-score>span{position:relative;z-index:1}
 .rp-compl-bar{height:6px;background:var(--fog);border-radius:3px;overflow:hidden;margin-bottom:1rem}
 .rp-compl-fill{height:100%;border-radius:3px;transition:width .6s ease}
 .rp-compl-detail{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
@@ -136,11 +145,7 @@
 .rp-ama-combined{margin-top:.5rem;padding:.6rem .8rem;background:rgba(47,111,106,.06);border-radius:6px;font-size:.8125rem;color:var(--warm-ink)}
 @media(max-width:600px){.rp-ama-gm{grid-template-columns:1fr}}
 
-/* Subtiele beweging: inhoud komt rustig in beeld, met respect voor reduced motion. */
-.rp-section,.how-card{transition:opacity .38s ease,transform .38s ease}
-.is-reveal-pending{opacity:0;transform:translateY(12px)}
-.is-reveal-visible{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rp-section,.how-card,.rp-source-toggle span{transition:none}.is-reveal-pending{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.rp-source-toggle span{transition:none}}
 
 @media(max-width:900px){.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:1.5rem}.rp-field{grid-template-columns:1fr}}
 @media(max-width:600px){.rapport-body{padding:1.25rem 1rem}.rapport-header{grid-template-columns:1fr}.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}}

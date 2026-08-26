@@ -34,7 +34,7 @@ var EXAMPLE_RAPPORT = {
     {
       num:"1", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
       fields: [
-        {label:"Opdrachtgever", value:"Aon Letselschade B.V."},
+        {label:"Opdrachtgever", value:"[OPDRACHTGEVER]", redacted:true},
         {label:"Dossierbehandelaar", value:"[PERSOON-8]", redacted:true},
         {label:"Advocaat betrokkene", value:"[PERSOON-9], [ORGANISATIE-3]", redacted:true},
         {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
@@ -197,7 +197,7 @@ if(data.compleetheid){
 var sc=data.compleetheid.score;
 var col=sc>=90?'var(--warm-teal)':sc>=70?'#C77B2E':'#D94F4F';
 h+='<div class="rp-completeness">';
-h+='<div class="rp-compl-header"><span class="rp-compl-title">Dossiercompleetheid</span><span class="rp-compl-score" style="color:'+col+'">'+sc+'%</span></div>';
+h+='<div class="rp-compl-header"><span class="rp-compl-title">Dossiercompleetheid</span><span class="rp-compl-score" style="color:'+col+'"><span>'+sc+'%</span></span></div>';
 h+='<div class="rp-compl-bar"><div class="rp-compl-fill" style="width:'+sc+'%;background:'+col+'"></div></div>';
 h+='<div class="rp-compl-detail">';
 h+='<div class="rp-compl-col"><span class="rp-compl-label">Aanwezig ('+data.compleetheid.aanwezig.length+')</span>';
@@ -244,7 +244,17 @@ h+='<div class="rp-question"><span class="rp-q-num">Vraag '+(i+1)+'</span><p cla
 // Text
 if(s.type==="text"){
 s.paragraphs.forEach(function(p){
-h+='<p class="rp-text">'+esc(p).replace(/\n/g,'<br>')+'</p>';
+if(s.title==="Samenvatting medische informatie"&&p.indexOf("\n")!==-1){
+  h+='<div class="rp-medical-timeline">';
+  p.split("\n").forEach(function(line){
+    var parts=line.split(" — ");
+    var date=parts.shift()||"";
+    h+='<div class="rp-timeline-event"><div class="rp-timeline-date">'+esc(date)+'</div><div class="rp-timeline-content">'+esc(parts.join(" — "))+'</div></div>';
+  });
+  h+='</div>';
+}else{
+  h+='<p class="rp-text">'+esc(p).replace(/\n/g,'<br>')+'</p>';
+}
 });
 if(s.sources&&s.sources.length){
 h+='<div class="rp-sources"><div class="rp-sources-title">Bronverwijzingen</div>';
@@ -375,22 +385,6 @@ o.querySelectorAll('.rp-source-toggle').forEach(function(button){
     route.hidden=open;
   });
 });
-setupReveal(o.querySelectorAll('.rp-section'));
-}
-
-function setupReveal(elements){
-if(!('IntersectionObserver' in window))return;
-elements.forEach(function(element){element.classList.add('is-reveal-pending');});
-var observer=new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){
-      entry.target.classList.remove('is-reveal-pending');
-      entry.target.classList.add('is-reveal-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:0.08});
-elements.forEach(function(element){observer.observe(element);});
 }
 
 var currentMode="example";
@@ -442,7 +436,6 @@ document.getElementById("modeExample").addEventListener("click",function(){setMo
 document.getElementById("modeCustom").addEventListener("click",function(){setMode("custom");});
 document.getElementById("extractBtn").addEventListener("click",generateRapport);
 renderRapport(EXAMPLE_RAPPORT);
-setupReveal(document.querySelectorAll('.how-card'));
 }
 
 // Herbruikbaar voor de tooling-werkruimte.
