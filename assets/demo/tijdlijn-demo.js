@@ -34,6 +34,12 @@ if(m<=24)return"Maand "+m+" (dag "+d+")";
 var y=(d/365.25).toFixed(1);return y+" jaar (dag "+d+")";
 }
 
+function splitSource(source){
+var marker=", p. ";
+var i=source.lastIndexOf(marker);
+return i===-1?{document:source,page:""}:{document:source.slice(0,i),page:"p. "+source.slice(i+marker.length)};
+}
+
 function renderTimeline(data,target){
 var o=target||document.getElementById("output");
 var h='<div class="dossier-header">';
@@ -56,10 +62,13 @@ h+='</div></div>';
 h+='<div class="tl-item" style="animation-delay:'+dl+'">';
 h+='<span class="tl-tag '+ev.tag+'">'+esc(ev.tagLabel)+'</span>';
 h+='<div class="tl-card">';
+h+='<div class="tl-event-main">';
 h+='<div class="tl-date">'+esc(ev.date)+' &middot; <strong>'+fmtDay(ev.day)+'</strong></div>';
 h+='<div class="tl-event-title">'+esc(ev.title)+'</div>';
 h+='<div class="tl-body">'+esc(ev.body)+'</div>';
-h+='<div class="tl-source"><strong>Bron:</strong> '+esc(ev.source)+'</div>';
+h+='</div>';
+var sourceParts=splitSource(ev.source);
+h+='<aside class="tl-source"><span class="tl-source-label">Bron</span><span class="tl-source-text">'+esc(sourceParts.document)+'</span>'+(sourceParts.page?'<span class="tl-source-page">'+esc(sourceParts.page)+'</span>':'')+'</aside>';
 h+='</div></div>';
 }
 });
