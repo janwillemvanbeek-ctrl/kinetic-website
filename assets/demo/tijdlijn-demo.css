@@ -16,14 +16,14 @@
 .dossier-redacted{color:var(--c-seh);font-family:'Courier New',monospace;font-size:.8125rem}
 
 /* TIJDLIJN */
-.timeline{position:relative;padding-left:4.5rem}
-.timeline::before{content:'';position:absolute;left:2.75rem;top:0;bottom:0;width:1.5px;background:var(--line)}
+.timeline{position:relative;padding-left:6.5rem}
+.timeline::before{content:'';position:absolute;left:5rem;top:.3rem;bottom:.3rem;width:1px;background:linear-gradient(var(--line),rgba(231,223,207,.45))}
 .tl-item{position:relative;margin-bottom:2rem}
 .tl-item:last-child{margin-bottom:0}
-.tl-tag{position:absolute;left:-4.5rem;top:.15rem;font-size:.5625rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .5rem;border-radius:3px;color:#FFF;white-space:nowrap;min-width:3rem;text-align:center}
+.tl-tag{position:absolute;left:-6.5rem;top:.45rem;font-size:.5625rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .5rem;border-radius:3px;color:#FFF;white-space:nowrap;min-width:3rem;text-align:center;box-shadow:0 1px 2px rgba(26,25,22,.12)}
 .tl-tag.seh{background:var(--c-seh)}.tl-tag.ortho{background:var(--c-ortho)}.tl-tag.radio{background:var(--c-radio)}.tl-tag.fysio{background:var(--c-fysio)}.tl-tag.pijn{background:var(--c-pijn)}.tl-tag.neuro{background:var(--c-neuro)}.tl-tag.psych{background:var(--c-psych)}.tl-tag.huisarts{background:var(--c-huisarts)}.tl-tag.overig,.tl-tag.mri{background:var(--stone)}
-.tl-item::before{content:'';position:absolute;left:-1.85rem;top:.55rem;width:8px;height:8px;border-radius:50%;background:var(--warm-ink);border:2px solid var(--fog);z-index:1}
-.tl-item.gap-item::before{background:var(--c-seh)}
+.tl-item::before{content:'';position:absolute;left:-1.75rem;top:1.08rem;width:10px;height:10px;border-radius:50%;background:var(--warm-ink);border:2px solid var(--fog);z-index:1;box-shadow:0 0 0 1px rgba(26,25,22,.12)}
+.tl-gap::before{background:var(--c-seh);box-shadow:0 0 0 1px rgba(217,79,79,.14)}
 .tl-card{background:#FFF;border:1px solid var(--line);border-radius:8px;padding:1.25rem 1.5rem;transition:border-color .2s}
 .tl-card:hover{border-color:rgba(47,111,106,.3)}
 .tl-date{font-size:.75rem;color:var(--stone);margin-bottom:.35rem}
@@ -51,4 +51,4 @@
 .tl-item{animation:fadeInCard .4s ease-out both}
 
 @media(max-width:900px){.dossier-header{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.dossier-header{grid-template-columns:1fr}.timeline{padding-left:3.5rem}.tl-tag{left:-3.5rem;font-size:.5rem}}
+@media(max-width:600px){.dossier-header{grid-template-columns:1fr}.timeline{padding-left:5.5rem}.timeline::before{left:4.5rem}.tl-tag{left:-5.5rem;font-size:.5rem}.tl-item::before{left:-1.25rem}}
