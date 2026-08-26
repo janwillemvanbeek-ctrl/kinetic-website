@@ -45,6 +45,23 @@
       [data-screen-label="Kinetic homepage"] .hero-actions a { width:100% !important; text-align:center; }
       [data-screen-label="Kinetic homepage"] section:nth-of-type(7) > div > div, [data-screen-label="Kinetic homepage"] footer > div > div:last-child { flex-direction: column !important; align-items: flex-start !important; }
     }
+    header nav a { position:relative; transition:color .2s ease; }
+    header nav a::after { content:""; position:absolute; right:0; bottom:-8px; left:0; height:1.5px; background:var(--teal); transform:scaleX(0); transform-origin:right; transition:transform .2s ease; }
+    header nav a:hover, header nav a.is-current { color:var(--ink) !important; }
+    header nav a:hover::after, header nav a.is-current::after { transform:scaleX(1); transform-origin:left; }
+    a[href="#contact"], a[href="#proces"] { transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+    a[href="#contact"]:hover, a[href="#proces"]:hover { transform:translateY(-2px); box-shadow:0 10px 20px -14px rgba(14,94,87,.65); }
+    details summary span { transition:transform .2s ease; }
+    details[open] summary span { transform:rotate(45deg); }
+    details[open] p { animation:faqReveal .22s ease both; }
+    .js-reveal { opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
+    .js-reveal.is-visible { opacity:1; transform:none; }
+    @keyframes faqReveal { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce) {
+      header nav a, header nav a::after, a[href="#contact"], a[href="#proces"], details summary span, .js-reveal { transition:none; }
+      details[open] p { animation:none; }
+      .js-reveal { opacity:1; transform:none; }
+    }
   </style>
 </head>
 <body>
@@ -163,5 +180,35 @@
     </div>
   </footer>
 </div>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-screen-label="Kinetic homepage"] > section[id]'));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('header nav a[href^="#"]'));
+    var revealTargets = Array.prototype.slice.call(document.querySelectorAll('[data-screen-label="Kinetic homepage"] > section:not(:first-of-type), [data-screen-label="Kinetic homepage"] > footer'));
+
+    if ('IntersectionObserver' in window) {
+      revealTargets.forEach(function (target) { target.classList.add('js-reveal'); });
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      revealTargets.forEach(function (target) { revealObserver.observe(target); });
+
+      var navigationObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach(function (link) {
+            link.classList.toggle('is-current', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function (section) { navigationObserver.observe(section); });
+    }
+  }());
+</script>
 </body>
 </html>
