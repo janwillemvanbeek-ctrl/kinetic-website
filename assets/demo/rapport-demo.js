@@ -142,7 +142,7 @@ var EXAMPLE_RAPPORT = {
       num:"9", title:"Beantwoording IWMD-vragen", badge:"arts", type:"iwmd_answers",
       intro:"Beantwoording conform IWMD-richtlijnen. Per vraag is de relevante dossiercontext samengevat.",
       questions: [
-        {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", context:"Zie secties 4 en 6 voor AI-voorbereiding."},
+        {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
         {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", context:"Zie sectie 3."},
         {q:"Vraag 3 \u2014 Bevindingen bij lichamelijk en hulponderzoek?", context:null},
         {q:"Vraag 4 \u2014 Diagnose en differentiaaldiagnostische overwegingen?", context:null},
@@ -219,16 +219,17 @@ h+='</div></div>';
 }
 
 h+='<div class="rapport-body">';
-h+='<div class="rapport-title">'+esc((data.meta&&data.meta.titel)||"Concept Medisch Expertiserapport")+'</div>';
-h+='<div class="rapport-subtitle">'+esc((data.meta&&data.meta.subtitel)||("IWMD "+(data.meta.specialisme||"")+" \u2014 AI-voorbereiding door Kinetic"))+'</div>';
+h+='<div class="rapport-kicker">Medische expertise &middot; geanonimiseerd voorbeeld</div>';
+h+='<div class="rapport-title">'+esc((data.meta&&data.meta.titel)||"Voorbeeld van een medisch expertiserapport")+'</div>';
+h+='<div class="rapport-subtitle">'+esc((data.meta&&data.meta.subtitel)||("IWMD-structuur · "+(data.meta.specialisme||"")))+'</div>';
 
 // Sections
 data.sections.forEach(function(s){
 h+='<div class="rp-section">';
 h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
 h+='<h3 class="rp-section-title">'+esc(s.title);
-if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">AI-voorbereid</span>';
-else h+='<span class="rp-badge rp-badge-arts">Arts</span>';
+if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">Dossier voorbereid</span>';
+else h+='<span class="rp-badge rp-badge-arts">Specialist</span>';
 h+='</h3>';
 
 // Fields
@@ -341,7 +342,7 @@ h+='</tbody></table>';
 
 // AMA Guides voorlopige impairment rating
 if(s.type==="ama_rating"){
-h+='<p class="rp-text"><span class="rp-badge rp-badge-ai">AI-voorbereiding</span> Voorberekening ter voorbereiding; de BIG-geregistreerde specialist verifieert en autoriseert de definitieve rating. AMA Guides berekening is optioneel onder IWMD 2025 (vraag 1l).</p>';
+h+='<p class="rp-text"><span class="rp-badge rp-badge-ai">Dossier voorbereid</span> Voorberekening ter ondersteuning; de BIG-geregistreerde specialist verifieert en autoriseert de definitieve rating. AMA Guides berekening is optioneel onder IWMD 2025 (vraag 1l).</p>';
 (s.ratings||[]).forEach(function(r){
 h+='<div class="rp-ama">';
 h+='<div class="rp-ama-head"><span class="rp-ama-diag">'+esc(r.diagnose)+'</span><span class="rp-ama-tabel">'+esc(r.tabel)+'</span></div>';
@@ -369,13 +370,13 @@ h+='</div>';
 
 h+='<div class="rp-page">p. 1\u201314</div>';
 h+='</div>';
-h+='<div class="rp-disclaimer"><strong>Fragment uit concept-rapport.</strong><br>AI ondersteunt bij ordening en bronverwijzing; de BIG-geregistreerde specialist beoordeelt en autoriseert het definitieve rapport.</div>';
+h+='<div class="rp-disclaimer"><strong>Geanonimiseerd rapportfragment.</strong><br>Kinetic structureert dossierinformatie en bronverwijzingen. De BIG-geregistreerde specialist beoordeelt en autoriseert het medische oordeel.</div>';
 h+='</div>';
 
 // Stats
 h+='<div class="rp-summary">';
-h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.aiSections+'</div><div class="rp-stat-lbl">AI-voorbereid</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.artsSections+'</div><div class="rp-stat-lbl">Arts-secties</div></div>';
+h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.aiSections+'</div><div class="rp-stat-lbl">Voorbereide secties</div></div>';
+h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.artsSections+'</div><div class="rp-stat-lbl">Specialistsecties</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.bronnen+'</div><div class="rp-stat-lbl">Bronverwijzingen</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#D94F4F">'+data.stats.hiaten+'</div><div class="rp-stat-lbl">Hiaten</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#C77B2E">'+(data.stats.tegenstrijdigheden||0)+'</div><div class="rp-stat-lbl">Aandachtspunten</div></div>';
@@ -412,7 +413,7 @@ document.getElementById("modeExample").classList.toggle("active",mode==="example
 document.getElementById("modeCustom").classList.toggle("active",mode==="custom");
 document.getElementById("inputPanel").classList.toggle("hidden",mode==="example");
 if(mode==="example"){renderRapport(EXAMPLE_RAPPORT);}
-else{document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><p>Plak een gepseudonimiseerd medisch dossier hierboven en klik op <strong>Genereer concept-rapport</strong>.</p></div>';}
+else{document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><p>Plak hierboven een gepseudonimiseerd medisch dossier en kies <strong>Maak conceptstructuur</strong>.</p></div>';}
 }
 
 async function generateRapportData(text,systemPrompt){
@@ -436,7 +437,7 @@ if(!text)return;
 var btn=document.getElementById("extractBtn");
 btn.disabled=true;
 btn.innerHTML='<span class="spinner"></span>Verwerken…';
-document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">AI genereert concept-rapport…</p></div>';
+document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">Conceptstructuur wordt opgebouwd…</p></div>';
 try{
 var parsed=await generateRapportData(text);
 renderRapport(parsed);
@@ -445,7 +446,7 @@ var msg=(err.message.indexOf("Failed to fetch")>=0||err.message.indexOf("Network
 document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:#D94F4F"><p><strong>Fout bij verwerking:</strong> '+esc(err.message)+'</p><p style="margin-top:.5rem;color:var(--stone)">'+msg+'</p></div>';
 }
 btn.disabled=false;
-btn.innerHTML="Genereer concept-rapport";
+btn.innerHTML="Maak conceptstructuur";
 }
 
 function init(){
