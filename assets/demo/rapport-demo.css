@@ -9,6 +9,10 @@
 }
 
 /* RAPPORT-DOCUMENT */
+.rp-demo-notice{display:flex;align-items:flex-start;gap:.7rem;margin:0 0 1rem;padding:.85rem 1rem;background:rgba(14,94,87,.08);border:1px solid rgba(14,94,87,.16);border-radius:8px;color:#35524d;font-size:.75rem;line-height:1.5}
+.rp-demo-notice-dot{width:7px;height:7px;margin-top:.25rem;border-radius:50%;background:var(--warm-teal);flex:0 0 auto}
+.rp-demo-notice strong{display:block;color:var(--warm-ink);font-size:.75rem}
+.rp-demo-notice span:not(.rp-demo-notice-dot){display:block;color:var(--stone);margin-top:.1rem}
 .rapport{background:#FFF;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .rapport-header{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
 .rapport-meta{background:#FFF;padding:1rem 1.25rem}
@@ -71,7 +75,7 @@
 .rp-stat-lbl{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone)}
 
 /* DOSSIERCOMPLEETHEID */
-.rp-completeness{padding:1.5rem 2rem;border-bottom:1px solid var(--line)}
+.rp-completeness{padding:1.35rem 2rem;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#FCFBF8 100%)}
 .rp-compl-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
 .rp-compl-title{font-size:.8125rem;font-weight:600;color:var(--warm-ink)}
 .rp-compl-score{font-size:1.5rem;font-weight:600}
@@ -82,7 +86,7 @@
 .rp-compl-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--stone);margin-bottom:.25rem}
 .rp-compl-item{font-size:.75rem;color:var(--stone);padding:.2rem 0 .2rem 1rem;position:relative}
 .rp-compl-ok::before{content:'';position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:var(--warm-teal)}
-.rp-compl-miss::before{content:'';position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:#D94F4F}
+.rp-compl-miss{padding-left:0}
 
 /* HIATEN */
 .rp-hiaat{background:#FFF8F5;border:1.5px solid #F5D5C8;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem}

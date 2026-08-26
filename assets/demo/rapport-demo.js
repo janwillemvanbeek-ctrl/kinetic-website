@@ -17,7 +17,7 @@ var EXAMPLE_RAPPORT = {
     geboortedatum: "[GEBOORTEDATUM]",
     status: "Concept",
     specialisme: "Orthopedisch",
-    opdrachtgever: "Aon Letselschade B.V.",
+    opdrachtgever: "[OPDRACHTGEVER]",
     ongevalsdatum: "29-01-2022",
     onderzoeksdatum: "23-04-2024"
   },
@@ -181,7 +181,8 @@ function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk
 
 function renderRapport(data,target){
 var o=target||document.getElementById("output");
-var h='<div class="rapport">';
+var h='<div class="rp-demo-notice"><span class="rp-demo-notice-dot"></span><div><strong>Geanonimiseerd voorbeeld</strong><span>Geen persoonsgegevens, zaakgegevens of herleidbare medische informatie.</span></div></div>';
+h+='<div class="rapport">';
 
 // Header
 h+='<div class="rapport-header">';
