@@ -124,6 +124,7 @@ var EXAMPLE_RAPPORT = {
     {
       num:"7", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
       prompt:"Bevindingen van de onderzoekend arts.",
+      goniometer: [{"label": "Nek · extensie en flexie", "a": [30, 40], "ref": [60, 50], "namen": ["extensie", "flexie"]}, {"label": "Nek · rotatie", "a": [50, 60], "ref": [80, 80], "namen": ["links", "rechts"]}, {"label": "Nek · lateroflexie", "a": [25, 25], "ref": [45, 45], "namen": ["links", "rechts"]}],
       table: {"vergelijk": "Ten opzichte van de normaalwaarde", "kolommen": ["Gemeten", "Normaalwaarde"], "rijen": [["Flexie", "40°", "50°"], ["Extensie", "30°", "60°"], ["Rotatie links", "50°", "80°"], ["Rotatie rechts", "60°", "80°"], ["Lateroflexie links", "25°", "45°"], ["Lateroflexie rechts", "25°", "45°"]]},
       subfields: [
         {label:"Algemene indruk", tekst:"Verzorgde man die zich wat voorzichtig beweegt en tijdens het gesprek regelmatig van houding wisselt. Lengte 182 cm, gewicht 84 kg.", context:null},
@@ -136,6 +137,7 @@ var EXAMPLE_RAPPORT = {
     {
       num:"8", title:"Diagnose en beschouwing", badge:"arts", type:"arts_template",
       prompt:"Per onderdeel staan de relevante dossiergegevens erbij. Zie ook de tegenstrijdigheden in sectie 5b.",
+      quote:"Naar mijn oordeel heeft het ongeval de klachten uitgelokt; een causaal verband acht ik aanwezig.",
       flow: [{"waarde": "Tabel 17-2", "label": "cervicale wervelkolom"}, {"waarde": "Klasse 1", "label": "na grade modifiers"}, {"waarde": "5%", "label": "gehele persoon"}],
       subfields: [
         {label:"Diagnose op vakgebied", tekst:"Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma (WAD graad II), bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links. De ulnarisneuropathie en de cognitieve klachten vallen buiten mijn vakgebied.", context:"Neuroloog: (1) cervicobrachialgie C5\u2013C6, (2) ulnaris neuropathie, (3) PCS. Zie sectie 5b."},
@@ -264,6 +266,7 @@ var EXAMPLE_NVMSR = {
         {label:"Algemeen en inspectie", tekst:"Lengte 181 cm, gewicht 83 kg. Normaal looppatroon. Rustig litteken van 8 cm aan de handpalmzijde van de rechter pols. Geen zwelling of standsafwijking.", context:null},
         {label:"Palpatie en functie", tekst:"Drukpijn over het distale radio-ulnaire gewricht rechts, geen drukpijn in de tabatière. Pro- en supinatie eindstandig pijnlijk. Fijne motoriek normaal.", context:"Fysiotherapie eindverslag T+6m: extensie pols rechts 45°, knijpkracht 70% van links (p. 3)."}
       ],
+      goniometer: [{"label": "Pols · extensie en flexie", "a": [45, 55], "ref": [70, 80], "namen": ["extensie", "flexie"]}, {"label": "Pols · radiaal en ulnair", "a": [15, 25], "ref": [20, 35], "namen": ["radiaal", "ulnair"]}, {"label": "Onderarm · pronatie en supinatie", "a": [80, 70], "ref": [85, 85], "namen": ["pronatie", "supinatie"]}],
       table: {
         vergelijk: "Rechts ten opzichte van links",
         kolommen: ["Rechts (aangedane zijde)","Links"],
@@ -273,6 +276,7 @@ var EXAMPLE_NVMSR = {
     {
       num:"1d", title:"Consistentie", badge:"arts", type:"arts_template",
       prompt:"Samenhang tussen anamnese, dossier en eigen bevindingen.",
+      quote:"De klachten, het beloop in het dossier en mijn bevindingen bij onderzoek zijn onderling consistent.",
       subfields: [{label:"Oordeel over de consistentie", tekst:"De klachten van betrokkene, het beloop in het medisch dossier en mijn bevindingen bij onderzoek zijn onderling consistent.", context:null}]
     },
     {
@@ -407,6 +411,66 @@ function flow(steps){
   return h+'</div>';
 }
 
+function caseEvents(data){
+  var sec=data.sections.filter(function(x){return x.title==="Samenvatting medische informatie";})[0];
+  if(!sec)return [];
+  var lines=(sec.paragraphs[0]||"").split("\n"),ev=[],base=null;
+  lines.forEach(function(line){
+    var p=line.split(" — "),d=p.shift()||"",txt=p.join(" — ");
+    var abs=/^\d{2}-\d{2}-\d{4}$/.test(d);if(abs&&base==null)base=tDays(d);
+    var t=abs?tDays(d,base):tDays(d);if(t==null)return;
+    ev.push({t:t,d:d,lab:txt.split(/[.:]/)[0].replace(/\[[A-Z0-9-]+\]/g,"").replace(/\s+/g," ").trim()});
+  });
+  return ev;
+}
+function coverLine(data){
+  var ev=caseEvents(data);if(ev.length<2)return "";
+  var max=Math.max.apply(null,ev.map(function(e){return e.t;}))||1,W=1000,x0=8,x1=W-8,LV=[30,66,102,138],y=172;
+  var ends=[[],[],[],[]];
+  ev.forEach(function(e){
+    var x=e.t/max*W, w=Math.max(e.d.length*6.6,e.lab.length*6.4)+18, right=(e.t/max)>0.7;
+    var lo=right?x-w:x, hi=right?x:x+w, pick=-1;
+    for(var L=0;L<LV.length;L++){var ok=ends[L].every(function(r){return hi<r[0]||lo>r[1];});if(ok){pick=L;break;}}
+    if(pick<0)pick=LV.length-1;
+    ends[pick].push([lo,hi]);e.lv=pick;e.right=right;
+  });
+  var s='<svg class="kr-caseline" viewBox="0 0 '+W+' 190" preserveAspectRatio="none" aria-hidden="true">';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" class="kr-cl-base"/>';
+  for(var k=1;k<24;k++){var tx=x0+(x1-x0)*k/24;s+='<line x1="'+tx.toFixed(1)+'" y1="'+(y-3)+'" x2="'+tx.toFixed(1)+'" y2="'+(y+3)+'" class="kr-cl-tick"/>';}
+  ev.forEach(function(e){
+    var x=x0+(x1-x0)*e.t/max;
+    s+='<line x1="'+x.toFixed(1)+'" y1="'+y+'" x2="'+x.toFixed(1)+'" y2="'+LV[e.lv]+'" class="kr-cl-stem"/>';
+    s+='<circle cx="'+x.toFixed(1)+'" cy="'+y+'" r="4.5" class="kr-cl-dot"/>';
+  });
+  s+='</svg>';
+  var lab='<div class="kr-caseline-labs">';
+  ev.forEach(function(e){var x=e.t/max*100;lab+='<span class="kr-cl-lab'+(e.right?' kr-cl-r':'')+'" style="left:'+x.toFixed(2)+'%;top:'+LV[e.lv]+'px"><b>'+esc(e.d)+'</b>'+esc(e.lab)+'</span>';});
+  lab+='</div>';
+  return '<figure class="kr-caseline-wrap" aria-label="Het verloop van deze casus">'+lab+s+'<figcaption><span>Ongeval</span><span>'+fmtSpan(max)+'</span></figcaption></figure>';
+}
+function gonio(g){
+  var cx=120,cy=118,r=96;
+  function pt(deg,rad){var t=deg*Math.PI/180;return (cx+rad*Math.sin(t)).toFixed(1)+" "+(cy-rad*Math.cos(t)).toFixed(1);}
+  function arc(a,b,rad){return "M "+pt(-a,rad)+" A "+rad+" "+rad+" 0 "+((a+b)>180?1:0)+" 1 "+pt(b,rad);}
+  var pct=Math.round((g.a[0]+g.a[1])/(g.ref[0]+g.ref[1])*100);
+  var s='<figure class="kr-gonio"><svg viewBox="0 0 240 140" aria-hidden="true">';
+  s+='<path d="'+arc(90,90,r)+'" class="kr-g-frame"/>';
+  [-90,-60,-30,0,30,60,90].forEach(function(d){s+='<line x1="'+pt(d,r-4).split(" ")[0]+'" y1="'+pt(d,r-4).split(" ")[1]+'" x2="'+pt(d,r+4).split(" ")[0]+'" y2="'+pt(d,r+4).split(" ")[1]+'" class="kr-g-tick"/>';});
+  s+='<path d="'+arc(g.ref[0],g.ref[1],r-16)+'" class="kr-g-ref"/>';
+  s+='<path d="'+arc(g.a[0],g.a[1],r-16)+'" class="kr-g-val"/>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+pt(-g.a[0],r-16).split(" ")[0]+'" y2="'+pt(-g.a[0],r-16).split(" ")[1]+'" class="kr-g-ray"/>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+pt(g.a[1],r-16).split(" ")[0]+'" y2="'+pt(g.a[1],r-16).split(" ")[1]+'" class="kr-g-ray"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="3" class="kr-g-hub"/>';
+  s+='<text x="'+cx+'" y="'+(cy-30)+'" class="kr-g-pct">'+pct+'%</text>';
+  s+='</svg><figcaption><strong>'+esc(g.label)+'</strong><span><em>'+esc(g.namen[0])+'</em> '+g.a[0]+'° <i>/ '+g.ref[0]+'°</i></span><span><em>'+esc(g.namen[1])+'</em> '+g.a[1]+'° <i>/ '+g.ref[1]+'°</i></span></figcaption></figure>';
+  return s;
+}
+function gonioSet(list,cap){
+  var h='<div class="kr-gonioset"><div class="kr-gonio-head"><span>'+esc(cap||"Beweeglijkheid")+'</span><span class="kr-gonio-key"><i class="kr-k-val"></i>Gemeten <i class="kr-k-ref"></i>Referentie</span></div><div class="kr-gonio-grid">';
+  list.forEach(function(g){h+=gonio(g);});
+  return h+'</div></div>';
+}
+
 function redact(t){
   return esc(t).replace(/\[([A-Z]+(?:-[0-9]+)?)\]/g,'<span class="kr-redact" title="Gepseudonimiseerd">$1</span>');
 }
@@ -425,6 +489,7 @@ h+='<div class="kr-cover-top"><span class="kr-mark">Kinetic<i>.</i></span><span 
 h+='<div class="kr-cover-kicker">'+(m.kicker||"Letselschade &middot; IWMD")+'</div>';
 h+='<h2 class="kr-cover-title">'+esc(m.titel||"Medische expertise")+'</h2>';
 h+='<p class="kr-cover-sub">'+esc(m.subtitel||("Vraagstelling volgens IWMD · "+(m.specialisme||"")))+'</p>';
+h+=coverLine(data);
 h+='<dl class="kr-cover-meta">';
 h+='<div><dt>Zaaknummer</dt><dd>'+esc(m.zaaknummer||"")+'</dd></div>';
 h+='<div><dt>Betrokkene</dt><dd>'+redact(m.betrokkene||"")+'</dd></div>';
@@ -478,8 +543,9 @@ h+='<div class="kr-share"><div class="kr-share-bar"><span class="kr-share-do" st
 h+='</div>';
 }
 
+var partNo=0;
 data.sections.forEach(function(s,i){
-if(s.deel)h+='<div class="kr-part"><span>'+esc(s.deel)+'</span></div>';
+if(s.deel){partNo++;var pt2=s.deel.split(" \u00b7 "),dm=pt2[0].match(/^Deel (\d+)$/),glyph=dm?dm[1]:(pt2.length>1?pt2[1]:pt2[0]).charAt(0);h+='<div class="kr-chapter"><span class="kr-chapter-no">'+esc(glyph)+'</span><div><span class="kr-chapter-kick">'+esc(pt2.length>1?pt2[0]:"Onderdeel")+'</span><span class="kr-chapter-title">'+esc(pt2.length>1?pt2[1]:pt2[0])+'</span></div></div>';}
 var arts=s.badge==="arts";
 h+='<section class="kr-sec'+(arts?' kr-sec-arts':'')+'" id="'+slug(s.title,i)+'">';
 h+='<div class="kr-sec-head"><span class="kr-sec-num">'+esc(secNum(s.num))+'</span><h3>'+esc(s.title)+'</h3><span class="kr-sec-by">'+(arts?'Arts':'Dossierordening')+'</span></div>';
@@ -536,6 +602,7 @@ s.items.forEach(function(it){
 
 if(s.type==="arts_template"){
 if(s.prompt)h+='<p class="kr-intro">'+esc(s.prompt)+'</p>';
+if(s.quote)h+='<blockquote class="kr-quote"><p>'+redact(s.quote)+'</p><cite>'+esc(s.quoteBy||"De onderzoekend arts")+'</cite></blockquote>';
 s.subfields.forEach(function(sf){
   var label=typeof sf==="string"?sf:sf.label, ctx=typeof sf==="string"?null:sf.context, tx=typeof sf==="string"?null:sf.tekst;
   h+='<div class="kr-finding"><h4>'+esc(label)+'</h4>';
@@ -549,7 +616,8 @@ if(s.table){
   h+='</tr></thead><tbody>';
   s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><th scope="row">'+esc(row[0])+'</th>';s.table.kolommen.forEach(function(k,ki){h+='<td'+(ki===0?' class="kr-affected"':'')+'>'+(row[ki+1]!=null?esc(row[ki+1]):'&middot;&middot;&middot;')+'</td>';});h+='</tr>';});
   h+='</tbody></table></div>';
-  h+=compareBars(s.table);
+  if(s.goniometer)h+=gonioSet(s.goniometer,s.table.vergelijk);
+  h+=compareBars(s.goniometer?{vergelijk:"Kracht",rijen:s.table.rijen.filter(function(r){return /kracht/i.test(r[0]);})}:s.table);
 }
 if(s.flow)h+=flow(s.flow);
 }
