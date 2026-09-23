@@ -51,8 +51,8 @@ var EXAMPLE_RAPPORT = {
    },
    {
     "label": "Functieverlies (AMA)",
-    "waarde": "Open",
-    "toelichting": "Rekenbijlage; niet gelijk aan arbeidsongeschiktheid"
+    "waarde": "3%",
+    "toelichting": "Gehele persoon; voorbeeldberekening, te verifiëren door de specialist"
    },
    {
     "label": "Dossier",
@@ -536,12 +536,17 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Het percentage wordt vastgesteld door de ondertekenend specialist. Elke stap staat in de rekenbijlage, zodat de uitkomst te controleren is.",
+     "tekst": "Voorbeeldberekening: 3% functieverlies van de gehele persoon volgens de AMA Guides, 6e druk. De keuze van de diagnoserij en de grade modifiers is een oordeel van de ondertekenend specialist en wordt door hem geverifieerd.",
      "context": null
     },
     {
-     "label": "Versie en rekenroute",
-     "tekst": "De ondertekenend specialist vermeldt vóór berekening de exacte editie, publicatieversie en eventuele update, en past daarna de rekenroute toe die bij die versie hoort.",
+     "label": "Basis",
+     "tekst": "De klachten zijn sinds het ongeval herhaald gedocumenteerd. Er zijn radiculaire klachten zonder objectiveerbare radiculopathie. Daarom is gekozen voor de rij aspecifieke nekklachten, niet voor de rij met discusafwijkingen en radiculopathie.",
+     "context": "Zie 1c, 1f en aandachtspunt 1."
+    },
+    {
+     "label": "Onzekerheid",
+     "tekst": "De uitkomst is weinig gevoelig voor de functionele historie: met modifier 0 blijft het 3%. Telt het aanvullend onderzoek niet mee, dan is de uitkomst 2 tot 3%.",
      "context": null
     },
     {
@@ -552,36 +557,44 @@ var EXAMPLE_RAPPORT = {
    ],
    "stappen": [
     [
-     "Editie, publicatieversie en eventuele update",
-     "Door de ondertekenend specialist in te vullen"
+     "Editie en versie",
+     "AMA Guides, 6e druk; eventuele update door de specialist te bevestigen"
     ],
     [
-     "Methode en reden (bijvoorbeeld diagnosegebonden)",
-     "Door de ondertekenend specialist in te vullen"
+     "Methode",
+     "Diagnosegebonden (DBI), hoofdstuk 17, wervelkolom"
     ],
     [
-     "Diagnoserij in de regionale tabel cervicale wervelkolom",
-     "[DIAGNOSERIJ] · door de ondertekenend specialist in te vullen"
+     "Diagnoserij (tabel 17-2)",
+     "Aspecifieke chronische nekklachten na sprain/strain-letsel, met aanhoudende axiale en niet-objectiveerbare radiculaire klachten, herhaald gedocumenteerd"
     ],
     [
-     "Klasse en reden",
-     "Door de ondertekenend specialist in te vullen"
+     "Klasse",
+     "Klasse 1: 1–3% gehele persoon (graad A–E: 1, 1, 2, 3, 3)"
     ],
     [
-     "Standaardwaarde (default grade)",
-     "[%] · door de ondertekenend specialist in te vullen"
+     "Standaardwaarde",
+     "Graad C = 2%"
     ],
     [
-     "Grade modifiers: functionele historie, lichamelijk onderzoek, klinische studies",
-     "Door de ondertekenend specialist in te vullen"
+     "Grade modifier functionele historie (tabel 17-6)",
+     "1, op basis van [VRAGENLIJST]"
     ],
     [
-     "Berekening volgens de rekenroute van de vastgelegde versie",
-     "Door de ondertekenend specialist in te vullen"
+     "Grade modifier lichamelijk onderzoek (tabel 17-7)",
+     "2: Spurling links positief met reproduceerbare uitstralende pijn"
     ],
     [
-     "Uiteindelijke grade en functieverlies gehele persoon",
-     "[%] · door de ondertekenend specialist in te vullen"
+     "Grade modifier aanvullend onderzoek (tabel 17-9)",
+     "2: MRI-bevindingen C5–C6 passend bij het klinisch beeld"
+    ],
+    [
+     "Netto-aanpassing",
+     "(1 − 1) + (2 − 1) + (2 − 1) = +2, dus graad E"
+    ],
+    [
+     "Functieverlies gehele persoon",
+     "3%"
     ]
    ]
   },
