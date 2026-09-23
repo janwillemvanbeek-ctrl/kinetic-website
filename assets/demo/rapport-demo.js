@@ -12,18 +12,18 @@ var esc = window.Kinetic.esc;
 
 var EXAMPLE_RAPPORT = {
   meta: {
-    zaaknummer: "2024-KME-04892",
+    zaaknummer: "2024-KME-01583",
     betrokkene: "[PERSOON-1]",
     geboortedatum: "[GEBOORTEDATUM]",
     status: "Concept",
     specialisme: "Orthopedisch",
     opdrachtgever: "[OPDRACHTGEVER]",
-    ongevalsdatum: "29-01-2022",
-    onderzoeksdatum: "23-04-2024",
+    ongevalsdatum: "07-10-2021",
+    onderzoeksdatum: "14-03-2024",
     kicker: "Letselschade &middot; IWMD &middot; fictief voorbeeld",
     titel: "Medische expertise orthopedie",
     subtitel: "Letselschade · vraagstelling volgens IWMD",
-    kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 23-04-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "9 van 12 stukken", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
+    kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 14-03-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "9 van 12 stukken", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
     ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
   },
   compleetheid: {
@@ -45,9 +45,9 @@ var EXAMPLE_RAPPORT = {
         {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
         {label:"Geboortedatum", value:"[GEBOORTEDATUM]", redacted:true},
         {label:"Adres", value:"[ADRES-1]", redacted:true},
-        {label:"Ongevalsdatum", value:"29-01-2022"},
-        {label:"Aard ongeval", value:"Verkeersongeval (kop-staartbotsing A27)"},
-        {label:"Datum onderzoek", value:"23-04-2024"},
+        {label:"Ongevalsdatum", value:"07-10-2021"},
+        {label:"Aard ongeval", value:"Verkeersongeval (kop-staartbotsing)"},
+        {label:"Datum onderzoek", value:"14-03-2024"},
         {label:"Plaats onderzoek", value:"[ORGANISATIE-5], [ADRES-2]"}
       ]
     },
@@ -70,43 +70,43 @@ var EXAMPLE_RAPPORT = {
     {
       num:"3", title:"Medische voorgeschiedenis", badge:"ai", type:"text",
       paragraphs: [
-        "[PERSOON-1] was voor het ongeval van 29 januari 2022 onder behandeling bij de huisarts voor spanningshoofdpijn (2019), waarvoor incidenteel paracetamol werd gebruikt. Er was geen sprake van nekklachten, schouderklachten of overige klachten aan het bewegingsapparaat.",
+        "[PERSOON-1] was voor het ongeval van 7 oktober 2021 onder behandeling bij de huisarts voor spanningshoofdpijn (2018), waarvoor incidenteel paracetamol werd gebruikt. Er was geen sprake van nekklachten, schouderklachten of overige klachten aan het bewegingsapparaat.",
         "In 2020 vond een routinematige gezondheidskeuring plaats via de werkgever, [ORGANISATIE-4], zonder bijzonderheden. Betrokkene was volledig arbeidsgeschikt."
       ],
-      sources: ["Huisartsjournaal [ORGANISATIE-1], 2018\u20132022, p. 1\u20133","Keuringsrapport [ORGANISATIE-4], 14-09-2020, p. 1"]
+      sources: ["Huisartsjournaal [ORGANISATIE-1], 2016\u20132021, p. 1\u20133","Keuringsrapport [ORGANISATIE-4], 03-03-2020, p. 1"]
     },
     {
       num:"4", title:"Toedracht en klachtenbeloop", badge:"ai", type:"text",
       paragraphs: [
-        "Op 29 januari 2022 was [PERSOON-1] als bestuurder betrokken bij een kop-staartbotsing op de A27 ter hoogte van afslag Lexmond. Betrokkene stond stil in een file en werd van achteren aangereden door een vrachtwagen. De airbags zijn niet afgegaan. Betrokkene kon zelfstandig het voertuig verlaten maar ervoer direct nekpijn, hoofdpijn en duizeligheid.",
+        "Op 7 oktober 2021 was [PERSOON-1] als bestuurder betrokken bij een kop-staartbotsing op een provinciale weg. Betrokkene stond stil in een file en werd van achteren aangereden door een vrachtwagen. De airbags zijn niet afgegaan. Betrokkene kon zelfstandig het voertuig verlaten maar ervoer direct nekpijn, hoofdpijn en duizeligheid.",
         "Op de SEH van [ORGANISATIE-2] werd een WAD graad II vastgesteld. R\u00f6ntgenonderzoek toonde geen fracturen of luxaties. In de weken erna namen klachten toe: cervicobrachialgie links, dagelijkse hoofdpijn (VAS 6\u20137) en concentratiestoornissen.",
-        "Fysiotherapie (16 weken, 2x/week) bij [ORGANISATIE-6] gaf beperkte verbetering. MRI cervicaal (18-08-2022): discusdegeneratie C5\u2013C6 met protrusie en foraminastenose links. Verwijzing pijnrevalidatie (oktober 2022), facetdenervatie C4\u2013C6 (januari 2023) met matige en tijdelijke pijnreductie. In maart 2023 start CGT bij Post Commotioneel Syndroom."
+        "Fysiotherapie (16 weken, 2x/week) bij [ORGANISATIE-6] gaf beperkte verbetering. MRI cervicaal (03-06-2022): discusdegeneratie C5\u2013C6 met protrusie en foraminastenose links. Verwijzing pijnrevalidatie (augustus 2022), facetdenervatie C4\u2013C6 (november 2022) met matige en tijdelijke pijnreductie. In februari 2023 start CGT bij Post Commotioneel Syndroom."
       ],
-      sources: ["SEH-verslag [ORGANISATIE-2], 29-01-2022, p. 1\u20132","Huisartsbrief [ORGANISATIE-1], 14-02-2022, p. 1","Fysiotherapie-intake [ORGANISATIE-6], 21-02-2022, p. 3","MRI Radiologie [ORGANISATIE-2], 18-08-2022, p. 1","Verwijsbrief [ORGANISATIE-7], 12-10-2022, p. 1\u20132","Operatieverslag, 15-01-2023, p. 1","Intake CGT [ORGANISATIE-8], 08-03-2023, p. 1\u20132"]
+      sources: ["SEH-verslag [ORGANISATIE-2], 07-10-2021, p. 1\u20132","Huisartsbrief [ORGANISATIE-1], 22-10-2021, p. 1","Fysiotherapie-intake [ORGANISATIE-6], 01-11-2021, p. 3","MRI Radiologie [ORGANISATIE-2], 03-06-2022, p. 1","Verwijsbrief [ORGANISATIE-7], 19-08-2022, p. 1\u20132","Operatieverslag, 24-11-2022, p. 1","Intake CGT [ORGANISATIE-8], 02-02-2023, p. 1\u20132"]
     },
     {
       num:"5", title:"Samenvatting medische informatie", badge:"ai", type:"text",
       paragraphs: [
-        "29-01-2022 \u2014 SEH [ORGANISATIE-2]. WAD II. R\u00f6ntgen: geen fracturen.\n14-02-2022 \u2014 Huisarts. Cervicobrachialgie links, verwijzing fysiotherapie.\n21-02-2022 \u2014 Start fysiotherapie. Flexie 35\u00b0, extensie 25\u00b0.\n18-08-2022 \u2014 MRI cervicaal: protrusie C5\u2013C6, foraminastenose links.\n12-10-2022 \u2014 Verwijzing pijnrevalidatie.\n15-01-2023 \u2014 Facetdenervatie C4\u2013C6.\n08-03-2023 \u2014 Start CGT (Post Commotioneel Syndroom).\n23-04-2024 \u2014 Expertiseonderzoek (heden)."
+        "07-10-2021 \u2014 SEH [ORGANISATIE-2]. WAD II. R\u00f6ntgen: geen fracturen.\n22-10-2021 \u2014 Huisarts. Cervicobrachialgie links, verwijzing fysiotherapie.\n01-11-2021 \u2014 Start fysiotherapie. Flexie 35\u00b0, extensie 25\u00b0.\n03-06-2022 \u2014 MRI cervicaal: protrusie C5\u2013C6, foraminastenose links.\n19-08-2022 \u2014 Verwijzing pijnrevalidatie.\n24-11-2022 \u2014 Facetdenervatie C4\u2013C6.\n02-02-2023 \u2014 Start CGT (Post Commotioneel Syndroom).\n14-03-2024 \u2014 Expertiseonderzoek (heden)."
       ],
       sources: ["Zie bronverwijzingen secties 3 en 4"]
     },
     {
       num:"5a", title:"Hiaten in het dossier", badge:"ai", type:"hiaten",
       hiaten: [
-        {status:"ontbrekend", prio:"kritiek", doc:"Fysiotherapie eindverslag", verwacht:"Juni 2022", toelichting:"Intake aanwezig (21-02-2022), maar geen afsluitend verslag. Behandelresultaat niet objectief vast te stellen.", actie:"Opvragen bij [ORGANISATIE-6]"},
-        {status:"ontbrekend", prio:"kritiek", doc:"Intake/voortgangsverslag pijnrevalidatie", verwacht:"Nov 2022", toelichting:"Verwijzing 12-10-2022, maar geen intake of behandelplan van [ORGANISATIE-7] aangetroffen.", actie:"Opvragen bij [ORGANISATIE-7]"},
-        {status:"ontbrekend", prio:"belangrijk", doc:"Neuropsychologisch onderzoek (NPA)", verwacht:"Q1 2024", toelichting:"Neuroloog verwees voor objectivering cognitieve klachten bij PCS. Geen NPA-rapport in dossier.", actie:"Opvragen bij verwijzend neuroloog of betrokkene"}
+        {status:"ontbrekend", prio:"kritiek", doc:"Fysiotherapie eindverslag", verwacht:"Februari 2022", toelichting:"Intake aanwezig (01-11-2021), maar geen afsluitend verslag. Behandelresultaat niet objectief vast te stellen.", actie:"Opvragen bij [ORGANISATIE-6]"},
+        {status:"ontbrekend", prio:"kritiek", doc:"Intake/voortgangsverslag pijnrevalidatie", verwacht:"Sep 2022", toelichting:"Verwijzing 19-08-2022, maar geen intake of behandelplan van [ORGANISATIE-7] aangetroffen.", actie:"Opvragen bij [ORGANISATIE-7]"},
+        {status:"ontbrekend", prio:"belangrijk", doc:"Neuropsychologisch onderzoek (NPA)", verwacht:"Q4 2023", toelichting:"Neuroloog verwees voor objectivering cognitieve klachten bij PCS. Geen NPA-rapport in dossier.", actie:"Opvragen bij verwijzend neuroloog of betrokkene"}
       ]
     },
     {
       num:"5b", title:"Tegenstrijdigheden en aandachtspunten", badge:"ai", type:"tegenstrijdigheden",
       items: [
         {thema:"Cervicale afwijkingen: pre-existent of traumatisch?", severity:"kritiek",
-         bronnen:["CT 29-01-2022: \u201cspondylose C5\u2013C6, pre-existent\u201d (bron 1, p. 2)","MRI 18-08-2022: \u201cprotrusie C5\u2013C6, foraminastenose\u201d (bron 5, p. 1)","Neuroloog 08-03-2023: \u201ccervicobrachialgie, traumatisch geagraveerd\u201d (bron 8, p. 1)"],
+         bronnen:["CT 07-10-2021: \u201cspondylose C5\u2013C6, pre-existent\u201d (bron 1, p. 2)","MRI 03-06-2022: \u201cprotrusie C5\u2013C6, foraminastenose\u201d (bron 5, p. 1)","Neuroloog 02-02-2023: \u201ccervicobrachialgie, traumatisch geagraveerd\u201d (bron 8, p. 1)"],
          relevantie:"Centraal voor IWMD-vraag 5 (causaliteit). De arts dient te beoordelen of de protrusie nieuw is of progressie van pre-existente degeneratie."},
         {thema:"Ulnaris neuropathie: traumatisch of pre-existent?", severity:"belangrijk",
-         bronnen:["EMG 12-01-2023: \u201cmogelijk traumatisch dan wel pre\u00ebxistente sulcus ulnaris\u201d (bron 7, p. 2)","Neuroloog: \u201culnaris neuropathie, post-traumatisch\u201d (bron 8, p. 2)"],
+         bronnen:["EMG 17-11-2022: \u201cmogelijk traumatisch dan wel pre\u00ebxistente sulcus ulnaris\u201d (bron 7, p. 2)","Neuroloog: \u201culnaris neuropathie, post-traumatisch\u201d (bron 8, p. 2)"],
          relevantie:"Neurofysioloog laat causaliteit open; neuroloog concludeert post-traumatisch. Relevant voor IWMD-vraag 8 (pre-existent lijden)."},
         {thema:"Cognitieve klachten: PCS of stemmingsgerelateerd?", severity:"aandacht",
          bronnen:["Neuroloog: \u201cPost Commotioneel Syndroom\u201d (bron 8)","NPA ontbreekt \u2014 klachten niet geobjectiveerd"],
@@ -116,10 +116,10 @@ var EXAMPLE_RAPPORT = {
     {
       num:"6", deel:"Onderzoek en oordeel", title:"Huidige klachten (anamnese)", badge:"arts", type:"text",
       paragraphs: [
-        "Betrokkene rapporteert bij onderzoek d.d. 23-04-2024:",
+        "Betrokkene rapporteert bij onderzoek d.d. 14-03-2024:",
         "Nek: VAS 5\u20136/10, uitstraling linker schouder/arm. Verergering bij beeldschermwerk en autorijden.\nHoofdpijn: 3\u20134x/week, fronto-temporaal, 4\u20138 uur.\nCognitief: verminderde concentratie, multitasking bemoeilijkt.\nSlaap: moeite met inslapen, 1\u20132x/nacht wakker.\nArbeid: 40% arbeidsongeschikt, werkt 3 dagen/week bij [ORGANISATIE-4]."
       ],
-      sources: ["Anamnese 23-04-2024","Brief neurologie 08-03-2023, p. 1\u20132"]
+      sources: ["Anamnese 14-03-2024","Brief neurologie 02-02-2023, p. 1\u20132"]
     },
     {
       num:"7", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
@@ -128,10 +128,10 @@ var EXAMPLE_RAPPORT = {
       table: {"vergelijk": "Ten opzichte van de normaalwaarde", "kolommen": ["Gemeten", "Normaalwaarde"], "rijen": [["Flexie", "40°", "50°"], ["Extensie", "30°", "60°"], ["Rotatie links", "50°", "80°"], ["Rotatie rechts", "60°", "80°"], ["Lateroflexie links", "25°", "45°"], ["Lateroflexie rechts", "25°", "45°"]]},
       subfields: [
         {label:"Algemene indruk", tekst:"Verzorgde man die zich wat voorzichtig beweegt en tijdens het gesprek regelmatig van houding wisselt. Lengte 182 cm, gewicht 84 kg.", context:null},
-        {label:"Cervicale wervelkolom", tekst:"Geen standsafwijking. Actieve beweeglijkheid: flexie 40°, extensie 30°, rotatie links 50° en rechts 60°, lateroflexie 25° beiderzijds. Eindstandige pijn bij extensie en rotatie naar links. Drukpijn paravertebraal C4–C6 links, verhoogde spierspanning van de m. trapezius links.", context:"Vergelijk: fysio 21-02-2022 (flex 35\u00b0, ext 25\u00b0), neuroloog 08-03-2023 (rot L 40\u00b0, R 55\u00b0, Spurling+). MRI: protrusie C5\u2013C6."},
+        {label:"Cervicale wervelkolom", tekst:"Geen standsafwijking. Actieve beweeglijkheid: flexie 40°, extensie 30°, rotatie links 50° en rechts 60°, lateroflexie 25° beiderzijds. Eindstandige pijn bij extensie en rotatie naar links. Drukpijn paravertebraal C4–C6 links, verhoogde spierspanning van de m. trapezius links.", context:"Vergelijk: fysio 01-11-2021 (flex 35\u00b0, ext 25\u00b0), neuroloog 02-02-2023 (rot L 40\u00b0, R 55\u00b0, Spurling+). MRI: protrusie C5\u2013C6."},
         {label:"Neurologisch bovenste extremiteiten", tekst:"Kracht symmetrisch 5/5. Reflexen symmetrisch opwekbaar. Verminderd gevoel aan de radiale zijde van de linker onderarm (C6) en aan dig IV–V links. Voor de duiding van de ulnarisklachten verwijs ik naar de neuroloog.", context:"EMG: ulnaris neuropathie elleboog L (42 m/s, N>50). Hypoesthesie C6 L, sensibiliteitsverlies dig IV\u2013V."},
-        {label:"Provocatietesten", tekst:"Spurling links positief met uitstraling naar de schouder, rechts negatief.", context:"Spurling positief L (neuroloog 08-03-2023)."},
-        {label:"Aanvullend onderzoek", tekst:"De MRI van 18-08-2022 heb ik zelf bekeken: discusdegeneratie C5–C6 met protrusie en foraminastenose links, passend bij het verslag. Geen aanvullend onderzoek verricht.", context:null}
+        {label:"Provocatietesten", tekst:"Spurling links positief met uitstraling naar de schouder, rechts negatief.", context:"Spurling positief L (neuroloog 02-02-2023)."},
+        {label:"Aanvullend onderzoek", tekst:"De MRI van 03-06-2022 heb ik zelf bekeken: discusdegeneratie C5–C6 met protrusie en foraminastenose links, passend bij het verslag. Geen aanvullend onderzoek verricht.", context:null}
       ]
     },
     {
@@ -143,7 +143,7 @@ var EXAMPLE_RAPPORT = {
         {label:"Diagnose op vakgebied", tekst:"Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma (WAD graad II), bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links. De ulnarisneuropathie en de cognitieve klachten vallen buiten mijn vakgebied.", context:"Neuroloog: (1) cervicobrachialgie C5\u2013C6, (2) ulnaris neuropathie, (3) PCS. Zie sectie 5b."},
         {label:"Causaal verband", tekst:"De nekklachten zijn direct na het ongeval ontstaan, bij een blanco voorgeschiedenis voor het bewegingsapparaat. De degeneratie C5–C6 bestond al, maar gaf geen klachten. Naar mijn oordeel heeft het ongeval de klachten uitgelokt; een causaal verband acht ik aanwezig.", context:"CT SEH: spondylose pre-existent. MRI: protrusie. Neuroloog: traumatisch geagraveerd. EMG: causaliteit open. \u2192 Zie tegenstrijdigheden 5b."},
         {label:"Pre-existente factoren", tekst:"Asymptomatische degeneratie C5–C6 en L4–L5. Zonder ongeval hadden op termijn ook nekklachten kunnen ontstaan; het moment en de omvang daarvan zijn niet met redelijke zekerheid vast te stellen.", context:"Spondylose C5\u2013C6 + L4\u2013L5 (CT/r\u00f6ntgen). Geen klachten in huisartsjournaal v\u00f3\u00f3r ongeval."},
-        {label:"Prognose en eindtoestand", tekst:"Ruim twee jaar na het ongeval en na uitgebreide behandeling verwacht ik geen wezenlijke verbetering meer. Eindtoestand per 23-04-2024.", context:"Neuroloog: PCS-herstel 6\u201312 mnd. Bedrijfsarts: volledige werkhervatting niet voor sept 2023. Huidig (apr 2024): 40% AO."},
+        {label:"Prognose en eindtoestand", tekst:"Ruim twee jaar na het ongeval en na uitgebreide behandeling verwacht ik geen wezenlijke verbetering meer. Eindtoestand per 14-03-2024.", context:"Neuroloog: PCS-herstel 6\u201312 mnd. Bedrijfsarts: volledige werkhervatting niet voor juli 2023. Huidig (mrt 2024): 40% AO."},
         {label:"Blijvende invaliditeit (AMA Guides 6e ed.)", tekst:"Cervicale wervelkolom volgens tabel 17-2, klasse 1, na correctie met de grade modifiers 5% van de gehele persoon. De ulnarisneuropathie en de cognitieve klachten beoordeelt de neuroloog.", context:"Relevante chapters: Ch.17 Spine (Table 17-2 Cervical DBI) voor cervicaal syndroom. Ch.15 Upper Extremities (Table 15-5 Clavicle/AC) voor AC-luxatie. Ch.13 CNS/PNS (Table 13-12 Peripheral Nerve) voor ulnaris neuropathie. Ch.13 (Table 13-6 TBI) voor PCS."}
       ]
     },
@@ -152,11 +152,11 @@ var EXAMPLE_RAPPORT = {
       intro:"De arts beantwoordt de vraagstelling. Per vraag staan de relevante bronnen uit het dossier.",
       questions: [
         {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", antwoord:"Zie sectie 6 (anamnese) en de samenvatting medische informatie in sectie 5.", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
-        {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", antwoord:"Blanco voor het bewegingsapparaat. In 2019 spanningshoofdpijn bij de huisarts; geen nek- of schouderklachten (sectie 3).", context:"Zie sectie 3."},
+        {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", antwoord:"Blanco voor het bewegingsapparaat. In 2018 spanningshoofdpijn bij de huisarts; geen nek- of schouderklachten (sectie 3).", context:"Zie sectie 3."},
         {q:"Vraag 3 \u2014 Bevindingen bij lichamelijk en hulponderzoek?", antwoord:"Zie sectie 7.", context:null},
         {q:"Vraag 4 \u2014 Diagnose en differentiaaldiagnostische overwegingen?", antwoord:"Chronische nekklachten met uitstraling naar de linker arm na WAD graad II, bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links.", context:null},
         {q:"Vraag 5 \u2014 Causaal verband klachten/stoornissen met ongeval?", antwoord:"Ja. De klachten ontstonden direct na het ongeval, bij een blanco voorgeschiedenis. Zie sectie 8.", context:"Aandacht: 3 tegenstrijdigheden (sectie 5b). Pre-existente spondylose vs. traumatische agravatie."},
-        {q:"Vraag 6 \u2014 Eindtoestand? Zo ja, per welke datum?", antwoord:"Ja, per 23-04-2024.", context:"Neuroloog: PCS 6\u201312 mnd. 26 mnd post-trauma, klachten persisteren."},
+        {q:"Vraag 6 \u2014 Eindtoestand? Zo ja, per welke datum?", antwoord:"Ja, per 14-03-2024.", context:"Neuroloog: PCS 6\u201312 mnd. 29 mnd post-trauma, klachten persisteren."},
         {q:"Vraag 7 \u2014 Beperkingen in huidige toestand (incl. FML)?", antwoord:"Geen langdurig statische belasting van de nek: beeldschermwerk en autorijden maximaal een uur aaneengesloten. Geen werk boven schouderhoogte en niet tillen boven 10 kg.", context:"Bedrijfsarts: max 4u/dag, beperkt bovenhands, pijn zitten >45 min. AMA Guides 6e ed.: Ch.17 Table 17-2 (cervicaal), Ch.15 Table 15-5 (AC-luxatie), Ch.13 Table 13-12 (ulnaris), Ch.13 Table 13-6 (PCS)."},
         {q:"Vraag 8 \u2014 Beperkingen toe te schrijven aan ongeval? Pre-existent?", antwoord:"Grotendeels aan het ongeval. Door de pre-existente degeneratie hadden op termijn ook zonder ongeval beperkingen kunnen ontstaan; de omvang daarvan is niet met redelijke zekerheid vast te stellen.", context:"Kritiek: zie tegenstrijdigheid 1 (sectie 5b). Spondylose pre-existent, geen klachten gedocumenteerd."},
         {q:"Vraag 9 \u2014 Therapeutische suggesties?", antwoord:"Voortzetten van het oefenprogramma en ergonomische aanpassing van de werkplek. Van verdere invasieve behandeling verwacht ik weinig.", context:null},
@@ -166,16 +166,16 @@ var EXAMPLE_RAPPORT = {
     {
       num:"10", deel:"Bijlage", title:"Bronnenlijst", badge:"ai", type:"bronnen",
       bronnen: [
-        {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-2]", datum:"29-01-2022", paginas:"1\u20132"},
-        {nr:"2", doc:"Huisartsbrief", bron:"[ORGANISATIE-1]", datum:"14-02-2022", paginas:"1"},
-        {nr:"3", doc:"Fysiotherapie intake", bron:"[ORGANISATIE-6]", datum:"21-02-2022", paginas:"3"},
-        {nr:"4", doc:"Huisartsjournaal", bron:"[ORGANISATIE-1]", datum:"2018\u20132022", paginas:"1\u20133"},
-        {nr:"5", doc:"MRI cervicaal", bron:"Radiologie [ORGANISATIE-2]", datum:"18-08-2022", paginas:"1"},
-        {nr:"6", doc:"Verwijsbrief pijnrevalidatie", bron:"[ORGANISATIE-7]", datum:"12-10-2022", paginas:"1\u20132"},
-        {nr:"7", doc:"Operatieverslag denervatie", bron:"Anesthesiologie", datum:"15-01-2023", paginas:"1"},
-        {nr:"8", doc:"Intake CGT", bron:"[ORGANISATIE-8]", datum:"08-03-2023", paginas:"1\u20132"},
-        {nr:"9", doc:"Keuringsrapport", bron:"[ORGANISATIE-4]", datum:"14-09-2020", paginas:"1"},
-        {nr:"10", doc:"Expertiseonderzoek", bron:"[ORGANISATIE-5]", datum:"23-04-2024", paginas:"4\u20136"}
+        {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-2]", datum:"07-10-2021", paginas:"1\u20132"},
+        {nr:"2", doc:"Huisartsbrief", bron:"[ORGANISATIE-1]", datum:"22-10-2021", paginas:"1"},
+        {nr:"3", doc:"Fysiotherapie intake", bron:"[ORGANISATIE-6]", datum:"01-11-2021", paginas:"3"},
+        {nr:"4", doc:"Huisartsjournaal", bron:"[ORGANISATIE-1]", datum:"2016\u20132021", paginas:"1\u20133"},
+        {nr:"5", doc:"MRI cervicaal", bron:"Radiologie [ORGANISATIE-2]", datum:"03-06-2022", paginas:"1"},
+        {nr:"6", doc:"Verwijsbrief pijnrevalidatie", bron:"[ORGANISATIE-7]", datum:"19-08-2022", paginas:"1\u20132"},
+        {nr:"7", doc:"Operatieverslag denervatie", bron:"Anesthesiologie", datum:"24-11-2022", paginas:"1"},
+        {nr:"8", doc:"Intake CGT", bron:"[ORGANISATIE-8]", datum:"02-02-2023", paginas:"1\u20132"},
+        {nr:"9", doc:"Keuringsrapport", bron:"[ORGANISATIE-4]", datum:"03-03-2020", paginas:"1"},
+        {nr:"10", doc:"Expertiseonderzoek", bron:"[ORGANISATIE-5]", datum:"14-03-2024", paginas:"4\u20136"}
       ]
     }
   ],

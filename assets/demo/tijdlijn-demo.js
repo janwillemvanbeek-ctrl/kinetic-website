@@ -9,20 +9,20 @@
 var esc = window.Kinetic.esc;
 
 var EXAMPLE_DATA={
-zaak:{zaaknummer:"2024-KME-04892",betrokkene:"[PERSOON-1]",geboortedatum:"[GEBOORTEDATUM]",ongevalsdatum:"29-01-2022"},
+zaak:{zaaknummer:"2024-KME-01583",betrokkene:"[PERSOON-1]",geboortedatum:"[GEBOORTEDATUM]",ongevalsdatum:"07-10-2021"},
 events:[
-{date:"29-01-2022",day:0,tag:"seh",tagLabel:"SEH",title:"SEH-presentatie na verkeersongeval",body:"Kop-staartbotsing op de A27 ter hoogte van afslag Lexmond. Betrokkene werd van achteren aangereden terwijl hij stilstond. Direct nekpijn en hoofdpijn. Whiplash Associated Disorder graad II vastgesteld door SEH-arts.",source:"Antonius Ziekenhuis Nieuwegein, SEH-verslag, p. 1–2"},
-{date:"14-02-2022",day:16,tag:"huisarts",tagLabel:"HUISARTS",title:"Controle huisarts",body:"Toenemende cervicobrachialgie links. Concentratiestoornissen. Hoofdpijn dagelijks, VAS-score 6–7. Tintelingen digiti III–V links. Verwijzing fysiotherapie.",source:"Huisartsenpraktijk, brief, p. 1"},
-{date:"21-02-2022",day:23,tag:"fysio",tagLabel:"FYSIO",title:"Fysiotherapie — intake",body:"Start revalidatietraject bij FysioFit Utrecht. Cervicale mobiliteit beperkt: flexie 35°, extensie 25°. Behandelplan: 2x per week, 16 weken. Behandelaar: [PERSOON-5].",source:"FysioFit Utrecht, intake, p. 3"},
-{gap:true,afterDate:"13-06-2022",afterDay:135,text:"Geen eindverslag fysiotherapie aangetroffen. Verwacht: afsluitend verslag na 16 weken behandeling (gepland rond juni 2022). Effectiviteit behandeling niet gedocumenteerd."},
-{date:"18-08-2022",day:201,tag:"radio",tagLabel:"MRI",title:"MRI cervicale wervelkolom (HWK)",body:"Discusdegeneratie C5–C6, lichte foraminastenose rechts. Geen HNP. Geen myelopathie. Lichte spondylartrose.",source:"Radiologie Antonius Ziekenhuis, verslag, p. 1"},
-{date:"12-10-2022",day:256,tag:"pijn",tagLabel:"PIJN",title:"Verwijzing pijnrevalidatie",body:"Persisterende cervicobrachialgie ondanks fysiotherapie. Verwijzing naar multidisciplinair pijnprogramma Sint Maartenskliniek.",source:"Sint Maartenskliniek Nijmegen, verwijsbrief, p. 1–2"},
-{gap:true,afterDate:"12-10-2022",afterDay:256,text:"Geen intake- of voortgangsverslag pijnrevalidatie aangetroffen. Verwacht: intakeverslag Sint Maartenskliniek na verwijzing oktober 2022. Status behandeltraject onduidelijk."},
-{date:"15-01-2023",day:351,tag:"neuro",tagLabel:"NEURO",title:"Facetdenervatie C4–C5 en C5–C6",body:"Radiofrequente denervatie onder fluoroscopie door [PERSOON-6], anesthesioloog. Procedure zonder complicaties. Verwachte pijnreductie na 2–4 weken.",source:"Anesthesiologie, operatieverslag, p. 1"},
-{date:"08-03-2023",day:403,tag:"psych",tagLabel:"CGT",title:"Start Cognitieve Gedragstherapie",body:"Behandeling concentratiestoornissen en pijncoping. Diagnose: Post Commotioneel Syndroom. Behandelplan: 12 sessies bij [PERSOON-7].",source:"Psychologenpraktijk, intake, p. 1–2"},
-{date:"23-04-2024",day:815,tag:"neuro",tagLabel:"NEURO",title:"Neurologisch expertiseonderzoek",body:"Cervicale mobiliteit: flexie 30° (normaal 50°), extensie 20° (normaal 60°), rotatie links 40° (normaal 80°). Spurling positief links. Hypoesthesie C7 links. Tricepsreflex verlaagd. Conclusie: 7% blijvende invaliditeit (AMA Guides, 6e editie).",source:"Kliniek voor Neurologische Expertise, rapport, p. 4–6"}
+{date:"07-10-2021",day:0,tag:"seh",tagLabel:"SEH",title:"SEH-presentatie na verkeersongeval",body:"Kop-staartbotsing op een provinciale weg. Betrokkene werd van achteren aangereden terwijl hij stilstond. Direct nekpijn en hoofdpijn. Whiplash Associated Disorder graad II vastgesteld door SEH-arts.",source:"Streekziekenhuis De Linde, SEH-verslag, p. 1–2"},
+{date:"22-10-2021",day:15,tag:"huisarts",tagLabel:"HUISARTS",title:"Controle huisarts",body:"Toenemende cervicobrachialgie links. Concentratiestoornissen. Hoofdpijn dagelijks, VAS-score 6–7. Tintelingen digiti III–V links. Verwijzing fysiotherapie.",source:"Huisartsenpraktijk, brief, p. 1"},
+{date:"01-11-2021",day:25,tag:"fysio",tagLabel:"FYSIO",title:"Fysiotherapie — intake",body:"Start revalidatietraject bij Fysiotherapie Het Plein. Cervicale mobiliteit beperkt: flexie 35°, extensie 25°. Behandelplan: 2x per week, 16 weken. Behandelaar: [PERSOON-5].",source:"Fysiotherapie Het Plein, intake, p. 3"},
+{gap:true,afterDate:"21-02-2022",afterDay:137,text:"Geen eindverslag fysiotherapie aangetroffen. Verwacht: afsluitend verslag na 16 weken behandeling (gepland rond februari 2022). Effectiviteit behandeling niet gedocumenteerd."},
+{date:"03-06-2022",day:239,tag:"radio",tagLabel:"MRI",title:"MRI cervicale wervelkolom (HWK)",body:"Discusdegeneratie C5–C6, lichte foraminastenose rechts. Geen HNP. Geen myelopathie. Lichte spondylartrose.",source:"Radiologie Streekziekenhuis De Linde, verslag, p. 1"},
+{date:"19-08-2022",day:316,tag:"pijn",tagLabel:"PIJN",title:"Verwijzing pijnrevalidatie",body:"Persisterende cervicobrachialgie ondanks fysiotherapie. Verwijzing naar multidisciplinair pijnprogramma Pijncentrum Heerdveld.",source:"Pijncentrum Heerdveld, verwijsbrief, p. 1–2"},
+{gap:true,afterDate:"19-08-2022",afterDay:316,text:"Geen intake- of voortgangsverslag pijnrevalidatie aangetroffen. Verwacht: intakeverslag Pijncentrum Heerdveld na verwijzing augustus 2022. Status behandeltraject onduidelijk."},
+{date:"24-11-2022",day:413,tag:"neuro",tagLabel:"NEURO",title:"Facetdenervatie C4–C5 en C5–C6",body:"Radiofrequente denervatie onder fluoroscopie door [PERSOON-6], anesthesioloog. Procedure zonder complicaties. Verwachte pijnreductie na 2–4 weken.",source:"Anesthesiologie, operatieverslag, p. 1"},
+{date:"02-02-2023",day:483,tag:"psych",tagLabel:"CGT",title:"Start Cognitieve Gedragstherapie",body:"Behandeling concentratiestoornissen en pijncoping. Diagnose: Post Commotioneel Syndroom. Behandelplan: 12 sessies bij [PERSOON-7].",source:"Psychologenpraktijk, intake, p. 1–2"},
+{date:"14-03-2024",day:889,tag:"neuro",tagLabel:"NEURO",title:"Neurologisch expertiseonderzoek",body:"Cervicale mobiliteit: flexie 30° (normaal 50°), extensie 20° (normaal 60°), rotatie links 40° (normaal 80°). Spurling positief links. Hypoesthesie C7 links. Tricepsreflex verlaagd. Conclusie: 7% blijvende invaliditeit (AMA Guides, 6e editie).",source:"Kliniek voor Neurologische Expertise, rapport, p. 4–6"}
 ],
-stats:{events:8,gaps:2,sources:8,spanDays:815}
+stats:{events:8,gaps:2,sources:8,spanDays:889}
 };
 
 function fmtDay(d){
