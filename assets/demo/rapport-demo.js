@@ -140,7 +140,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
       num:"9", title:"Beantwoording IWMD-vragen", badge:"arts", type:"iwmd_answers",
-      intro:"De arts beantwoordt de vraagstelling. Per vraag staan de relevante vindplaatsen uit het dossier.",
+      intro:"De arts beantwoordt de vraagstelling. Per vraag staan de relevante bronnen uit het dossier.",
       questions: [
         {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
         {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", context:"Zie sectie 3."},
