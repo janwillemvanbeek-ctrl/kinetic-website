@@ -48,7 +48,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
       num:"2", title:"Vraagstelling", badge:"ai", type:"iwmd",
-      intro:"Onderstaande vraagstelling is conform de IWMD-richtlijnen voor medische expertises bij letselschade en beroepsziekten.",
+      intro:"Vraagstelling zoals aangeleverd door de opdrachtgever. Voorbeeld op basis van de IWMD-vraagstelling; de actuele versie (2025) geldt als uitgangspunt.",
       questions: [
         "Hoe luidt de anamnese voor wat betreft de aard en de ernst van het letsel, het verloop van de klachten, de toegepaste behandelingen en het resultaat van deze behandelingen? Welke overige klachten en behandelingen op uw vakgebied worden in de post-ongevalsperiode vermeld?",
         "Wilt u op basis van het medisch dossier van betrokkene een beschrijving geven van de medische voorgeschiedenis op uw vakgebied?",
@@ -140,7 +140,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
       num:"9", title:"Beantwoording IWMD-vragen", badge:"arts", type:"iwmd_answers",
-      intro:"Beantwoording conform IWMD-richtlijnen. Per vraag is de relevante dossiercontext samengevat.",
+      intro:"De specialist beantwoordt de vraagstelling. Per vraag staan de relevante vindplaatsen uit het dossier.",
       questions: [
         {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
         {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", context:"Zie sectie 3."},
