@@ -510,3 +510,6 @@
 .kr-reken-val{color:var(--kr-ink2)}
 .kr-reken li.kr-open .kr-reken-val{color:#8A5A1F;font-style:italic}
 @media(max-width:640px){.kr-reken li{grid-template-columns:1.6rem 1fr}.kr-reken-val{grid-column:2}}
+.opbouw-verschil{max-width:1100px;margin:3rem auto 0;--kr-ink:#1A1916;--kr-ink2:#4F4A42;--kr-stone:#8B8579;--kr-line:#E7E1D4;--kr-teal:var(--warm-teal);--kr-mono:"IBM Plex Mono",ui-monospace,monospace}
+.opbouw-verschil .kr-table{margin-top:1rem;background:#fff}
+.opbouw-verschil .kr-table td{color:var(--kr-ink)}

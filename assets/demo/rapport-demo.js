@@ -125,10 +125,6 @@ var EXAMPLE_RAPPORT = {
      "value": "07-10-2021, kop-staartbotsing als bestuurder"
     },
     {
-     "label": "Kader",
-     "value": "Letselschade, civiele aansprakelijkheid"
-    },
-    {
      "label": "Datum onderzoek",
      "value": "14-03-2024"
     },
@@ -140,11 +136,47 @@ var EXAMPLE_RAPPORT = {
   },
   {
    "num": "–",
+   "title": "Kader van dit rapport",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Soort expertise",
+     "value": "Letselschade: een ander is aansprakelijk voor het ongeval"
+    },
+    {
+     "label": "Kernvraag",
+     "value": "Wat is het verschil tussen de situatie met en zonder ongeval?"
+    },
+    {
+     "label": "Doel van de uitkomst",
+     "value": "Basis voor de berekening van de schadevergoeding door partijen"
+    },
+    {
+     "label": "Partijen",
+     "value": "Benadeelde en de verzekeraar van de aansprakelijke partij; bij voorkeur een gezamenlijke opdracht"
+    },
+    {
+     "label": "Vraagstelling",
+     "value": "IWMD 2025 (De Letselschade Raad)"
+    },
+    {
+     "label": "Invaliditeitspercentage",
+     "value": "Optioneel, vraag 1(l)"
+    },
+    {
+     "label": "Richtlijn rapportage",
+     "value": "NVMSR 2024"
+    }
+   ]
+  },
+  {
+   "num": "–",
    "title": "Vraagstelling",
    "badge": "ai",
    "type": "text",
    "paragraphs": [
-    "De opdrachtgever hanteert de IWMD-vraagstelling Causaal Verband bij Ongeval 2025. Deel 1 betreft de situatie met ongeval, deel 2 de situatie zonder ongeval en deel 3 overige opmerkingen. De vragen worden beantwoord voor het orthopedisch vakgebied; vraag 1l (functieverlies) is optioneel en door de opdrachtgever gevraagd."
+    "De opdrachtgever hanteert de IWMD-vraagstelling Causaal Verband bij Ongeval 2025. Deel 1 betreft de situatie met ongeval, deel 2 de situatie zonder ongeval en deel 3 overige opmerkingen. De vragen worden beantwoord voor het orthopedisch vakgebied; vraag 1(l) (functieverlies) is optioneel en door de opdrachtgever gevraagd."
    ],
    "sources": [
     "Opdrachtbrief [OPDRACHTGEVER]"
@@ -857,6 +889,42 @@ var EXAMPLE_NVMSR = {
     {
      "label": "Datum onderzoek",
      "value": "T+24m"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Kader van dit rapport",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Soort expertise",
+     "value": "Ongevallenverzekering: een uitkering op grond van de eigen polis; geen aansprakelijkheid"
+    },
+    {
+     "label": "Kernvraag",
+     "value": "Hoeveel blijvend functieverlies is er, gemeten volgens de maatstaf van de polis?"
+    },
+    {
+     "label": "Doel van de uitkomst",
+     "value": "Basis voor een vaste uitkering: percentage maal verzekerd bedrag"
+    },
+    {
+     "label": "Partijen",
+     "value": "Verzekerde en de eigen verzekeraar; schuld speelt geen rol"
+    },
+    {
+     "label": "Vraagstelling",
+     "value": "Van de verzekeraar, gebaseerd op de polis"
+    },
+    {
+     "label": "Invaliditeitspercentage",
+     "value": "De hoofdvraag"
+    },
+    {
+     "label": "Richtlijn rapportage",
+     "value": "NVMSR 2024"
     }
    ]
   },
