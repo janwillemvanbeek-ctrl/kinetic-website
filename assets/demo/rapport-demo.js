@@ -18,8 +18,8 @@ var EXAMPLE_RAPPORT = {
   "status": "Concept · voorlopig oordeel",
   "specialisme": "Orthopedisch",
   "opdrachtgever": "[OPDRACHTGEVER]",
-  "ongevalsdatum": "07-10-2021",
-  "onderzoeksdatum": "14-03-2024",
+  "ongevalsdatum": "T±0",
+  "onderzoeksdatum": "T+29m",
   "kicker": "Letselschade &middot; IWMD 2025 &middot; fictief voorbeeld",
   "titel": "Orthopedische expertise letselschade",
   "subtitel": "Vraagstelling volgens IWMD 2025",
@@ -148,11 +148,11 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Ongeval",
-     "value": "07-10-2021, kop-staartbotsing als bestuurder"
+     "value": "T±0: kop-staartbotsing als bestuurder"
     },
     {
      "label": "Datum onderzoek",
-     "value": "14-03-2024"
+     "value": "T+29m"
     },
     {
      "label": "Specialisme",
@@ -214,7 +214,7 @@ var EXAMPLE_RAPPORT = {
    "badge": "ai",
    "type": "text",
    "paragraphs": [
-    "07-10-2021 — SEH: WAD graad II; CT-cervicaal zonder fractuur, spondylose C5–C6 (bron 1, p. 2)\n22-10-2021 — Huisarts: nekpijn met uitstraling naar de linker arm, verwijzing fysiotherapie (bron 2, p. 1)\n01-11-2021 — Fysiotherapie intake: flexie 35°, extensie 25° (bron 5, p. 3)\n03-06-2022 — MRI: discusdegeneratie C5–C6 met protrusie en foraminastenose links (bron 6, p. 1)\n19-08-2022 — Verwijzing pijnrevalidatie (bron 7, p. 1)\n17-11-2022 — EMG: geleidingsvertraging n. ulnaris ter hoogte van de linker elleboog, oorzaak niet te duiden (bron 8, p. 2)\n24-11-2022 — Facetdenervatie C4–C6 (bron 9, p. 1)\n12-01-2023 — Neuroloog: cervicobrachialgie links, ulnarisneuropathie, verdenking post-commotioneel syndroom (bron 10, p. 1–2)\n02-02-2023 — Start cognitieve gedragstherapie (bron 11, p. 1)\n14-03-2024 — Expertiseonderzoek"
+    "T±0 — SEH: WAD graad II; CT-cervicaal zonder fractuur, spondylose C5–C6 (bron 1, p. 2)\nT+2w — Huisarts: nekpijn met uitstraling naar de linker arm, verwijzing fysiotherapie (bron 2, p. 1)\nT+4w — Fysiotherapie intake: flexie 35°, extensie 25° (bron 5, p. 3)\nT+8m — MRI: discusdegeneratie C5–C6 met protrusie en foraminastenose links (bron 6, p. 1)\nT+10m — Verwijzing pijnrevalidatie (bron 7, p. 1)\nT+13m — EMG: geleidingsvertraging n. ulnaris ter hoogte van de linker elleboog, oorzaak niet te duiden (bron 8, p. 2)\nT+14m — Facetdenervatie C4–C6 (bron 9, p. 1)\nT+15m — Neuroloog: cervicobrachialgie links, ulnarisneuropathie, verdenking post-commotioneel syndroom (bron 10, p. 1–2)\nT+16m — Start cognitieve gedragstherapie (bron 11, p. 1)\nT+29m — Expertiseonderzoek"
    ],
    "sources": [
     "Bronnen 1, 2, 5–11"
@@ -229,21 +229,21 @@ var EXAMPLE_RAPPORT = {
     {
      "prio": "kritiek",
      "doc": "Fysiotherapie eindverslag",
-     "verwacht": "Februari 2022",
+     "verwacht": "T+4m",
      "toelichting": "Intake aanwezig (bron 5), maar geen afsluitend verslag. Het resultaat van de behandeling is niet vast te stellen.",
      "actie": "Opvragen bij [ORGANISATIE-6]."
     },
     {
      "prio": "kritiek",
      "doc": "Intake en voortgang pijnrevalidatie",
-     "verwacht": "Najaar 2022",
+     "verwacht": "T+11m",
      "toelichting": "Verwijzing aanwezig (bron 7), maar geen intake of behandelplan.",
      "actie": "Opvragen bij [ORGANISATIE-7]."
     },
     {
      "prio": "belangrijk",
      "doc": "Neuropsychologisch onderzoek",
-     "verwacht": "2023",
+     "verwacht": "T+15–24m",
      "toelichting": "De neuroloog noemt een verdenking op een post-commotioneel syndroom (bron 10); een neuropsychologisch onderzoek ontbreekt.",
      "actie": "Navragen bij de behandelend neuroloog."
     }
@@ -259,9 +259,9 @@ var EXAMPLE_RAPPORT = {
      "thema": "Cervicale afwijkingen: bestaand of door het ongeval?",
      "severity": "kritiek",
      "bronnen": [
-      "CT 07-10-2021: spondylose C5–C6 (bron 1, p. 2)",
-      "MRI 03-06-2022: protrusie en foraminastenose links C5–C6 (bron 6, p. 1)",
-      "Neuroloog 12-01-2023: cervicobrachialgie, ‘traumatisch geagraveerd’ (bron 10, p. 2)"
+      "CT T±0: spondylose C5–C6 (bron 1, p. 2)",
+      "MRI T+8m: protrusie en foraminastenose links C5–C6 (bron 6, p. 1)",
+      "Neuroloog T+15m: cervicobrachialgie, ‘traumatisch geagraveerd’ (bron 10, p. 2)"
      ],
      "relevantie": "De bronnen spreken elkaar niet tegen over de afwijking, maar wel over de betekenis ervan."
     },
@@ -269,8 +269,8 @@ var EXAMPLE_RAPPORT = {
      "thema": "Ulnarisneuropathie: door het ongeval of niet?",
      "severity": "belangrijk",
      "bronnen": [
-      "EMG 17-11-2022: oorzaak niet te duiden (bron 8, p. 2)",
-      "Neuroloog 12-01-2023: ‘posttraumatisch’ (bron 10, p. 2)"
+      "EMG T+13m: oorzaak niet te duiden (bron 8, p. 2)",
+      "Neuroloog T+15m: ‘posttraumatisch’ (bron 10, p. 2)"
      ],
      "relevantie": "Valt buiten het orthopedisch vakgebied."
     },
@@ -278,7 +278,7 @@ var EXAMPLE_RAPPORT = {
      "thema": "Cognitieve klachten",
      "severity": "aandacht",
      "bronnen": [
-      "Neuroloog 12-01-2023: verdenking post-commotioneel syndroom (bron 10, p. 2)",
+      "Neuroloog T+15m: verdenking post-commotioneel syndroom (bron 10, p. 2)",
       "Neuropsychologisch onderzoek ontbreekt"
      ],
      "relevantie": "Valt buiten het orthopedisch vakgebied."
@@ -319,12 +319,12 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Voorgeschiedenis",
-     "tekst": "In de huisartsinformatie over de periode 2016–2021 zijn geen nek- of schouderklachten gedocumenteerd. In 2018 bezocht betrokkene de huisarts voor spanningshoofdpijn. Bij een keuring in 2020 was hij volledig arbeidsgeschikt.",
+     "tekst": "In de huisartsinformatie over de vijf jaar vóór het ongeval zijn geen nek- of schouderklachten gedocumenteerd. Op T−3j bezocht betrokkene de huisarts voor spanningshoofdpijn. Bij een keuring op T−19m was hij volledig arbeidsgeschikt.",
      "context": "Bron 3, p. 1–3; bron 4, p. 1."
     },
     {
      "label": "Behandeling na het ongeval",
-     "tekst": "Fysiotherapie vanaf november 2021, verwijzing naar pijnrevalidatie in augustus 2022, facetdenervatie C4–C6 in november 2022 en cognitieve gedragstherapie vanaf februari 2023.",
+     "tekst": "Fysiotherapie vanaf T+4w, verwijzing naar pijnrevalidatie op T+10m, facetdenervatie C4–C6 op T+14m en cognitieve gedragstherapie vanaf T+16m.",
      "context": "Bronnen 5, 7, 9 en 11. Het eindverslag van de fysiotherapie en de gegevens van de pijnrevalidatie ontbreken."
     }
    ]
@@ -353,7 +353,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Hulponderzoek",
-     "tekst": "Ik heb de beelden van de MRI van 03-06-2022 zelf bekeken; de bevindingen komen overeen met het verslag. Er is geen aanvullend onderzoek verricht.",
+     "tekst": "Ik heb de beelden van de MRI van T+8m zelf bekeken; de bevindingen komen overeen met het verslag. Er is geen aanvullend onderzoek verricht.",
      "context": "Bron 6, p. 1."
     }
    ],
@@ -599,7 +599,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Volgens de broninformatie",
-     "tekst": "In de huisartsinformatie over 2016–2021 zijn geen nek- of schouderklachten gedocumenteerd. De degeneratie C5–C6 bestond wel al; die is op de CT van de ongevalsdag beschreven.",
+     "tekst": "In de huisartsinformatie over de vijf jaar vóór het ongeval zijn geen nek- of schouderklachten gedocumenteerd. De degeneratie C5–C6 bestond wel al; die is op de CT van de ongevalsdag beschreven.",
      "context": "Bron 1, p. 2; bron 3, p. 1–3."
     },
     {
@@ -775,77 +775,77 @@ var EXAMPLE_RAPPORT = {
      "nr": "1",
      "doc": "SEH-verslag met CT-cervicaal",
      "bron": "[ORGANISATIE-2]",
-     "datum": "07-10-2021",
+     "datum": "T±0",
      "paginas": "1–2"
     },
     {
      "nr": "2",
      "doc": "Huisartsbrief",
      "bron": "[ORGANISATIE-1]",
-     "datum": "22-10-2021",
+     "datum": "T+2w",
      "paginas": "1"
     },
     {
      "nr": "3",
      "doc": "Huisartsjournaal",
      "bron": "[ORGANISATIE-1]",
-     "datum": "2016–2021",
+     "datum": "T−5j–T±0",
      "paginas": "1–3"
     },
     {
      "nr": "4",
      "doc": "Keuringsrapport werkgever",
      "bron": "[ORGANISATIE-4]",
-     "datum": "03-03-2020",
+     "datum": "T−19m",
      "paginas": "1"
     },
     {
      "nr": "5",
      "doc": "Fysiotherapie intake",
      "bron": "[ORGANISATIE-6]",
-     "datum": "01-11-2021",
+     "datum": "T+4w",
      "paginas": "1–3"
     },
     {
      "nr": "6",
      "doc": "MRI cervicale wervelkolom",
      "bron": "Radiologie [ORGANISATIE-2]",
-     "datum": "03-06-2022",
+     "datum": "T+8m",
      "paginas": "1"
     },
     {
      "nr": "7",
      "doc": "Verwijsbrief pijnrevalidatie",
      "bron": "[ORGANISATIE-7]",
-     "datum": "19-08-2022",
+     "datum": "T+10m",
      "paginas": "1–2"
     },
     {
      "nr": "8",
      "doc": "EMG-verslag",
      "bron": "Klinische neurofysiologie [ORGANISATIE-2]",
-     "datum": "17-11-2022",
+     "datum": "T+13m",
      "paginas": "1–2"
     },
     {
      "nr": "9",
      "doc": "Operatieverslag facetdenervatie",
      "bron": "Anesthesiologie [ORGANISATIE-2]",
-     "datum": "24-11-2022",
+     "datum": "T+14m",
      "paginas": "1"
     },
     {
      "nr": "10",
      "doc": "Brief neurologie",
      "bron": "Neurologie [ORGANISATIE-2]",
-     "datum": "12-01-2023",
+     "datum": "T+15m",
      "paginas": "1–2"
     },
     {
      "nr": "11",
      "doc": "Intake cognitieve gedragstherapie",
      "bron": "[ORGANISATIE-8]",
-     "datum": "02-02-2023",
+     "datum": "T+16m",
      "paginas": "1–2"
     }
    ]
@@ -1589,6 +1589,24 @@ function fmtSpan(days){
   if(days<730)return Math.round(days/30.44)+" maanden";
   return (Math.round(days/365.25*10)/10).toString().replace(".",",")+" jaar";
 }
+function layoutAxes(root){
+  root.querySelectorAll('.kr-axis-track').forEach(function(tr){
+    var evs=[].slice.call(tr.querySelectorAll('.kr-axis-ev')),placed=[[],[],[]];evs.forEach(function(e){e.classList.remove('kr-axis-hide');});
+    evs.forEach(function(ev){
+      var best=0,bestOv=Infinity;
+      for(var l=0;l<3;l++){
+        ev.className=ev.className.replace(/kr-lvl-\d/,'kr-lvl-'+l);
+        var r=ev.querySelector('.kr-axis-lab').getBoundingClientRect(),ov=0;
+        placed[l].forEach(function(q){var o=Math.min(r.right,q.right)-Math.max(r.left,q.left)+(ev.classList.contains('kr-axis-right')?14:2);if(o>0)ov+=o;});
+        if(ov===0){best=l;bestOv=0;break;}
+        if(ov<bestOv){bestOv=ov;best=l;}
+      }
+      ev.className=ev.className.replace(/kr-lvl-\d/,'kr-lvl-'+best);
+      if(bestOv>0){ev.classList.add('kr-axis-hide');return;}
+      placed[best].push(ev.querySelector('.kr-axis-lab').getBoundingClientRect());
+    });
+  });
+}
 function timelineAxis(lines){
   var ev=[],base=null;
   lines.forEach(function(line){
@@ -1895,6 +1913,7 @@ h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><spa
 h+='</div></div></article>';
 
 o.innerHTML=h;
+try{layoutAxes(o);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){layoutAxes(o);});if(!o._axRs){o._axRs=1;var _t;window.addEventListener('resize',function(){clearTimeout(_t);_t=setTimeout(function(){layoutAxes(o);},150);});}}catch(e){}
 o.querySelectorAll('.kr-toc a').forEach(function(a){
   a.addEventListener('click',function(e){
     var t=o.querySelector(a.getAttribute('href'));if(!t)return;

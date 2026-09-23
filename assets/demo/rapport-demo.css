@@ -515,3 +515,6 @@
 .opbouw-verschil .kr-table{margin-top:1rem;background:#fff}
 .opbouw-verschil .kr-table td{color:var(--kr-ink)}
 
+.kr-axis-hide .kr-axis-lab{display:none}
+.kr-cover-top{gap:1rem}.kr-cover-conf{text-align:right}
+.kr-doc .kr-axis-lab{white-space:nowrap;width:auto}
