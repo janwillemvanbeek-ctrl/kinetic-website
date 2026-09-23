@@ -498,3 +498,15 @@
 .kr-chapter-no{min-width:1.1em;text-align:center}
 @media(max-width:640px){.kr-caseline{height:110px}}
 .kr-quote{margin:.5rem 0 1.75rem}
+
+.kr-tablenote{font-size:.75rem;color:var(--kr-stone);margin:.6rem 0 0;line-height:1.5}
+.kr-reken{margin:1.25rem 0 .25rem;border:1px solid var(--kr-line);border-radius:10px;overflow:hidden}
+.kr-reken-head{display:flex;justify-content:space-between;padding:.75rem 1rem;background:#141414;color:#FAF9F7;font:500 .625rem/1 var(--kr-mono);letter-spacing:.12em;text-transform:uppercase}
+.kr-reken-head span+span{color:#8FCFC4}
+.kr-reken ol{list-style:none;margin:0;padding:0}
+.kr-reken li{display:grid;grid-template-columns:2rem minmax(0,1fr) minmax(0,1fr);gap:.75rem;padding:.65rem 1rem;border-top:1px solid var(--kr-line);font-size:.82rem;align-items:baseline}
+.kr-reken-no{font:500 .7rem/1.4 var(--kr-mono);color:var(--kr-teal)}
+.kr-reken-lab{color:var(--kr-ink)}
+.kr-reken-val{color:var(--kr-ink2)}
+.kr-reken li.kr-open .kr-reken-val{color:#8A5A1F;font-style:italic}
+@media(max-width:640px){.kr-reken li{grid-template-columns:1.6rem 1fr}.kr-reken-val{grid-column:2}}

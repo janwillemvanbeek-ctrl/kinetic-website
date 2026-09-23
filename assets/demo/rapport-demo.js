@@ -11,328 +11,1297 @@
 var esc = window.Kinetic.esc;
 
 var EXAMPLE_RAPPORT = {
-  meta: {
-    zaaknummer: "2024-KME-01583",
-    betrokkene: "[PERSOON-1]",
-    geboortedatum: "[GEBOORTEDATUM]",
-    status: "Concept",
-    specialisme: "Orthopedisch",
-    opdrachtgever: "[OPDRACHTGEVER]",
-    ongevalsdatum: "07-10-2021",
-    onderzoeksdatum: "14-03-2024",
-    kicker: "Letselschade &middot; IWMD &middot; fictief voorbeeld",
-    titel: "Orthopedische expertise",
-    subtitel: "Letselschade · vraagstelling volgens IWMD",
-    kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 14-03-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "9 van 12 stukken", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
-    ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
-  },
-  compleetheid: {
-    score: 78,
-    aanwezig: ["SEH-verslag","Ontslagbrief","Huisartsbrief","Fysiotherapie intake","MRI cervicaal","Verwijsbrief pijnrevalidatie","Operatieverslag denervatie","Intake CGT","Keuringsrapport"],
-    ontbrekend: [
-      {doc:"Fysiotherapie eindverslag", prio:"kritiek"},
-      {doc:"Intake/voortgangsverslag pijnrevalidatie", prio:"kritiek"},
-      {doc:"Neuropsychologisch onderzoek (NPA)", prio:"belangrijk"}
-    ]
-  },
-  sections: [
-    {
-      num:"1", deel:"Dossier", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
-      fields: [
-        {label:"Opdrachtgever", value:"[OPDRACHTGEVER]", redacted:true},
-        {label:"Dossierbehandelaar", value:"[PERSOON-8]", redacted:true},
-        {label:"Advocaat betrokkene", value:"[PERSOON-9], [ORGANISATIE-3]", redacted:true},
-        {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
-        {label:"Geboortedatum", value:"[GEBOORTEDATUM]", redacted:true},
-        {label:"Adres", value:"[ADRES-1]", redacted:true},
-        {label:"Ongevalsdatum", value:"07-10-2021"},
-        {label:"Aard ongeval", value:"Verkeersongeval (kop-staartbotsing)"},
-        {label:"Datum onderzoek", value:"14-03-2024"},
-        {label:"Plaats onderzoek", value:"[ORGANISATIE-5], [ADRES-2]"}
-      ]
-    },
-    {
-      num:"2", title:"Vraagstelling", badge:"ai", type:"iwmd",
-      intro:"Vraagstelling zoals aangeleverd door de opdrachtgever. Voorbeeld op basis van de IWMD-vraagstelling; de actuele versie (2025) geldt als uitgangspunt.",
-      questions: [
-        "Hoe luidt de anamnese voor wat betreft de aard en de ernst van het letsel, het verloop van de klachten, de toegepaste behandelingen en het resultaat van deze behandelingen? Welke overige klachten en behandelingen op uw vakgebied worden in de post-ongevalsperiode vermeld?",
-        "Wilt u op basis van het medisch dossier van betrokkene een beschrijving geven van de medische voorgeschiedenis op uw vakgebied?",
-        "Wilt u een beschrijving geven van uw bevindingen bij lichamelijk en eventueel hulponderzoek?",
-        "Wat is de diagnose op uw vakgebied? Wilt u daarbij differentiaal diagnostische overwegingen geven?",
-        "Indien sprake is van klachten, stoornissen en/of beperkingen op uw vakgebied: bestaat er dan naar uw oordeel een causaal verband met het ongeval? Zo ja, wilt u dit nader onderbouwen? Zo nee, kunt u aangeven waardoor de klachten, stoornissen en/of beperkingen dan wel worden veroorzaakt?",
-        "Is de huidige toestand van betrokkene op uw vakgebied als een eindtoestand te beschouwen? Zo ja, per welke datum is dit het geval? Zo nee, welke veranderingen zijn nog te verwachten en op welke termijn?",
-        "Welke beperkingen op uw vakgebied bestaan naar uw oordeel bij betrokkene in zijn huidige toestand, ongeacht of deze beperkingen voortvloeien uit het ongeval? Wilt u deze beperkingen zo uitgebreid mogelijk beschrijven en zo nodig een Functionele Mogelijkhedenlijst (FML) invullen?",
-        "Indien u beperkingen heeft vastgesteld: zijn deze geheel of gedeeltelijk toe te schrijven aan het ongeval? In hoeverre bestonden deze beperkingen reeds voor het ongeval? Zijn er daarnaast ook beperkingen die geheel of gedeeltelijk aan andere oorzaken dan het ongeval moeten worden toegeschreven?",
-        "Heeft u therapeutische suggesties?",
-        "Zijn er op uw vakgebied nog andere voor de beoordeling van deze casus van belang zijnde feiten of omstandigheden die u onder de aandacht van de opdrachtgever wilt brengen?"
-      ]
-    },
-    {
-      num:"3", title:"Medische voorgeschiedenis", badge:"ai", type:"text",
-      paragraphs: [
-        "[PERSOON-1] was voor het ongeval van 7 oktober 2021 onder behandeling bij de huisarts voor spanningshoofdpijn (2018), waarvoor incidenteel paracetamol werd gebruikt. Er was geen sprake van nekklachten, schouderklachten of overige klachten aan het bewegingsapparaat.",
-        "In 2020 vond een routinematige gezondheidskeuring plaats via de werkgever, [ORGANISATIE-4], zonder bijzonderheden. Betrokkene was volledig arbeidsgeschikt."
-      ],
-      sources: ["Huisartsjournaal [ORGANISATIE-1], 2016\u20132021, p. 1\u20133","Keuringsrapport [ORGANISATIE-4], 03-03-2020, p. 1"]
-    },
-    {
-      num:"4", title:"Toedracht en klachtenbeloop", badge:"ai", type:"text",
-      paragraphs: [
-        "Op 7 oktober 2021 was [PERSOON-1] als bestuurder betrokken bij een kop-staartbotsing op een provinciale weg. Betrokkene stond stil in een file en werd van achteren aangereden door een vrachtwagen. De airbags zijn niet afgegaan. Betrokkene kon zelfstandig het voertuig verlaten maar ervoer direct nekpijn, hoofdpijn en duizeligheid.",
-        "Op de SEH van [ORGANISATIE-2] werd een WAD graad II vastgesteld. R\u00f6ntgenonderzoek toonde geen fracturen of luxaties. In de weken erna namen klachten toe: cervicobrachialgie links, dagelijkse hoofdpijn (VAS 6\u20137) en concentratiestoornissen.",
-        "Fysiotherapie (16 weken, 2x/week) bij [ORGANISATIE-6] gaf beperkte verbetering. MRI cervicaal (03-06-2022): discusdegeneratie C5\u2013C6 met protrusie en foraminastenose links. Verwijzing pijnrevalidatie (augustus 2022), facetdenervatie C4\u2013C6 (november 2022) met matige en tijdelijke pijnreductie. In februari 2023 start CGT bij Post Commotioneel Syndroom."
-      ],
-      sources: ["SEH-verslag [ORGANISATIE-2], 07-10-2021, p. 1\u20132","Huisartsbrief [ORGANISATIE-1], 22-10-2021, p. 1","Fysiotherapie-intake [ORGANISATIE-6], 01-11-2021, p. 3","MRI Radiologie [ORGANISATIE-2], 03-06-2022, p. 1","Verwijsbrief [ORGANISATIE-7], 19-08-2022, p. 1\u20132","Operatieverslag, 24-11-2022, p. 1","Intake CGT [ORGANISATIE-8], 02-02-2023, p. 1\u20132"]
-    },
-    {
-      num:"5", title:"Samenvatting medische informatie", badge:"ai", type:"text",
-      paragraphs: [
-        "07-10-2021 \u2014 SEH [ORGANISATIE-2]. WAD II. R\u00f6ntgen: geen fracturen.\n22-10-2021 \u2014 Huisarts. Cervicobrachialgie links, verwijzing fysiotherapie.\n01-11-2021 \u2014 Start fysiotherapie. Flexie 35\u00b0, extensie 25\u00b0.\n03-06-2022 \u2014 MRI cervicaal: protrusie C5\u2013C6, foraminastenose links.\n19-08-2022 \u2014 Verwijzing pijnrevalidatie.\n24-11-2022 \u2014 Facetdenervatie C4\u2013C6.\n02-02-2023 \u2014 Start CGT (Post Commotioneel Syndroom).\n14-03-2024 \u2014 Expertiseonderzoek (heden)."
-      ],
-      sources: ["Zie bronverwijzingen secties 3 en 4"]
-    },
-    {
-      num:"5a", title:"Hiaten in het dossier", badge:"ai", type:"hiaten",
-      hiaten: [
-        {status:"ontbrekend", prio:"kritiek", doc:"Fysiotherapie eindverslag", verwacht:"Februari 2022", toelichting:"Intake aanwezig (01-11-2021), maar geen afsluitend verslag. Behandelresultaat niet objectief vast te stellen.", actie:"Opvragen bij [ORGANISATIE-6]"},
-        {status:"ontbrekend", prio:"kritiek", doc:"Intake/voortgangsverslag pijnrevalidatie", verwacht:"Sep 2022", toelichting:"Verwijzing 19-08-2022, maar geen intake of behandelplan van [ORGANISATIE-7] aangetroffen.", actie:"Opvragen bij [ORGANISATIE-7]"},
-        {status:"ontbrekend", prio:"belangrijk", doc:"Neuropsychologisch onderzoek (NPA)", verwacht:"Q4 2023", toelichting:"Neuroloog verwees voor objectivering cognitieve klachten bij PCS. Geen NPA-rapport in dossier.", actie:"Opvragen bij verwijzend neuroloog of betrokkene"}
-      ]
-    },
-    {
-      num:"5b", title:"Tegenstrijdigheden en aandachtspunten", badge:"ai", type:"tegenstrijdigheden",
-      items: [
-        {thema:"Cervicale afwijkingen: pre-existent of traumatisch?", severity:"kritiek",
-         bronnen:["CT 07-10-2021: \u201cspondylose C5\u2013C6, pre-existent\u201d (bron 1, p. 2)","MRI 03-06-2022: \u201cprotrusie C5\u2013C6, foraminastenose\u201d (bron 5, p. 1)","Neuroloog 02-02-2023: \u201ccervicobrachialgie, traumatisch geagraveerd\u201d (bron 8, p. 1)"],
-         relevantie:"Centraal voor IWMD-vraag 5 (causaliteit). De arts dient te beoordelen of de protrusie nieuw is of progressie van pre-existente degeneratie."},
-        {thema:"Ulnaris neuropathie: traumatisch of pre-existent?", severity:"belangrijk",
-         bronnen:["EMG 17-11-2022: \u201cmogelijk traumatisch dan wel pre\u00ebxistente sulcus ulnaris\u201d (bron 7, p. 2)","Neuroloog: \u201culnaris neuropathie, post-traumatisch\u201d (bron 8, p. 2)"],
-         relevantie:"Neurofysioloog laat causaliteit open; neuroloog concludeert post-traumatisch. Relevant voor IWMD-vraag 8 (pre-existent lijden)."},
-        {thema:"Cognitieve klachten: PCS of stemmingsgerelateerd?", severity:"aandacht",
-         bronnen:["Neuroloog: \u201cPost Commotioneel Syndroom\u201d (bron 8)","NPA ontbreekt \u2014 klachten niet geobjectiveerd"],
-         relevantie:"Zonder NPA niet vast te stellen of klachten primair door commotio of door depressieve symptomatologie."}
-      ]
-    },
-    {
-      num:"6", deel:"Onderzoek en oordeel", title:"Huidige klachten (anamnese)", badge:"arts", type:"text",
-      paragraphs: [
-        "Betrokkene rapporteert bij onderzoek d.d. 14-03-2024:",
-        "Nek: VAS 5\u20136/10, uitstraling linker schouder/arm. Verergering bij beeldschermwerk en autorijden.\nHoofdpijn: 3\u20134x/week, fronto-temporaal, 4\u20138 uur.\nCognitief: verminderde concentratie, multitasking bemoeilijkt.\nSlaap: moeite met inslapen, 1\u20132x/nacht wakker.\nArbeid: 40% arbeidsongeschikt, werkt 3 dagen/week bij [ORGANISATIE-4]."
-      ],
-      sources: ["Anamnese 14-03-2024","Brief neurologie 02-02-2023, p. 1\u20132"]
-    },
-    {
-      num:"7", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
-      prompt:"Bevindingen van de onderzoekend arts.",
-      goniometer: [{"label": "Nek · extensie en flexie", "a": [30, 40], "ref": [60, 50], "namen": ["extensie", "flexie"]}, {"label": "Nek · rotatie", "a": [50, 60], "ref": [80, 80], "namen": ["links", "rechts"]}, {"label": "Nek · lateroflexie", "a": [25, 25], "ref": [45, 45], "namen": ["links", "rechts"]}],
-      table: {"vergelijk": "Ten opzichte van de normaalwaarde", "kolommen": ["Gemeten", "Normaalwaarde"], "rijen": [["Flexie", "40°", "50°"], ["Extensie", "30°", "60°"], ["Rotatie links", "50°", "80°"], ["Rotatie rechts", "60°", "80°"], ["Lateroflexie links", "25°", "45°"], ["Lateroflexie rechts", "25°", "45°"]]},
-      subfields: [
-        {label:"Algemene indruk", tekst:"Verzorgde man die zich wat voorzichtig beweegt en tijdens het gesprek regelmatig van houding wisselt. Lengte 182 cm, gewicht 84 kg.", context:null},
-        {label:"Cervicale wervelkolom", tekst:"Geen standsafwijking. Actieve beweeglijkheid: flexie 40°, extensie 30°, rotatie links 50° en rechts 60°, lateroflexie 25° beiderzijds. Eindstandige pijn bij extensie en rotatie naar links. Drukpijn paravertebraal C4–C6 links, verhoogde spierspanning van de m. trapezius links.", context:"Vergelijk: fysio 01-11-2021 (flex 35\u00b0, ext 25\u00b0), neuroloog 02-02-2023 (rot L 40\u00b0, R 55\u00b0, Spurling+). MRI: protrusie C5\u2013C6."},
-        {label:"Neurologisch bovenste extremiteiten", tekst:"Kracht symmetrisch 5/5. Reflexen symmetrisch opwekbaar. Verminderd gevoel aan de radiale zijde van de linker onderarm (C6) en aan dig IV–V links. Voor de duiding van de ulnarisklachten verwijs ik naar de neuroloog.", context:"EMG: ulnaris neuropathie elleboog L (42 m/s, N>50). Hypoesthesie C6 L, sensibiliteitsverlies dig IV\u2013V."},
-        {label:"Provocatietesten", tekst:"Spurling links positief met uitstraling naar de schouder, rechts negatief.", context:"Spurling positief L (neuroloog 02-02-2023)."},
-        {label:"Aanvullend onderzoek", tekst:"De MRI van 03-06-2022 heb ik zelf bekeken: discusdegeneratie C5–C6 met protrusie en foraminastenose links, passend bij het verslag. Geen aanvullend onderzoek verricht.", context:null}
-      ]
-    },
-    {
-      num:"8", title:"Diagnose en beschouwing", badge:"arts", type:"arts_template",
-      prompt:"Per onderdeel staan de relevante dossiergegevens erbij. Zie ook de tegenstrijdigheden in sectie 5b.",
-      quote:"Naar mijn oordeel heeft het ongeval de klachten uitgelokt; een causaal verband acht ik aanwezig.",
-      flow: [{"waarde": "Tabel 17-2", "label": "cervicale wervelkolom"}, {"waarde": "Klasse 1", "label": "na grade modifiers"}, {"waarde": "5%", "label": "gehele persoon"}],
-      subfields: [
-        {label:"Diagnose op vakgebied", tekst:"Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma (WAD graad II), bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links. De ulnarisneuropathie en de cognitieve klachten vallen buiten mijn vakgebied.", context:"Neuroloog: (1) cervicobrachialgie C5\u2013C6, (2) ulnaris neuropathie, (3) PCS. Zie sectie 5b."},
-        {label:"Causaal verband", tekst:"De nekklachten zijn direct na het ongeval ontstaan, bij een blanco voorgeschiedenis voor het bewegingsapparaat. De degeneratie C5–C6 bestond al, maar gaf geen klachten. Naar mijn oordeel heeft het ongeval de klachten uitgelokt; een causaal verband acht ik aanwezig.", context:"CT SEH: spondylose pre-existent. MRI: protrusie. Neuroloog: traumatisch geagraveerd. EMG: causaliteit open. \u2192 Zie tegenstrijdigheden 5b."},
-        {label:"Pre-existente factoren", tekst:"Asymptomatische degeneratie C5–C6 en L4–L5. Zonder ongeval hadden op termijn ook nekklachten kunnen ontstaan; het moment en de omvang daarvan zijn niet met redelijke zekerheid vast te stellen.", context:"Spondylose C5\u2013C6 + L4\u2013L5 (CT/r\u00f6ntgen). Geen klachten in huisartsjournaal v\u00f3\u00f3r ongeval."},
-        {label:"Prognose en eindtoestand", tekst:"Ruim twee jaar na het ongeval en na uitgebreide behandeling verwacht ik geen wezenlijke verbetering meer. Eindtoestand per 14-03-2024.", context:"Neuroloog: PCS-herstel 6\u201312 mnd. Bedrijfsarts: volledige werkhervatting niet voor juli 2023. Huidig (mrt 2024): 40% AO."},
-        {label:"Blijvende invaliditeit (AMA Guides 6e ed.)", tekst:"Cervicale wervelkolom volgens tabel 17-2, klasse 1, na correctie met de grade modifiers 5% van de gehele persoon. De ulnarisneuropathie en de cognitieve klachten beoordeelt de neuroloog.", context:"Relevante chapters: Ch.17 Spine (Table 17-2 Cervical DBI) voor cervicaal syndroom. Ch.15 Upper Extremities (Table 15-5 Clavicle/AC) voor AC-luxatie. Ch.13 CNS/PNS (Table 13-12 Peripheral Nerve) voor ulnaris neuropathie. Ch.13 (Table 13-6 TBI) voor PCS."}
-      ]
-    },
-    {
-      num:"9", title:"Beantwoording IWMD-vragen", badge:"arts", type:"iwmd_answers",
-      intro:"De arts beantwoordt de vraagstelling. Per vraag staan de relevante bronnen uit het dossier.",
-      questions: [
-        {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", antwoord:"Zie sectie 6 (anamnese) en de samenvatting medische informatie in sectie 5.", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
-        {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", antwoord:"Blanco voor het bewegingsapparaat. In 2018 spanningshoofdpijn bij de huisarts; geen nek- of schouderklachten (sectie 3).", context:"Zie sectie 3."},
-        {q:"Vraag 3 \u2014 Bevindingen bij lichamelijk en hulponderzoek?", antwoord:"Zie sectie 7.", context:null},
-        {q:"Vraag 4 \u2014 Diagnose en differentiaaldiagnostische overwegingen?", antwoord:"Chronische nekklachten met uitstraling naar de linker arm na WAD graad II, bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links.", context:null},
-        {q:"Vraag 5 \u2014 Causaal verband klachten/stoornissen met ongeval?", antwoord:"Ja. De klachten ontstonden direct na het ongeval, bij een blanco voorgeschiedenis. Zie sectie 8.", context:"Aandacht: 3 tegenstrijdigheden (sectie 5b). Pre-existente spondylose vs. traumatische agravatie."},
-        {q:"Vraag 6 \u2014 Eindtoestand? Zo ja, per welke datum?", antwoord:"Ja, per 14-03-2024.", context:"Neuroloog: PCS 6\u201312 mnd. 29 mnd post-trauma, klachten persisteren."},
-        {q:"Vraag 7 \u2014 Beperkingen in huidige toestand (incl. FML)?", antwoord:"Geen langdurig statische belasting van de nek: beeldschermwerk en autorijden maximaal een uur aaneengesloten. Geen werk boven schouderhoogte en niet tillen boven 10 kg.", context:"Bedrijfsarts: max 4u/dag, beperkt bovenhands, pijn zitten >45 min. AMA Guides 6e ed.: Ch.17 Table 17-2 (cervicaal), Ch.15 Table 15-5 (AC-luxatie), Ch.13 Table 13-12 (ulnaris), Ch.13 Table 13-6 (PCS)."},
-        {q:"Vraag 8 \u2014 Beperkingen toe te schrijven aan ongeval? Pre-existent?", antwoord:"Grotendeels aan het ongeval. Door de pre-existente degeneratie hadden op termijn ook zonder ongeval beperkingen kunnen ontstaan; de omvang daarvan is niet met redelijke zekerheid vast te stellen.", context:"Kritiek: zie tegenstrijdigheid 1 (sectie 5b). Spondylose pre-existent, geen klachten gedocumenteerd."},
-        {q:"Vraag 9 \u2014 Therapeutische suggesties?", antwoord:"Voortzetten van het oefenprogramma en ergonomische aanpassing van de werkplek. Van verdere invasieve behandeling verwacht ik weinig.", context:null},
-        {q:"Vraag 10 \u2014 Overige relevante feiten of omstandigheden?", antwoord:"Voor de ulnarisneuropathie en de cognitieve klachten adviseer ik een neurologische expertise, met neuropsychologisch onderzoek.", context:"3 hiaten (sectie 5a), 3 tegenstrijdigheden (sectie 5b)."}
-      ]
-    },
-    {
-      num:"10", deel:"Bijlage", title:"Bronnenlijst", badge:"ai", type:"bronnen",
-      bronnen: [
-        {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-2]", datum:"07-10-2021", paginas:"1\u20132"},
-        {nr:"2", doc:"Huisartsbrief", bron:"[ORGANISATIE-1]", datum:"22-10-2021", paginas:"1"},
-        {nr:"3", doc:"Fysiotherapie intake", bron:"[ORGANISATIE-6]", datum:"01-11-2021", paginas:"3"},
-        {nr:"4", doc:"Huisartsjournaal", bron:"[ORGANISATIE-1]", datum:"2016\u20132021", paginas:"1\u20133"},
-        {nr:"5", doc:"MRI cervicaal", bron:"Radiologie [ORGANISATIE-2]", datum:"03-06-2022", paginas:"1"},
-        {nr:"6", doc:"Verwijsbrief pijnrevalidatie", bron:"[ORGANISATIE-7]", datum:"19-08-2022", paginas:"1\u20132"},
-        {nr:"7", doc:"Operatieverslag denervatie", bron:"Anesthesiologie", datum:"24-11-2022", paginas:"1"},
-        {nr:"8", doc:"Intake CGT", bron:"[ORGANISATIE-8]", datum:"02-02-2023", paginas:"1\u20132"},
-        {nr:"9", doc:"Keuringsrapport", bron:"[ORGANISATIE-4]", datum:"03-03-2020", paginas:"1"},
-        {nr:"10", doc:"Expertiseonderzoek", bron:"[ORGANISATIE-5]", datum:"14-03-2024", paginas:"4\u20136"}
-      ]
-    }
+ "meta": {
+  "zaaknummer": "2024-KME-01583",
+  "betrokkene": "[PERSOON-1]",
+  "geboortedatum": "[GEBOORTEDATUM]",
+  "status": "Concept",
+  "specialisme": "Orthopedisch",
+  "opdrachtgever": "[OPDRACHTGEVER]",
+  "ongevalsdatum": "07-10-2021",
+  "onderzoeksdatum": "14-03-2024",
+  "kicker": "Letselschade &middot; IWMD 2025 &middot; fictief voorbeeld",
+  "titel": "Orthopedische expertise",
+  "subtitel": "Letselschade · vraagstelling volgens IWMD 2025",
+  "kern": [
+   {
+    "label": "Diagnose (orthopedisch)",
+    "waarde": "Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma, bij pre-existente degeneratie C5–C6",
+    "breed": true
+   },
+   {
+    "label": "Relatie met het ongeval",
+    "waarde": "Temporeel verband",
+    "toelichting": "Blijvende traumatische verergering niet vast te stellen"
+   },
+   {
+    "label": "Eindsituatie",
+    "waarde": "Stationair",
+    "toelichting": "Voor de nekklachten; neurologisch deel nog niet"
+   },
+   {
+    "label": "Beperkingen",
+    "waarde": "Matig",
+    "toelichting": "Statische nekbelasting, bovenhands werk"
+   },
+   {
+    "label": "Aanvullend nodig",
+    "waarde": "Neurologie",
+    "toelichting": "Ulnarisklachten en cognitieve klachten"
+   },
+   {
+    "label": "Functieverlies (AMA)",
+    "waarde": "Open",
+    "toelichting": "Rekenbijlage, door de specialist"
+   },
+   {
+    "label": "Dossier",
+    "waarde": "11 van 14 stukken",
+    "toelichting": "3 hiaten, 3 aandachtspunten"
+   }
   ],
-  stats: {aiSections:7, artsSections:4, bronnen:10, hiaten:3, tegenstrijdigheden:3}
+  "ondertekening": {
+   "arts": "[ARTS] · basisarts, BIG [BIG-NR]",
+   "specialist": "Orthopedisch chirurg · BIG [BIG-NR]",
+   "status": "Concept. Definitief na toetsing door de specialist, controle van vraagstelling en feitelijke gegevens door de opdrachtgever, en inzage door betrokkene."
+  }
+ },
+ "compleetheid": {
+  "score": 79,
+  "aanwezig": [
+   "SEH-verslag met CT",
+   "Huisartsbrief",
+   "Huisartsjournaal",
+   "Keuringsrapport werkgever",
+   "Fysiotherapie intake",
+   "MRI cervicaal",
+   "Verwijsbrief pijnrevalidatie",
+   "EMG-verslag",
+   "Operatieverslag denervatie",
+   "Brief neurologie",
+   "Intake CGT"
+  ],
+  "ontbrekend": [
+   {
+    "doc": "Fysiotherapie eindverslag",
+    "prio": "kritiek"
+   },
+   {
+    "doc": "Intake en voortgang pijnrevalidatie",
+    "prio": "kritiek"
+   },
+   {
+    "doc": "Neuropsychologisch onderzoek",
+    "prio": "belangrijk"
+   }
+  ]
+ },
+ "sections": [
+  {
+   "num": "–",
+   "deel": "Dossier",
+   "title": "Gegevens opdrachtgever en betrokkene",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Opdrachtgever",
+     "value": "[OPDRACHTGEVER]"
+    },
+    {
+     "label": "Advocaat betrokkene",
+     "value": "[PERSOON-9], [ORGANISATIE-3]"
+    },
+    {
+     "label": "Betrokkene",
+     "value": "[PERSOON-1]"
+    },
+    {
+     "label": "Geboortedatum",
+     "value": "[GEBOORTEDATUM]"
+    },
+    {
+     "label": "Ongeval",
+     "value": "07-10-2021, kop-staartbotsing als bestuurder"
+    },
+    {
+     "label": "Kader",
+     "value": "Letselschade, civiele aansprakelijkheid"
+    },
+    {
+     "label": "Datum onderzoek",
+     "value": "14-03-2024"
+    },
+    {
+     "label": "Specialisme",
+     "value": "Orthopedie"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Vraagstelling",
+   "badge": "ai",
+   "type": "text",
+   "paragraphs": [
+    "De opdrachtgever hanteert de IWMD-vraagstelling Causaal Verband bij Ongeval 2025. Deel 1 betreft de situatie met ongeval, deel 2 de situatie zonder ongeval en deel 3 overige opmerkingen. De vragen worden beantwoord voor het orthopedisch vakgebied; vraag 1l (functieverlies) is optioneel en door de opdrachtgever gevraagd."
+   ],
+   "sources": [
+    "Opdrachtbrief [OPDRACHTGEVER]"
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Samenvatting medische informatie",
+   "badge": "ai",
+   "type": "text",
+   "paragraphs": [
+    "07-10-2021 — SEH: WAD graad II; CT-cervicaal zonder fractuur, spondylose C5–C6 (bron 1, p. 2)\n22-10-2021 — Huisarts: nekpijn met uitstraling naar de linker arm, verwijzing fysiotherapie (bron 2, p. 1)\n01-11-2021 — Fysiotherapie intake: flexie 35°, extensie 25° (bron 5, p. 3)\n03-06-2022 — MRI: discusdegeneratie C5–C6 met protrusie en foraminastenose links (bron 6, p. 1)\n19-08-2022 — Verwijzing pijnrevalidatie (bron 7, p. 1)\n17-11-2022 — EMG: geleidingsvertraging n. ulnaris ter hoogte van de linker elleboog, oorzaak niet te duiden (bron 8, p. 2)\n24-11-2022 — Facetdenervatie C4–C6 (bron 9, p. 1)\n12-01-2023 — Neuroloog: cervicobrachialgie links, ulnarisneuropathie, verdenking post-commotioneel syndroom (bron 10, p. 1–2)\n02-02-2023 — Start cognitieve gedragstherapie (bron 11, p. 1)\n14-03-2024 — Expertiseonderzoek"
+   ],
+   "sources": [
+    "Bronnen 1, 2, 5–11"
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Hiaten in het dossier",
+   "badge": "ai",
+   "type": "hiaten",
+   "hiaten": [
+    {
+     "prio": "kritiek",
+     "doc": "Fysiotherapie eindverslag",
+     "verwacht": "Februari 2022",
+     "toelichting": "Intake aanwezig (bron 5), maar geen afsluitend verslag. Het resultaat van de behandeling is niet vast te stellen.",
+     "actie": "Opvragen bij [ORGANISATIE-6]."
+    },
+    {
+     "prio": "kritiek",
+     "doc": "Intake en voortgang pijnrevalidatie",
+     "verwacht": "Najaar 2022",
+     "toelichting": "Verwijzing aanwezig (bron 7), maar geen intake of behandelplan.",
+     "actie": "Opvragen bij [ORGANISATIE-7]."
+    },
+    {
+     "prio": "belangrijk",
+     "doc": "Neuropsychologisch onderzoek",
+     "verwacht": "2023",
+     "toelichting": "De neuroloog noemt een verdenking op een post-commotioneel syndroom (bron 10); een neuropsychologisch onderzoek ontbreekt.",
+     "actie": "Navragen bij de behandelend neuroloog."
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Tegenstrijdigheden en aandachtspunten",
+   "badge": "ai",
+   "type": "tegenstrijdigheden",
+   "items": [
+    {
+     "thema": "Cervicale afwijkingen: bestaand of door het ongeval?",
+     "severity": "kritiek",
+     "bronnen": [
+      "CT 07-10-2021: spondylose C5–C6 (bron 1, p. 2)",
+      "MRI 03-06-2022: protrusie en foraminastenose links C5–C6 (bron 6, p. 1)",
+      "Neuroloog 12-01-2023: cervicobrachialgie, ‘traumatisch geagraveerd’ (bron 10, p. 2)"
+     ],
+     "relevantie": "De bronnen spreken elkaar niet tegen over de afwijking, maar wel over de betekenis ervan."
+    },
+    {
+     "thema": "Ulnarisneuropathie: door het ongeval of niet?",
+     "severity": "belangrijk",
+     "bronnen": [
+      "EMG 17-11-2022: oorzaak niet te duiden (bron 8, p. 2)",
+      "Neuroloog 12-01-2023: ‘posttraumatisch’ (bron 10, p. 2)"
+     ],
+     "relevantie": "Valt buiten het orthopedisch vakgebied."
+    },
+    {
+     "thema": "Cognitieve klachten",
+     "severity": "aandacht",
+     "bronnen": [
+      "Neuroloog 12-01-2023: verdenking post-commotioneel syndroom (bron 10, p. 2)",
+      "Neuropsychologisch onderzoek ontbreekt"
+     ],
+     "relevantie": "Valt buiten het orthopedisch vakgebied."
+    }
+   ]
+  },
+  {
+   "num": "1a",
+   "title": "Anamnese",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Het relaas van betrokkene, zonder dossierinformatie.",
+   "subfields": [
+    {
+     "label": "Ongeval en beloop volgens betrokkene",
+     "tekst": "Betrokkene vertelt dat hij stilstond en van achteren werd aangereden. Hij had direct pijn in de nek en hoofdpijn. In de weken daarna kreeg hij pijn die uitstraalde naar de linker schouder en arm. Fysiotherapie en een behandeling met ‘verhitting van de zenuwtakjes’ in de nek hielpen volgens hem kort.",
+     "context": null
+    },
+    {
+     "label": "Huidige klachten",
+     "tekst": "Dagelijks nekpijn, links meer dan rechts, erger na beeldschermwerk en autorijden. Tintelingen in de pink en ringvinger links. Hoofdpijn enkele keren per week. Moeite met concentratie.",
+     "context": null
+    },
+    {
+     "label": "Werk, huishouden en vrije tijd",
+     "tekst": "Hij werkt als werkvoorbereider ongeveer 60% van zijn oude uren. Na een uur beeldschermwerk moet hij pauzeren. Klussen boven het hoofd laat hij over. Hardlopen heeft hij vervangen door wandelen.",
+     "context": null
+    }
+   ],
+   "deel": "Deel 1 · Situatie met ongeval"
+  },
+  {
+   "num": "1b",
+   "title": "Medische gegevens",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Voorgeschiedenis en behandeling op basis van het medisch dossier.",
+   "subfields": [
+    {
+     "label": "Voorgeschiedenis",
+     "tekst": "In de huisartsinformatie over de periode 2016–2021 zijn geen nek- of schouderklachten gedocumenteerd. In 2018 bezocht betrokkene de huisarts voor spanningshoofdpijn. Bij een keuring in 2020 was hij volledig arbeidsgeschikt.",
+     "context": "Bron 3, p. 1–3; bron 4, p. 1."
+    },
+    {
+     "label": "Behandeling na het ongeval",
+     "tekst": "Fysiotherapie vanaf november 2021, verwijzing naar pijnrevalidatie in augustus 2022, facetdenervatie C4–C6 in november 2022 en cognitieve gedragstherapie vanaf februari 2023.",
+     "context": "Bronnen 5, 7, 9 en 11. Het eindverslag van de fysiotherapie en de gegevens van de pijnrevalidatie ontbreken."
+    }
+   ]
+  },
+  {
+   "num": "1c",
+   "title": "Medisch onderzoek",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Bevindingen bij lichamelijk onderzoek en hulponderzoek.",
+   "subfields": [
+    {
+     "label": "Algemeen",
+     "tekst": "Verzorgde man, 182 cm, 84 kg. Wisselt tijdens het gesprek regelmatig van houding.",
+     "context": null
+    },
+    {
+     "label": "Cervicale wervelkolom",
+     "tekst": "Geen standsafwijking. Drukpijn paravertebraal C4–C6 links met verhoogde spierspanning van de m. trapezius links. Eindstandige pijn bij extensie en rotatie naar links. Bewegingsuitslagen in de tabel hieronder.",
+     "context": null
+    },
+    {
+     "label": "Neurologisch, oriënterend",
+     "tekst": "Kracht symmetrisch, reflexen symmetrisch. Spurling links positief met uitstraling naar de schouder, rechts negatief. Verminderd gevoel aan de radiale zijde van de linker onderarm en aan de pink en ringvinger links. Voor de duiding van de ulnarisklachten verwijs ik naar de neuroloog.",
+     "context": null
+    },
+    {
+     "label": "Hulponderzoek",
+     "tekst": "Ik heb de beelden van de MRI van 03-06-2022 zelf bekeken; de bevindingen komen overeen met het verslag. Er is geen aanvullend onderzoek verricht.",
+     "context": "Bron 6, p. 1."
+    }
+   ],
+   "table": {
+    "kolommen": [
+     "Gemeten",
+     "Normaalwaarde*",
+     "Methode",
+     "Pijn"
+    ],
+    "rijen": [
+     [
+      "Flexie",
+      "40°",
+      "50°",
+      "actief, 3×, goniometer",
+      "eindstandig"
+     ],
+     [
+      "Extensie",
+      "30°",
+      "60°",
+      "actief, 3×, goniometer",
+      "eindstandig"
+     ],
+     [
+      "Rotatie links",
+      "50°",
+      "80°",
+      "actief, 3×, goniometer",
+      "eindstandig"
+     ],
+     [
+      "Rotatie rechts",
+      "60°",
+      "80°",
+      "actief, 3×, goniometer",
+      "geen"
+     ],
+     [
+      "Lateroflexie links",
+      "25°",
+      "45°",
+      "actief, 3×, goniometer",
+      "geen"
+     ],
+     [
+      "Lateroflexie rechts",
+      "25°",
+      "45°",
+      "actief, 3×, goniometer",
+      "geen"
+     ]
+    ]
+   },
+   "tableNote": "* Algemene normaalwaarde; bron en eventuele correctie in de rekenbijlage. Weergegeven is de beste reproduceerbare waarde van drie metingen."
+  },
+  {
+   "num": "1d",
+   "title": "Consistentie",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Samenhang tussen anamnese, medisch dossier en onderzoeksbevindingen.",
+   "subfields": [
+    {
+     "label": "Oordeel",
+     "tekst": "Het beloop dat betrokkene beschrijft, komt overeen met de medische informatie. De bevindingen bij onderzoek passen bij de klachten; de bewegingsbeperking was bij herhaling gelijk.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "1e",
+   "title": "Reactie op inconsistenties",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Reactie van betrokkene op eventuele inconsistenties.",
+   "subfields": [
+    {
+     "label": "Oordeel",
+     "tekst": "Niet van toepassing; er zijn geen inconsistenties vastgesteld.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "1f",
+   "title": "Diagnose",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Diagnose en differentiaaldiagnostische overwegingen.",
+   "subfields": [
+    {
+     "label": "Diagnose",
+     "tekst": "Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma (WAD graad II), bij pre-existente degeneratie C5–C6.",
+     "context": null
+    },
+    {
+     "label": "Differentiaaldiagnose",
+     "tekst": "Ik onderscheid: (1) posttraumatische nekklachten zonder aantoonbare nieuwe structurele afwijking; (2) pre-existente, voor het ongeval symptoomloze degeneratie C5–C6; (3) een mogelijke traumatische verergering van die degeneratie; (4) een mogelijke radiculopathie C6 links; (5) een ulnarisneuropathie links, die buiten mijn vakgebied valt.",
+     "context": null
+    },
+    {
+     "label": "Beschouwing",
+     "tekst": "Er is een plausibel temporeel verband tussen het ongeval en het ontstaan van de nekklachten. Of sprake is van een blijvende traumatische verergering van de degeneratie, dan wel van een zelfstandige radiculopathie, kan op basis van de nu beschikbare broninformatie niet met voldoende medische onderbouwing worden vastgesteld. Daarvoor zijn het eindverslag van de fysiotherapie en een neurologisch oordeel nodig.",
+     "context": "Zie tegenstrijdigheden 1 en 2."
+    }
+   ],
+   "quote": "De gegevens ondersteunen een temporeel verband. Een blijvende traumatische verergering is met de huidige broninformatie niet vast te stellen."
+  },
+  {
+   "num": "1g",
+   "title": "Beperkingen",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Semi-kwantitatief: geen, licht, matig, ernstig of volledig. Een FML stelt de bedrijfs- of verzekeringsarts op.",
+   "subfields": [
+    {
+     "label": "Beperkingen op orthopedisch gebied",
+     "tekst": "Matig beperkt voor langdurig statisch nekbelastend werk, zoals beeldschermwerk en autorijden. Matig beperkt voor bovenhands werk en herhaald eindstandig bewegen van de nek. Licht beperkt voor tillen. Niet beperkt voor lopen en staan.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "1h–k",
+   "title": "Medische eindsituatie",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Is de situatie geschikt voor beoordeling, of is verbetering of verslechtering te verwachten?",
+   "subfields": [
+    {
+     "label": "h. Geschikt voor beoordeling",
+     "tekst": "Voor de orthopedische nekklachten acht ik de situatie stationair.",
+     "context": null
+    },
+    {
+     "label": "i–j. Te verwachten verandering",
+     "tekst": "Gelet op duur en beloop acht ik verdere substantiële verbetering niet waarschijnlijk. Dit oordeel betreft niet de neurologische en cognitieve klachten, die nog onvoldoende zijn gedocumenteerd.",
+     "context": null
+    },
+    {
+     "label": "k. Gevolgen voor de beperkingen",
+     "tekst": "Geen verandering verwacht in de beperkingen onder 1g.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "1(l)",
+   "title": "Functieverlies (optioneel)",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Percentage functieverlies volgens de AMA Guides 6e druk en de richtlijnen van de NOV. Dit betreft alleen algemene dagelijkse activiteiten, niet het beroep.",
+   "subfields": [
+    {
+     "label": "Oordeel",
+     "tekst": "Het percentage wordt vastgesteld door de ondertekenend specialist, met de volledige berekening in de rekenbijlage.",
+     "context": null
+    }
+   ],
+   "stappen": [
+    [
+     "AMA-editie en eventuele update",
+     "6e druk; update: door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Gekozen methode en reden",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Diagnose en tabel (hoofdstuk 17)",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Klasse en standaardwaarde",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Grade modifiers: functionele historie, lichamelijk onderzoek, klinische studies",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Berekening en afronding",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Functieverlies gehele persoon",
+     "Door de ondertekenend specialist in te vullen"
+    ]
+   ]
+  },
+  {
+   "num": "2a–b",
+   "title": "Klachten en beperkingen vóór het ongeval",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Onderscheid tussen anamnese en medische broninformatie.",
+   "subfields": [
+    {
+     "label": "Volgens betrokkene",
+     "tekst": "Geen nek- of armklachten vóór het ongeval.",
+     "context": null
+    },
+    {
+     "label": "Volgens de broninformatie",
+     "tekst": "In de huisartsinformatie over 2016–2021 zijn geen nek- of schouderklachten gedocumenteerd. De degeneratie C5–C6 bestond wel al; die is op de CT van de ongevalsdag beschreven.",
+     "context": "Bron 1, p. 2; bron 3, p. 1–3."
+    },
+    {
+     "label": "Beperkingen toen en nu door bestaande afwijkingen",
+     "tekst": "Vóór het ongeval zijn geen beperkingen bekend.",
+     "context": null
+    }
+   ],
+   "deel": "Deel 2 · Situatie zonder ongeval"
+  },
+  {
+   "num": "2c–d",
+   "title": "Klachten zonder ongeval",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Aanwijzingen en inschatting: waarschijnlijkheid, termijn en omvang.",
+   "subfields": [
+    {
+     "label": "Aanwijzingen",
+     "tekst": "De degeneratie C5–C6 kan ook zonder ongeval nekklachten geven. Dat klachten na het ongeval voor het eerst zijn gemeld, is op zichzelf geen reden ze volledig aan het ongeval toe te schrijven.",
+     "context": null
+    },
+    {
+     "label": "Inschatting",
+     "tekst": "Het is mogelijk dat zonder ongeval op termijn nekklachten waren ontstaan. Waarschijnlijkheid, moment en omvang daarvan zijn niet met redelijke zekerheid te bepalen.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "2e–i",
+   "title": "Beperkingen en verloop zonder ongeval",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Semi-kwantitatief, met de verwachte ontwikkeling.",
+   "subfields": [
+    {
+     "label": "Beperkingen zonder ongeval",
+     "tekst": "Op dit moment waarschijnlijk geen tot licht beperkt.",
+     "context": null
+    },
+    {
+     "label": "Te verwachten ontwikkeling",
+     "tekst": "Bij degeneratie van de nek is geleidelijke toename van klachten mogelijk, maar niet voorspelbaar. Een termijn en mate kan ik niet onderbouwd aangeven.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "3a",
+   "title": "Verdere opmerkingen",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Relevante bevindingen buiten de vragen en therapeutische suggesties.",
+   "subfields": [
+    {
+     "label": "Opmerkingen",
+     "tekst": "Voor de ulnarisklachten en de cognitieve klachten adviseer ik een neurologische expertise, met neuropsychologisch onderzoek. Voortzetting van een actief oefenprogramma en ergonomische aanpassing van de werkplek zijn zinvol; van verdere invasieve behandeling verwacht ik weinig.",
+     "context": null
+    }
+   ],
+   "deel": "Deel 3 · Overig"
+  },
+  {
+   "num": "–",
+   "deel": "Verantwoording",
+   "title": "Procedure en rolverdeling",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Opdracht",
+     "value": "Opdrachtbrief [OPDRACHTGEVER], vraagstelling IWMD 2025"
+    },
+    {
+     "label": "Machtiging",
+     "value": "Getekende machtiging van betrokkene voor opvragen en gebruik medische gegevens"
+    },
+    {
+     "label": "Dossierordening",
+     "value": "Kinetic: ordening, tijdlijn, bronverwijzingen en hiaten, zonder medische duiding"
+    },
+    {
+     "label": "Onderzoek",
+     "value": "Anamnese en lichamelijk onderzoek door [ARTS], basisarts, onder supervisie van de specialist"
+    },
+    {
+     "label": "Aanwezig bij onderzoek",
+     "value": "Betrokkene en de onderzoekend arts"
+    },
+    {
+     "label": "Toetsing",
+     "value": "De ondertekenend specialist heeft dossier, onderzoeksbevindingen en conclusies zelfstandig getoetst"
+    },
+    {
+     "label": "Opdrachtgever",
+     "value": "Controleert vraagstelling, feitelijke gegevens en volledigheid; niet de medische inhoud"
+    },
+    {
+     "label": "Richtlijn",
+     "value": "NVMSR-richtlijn medisch specialistische rapportage 2024"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Inzage en blokkeringsrecht",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Gewezen op recht",
+     "value": "Bij het onderzoek, mondeling en schriftelijk"
+    },
+    {
+     "label": "Concept toegezonden",
+     "value": "[DATUM], met termijn van twee weken"
+    },
+    {
+     "label": "Reactie betrokkene",
+     "value": "Correctie van één feitelijke onjuistheid (werkuren); verwerkt in 1a"
+    },
+    {
+     "label": "Blokkeringsrecht",
+     "value": "Na inzage geen gebruik van gemaakt"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Disclosure statement",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Specialist",
+     "value": "Orthopedisch chirurg, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+    },
+    {
+     "label": "Onderzoekend arts",
+     "value": "Basisarts, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+    },
+    {
+     "label": "Ervaring als deskundige",
+     "value": "[OPGAVE]"
+    },
+    {
+     "label": "Relatie met partijen",
+     "value": "Geen eerdere behandelrelatie met betrokkene; geen belang bij de uitkomst"
+    },
+    {
+     "label": "Wetenschappelijke discussie",
+     "value": "Over de betekenis van degeneratie na een whiplashtrauma bestaan uiteenlopende opvattingen; deze zijn meegewogen in 1f en deel 2"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "deel": "Bijlage",
+   "title": "Bronnenlijst",
+   "badge": "ai",
+   "type": "bronnen",
+   "bronnen": [
+    {
+     "nr": "1",
+     "doc": "SEH-verslag met CT-cervicaal",
+     "bron": "[ORGANISATIE-2]",
+     "datum": "07-10-2021",
+     "paginas": "1–2"
+    },
+    {
+     "nr": "2",
+     "doc": "Huisartsbrief",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "22-10-2021",
+     "paginas": "1"
+    },
+    {
+     "nr": "3",
+     "doc": "Huisartsjournaal",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "2016–2021",
+     "paginas": "1–3"
+    },
+    {
+     "nr": "4",
+     "doc": "Keuringsrapport werkgever",
+     "bron": "[ORGANISATIE-4]",
+     "datum": "03-03-2020",
+     "paginas": "1"
+    },
+    {
+     "nr": "5",
+     "doc": "Fysiotherapie intake",
+     "bron": "[ORGANISATIE-6]",
+     "datum": "01-11-2021",
+     "paginas": "1–3"
+    },
+    {
+     "nr": "6",
+     "doc": "MRI cervicale wervelkolom",
+     "bron": "Radiologie [ORGANISATIE-2]",
+     "datum": "03-06-2022",
+     "paginas": "1"
+    },
+    {
+     "nr": "7",
+     "doc": "Verwijsbrief pijnrevalidatie",
+     "bron": "[ORGANISATIE-7]",
+     "datum": "19-08-2022",
+     "paginas": "1–2"
+    },
+    {
+     "nr": "8",
+     "doc": "EMG-verslag",
+     "bron": "Klinische neurofysiologie [ORGANISATIE-2]",
+     "datum": "17-11-2022",
+     "paginas": "1–2"
+    },
+    {
+     "nr": "9",
+     "doc": "Operatieverslag facetdenervatie",
+     "bron": "Anesthesiologie [ORGANISATIE-2]",
+     "datum": "24-11-2022",
+     "paginas": "1"
+    },
+    {
+     "nr": "10",
+     "doc": "Brief neurologie",
+     "bron": "Neurologie [ORGANISATIE-2]",
+     "datum": "12-01-2023",
+     "paginas": "1–2"
+    },
+    {
+     "nr": "11",
+     "doc": "Intake cognitieve gedragstherapie",
+     "bron": "[ORGANISATIE-8]",
+     "datum": "02-02-2023",
+     "paginas": "1–2"
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "bronnen": 11,
+  "hiaten": 3
+ }
 };
 
-/* Tweede voorbeeld: medische expertise volgens de NVMSR-richtlijn (deel 1 met ongeval,
-   deel 2 zonder ongeval, deel 3 overig). Fictieve casus, geen echte persoon. */
+/* Tweede voorbeeld: expertise voor een ongevallenverzekering (geen letselschade). Fictieve casus. */
 var EXAMPLE_NVMSR = {
-  meta: {
-    zaaknummer: "2025-KME-01317",
-    betrokkene: "[PERSOON-1]",
-    geboortedatum: "[GEBOORTEDATUM]",
-    status: "Concept",
-    specialisme: "Orthopedisch",
-    kicker: "Ongevallenverzekering &middot; NVMSR &middot; fictief voorbeeld",
-    titel: "Orthopedische expertise blijvende invaliditeit",
-    subtitel: "Ongevallenverzekering · vraagstelling van de verzekeraar",
-    onderzoeksdatum: "T+24m",
-    kern: [{"label": "Diagnose", "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na distale radiusfractuur", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "4%", "toelichting": "van de gehele persoon (7% bovenste extremiteit)", "groot": true}, {"label": "Medische eindsituatie", "waarde": "Bereikt", "toelichting": "Verdere verbetering niet verwacht"}, {"label": "Consistentie", "waarde": "Consistent", "toelichting": "Anamnese, dossier en onderzoek"}, {"label": "Knijpkracht rechts", "waarde": "70%", "toelichting": "van de niet-aangedane zijde"}, {"label": "Zonder ongeval", "waarde": "Geen klachten", "toelichting": "Geen invaliditeit"}, {"label": "Dossier", "waarde": "7 van 8 stukken", "toelichting": "1 hiaat"}],
-    ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
-  },
-  compleetheid: {
-    score: 88,
-    aanwezig: ["SEH-verslag","Operatieverslag","Ontslagbrief","Poliklinische brieven orthopedie","Röntgenverslagen","Fysiotherapie eindverslag","Huisartsjournaal"],
-    ontbrekend: [
-      {doc:"Verslag arbeidsdeskundige / bedrijfsarts", prio:"belangrijk"}
-    ]
-  },
-  sections: [
-    {
-      num:"0", deel:"Dossier", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
-      fields: [
-        {label:"Opdrachtgever", value:"[OPDRACHTGEVER]", redacted:true},
-        {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
-        {label:"Geboortedatum", value:"[GEBOORTEDATUM]", redacted:true},
-        {label:"Beroep", value:"Monteur installatietechniek"},
-        {label:"Kader", value:"Ongevallenverzekering, vaststelling van blijvende invaliditeit"},
-        {label:"Ongeval", value:"T±0: val van een trap tijdens werkzaamheden"},
-        {label:"Datum onderzoek", value:"T+24m"}
-      ]
-    },
-    {
-      num:"0", title:"Opzet van de rapportage", badge:"ai", type:"text",
-      paragraphs: [
-        "Geen letselschadezaak: de verzekeraar vraagt om vaststelling van de blijvende invaliditeit onder de ongevallenverzekering. De vraagstelling komt van de verzekeraar; de rapportage volgt de richtlijn Medisch Specialistische Rapportage (NVMSR). Deel 1 beschrijft de situatie met ongeval, deel 2 de situatie zonder ongeval (voorafbestaande afwijkingen) en deel 3 overige vragen van de verzekeraar."
-      ]
-    },
-    {
-      num:"0", title:"Medische voorgeschiedenis", badge:"ai", type:"text",
-      paragraphs: [
-        "Huisartsjournaal (T−5j tot T±0): geen klachten of behandelingen van de bovenste extremiteiten. Geen operaties in de voorgeschiedenis."
-      ],
-      sources: ["Huisartsjournaal, p. 1–2"]
-    },
-    {
-      num:"0", title:"Samenvatting medische informatie", badge:"ai", type:"text",
-      paragraphs: [
-        "T±0 — SEH: distale radiusfractuur rechts, dorsaal gedisloceerd (SEH-verslag, p. 1)\nT+2d — Operatie: open repositie en plaatfixatie (operatieverslag, p. 1)\nT+6w — Polikliniek orthopedie: consolidatie op röntgenfoto, start fysiotherapie (brief, p. 2)\nT+6m — Fysiotherapie eindverslag: restbeperking pols, knijpkracht verminderd (eindverslag, p. 3)\nT+14m — Polikliniek orthopedie: verwijdering osteosynthesemateriaal (brief, p. 1)"
-      ],
-      sources: ["SEH-verslag, p. 1","Operatieverslag, p. 1","Poliklinische brieven orthopedie, p. 1–2","Fysiotherapie eindverslag, p. 3"]
-    },
-    {
-      num:"0", title:"Hiaten in het dossier", badge:"ai", type:"hiaten",
-      hiaten: [
-        {prio:"belangrijk", doc:"Verslag arbeidsdeskundige / bedrijfsarts", verwacht:"T+3m tot T+12m", toelichting:"Werkhervatting wordt genoemd in de poliklinische brief, maar er is geen verslag over belastbaarheid in het werk.", actie:"Opvragen bij de werkgever of arbodienst."}
-      ]
-    },
-    {
-      num:"1a", deel:"Deel 1 · Situatie met ongeval", title:"Anamnese", badge:"arts", type:"arts_template",
-      prompt:"Het gesprek met betrokkene.",
-      subfields: [
-        {label:"Toedracht en beloop", tekst:"Op T±0 viel betrokkene tijdens werkzaamheden van een trap en ving zich op met de rechterhand. Op de SEH bleek de pols gebroken; twee dagen later volgde een operatie met een plaat. Na zes weken gips startte fysiotherapie, die tot een half jaar na het ongeval duurde. Na veertien maanden is de plaat verwijderd.", context:"Zie samenvatting medische informatie: fractuur, operatie T+2d, fysiotherapie tot T+6m, materiaalverwijdering T+14m."},
-        {label:"Huidige klachten en beperkingen in werk en vrije tijd", tekst:"Pijn aan de rechter pols bij draaien en steunen, bijvoorbeeld bij het aandraaien van koppelingen en bij opstaan uit een stoel. Langdurig gereedschap vasthouden lukt minder lang. Hij werkt weer volledig als monteur, maar laat zwaar trekwerk aan collega's over. Zijn fitnesstraining heeft hij aangepast. Geen pijnstillers.", context:null}
-      ]
-    },
-    {
-      num:"1b", title:"Medische gegevens", badge:"arts", type:"arts_template",
-      prompt:"Op basis van anamnese en dossier.",
-      subfields: [
-        {label:"Voorgeschiedenis, medicatie, allergieën", tekst:"Geen klachten of behandelingen van de bovenste extremiteiten. Geen medicatie, geen allergieën. Rechtshandig.", context:"Huisartsjournaal: geen klachten bovenste extremiteiten voor het ongeval."}
-      ]
-    },
-    {
-      num:"1c", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
-      prompt:"Bevindingen van de onderzoekend arts.",
-      subfields: [
-        {label:"Algemeen en inspectie", tekst:"Lengte 181 cm, gewicht 83 kg. Normaal looppatroon. Rustig litteken van 8 cm aan de handpalmzijde van de rechter pols. Geen zwelling of standsafwijking.", context:null},
-        {label:"Palpatie en functie", tekst:"Drukpijn over het distale radio-ulnaire gewricht rechts, geen drukpijn in de tabatière. Pro- en supinatie eindstandig pijnlijk. Fijne motoriek normaal.", context:"Fysiotherapie eindverslag T+6m: extensie pols rechts 45°, knijpkracht 70% van links (p. 3)."}
-      ],
-      goniometer: [{"label": "Pols · extensie en flexie", "a": [45, 55], "ref": [70, 80], "namen": ["extensie", "flexie"]}, {"label": "Pols · radiaal en ulnair", "a": [15, 25], "ref": [20, 35], "namen": ["radiaal", "ulnair"]}, {"label": "Onderarm · pronatie en supinatie", "a": [80, 70], "ref": [85, 85], "namen": ["pronatie", "supinatie"]}],
-      table: {
-        vergelijk: "Rechts ten opzichte van links",
-        kolommen: ["Rechts (aangedane zijde)","Links"],
-        rijen: [["Omtrek pols","17,5 cm","17,0 cm"],["Omtrek onderarm (10 cm distaal elleboog)","27,0 cm","28,0 cm"],["Pols extensie-flexie","45-0-55","70-0-80"],["Pols radiaal-ulnairdeviatie","15-0-25","20-0-35"],["Onderarm pronatie-supinatie","80-0-70","85-0-85"],["Knijpkracht (kg)","32","46"]]
-      }
-    },
-    {
-      num:"1d", title:"Consistentie", badge:"arts", type:"arts_template",
-      prompt:"Samenhang tussen anamnese, dossier en eigen bevindingen.",
-      quote:"De klachten, het beloop in het dossier en mijn bevindingen bij onderzoek zijn onderling consistent.",
-      subfields: [{label:"Oordeel over de consistentie", tekst:"De klachten van betrokkene, het beloop in het medisch dossier en mijn bevindingen bij onderzoek zijn onderling consistent.", context:null}]
-    },
-    {
-      num:"1f", title:"Diagnose", badge:"arts", type:"arts_template",
-      prompt:"Diagnose op het eigen vakgebied.",
-      subfields: [{label:"Diagnose", tekst:"Pijnlijke bewegingsbeperking van de rechter pols bij status na distale radiusfractuur rechts, behandeld met plaatfixatie en materiaalverwijdering.", context:"Status na distale radiusfractuur rechts, plaatfixatie en materiaalverwijdering."}]
-    },
-    {
-      num:"1g", title:"Beperkingen", badge:"arts", type:"arts_template",
-      prompt:"Beperkingen in werk, huishouden en vrije tijd.",
-      subfields: [{label:"Beperkingen", tekst:"Verminderde knijpkracht en belastbaarheid van de rechter pols. Beperkt in krachtig draaien, steunen op de hand en langdurig vasthouden van gereedschap. Geen beperkingen in de fijne motoriek.", context:null}]
-    },
-    {
-      num:"1h", title:"Blijvende invaliditeit", badge:"arts", type:"arts_template",
-      flow: [{"waarde": "7%", "label": "bovenste extremiteit"}, {"waarde": "× 0,6", "label": "omrekening"}, {"waarde": "4%", "label": "gehele persoon"}],
-      prompt:"Volgens de AMA Guides 6e editie en de leidraad van de Werkgroep Invaliditeit en Arbeidsongeschiktheid van de NOV.",
-      subfields: [{label:"Berekening per diagnose en totaal", tekst:"De bewegingsbeperking van de pols (tabel 15-32) geeft 7% van de bovenste extremiteit. Die waarde is hoger dan de diagnosegebonden waarde en wordt daarom gebruikt. Blijvende invaliditeit: 7% van de bovenste extremiteit, 4% van de gehele persoon.", context:null}]
-    },
-    {
-      num:"1i", title:"Medische eindsituatie", badge:"arts", type:"arts_template",
-      prompt:"Is er sprake van een medische eindsituatie, en zo nee, wanneer wordt die verwacht?",
-      subfields: [{label:"Medische eindsituatie", tekst:"Er is sprake van een medische eindsituatie. Verdere verbetering verwacht ik niet.", context:"Laatste poliklinisch contact T+14m (materiaalverwijdering)."}]
-    },
-    {
-      num:"–", title:"Inzage en blokkeringsrecht", badge:"arts", type:"arts_template",
-      prompt:"Vastleggen of betrokkene het concept wil inzien en of gebruik wordt gemaakt van het blokkeringsrecht.",
-      subfields: [{label:"Keuze van betrokkene", tekst:"Betrokkene wil het concept inzien. Op het blokkeringsrecht gewezen; hij maakt daar geen gebruik van.", context:null}]
-    },
-    {
-      num:"2", deel:"Deel 2 · Situatie zonder ongeval", title:"Situatie zonder ongeval", badge:"arts", type:"arts_template",
-      prompt:"Klachten, afwijkingen en beperkingen in de hypothetische situatie zonder ongeval.",
-      subfields: [
-        {label:"Klachten en beperkingen voor het ongeval", tekst:"Geen klachten aan de rechter pols of hand.", context:"Huisartsjournaal: geen klachten bovenste extremiteiten."},
-        {label:"Klachten die ook zonder ongeval waren ontstaan", tekst:"Nee, op mijn vakgebied zijn er geen klachten die ook zonder ongeval waren ontstaan.", context:null},
-        {label:"Blijvende invaliditeit zonder ongeval", tekst:"Nee.", context:null}
-      ]
-    },
-    {
-      num:"3", deel:"Deel 3 · Overig", title:"Overige vragen", badge:"arts", type:"arts_template",
-      prompt:"Aanvullende vragen van de opdrachtgever.",
-      subfields: [{label:"Overig", tekst:"Geen aanvullende vragen.", context:null}]
-    },
-    {
-      num:"–", deel:"Bijlage", title:"Bronnenlijst", badge:"ai", type:"bronnen",
-      bronnen: [
-        {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-1]", datum:"T±0", paginas:"1"},
-        {nr:"2", doc:"Operatieverslag", bron:"[ORGANISATIE-1]", datum:"T+2d", paginas:"1"},
-        {nr:"3", doc:"Poliklinische brieven orthopedie", bron:"[ORGANISATIE-1]", datum:"T+6w–T+14m", paginas:"1–2"},
-        {nr:"4", doc:"Fysiotherapie eindverslag", bron:"[ORGANISATIE-2]", datum:"T+6m", paginas:"3"},
-        {nr:"5", doc:"Huisartsjournaal", bron:"[ORGANISATIE-3]", datum:"T−5j–T+24m", paginas:"1–2"}
-      ]
-    }
+ "meta": {
+  "zaaknummer": "2025-KME-01317",
+  "betrokkene": "[PERSOON-1]",
+  "geboortedatum": "[GEBOORTEDATUM]",
+  "status": "Concept",
+  "specialisme": "Orthopedisch",
+  "onderzoeksdatum": "T+24m",
+  "kicker": "Ongevallenverzekering &middot; fictief voorbeeld",
+  "titel": "Orthopedische expertise blijvende invaliditeit",
+  "subtitel": "Ongevallenverzekering · vraagstelling van de verzekeraar",
+  "kern": [
+   {
+    "label": "Diagnose",
+    "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na een distale radiusfractuur",
+    "breed": true
+   },
+   {
+    "label": "Relatie met het ongeval",
+    "waarde": "Medisch aannemelijk",
+    "toelichting": "Geen aanwijzingen voor een andere oorzaak"
+   },
+   {
+    "label": "Eindsituatie",
+    "waarde": "Nog niet vast te stellen",
+    "toelichting": "Controle na materiaalverwijdering ontbreekt"
+   },
+   {
+    "label": "Knijpkracht",
+    "waarde": "32 / 46 kg",
+    "toelichting": "Rechts / links, Jamar stand II"
+   },
+   {
+    "label": "Voorafbestaand",
+    "waarde": "Niet gedocumenteerd",
+    "toelichting": "Geen klachten of afwijkingen bekend"
+   },
+   {
+    "label": "Blijvende invaliditeit",
+    "waarde": "Open",
+    "toelichting": "Na eindsituatie, volgens polistabel"
+   },
+   {
+    "label": "Dossier",
+    "waarde": "8 van 9 stukken",
+    "toelichting": "1 hiaat"
+   }
   ],
-  stats: {aiSections:6, artsSections:10, bronnen:5, hiaten:1, tegenstrijdigheden:0}
+  "ondertekening": {
+   "arts": "[ARTS] · basisarts, BIG [BIG-NR]",
+   "specialist": "Orthopedisch chirurg · BIG [BIG-NR]",
+   "status": "Concept. Definitief na toetsing door de specialist, controle van vraagstelling en feitelijke gegevens door de verzekeraar, en inzage door betrokkene."
+  }
+ },
+ "compleetheid": {
+  "score": 89,
+  "aanwezig": [
+   "SEH-verslag",
+   "Röntgenverslagen pols",
+   "Operatieverslag plaatfixatie",
+   "Ontslagbrief",
+   "Poliklinische brieven orthopedie",
+   "Fysiotherapie eindverslag",
+   "Operatieverslag materiaalverwijdering",
+   "Huisartsjournaal"
+  ],
+  "ontbrekend": [
+   {
+    "doc": "Controle na materiaalverwijdering",
+    "prio": "kritiek"
+   }
+  ]
+ },
+ "sections": [
+  {
+   "num": "–",
+   "deel": "Opdracht en polis",
+   "title": "Gegevens verzekeraar en betrokkene",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Verzekeraar",
+     "value": "[OPDRACHTGEVER]"
+    },
+    {
+     "label": "Betrokkene",
+     "value": "[PERSOON-1]"
+    },
+    {
+     "label": "Geboortedatum",
+     "value": "[GEBOORTEDATUM]"
+    },
+    {
+     "label": "Beroep",
+     "value": "Monteur installatietechniek, rechtshandig"
+    },
+    {
+     "label": "Ongeval",
+     "value": "T±0: val van een trap tijdens werkzaamheden"
+    },
+    {
+     "label": "Datum onderzoek",
+     "value": "T+24m"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Polis en opdracht",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Soort verzekering",
+     "value": "Collectieve ongevallenverzekering via de werkgever; geen letselschadezaak"
+    },
+    {
+     "label": "Polisvoorwaarden",
+     "value": "[POLISVERSIE], artikel [NR] (blijvende invaliditeit)"
+    },
+    {
+     "label": "Dekking",
+     "value": "De verzekeraar heeft het ongeval als gedekt uitgangspunt aanvaard"
+    },
+    {
+     "label": "Invaliditeitsmaatstaf",
+     "value": "Volgens de polis: [TABEL] (bijvoorbeeld AMA Guides 6e druk)"
+    },
+    {
+     "label": "Termijn",
+     "value": "Vaststelling volgens de polis uiterlijk [TERMIJN] na het ongeval"
+    },
+    {
+     "label": "Voorafbestaande invaliditeit",
+     "value": "Volgens de polis in mindering te brengen"
+    },
+    {
+     "label": "Niet beoordeeld",
+     "value": "Dekking, uitkering en uitleg van de polisvoorwaarden; dat is aan de verzekeraar"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Vragen van de verzekeraar",
+   "badge": "ai",
+   "type": "iwmd",
+   "intro": "Zoals gesteld in de opdrachtbrief.",
+   "questions": [
+    "Wat is de aard van het letsel en de huidige diagnose?",
+    "Zijn de huidige afwijkingen medisch het gevolg van het ongeval?",
+    "Bestonden er vóór het ongeval klachten, afwijkingen of functieverlies aan het betrokken lichaamsdeel?",
+    "Is er sprake van een medische eindsituatie? Zo nee, wanneer wordt die verwacht?",
+    "Wat is de blijvende invaliditeit volgens de maatstaf in de polis, en welk deel daarvan bestond al vóór het ongeval?",
+    "Heeft u overige opmerkingen?"
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Samenvatting medische informatie",
+   "badge": "ai",
+   "type": "text",
+   "paragraphs": [
+    "T±0 — SEH: distale radiusfractuur rechts, dorsaal gedisloceerd (bron 1, p. 1)\nT+2d — Operatie: open repositie en plaatfixatie (bron 3, p. 1)\nT+6w — Polikliniek orthopedie: consolidatie op de röntgenfoto, start fysiotherapie (bron 5, p. 1)\nT+6m — Fysiotherapie eindverslag: restbeperking pols, knijpkracht verminderd (bron 6, p. 3)\nT+14m — Materiaalverwijdering (bron 7, p. 1)\nT+24m — Expertiseonderzoek"
+   ],
+   "sources": [
+    "Bronnen 1, 3, 5, 6, 7"
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Hiaten in het dossier",
+   "badge": "ai",
+   "type": "hiaten",
+   "hiaten": [
+    {
+     "prio": "kritiek",
+     "doc": "Controle na materiaalverwijdering",
+     "verwacht": "T+15m",
+     "toelichting": "Na de materiaalverwijdering is geen poliklinische controle of röntgenfoto in het dossier. Zonder deze informatie is de eindsituatie niet betrouwbaar vast te stellen.",
+     "actie": "Opvragen bij [ORGANISATIE-1]."
+    }
+   ]
+  },
+  {
+   "num": "1",
+   "title": "Aard van het letsel en diagnose",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Anamnese, medische gegevens, onderzoek en diagnose.",
+   "subfields": [
+    {
+     "label": "Anamnese",
+     "tekst": "Betrokkene vertelt dat hij van een trap viel en zich opving met de rechterhand. Hij heeft pijn aan de pols bij draaien en steunen, bijvoorbeeld bij het aandraaien van koppelingen en bij opstaan uit een stoel. Langdurig gereedschap vasthouden lukt minder lang. Hij werkt weer volledig, maar laat zwaar trekwerk aan collega’s over. Geen pijnstillers.",
+     "context": null
+    },
+    {
+     "label": "Medische gegevens",
+     "tekst": "Distale radiusfractuur rechts, behandeld met plaatfixatie op T+2d. Fysiotherapie tot T+6m. Materiaalverwijdering op T+14m.",
+     "context": "Bronnen 1, 3, 6 en 7."
+    },
+    {
+     "label": "Onderzoek",
+     "tekst": "Rustig litteken van 8 cm aan de handpalmzijde van de rechter pols, geen zwelling of standsafwijking. Drukpijn over het distale radio-ulnaire gewricht rechts, geen drukpijn in de tabatière. Pro- en supinatie eindstandig pijnlijk. Fijne motoriek normaal. Meetwaarden in de tabel.",
+     "context": null
+    },
+    {
+     "label": "Diagnose",
+     "tekst": "Pijnlijke bewegingsbeperking en verminderde knijpkracht van de rechter pols bij status na een distale radiusfractuur, behandeld met plaatfixatie en materiaalverwijdering.",
+     "context": null
+    }
+   ],
+   "deel": "Beantwoording",
+   "table": {
+    "kolommen": [
+     "Rechts (aangedaan)",
+     "Links (contralateraal)",
+     "Methode",
+     "Pijn"
+    ],
+    "rijen": [
+     [
+      "Omtrek pols",
+      "17,5 cm",
+      "17,0 cm",
+      "meetlint, processus styloideus",
+      "—"
+     ],
+     [
+      "Omtrek onderarm",
+      "27,0 cm",
+      "28,0 cm",
+      "meetlint, 10 cm distaal elleboog",
+      "—"
+     ],
+     [
+      "Extensie-flexie",
+      "45-0-55",
+      "70-0-80",
+      "actief, 3×, goniometer, neutraal-nul",
+      "eindstandig"
+     ],
+     [
+      "Radiaal-ulnairdeviatie",
+      "15-0-25",
+      "20-0-35",
+      "actief, 3×, goniometer",
+      "eindstandig ulnair"
+     ],
+     [
+      "Pronatie-supinatie",
+      "80-0-70",
+      "85-0-85",
+      "actief, 3×, goniometer",
+      "eindstandig"
+     ],
+     [
+      "Knijpkracht",
+      "32 kg",
+      "46 kg",
+      "Jamar, stand II, gemiddelde van 3",
+      "licht"
+     ]
+    ]
+   },
+   "tableNote": "De linkerzijde is een individuele vergelijking, geen algemene normaalwaarde. Weergegeven is de beste reproduceerbare waarde van drie metingen."
+  },
+  {
+   "num": "2",
+   "title": "Relatie met het ongeval",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Is de huidige afwijking medisch het gevolg van het ongeval?",
+   "subfields": [
+    {
+     "label": "Oordeel",
+     "tekst": "De bewegingsbeperking en het krachtverlies zijn medisch goed te verklaren uit de polsbreuk en de behandeling daarvan. Ik heb gekeken naar andere verklaringen: klachten van het distale radio-ulnaire gewricht passen bij het letsel; voor posttraumatische artrose, peesproblemen of CRPS zijn bij onderzoek geen aanwijzingen. Voor een oorzaak buiten het ongeval zijn geen aanwijzingen.",
+     "context": null
+    },
+    {
+     "label": "Onzekerheid",
+     "tekst": "Zonder röntgenfoto na de materiaalverwijdering kan ik beginnende artrose niet uitsluiten.",
+     "context": null
+    }
+   ],
+   "quote": "De beperking is medisch goed te verklaren uit de polsbreuk. Voor een andere oorzaak zijn geen aanwijzingen."
+  },
+  {
+   "num": "3",
+   "title": "Toestand vóór het ongeval",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Klachten, objectieve afwijkingen en functieverlies vóór het ongeval.",
+   "subfields": [
+    {
+     "label": "Klachten",
+     "tekst": "In de huisartsinformatie over vijf jaar voor het ongeval zijn geen pols- of handklachten gedocumenteerd.",
+     "context": "Bron 8, p. 1–2."
+    },
+    {
+     "label": "Objectieve afwijkingen en functieverlies",
+     "tekst": "Uit de beschikbare gegevens blijken geen eerdere afwijkingen of functieverlies. De röntgenfoto van de ongevalsdag toont geen aanwijzingen voor bestaande artrose.",
+     "context": "Bron 2, p. 1."
+    },
+    {
+     "label": "Conclusie",
+     "tekst": "Er zijn geen aanwijzingen voor voorafbestaande invaliditeit van de rechter pols.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "4",
+   "title": "Medische eindsituatie",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Is de eindsituatie bereikt, en zo nee, wanneer?",
+   "subfields": [
+    {
+     "label": "Oordeel",
+     "tekst": "Op basis van het klinisch onderzoek acht ik verdere relevante verbetering niet waarschijnlijk. Een definitieve eindsituatie kan ik echter pas vaststellen met de gegevens van de controle na de materiaalverwijdering en een actuele röntgenfoto.",
+     "context": null
+    },
+    {
+     "label": "Advies",
+     "tekst": "Controlegegevens opvragen en, als die geen bijzonderheden tonen, de eindsituatie stellen op T+24m. Anders herbeoordeling na aanvullende gegevens.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "5",
+   "title": "Blijvende invaliditeit",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Volgens de maatstaf in de polis, met aftrek van voorafbestaande invaliditeit.",
+   "subfields": [
+    {
+     "label": "Oordeel",
+     "tekst": "Het percentage wordt vastgesteld zodra de eindsituatie vaststaat, door de ondertekenend specialist, met de volledige berekening in de rekenbijlage.",
+     "context": null
+    }
+   ],
+   "stappen": [
+    [
+     "Maatstaf volgens de polis",
+     "[TABEL] volgens [POLISVERSIE]"
+    ],
+    [
+     "Gekozen methode (diagnose of bewegingsuitslag) en reden",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Gemeten waarden en afronding",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Tabelcel per bewegingsrichting",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Subtotaal per gewricht",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Modifiers en formule",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Omzetting via de conversietabel",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Aftrek voorafbestaande invaliditeit",
+     "Niet van toepassing (vraag 3)"
+    ],
+    [
+     "Uitkomst volgens de polis",
+     "Door de ondertekenend specialist in te vullen"
+    ]
+   ]
+  },
+  {
+   "num": "6",
+   "title": "Overige opmerkingen",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "",
+   "subfields": [
+    {
+     "label": "Opmerkingen",
+     "tekst": "Geen.",
+     "context": null
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "deel": "Verantwoording",
+   "title": "Procedure en rolverdeling",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Opdracht",
+     "value": "Opdrachtbrief [OPDRACHTGEVER] met vragen van de verzekeraar"
+    },
+    {
+     "label": "Machtiging",
+     "value": "Getekende machtiging van betrokkene"
+    },
+    {
+     "label": "Dossierordening",
+     "value": "Kinetic: ordening, tijdlijn, bronverwijzingen en hiaten, zonder medische duiding"
+    },
+    {
+     "label": "Onderzoek",
+     "value": "Anamnese en lichamelijk onderzoek door [ARTS], basisarts, onder supervisie van de specialist"
+    },
+    {
+     "label": "Toetsing",
+     "value": "De ondertekenend specialist heeft dossier, onderzoeksbevindingen en conclusies zelfstandig getoetst"
+    },
+    {
+     "label": "Verzekeraar",
+     "value": "Controleert vraagstelling, feitelijke gegevens en volledigheid; niet de medische inhoud"
+    },
+    {
+     "label": "Richtlijn",
+     "value": "NVMSR-richtlijn medisch specialistische rapportage 2024"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Inzage en blokkeringsrecht",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Gewezen op recht",
+     "value": "Bij het onderzoek, mondeling en schriftelijk"
+    },
+    {
+     "label": "Concept toegezonden",
+     "value": "[DATUM], met termijn van twee weken"
+    },
+    {
+     "label": "Reactie betrokkene",
+     "value": "Geen correcties"
+    },
+    {
+     "label": "Blokkeringsrecht",
+     "value": "Na inzage geen gebruik van gemaakt"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "title": "Disclosure statement",
+   "badge": "ai",
+   "type": "fields",
+   "fields": [
+    {
+     "label": "Specialist",
+     "value": "Orthopedisch chirurg, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+    },
+    {
+     "label": "Onderzoekend arts",
+     "value": "Basisarts, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+    },
+    {
+     "label": "Relatie met partijen",
+     "value": "Geen eerdere behandelrelatie met betrokkene; geen belang bij de uitkomst"
+    }
+   ]
+  },
+  {
+   "num": "–",
+   "deel": "Bijlage",
+   "title": "Bronnenlijst",
+   "badge": "ai",
+   "type": "bronnen",
+   "bronnen": [
+    {
+     "nr": "1",
+     "doc": "SEH-verslag",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "T±0",
+     "paginas": "1"
+    },
+    {
+     "nr": "2",
+     "doc": "Röntgenverslagen pols",
+     "bron": "Radiologie [ORGANISATIE-1]",
+     "datum": "T±0–T+6w",
+     "paginas": "1–2"
+    },
+    {
+     "nr": "3",
+     "doc": "Operatieverslag plaatfixatie",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "T+2d",
+     "paginas": "1"
+    },
+    {
+     "nr": "4",
+     "doc": "Ontslagbrief",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "T+3d",
+     "paginas": "1"
+    },
+    {
+     "nr": "5",
+     "doc": "Poliklinische brieven orthopedie",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "T+6w–T+12m",
+     "paginas": "1–3"
+    },
+    {
+     "nr": "6",
+     "doc": "Fysiotherapie eindverslag",
+     "bron": "[ORGANISATIE-2]",
+     "datum": "T+6m",
+     "paginas": "1–3"
+    },
+    {
+     "nr": "7",
+     "doc": "Operatieverslag materiaalverwijdering",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "T+14m",
+     "paginas": "1"
+    },
+    {
+     "nr": "8",
+     "doc": "Huisartsjournaal",
+     "bron": "[ORGANISATIE-3]",
+     "datum": "T−5j–T+24m",
+     "paginas": "1–2"
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "bronnen": 8,
+  "hiaten": 1
+ }
 };
-
 
 function prioColor(p){return p==="kritiek"?"#D94F4F":p==="belangrijk"?"#C77B2E":"var(--warm-teal)";}
 function prioLabel(p){return p==="kritiek"?"Kritiek":p==="belangrijk"?"Belangrijk":"Aandacht";}
@@ -362,7 +1331,7 @@ function timelineAxis(lines){
     if(abs&&base==null)base=tDays(d);
     var t=abs?tDays(d,base):tDays(d);
     if(t==null)return;
-    var lab=txt.split(/[.:]/)[0].replace(/\[[A-Z0-9-]+\]/g,"").replace(/\s+/g," ").trim();
+    var lab=txt.split(/[.:]/)[0].replace(/\s*\(.*$/,"").replace(/\[[A-Z0-9-]+\]/g,"").replace(/\s+/g," ").trim();
     ev.push({t:t,d:d,lab:lab});
   });
   if(ev.length<2)return "";
@@ -419,7 +1388,7 @@ function caseEvents(data){
     var p=line.split(" — "),d=p.shift()||"",txt=p.join(" — ");
     var abs=/^\d{2}-\d{2}-\d{4}$/.test(d);if(abs&&base==null)base=tDays(d);
     var t=abs?tDays(d,base):tDays(d);if(t==null)return;
-    ev.push({t:t,d:d,lab:txt.split(/[.:]/)[0].replace(/\[[A-Z0-9-]+\]/g,"").replace(/\s+/g," ").trim()});
+    ev.push({t:t,d:d,lab:txt.split(/[.:]/)[0].replace(/\s*\(.*$/,"").replace(/\[[A-Z0-9-]+\]/g,"").replace(/\s+/g," ").trim()});
   });
   return ev;
 }
@@ -472,7 +1441,7 @@ function gonioSet(list,cap){
 }
 
 function redact(t){
-  return esc(t).replace(/\[([A-Z]+(?:-[0-9]+)?)\]/g,'<span class="kr-redact" title="Gepseudonimiseerd">$1</span>');
+  return esc(t).replace(/\[([A-Z][A-Z0-9-]*)\]/g,'<span class="kr-redact" title="Gepseudonimiseerd">$1</span>');
 }
 function slug(t,i){return "kr-s"+i+"-"+String(t).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
 function secNum(n){return (n&&n!=="0"&&n!=="–")?n:"";}
@@ -616,10 +1585,10 @@ if(s.table){
   h+='</tr></thead><tbody>';
   s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><th scope="row">'+esc(row[0])+'</th>';s.table.kolommen.forEach(function(k,ki){h+='<td'+(ki===0?' class="kr-affected"':'')+'>'+(row[ki+1]!=null?esc(row[ki+1]):'&middot;&middot;&middot;')+'</td>';});h+='</tr>';});
   h+='</tbody></table></div>';
-  if(s.goniometer)h+=gonioSet(s.goniometer,s.table.vergelijk);
-  h+=compareBars(s.goniometer?{vergelijk:"Kracht",rijen:s.table.rijen.filter(function(r){return /kracht/i.test(r[0]);})}:s.table);
+  if(s.tableNote)h+='<p class="kr-tablenote">'+redact(s.tableNote)+'</p>';
 }
 if(s.flow)h+=flow(s.flow);
+if(s.stappen){h+='<div class="kr-reken"><div class="kr-reken-head"><span>Rekenbijlage</span><span>Controleerbaar per stap</span></div><ol>';s.stappen.forEach(function(st,si){var open=/in te vullen/i.test(st[1]);h+='<li'+(open?' class="kr-open"':'')+'><span class="kr-reken-no">'+(si+1)+'</span><span class="kr-reken-lab">'+esc(st[0])+'</span><span class="kr-reken-val">'+redact(st[1])+'</span></li>';});h+='</ol></div>';}
 }
 
 if(s.type==="iwmd_answers"){
