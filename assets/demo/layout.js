@@ -21,12 +21,16 @@
 
   // Woordmerk conform de homepage; de footer gebruikt de inverse variant.
   function logoWordmark(inverse) {
-    return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.01em;color:' + (inverse ? '#FAF9F7' : '#1A1916') + ';">' +
+    return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:' + (inverse ? '1.3rem' : '26px') + ';letter-spacing:-.01em;color:' + (inverse ? '#FAF9F7' : '#1A1916') + ';">' +
       'Kinetic<span style="color:' + (inverse ? '#5FB3A6' : '#0E5E57') + ';">.</span></span>';
   }
 
   function headerHTML() {
     return '<header class="header">' +
+      '<div class="topbar"><div class="topbar-inner">' +
+      '<div class="topbar-trust"><span class="topbar-dot"></span><span>AVG-compliant</span><span>NEN 7510</span><span>EU-hosting</span><span>BIG-geregistreerd</span></div>' +
+      '<div class="topbar-contact"><a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a><span>·</span><a href="tel:0852502747">085 250 2747</a></div>' +
+      '</div></div>' +
       '<nav class="nav-content">' +
       '<a href="https://kineticmedical.nl" class="logo">' + logoWordmark(false) + '</a>' +
       '<div class="nav-links">' +
@@ -35,8 +39,9 @@
       '<a href="https://kineticmedical.nl/#voordelen">Voordelen</a>' +
       '<a href="https://kineticmedical.nl/#faq">FAQ</a>' +
       '<a href="https://kineticmedical.nl/#prijzen">Tarief</a>' +
-      '<a href="https://kineticmedical.nl/#contact" class="btn btn-primary">Plan een gesprek</a>' +
-      '</div></nav></header>';
+      '</div>' +
+      '<a href="https://kineticmedical.nl/#contact" class="nav-cta">Plan een gesprek</a>' +
+      '</nav></header>';
   }
 
   function pipelineHTML(active) {
