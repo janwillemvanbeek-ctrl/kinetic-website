@@ -1,56 +1,90 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacybeleid | Kinetic Medische Expertises</title>
-    <meta name="robots" content="noindex">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%232f6f6a'/%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="kinetic.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacybeleid | Kinetic Medische Expertises</title>
+  <meta name="description" content="Privacybeleid van Kinetic Medische Expertises.">
+  <meta name="theme-color" content="#0E5E57">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/kinetic-monogram-primary.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #F7F3EA; font-family: "Inter", sans-serif; overflow-x: hidden; }
+    s { text-decoration-thickness: 1px; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    a { color: inherit; text-decoration: none; }
+    [data-screen-label="Kinetic homepage"] { -webkit-font-smoothing: antialiased; }
+    @media (max-width: 980px) {
+      [data-screen-label="Kinetic homepage"] header > div:first-child { display: none !important; }
+      [data-screen-label="Kinetic homepage"] header > div:last-child { height: auto !important; padding: 18px 20px !important; flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+      [data-screen-label="Kinetic homepage"] header nav { display: flex !important; flex-wrap: wrap !important; gap: 12px 18px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type { padding: 32px 20px 64px !important; }
+      [data-screen-label="Kinetic homepage"] section > div, [data-screen-label="Kinetic homepage"] footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type > div, [data-screen-label="Kinetic homepage"] #proces > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] #proces > div > div:nth-of-type(3), [data-screen-label="Kinetic homepage"] section:nth-of-type(4) > div > div, [data-screen-label="Kinetic homepage"] #prijzen > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(10) > div > div, [data-screen-label="Kinetic homepage"] #contact > div > div, [data-screen-label="Kinetic homepage"] footer > div > div:first-child { grid-template-columns: 1fr !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type > div { gap: 32px !important; }
+      [data-screen-label="Kinetic homepage"] #voorwie > div > div:first-of-type { flex-direction: column !important; align-items: flex-start !important; }
+      [data-screen-label="Kinetic homepage"] #voorwie > div > div:first-of-type > div, [data-screen-label="Kinetic homepage"] #voorwie > div > div:first-of-type > p { max-width: none !important; width: 100% !important; padding-bottom: 0 !important; }
+      [data-screen-label="Kinetic homepage"] #voorwie > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] #voordelen > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(5) > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(10) > div > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
+      [data-screen-label="Kinetic homepage"] section:nth-of-type(3) > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(6) > div > div { grid-template-columns: 1fr !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type h1 { font-size: 42px !important; }
+      [data-screen-label="Kinetic homepage"] #contact h2, [data-screen-label="Kinetic homepage"] #faq h2, [data-screen-label="Kinetic homepage"] #prijzen h2, [data-screen-label="Kinetic homepage"] section h2 { font-size: 34px !important; }
+      [data-screen-label="Kinetic homepage"] .proof-cta { grid-template-columns:1fr !important; }
+      [data-screen-label="Kinetic homepage"] footer > div > div:last-child, [data-screen-label="Kinetic homepage"] footer > div > div:first-child { gap: 24px !important; }
+    }
+    @media (max-width: 640px) {
+      [data-screen-label="Kinetic homepage"] section:first-of-type > div, [data-screen-label="Kinetic homepage"] section:nth-of-type(3) > div > div:nth-of-type(3), [data-screen-label="Kinetic homepage"] #contact > div > div { gap: 24px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type h1 { font-size: 34px !important; }
+      [data-screen-label="Kinetic homepage"] section h2, [data-screen-label="Kinetic homepage"] #contact h2 { font-size: 28px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type a, [data-screen-label="Kinetic homepage"] #contact a, [data-screen-label="Kinetic homepage"] section:nth-of-type(7) a, [data-screen-label="Kinetic homepage"] #prijzen a { width: 100%; justify-content: center; }
+      [data-screen-label="Kinetic homepage"] .hero-actions { flex-direction: column !important; align-items: stretch !important; }
+      [data-screen-label="Kinetic homepage"] .hero-actions a { width:100% !important; text-align:center; }
+      [data-screen-label="Kinetic homepage"] section:nth-of-type(7) > div > div, [data-screen-label="Kinetic homepage"] footer > div > div:last-child { flex-direction: column !important; align-items: flex-start !important; }
+    }
+    header nav a { position:relative; transition:color .2s ease; }
+    header nav a::after { content:""; position:absolute; right:0; bottom:-8px; left:0; height:1.5px; background:var(--teal); transform:scaleX(0); transform-origin:right; transition:transform .2s ease; }
+    header nav a:hover, header nav a.is-current { color:var(--ink) !important; }
+    header nav a:hover::after, header nav a.is-current::after { transform:scaleX(1); transform-origin:left; }
+    a[href="#contact"], a[href="#proces"] { transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+    a[href="#contact"]:hover, a[href="#proces"]:hover { transform:translateY(-2px); box-shadow:0 10px 20px -14px rgba(14,94,87,.65); }
+    details summary span { transition:transform .2s ease; }
+    details[open] summary span { transform:rotate(45deg); }
+    details[open] p { animation:faqReveal .22s ease both; }
+    .js-reveal { opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
+    .js-reveal.is-visible { opacity:1; transform:none; }
+    @keyframes faqReveal { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce) {
+      header nav a, header nav a::after, a[href="#contact"], a[href="#proces"], details summary span, .js-reveal { transition:none; }
+      details[open] p { animation:none; }
+      .js-reveal { opacity:1; transform:none; }
+    }
+  </style>
 </head>
 <body>
-    <header class="legal-bar">
-        <div class="nav-content">
-            <a href="index.html" class="logo" aria-label="Kinetic — naar home">
-                <span class="wordmark">Kinetic<span class="wm-dot">.</span></span>
-            </a>
-            <a href="index.html" class="back">← Terug naar home</a>
-        </div>
-    </header>
-
-    <main class="legal-main">
-        <div class="kicker"><span class="rule"></span><span class="label">Juridisch</span></div>
-        <h1>Privacybeleid</h1>
-        <p class="legal-updated">Laatst bijgewerkt: <span class="legal-placeholder">[datum invullen]</span></p>
-
-        <div class="legal-note">Dit is een opzet. Laat de definitieve tekst toetsen door een jurist of privacy-functionaris voordat u publiceert. De passages tussen [haken] moeten worden ingevuld.</div>
-
-        <h2>1. Wie zijn wij</h2>
-        <p>Kinetic Medische Expertises, gevestigd te <span class="legal-placeholder">[adres]</span>, KvK <span class="legal-placeholder">[nummer]</span>, is verantwoordelijk voor de verwerking van persoonsgegevens zoals beschreven in dit beleid. Contact: info@kineticmedical.nl.</p>
-
-        <h2>2. Welke gegevens wij verwerken</h2>
-        <p>Bij contact via deze website verwerken wij de gegevens die u zelf verstrekt: naam, organisatie, e-mailadres en de inhoud van uw bericht. Medische dossiers worden uitsluitend verwerkt in opdracht van een opdrachtgever en op basis van een verwerkersovereenkomst.</p>
-
-        <h2>3. Doel en grondslag</h2>
-        <ul>
-            <li>Beantwoorden van uw aanvraag of vraag (grondslag: gerechtvaardigd belang / uitvoering van een overeenkomst).</li>
-            <li>Uitvoeren van een medische expertise in opdracht (grondslag: <span class="legal-placeholder">[uitvoering overeenkomst / wettelijke verplichting]</span>).</li>
-        </ul>
-
-        <h2>4. Bewaartermijnen</h2>
-        <p><span class="legal-placeholder">[Beschrijf per categorie hoe lang gegevens worden bewaard.]</span></p>
-
-        <h2>5. Verwerkers en hosting</h2>
-        <p>Gegevens worden gehost binnen de EU. Wij schakelen verwerkers in conform de AVG; met hen sluiten wij verwerkersovereenkomsten. <span class="legal-placeholder">[Noem relevante verwerkers.]</span></p>
-
-        <h2>6. Uw rechten</h2>
-        <p>U heeft recht op inzage, correctie, verwijdering en bezwaar. Een verzoek kunt u richten aan info@kineticmedical.nl. Daarnaast kunt u een klacht indienen bij de Autoriteit Persoonsgegevens.</p>
-
-        <h2>7. Cookies</h2>
-        <p>Deze website plaatst <span class="legal-placeholder">[geen / functionele]</span> cookies. <span class="legal-placeholder">[Pas aan op basis van de werkelijke situatie; let op: lettertypen worden momenteel via Google Fonts geladen.]</span></p>
-    </main>
+<div data-screen-label="Kinetic homepage" style="--paper:#F7F3EA; --surface:#FFFFFF; --raise:#FBF8F1; --ink:#1A1916; --ink2:#5A544B; --ink3:#6B6457; --line:#E7DFCF; --line2:#EFE9DC; --teal:#0E5E57; --teal-d:#0A4842; --tint:#ECF1EF; font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased;">
+  <header style="position:sticky; top:0; z-index:50; background:rgba(247,243,234,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 40px; height:74px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="index.html" style="font-family:'Inter'; font-weight:600; font-size:26px; letter-spacing:-.01em;">Kinetic<span style="color:var(--teal);">.</span></a>
+      <a href="index.html" style="font:500 14.5px 'Inter'; color:var(--ink2);">Terug naar home</a>
+    </div>
+  </header>
+  <section style="max-width:1200px; margin:0 auto; padding:96px 40px 120px;">
+    <div style="max-width:720px;">
+      <div style="font:500 12px 'IBM Plex Mono'; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); margin-bottom:18px;">Privacy</div>
+      <h1 style="font-family:'Inter'; font-weight:600; font-size:46px; line-height:1.08; letter-spacing:-.02em;">Privacybeleid</h1>
+      <p style="font-size:17px; line-height:1.65; color:var(--ink2); margin-top:20px;">Als u ons mailt of belt, gebruiken wij uw naam, organisatie, contactgegevens en de inhoud van uw bericht alleen om uw vraag te beantwoorden.</p><p style="font-size:17px; line-height:1.65; color:var(--ink2); margin-top:20px;">Deze website gebruikt geen cookies voor analyse of advertenties. De lettertypen worden geladen via Google Fonts.</p><p style="font-size:17px; line-height:1.65; color:var(--ink2); margin-top:20px;">U kunt ons vragen welke gegevens wij van u hebben en die laten corrigeren of verwijderen. Stuur daarvoor een mail naar <a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a>. U kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens.</p><p style="font-size:17px; line-height:1.65; color:var(--ink2); margin-top:20px;">Hoe wij medische dossiers verwerken, leggen wij per opdracht vast. Het volledige privacybeleid ontvangt u op aanvraag.</p>
+    </div>
+  </section>
+  <footer style="background:#14130F; color:#E9E4D8;">
+    <div style="max-width:1200px; margin:0 auto; padding:72px 40px 40px;">
+      <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.1);"><div><div style="font-family:'Inter'; font-weight:600; font-size:26px;">Kinetic<span style="color:#5FB3A6;">.</span></div><p style="font-size:14.5px; line-height:1.6; color:rgba(233,228,216,.6); margin-top:16px; max-width:340px;">Orthopedische expertises in letselschadezaken.</p><div style="display:flex; gap:18px; margin-top:22px; font:500 12.5px 'IBM Plex Mono'; color:rgba(233,228,216,.5);"><span>AVG</span><span>NEN 7510</span><span>EU-hosting</span></div></div><div><div style="font:600 12px 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:rgba(233,228,216,.45);">Contact</div><div style="display:flex; flex-direction:column; gap:11px; margin-top:18px; font:500 14.5px 'Inter'; color:rgba(233,228,216,.78);"><a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a><a href="tel:0852502747">085 250 2747</a><a href="tel:0852502747">Plan een belafspraak</a></div></div><div><div style="font:600 12px 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:rgba(233,228,216,.45);">Juridisch</div><div style="display:flex; flex-direction:column; gap:11px; margin-top:18px; font:500 14.5px 'Inter'; color:rgba(233,228,216,.78);"><a href="privacy.html">Privacybeleid</a><a href="voorwaarden.html">Algemene voorwaarden</a><a href="verwerkersovereenkomst.html">Verwerkersovereenkomst</a></div></div></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-top:28px; font:500 12.5px 'Inter'; color:rgba(233,228,216,.45);"><span>© 2026 Kinetic Medische Expertises</span><span style="display:flex; align-items:center; gap:7px;"><span style="width:6px; height:6px; border-radius:50%; background:#5FB3A6;"></span>SSL beveiligd</span></div>
+    </div>
+  </footer>
+</div>
 </body>
 </html>

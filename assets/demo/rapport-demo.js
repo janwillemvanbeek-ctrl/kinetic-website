@@ -181,7 +181,7 @@ function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk
 
 function renderRapport(data,target){
 var o=target||document.getElementById("output");
-var h='<div class="rp-demo-notice"><span class="rp-demo-notice-dot"></span><div><strong>Geanonimiseerd voorbeeld</strong><span>Geen persoonsgegevens, zaakgegevens of herleidbare medische informatie.</span></div></div>';
+var h='';
 h+='<nav class="rp-document-nav" aria-label="Rapportonderdelen">';
 h+='<button type="button" class="rp-document-nav-item is-active" aria-pressed="true" data-report-target="Gegevens opdrachtgever en betrokkene"><span>01</span>Dossier</button>';
 h+='<button type="button" class="rp-document-nav-item" aria-pressed="false" data-report-target="Samenvatting medische informatie"><span>02</span>Tijdlijn</button>';
@@ -219,16 +219,16 @@ h+='</div></div>';
 }
 
 h+='<div class="rapport-body">';
-h+='<div class="rapport-kicker">Medische expertise &middot; geanonimiseerd voorbeeld</div>';
-h+='<div class="rapport-title">'+esc((data.meta&&data.meta.titel)||"Voorbeeld van een medisch expertiserapport")+'</div>';
-h+='<div class="rapport-subtitle">'+esc((data.meta&&data.meta.subtitel)||("IWMD-structuur · "+(data.meta.specialisme||"")))+'</div>';
+h+='<div class="rapport-kicker">Orthopedische expertise &middot; voorbeeld</div>';
+h+='<div class="rapport-title">'+esc((data.meta&&data.meta.titel)||"Opbouw van een expertiserapport")+'</div>';
+h+='<div class="rapport-subtitle">'+esc((data.meta&&data.meta.subtitel)||("Vraagstelling volgens IWMD · "+(data.meta.specialisme||"")))+'</div>';
 
 // Sections
 data.sections.forEach(function(s){
 h+='<div class="rp-section">';
 h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
 h+='<h3 class="rp-section-title">'+esc(s.title);
-if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">Dossier voorbereid</span>';
+if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">Dossierordening</span>';
 else h+='<span class="rp-badge rp-badge-arts">Specialist</span>';
 h+='</h3>';
 
@@ -342,7 +342,7 @@ h+='</tbody></table>';
 
 // AMA Guides voorlopige impairment rating
 if(s.type==="ama_rating"){
-h+='<p class="rp-text"><span class="rp-badge rp-badge-ai">Dossier voorbereid</span> Voorberekening ter ondersteuning; de BIG-geregistreerde specialist verifieert en autoriseert de definitieve rating. AMA Guides berekening is optioneel onder IWMD 2025 (vraag 1l).</p>';
+h+='<p class="rp-text"><span class="rp-badge rp-badge-ai">Dossierordening</span> Voorberekening ter ondersteuning; de BIG-geregistreerde specialist verifieert en autoriseert de definitieve rating. AMA Guides berekening is optioneel onder IWMD 2025 (vraag 1l).</p>';
 (s.ratings||[]).forEach(function(r){
 h+='<div class="rp-ama">';
 h+='<div class="rp-ama-head"><span class="rp-ama-diag">'+esc(r.diagnose)+'</span><span class="rp-ama-tabel">'+esc(r.tabel)+'</span></div>';
@@ -370,7 +370,7 @@ h+='</div>';
 
 h+='<div class="rp-page">p. 1\u201314</div>';
 h+='</div>';
-h+='<div class="rp-disclaimer"><strong>Geanonimiseerd rapportfragment.</strong><br>Kinetic structureert dossierinformatie en bronverwijzingen. De BIG-geregistreerde specialist beoordeelt en autoriseert het medische oordeel.</div>';
+h+='<div class="rp-disclaimer"><strong>Ingekort voorbeeld.</strong><br>Kinetic ordent dossierinformatie en bronverwijzingen. Onderzoek, oordeel en rapport zijn van de BIG-geregistreerde specialist, die het rapport ondertekent.</div>';
 h+='</div>';
 
 // Stats
@@ -450,10 +450,7 @@ btn.innerHTML="Maak conceptstructuur";
 }
 
 function init(){
-if(!document.getElementById("modeExample")||!document.getElementById("output"))return;
-document.getElementById("modeExample").addEventListener("click",function(){setMode("example");});
-document.getElementById("modeCustom").addEventListener("click",function(){setMode("custom");});
-document.getElementById("extractBtn").addEventListener("click",generateRapport);
+if(!document.getElementById("output"))return;
 renderRapport(EXAMPLE_RAPPORT);
 }
 

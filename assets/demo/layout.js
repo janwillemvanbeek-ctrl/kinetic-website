@@ -14,15 +14,15 @@
   "use strict";
 
   var STEPS = [
-    { n: 1, label: "Pseudonymizer", href: "tooling-demo.html" },
-    { n: 2, label: "Tijdlijn Extract", href: "tijdlijn-demo.html" },
-    { n: 3, label: "Concept Rapport", href: "rapport-demo.html" }
+    { n: 1, label: "Pseudonimiseren", href: "tooling-demo.html" },
+    { n: 2, label: "Tijdlijn", href: "tijdlijn-demo.html" },
+    { n: 3, label: "Rapportopbouw", href: "rapport-demo.html" }
   ];
 
   // Woordmerk conform de homepage; de footer gebruikt de inverse variant.
   function logoWordmark(inverse) {
     return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.01em;color:' + (inverse ? '#FAF9F7' : '#1A1916') + ';">' +
-      'Kinetic<span style="color:#5FB3A6;">.</span></span>';
+      'Kinetic<span style="color:' + (inverse ? '#5FB3A6' : '#0E5E57') + ';">.</span></span>';
   }
 
   function headerHTML() {
@@ -30,10 +30,11 @@
       '<nav class="nav-content">' +
       '<a href="https://kineticmedical.nl" class="logo">' + logoWordmark(false) + '</a>' +
       '<div class="nav-links">' +
+      '<a href="https://kineticmedical.nl/#voorwie">Voor wie</a>' +
       '<a href="https://kineticmedical.nl/#proces">Werkwijze</a>' +
       '<a href="https://kineticmedical.nl/#voordelen">Voordelen</a>' +
       '<a href="https://kineticmedical.nl/#faq">FAQ</a>' +
-      '<a href="https://kineticmedical.nl/#prijzen">Prijzen</a>' +
+      '<a href="https://kineticmedical.nl/#prijzen">Tarief</a>' +
       '<a href="https://kineticmedical.nl/#contact" class="btn btn-primary">Plan een gesprek</a>' +
       '</div></nav></header>';
   }
@@ -42,7 +43,7 @@
     var row = STEPS.map(function (step) {
       var isActive = step.n === active;
       var cls = isActive ? "pipe-step active" : "pipe-step done";
-      var tag = isActive ? "Actief" : "Gereed";
+      var tag = isActive ? "U bent hier" : "Bekijk";
       var inner = '<span class="pipe-num">' + step.n + '</span>' +
         '<span class="pipe-label">' + step.label + '</span>' +
         '<span class="pipe-tag">' + tag + '</span>';
@@ -59,7 +60,7 @@
     return '<footer class="footer">' +
       '<div class="footer-content">' +
       '<div class="footer-brand">' + logoWordmark(true) +
-      '<p>Onafhankelijke medische expertises, navolgbaar tot de bron.</p>' +
+      '<p>Orthopedische expertises in letselschadezaken.</p>' +
       '<div class="footer-trust"><span>AVG</span><span>NEN 7510</span><span>EU-hosting</span></div>' +
       '</div>' +
       '<div class="footer-links">' +

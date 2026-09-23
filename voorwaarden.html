@@ -1,56 +1,90 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algemene voorwaarden | Kinetic Medische Expertises</title>
-    <meta name="robots" content="noindex">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%232f6f6a'/%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="kinetic.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algemene voorwaarden | Kinetic Medische Expertises</title>
+  <meta name="description" content="Algemene voorwaarden van Kinetic Medische Expertises.">
+  <meta name="theme-color" content="#0E5E57">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/kinetic-monogram-primary.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #F7F3EA; font-family: "Inter", sans-serif; overflow-x: hidden; }
+    s { text-decoration-thickness: 1px; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    a { color: inherit; text-decoration: none; }
+    [data-screen-label="Kinetic homepage"] { -webkit-font-smoothing: antialiased; }
+    @media (max-width: 980px) {
+      [data-screen-label="Kinetic homepage"] header > div:first-child { display: none !important; }
+      [data-screen-label="Kinetic homepage"] header > div:last-child { height: auto !important; padding: 18px 20px !important; flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+      [data-screen-label="Kinetic homepage"] header nav { display: flex !important; flex-wrap: wrap !important; gap: 12px 18px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type { padding: 32px 20px 64px !important; }
+      [data-screen-label="Kinetic homepage"] section > div, [data-screen-label="Kinetic homepage"] footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type > div, [data-screen-label="Kinetic homepage"] #proces > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] #proces > div > div:nth-of-type(3), [data-screen-label="Kinetic homepage"] section:nth-of-type(4) > div > div, [data-screen-label="Kinetic homepage"] #prijzen > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(10) > div > div, [data-screen-label="Kinetic homepage"] #contact > div > div, [data-screen-label="Kinetic homepage"] footer > div > div:first-child { grid-template-columns: 1fr !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type > div { gap: 32px !important; }
+      [data-screen-label="Kinetic homepage"] #voorwie > div > div:first-of-type { flex-direction: column !important; align-items: flex-start !important; }
+      [data-screen-label="Kinetic homepage"] #voorwie > div > div:first-of-type > div, [data-screen-label="Kinetic homepage"] #voorwie > div > div:first-of-type > p { max-width: none !important; width: 100% !important; padding-bottom: 0 !important; }
+      [data-screen-label="Kinetic homepage"] #voorwie > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] #voordelen > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(5) > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(10) > div > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
+      [data-screen-label="Kinetic homepage"] section:nth-of-type(3) > div > div:nth-of-type(2), [data-screen-label="Kinetic homepage"] section:nth-of-type(6) > div > div { grid-template-columns: 1fr !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type h1 { font-size: 42px !important; }
+      [data-screen-label="Kinetic homepage"] #contact h2, [data-screen-label="Kinetic homepage"] #faq h2, [data-screen-label="Kinetic homepage"] #prijzen h2, [data-screen-label="Kinetic homepage"] section h2 { font-size: 34px !important; }
+      [data-screen-label="Kinetic homepage"] .proof-cta { grid-template-columns:1fr !important; }
+      [data-screen-label="Kinetic homepage"] footer > div > div:last-child, [data-screen-label="Kinetic homepage"] footer > div > div:first-child { gap: 24px !important; }
+    }
+    @media (max-width: 640px) {
+      [data-screen-label="Kinetic homepage"] section:first-of-type > div, [data-screen-label="Kinetic homepage"] section:nth-of-type(3) > div > div:nth-of-type(3), [data-screen-label="Kinetic homepage"] #contact > div > div { gap: 24px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type h1 { font-size: 34px !important; }
+      [data-screen-label="Kinetic homepage"] section h2, [data-screen-label="Kinetic homepage"] #contact h2 { font-size: 28px !important; }
+      [data-screen-label="Kinetic homepage"] section:first-of-type a, [data-screen-label="Kinetic homepage"] #contact a, [data-screen-label="Kinetic homepage"] section:nth-of-type(7) a, [data-screen-label="Kinetic homepage"] #prijzen a { width: 100%; justify-content: center; }
+      [data-screen-label="Kinetic homepage"] .hero-actions { flex-direction: column !important; align-items: stretch !important; }
+      [data-screen-label="Kinetic homepage"] .hero-actions a { width:100% !important; text-align:center; }
+      [data-screen-label="Kinetic homepage"] section:nth-of-type(7) > div > div, [data-screen-label="Kinetic homepage"] footer > div > div:last-child { flex-direction: column !important; align-items: flex-start !important; }
+    }
+    header nav a { position:relative; transition:color .2s ease; }
+    header nav a::after { content:""; position:absolute; right:0; bottom:-8px; left:0; height:1.5px; background:var(--teal); transform:scaleX(0); transform-origin:right; transition:transform .2s ease; }
+    header nav a:hover, header nav a.is-current { color:var(--ink) !important; }
+    header nav a:hover::after, header nav a.is-current::after { transform:scaleX(1); transform-origin:left; }
+    a[href="#contact"], a[href="#proces"] { transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+    a[href="#contact"]:hover, a[href="#proces"]:hover { transform:translateY(-2px); box-shadow:0 10px 20px -14px rgba(14,94,87,.65); }
+    details summary span { transition:transform .2s ease; }
+    details[open] summary span { transform:rotate(45deg); }
+    details[open] p { animation:faqReveal .22s ease both; }
+    .js-reveal { opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
+    .js-reveal.is-visible { opacity:1; transform:none; }
+    @keyframes faqReveal { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce) {
+      header nav a, header nav a::after, a[href="#contact"], a[href="#proces"], details summary span, .js-reveal { transition:none; }
+      details[open] p { animation:none; }
+      .js-reveal { opacity:1; transform:none; }
+    }
+  </style>
 </head>
 <body>
-    <header class="legal-bar">
-        <div class="nav-content">
-            <a href="index.html" class="logo" aria-label="Kinetic — naar home">
-                <span class="wordmark">Kinetic<span class="wm-dot">.</span></span>
-            </a>
-            <a href="index.html" class="back">← Terug naar home</a>
-        </div>
-    </header>
-
-    <main class="legal-main">
-        <div class="kicker"><span class="rule"></span><span class="label">Juridisch</span></div>
-        <h1>Algemene voorwaarden</h1>
-        <p class="legal-updated">Laatst bijgewerkt: <span class="legal-placeholder">[datum invullen]</span></p>
-
-        <div class="legal-note">Dit is een opzet. Laat de definitieve voorwaarden opstellen of toetsen door een jurist voordat u ze van toepassing verklaart.</div>
-
-        <h2>1. Definities</h2>
-        <p><span class="legal-placeholder">[Definieer: Kinetic, opdrachtgever, expertise, rapport, dossier.]</span></p>
-
-        <h2>2. Toepasselijkheid</h2>
-        <p>Deze voorwaarden zijn van toepassing op alle aanbiedingen en overeenkomsten met Kinetic Medische Expertises, tenzij schriftelijk anders overeengekomen.</p>
-
-        <h2>3. De opdracht</h2>
-        <p>Een opdracht komt tot stand na schriftelijke bevestiging. De doorlooptijd van zes weken vangt aan zodra het dossier volledig is aangeleverd.</p>
-
-        <h2>4. Tarief en betaling</h2>
-        <p>Het tarief bedraagt <span class="legal-placeholder">[bedrag]</span> per dossier, all-in. <span class="legal-placeholder">[Beschrijf betaaltermijn en facturatie.]</span></p>
-
-        <h2>5. Doorlooptijd en korting</h2>
-        <p>Bij overschrijding van de overeengekomen doorlooptijd geldt een korting op het tarief, zoals vooraf bepaald. <span class="legal-placeholder">[Specificeer de kortingsregeling.]</span></p>
-
-        <h2>6. Verantwoordelijkheid</h2>
-        <p>De BIG-geregistreerde specialist is eindverantwoordelijk voor de medische inhoud van het rapport. Kinetic faciliteert de dossiervoorbereiding en rapportage.</p>
-
-        <h2>7. Aansprakelijkheid</h2>
-        <p><span class="legal-placeholder">[Beschrijf de aansprakelijkheidsbeperking.]</span></p>
-
-        <h2>8. Toepasselijk recht</h2>
-        <p>Op alle overeenkomsten is Nederlands recht van toepassing.</p>
-    </main>
+<div data-screen-label="Kinetic homepage" style="--paper:#F7F3EA; --surface:#FFFFFF; --raise:#FBF8F1; --ink:#1A1916; --ink2:#5A544B; --ink3:#6B6457; --line:#E7DFCF; --line2:#EFE9DC; --teal:#0E5E57; --teal-d:#0A4842; --tint:#ECF1EF; font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased;">
+  <header style="position:sticky; top:0; z-index:50; background:rgba(247,243,234,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 40px; height:74px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="index.html" style="font-family:'Inter'; font-weight:600; font-size:26px; letter-spacing:-.01em;">Kinetic<span style="color:var(--teal);">.</span></a>
+      <a href="index.html" style="font:500 14.5px 'Inter'; color:var(--ink2);">Terug naar home</a>
+    </div>
+  </header>
+  <section style="max-width:1200px; margin:0 auto; padding:96px 40px 120px;">
+    <div style="max-width:720px;">
+      <div style="font:500 12px 'IBM Plex Mono'; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); margin-bottom:18px;">Voorwaarden</div>
+      <h1 style="font-family:'Inter'; font-weight:600; font-size:46px; line-height:1.08; letter-spacing:-.02em;">Algemene voorwaarden</h1>
+      <p style="font-size:17px; line-height:1.65; color:var(--ink2); margin-top:20px;">Onze algemene voorwaarden ontvangt u op aanvraag. Mail naar <a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a> of bel <a href="tel:0852502747">085 250 2747</a>.</p><p style="font-size:17px; line-height:1.65; color:var(--ink2); margin-top:20px;">Tarief, doorlooptijd en vraagstelling leggen wij per opdracht schriftelijk vast.</p>
+    </div>
+  </section>
+  <footer style="background:#14130F; color:#E9E4D8;">
+    <div style="max-width:1200px; margin:0 auto; padding:72px 40px 40px;">
+      <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.1);"><div><div style="font-family:'Inter'; font-weight:600; font-size:26px;">Kinetic<span style="color:#5FB3A6;">.</span></div><p style="font-size:14.5px; line-height:1.6; color:rgba(233,228,216,.6); margin-top:16px; max-width:340px;">Orthopedische expertises in letselschadezaken.</p><div style="display:flex; gap:18px; margin-top:22px; font:500 12.5px 'IBM Plex Mono'; color:rgba(233,228,216,.5);"><span>AVG</span><span>NEN 7510</span><span>EU-hosting</span></div></div><div><div style="font:600 12px 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:rgba(233,228,216,.45);">Contact</div><div style="display:flex; flex-direction:column; gap:11px; margin-top:18px; font:500 14.5px 'Inter'; color:rgba(233,228,216,.78);"><a href="mailto:info@kineticmedical.nl">info@kineticmedical.nl</a><a href="tel:0852502747">085 250 2747</a><a href="tel:0852502747">Plan een belafspraak</a></div></div><div><div style="font:600 12px 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:rgba(233,228,216,.45);">Juridisch</div><div style="display:flex; flex-direction:column; gap:11px; margin-top:18px; font:500 14.5px 'Inter'; color:rgba(233,228,216,.78);"><a href="privacy.html">Privacybeleid</a><a href="voorwaarden.html">Algemene voorwaarden</a><a href="verwerkersovereenkomst.html">Verwerkersovereenkomst</a></div></div></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-top:28px; font:500 12.5px 'Inter'; color:rgba(233,228,216,.45);"><span>© 2026 Kinetic Medische Expertises</span><span style="display:flex; align-items:center; gap:7px;"><span style="width:6px; height:6px; border-radius:50%; background:#5FB3A6;"></span>SSL beveiligd</span></div>
+    </div>
+  </footer>
+</div>
 </body>
 </html>

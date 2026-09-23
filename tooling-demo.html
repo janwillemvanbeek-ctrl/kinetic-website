@@ -9,36 +9,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/demo/base.css">
-<link rel="stylesheet" href="assets/demo/tooling-demo.css">
+<link rel="stylesheet" href="assets/demo/base.css?v=20260923">
+<link rel="stylesheet" href="assets/demo/tooling-demo.css?v=20260923">
 </head>
 <body data-kinetic-step="1">
 
 <div data-kinetic="header"></div>
 
 <div class="hero">
-<div class="section-label">Veiligheidslaag</div>
-<h1>Medische informatie zorgvuldig voorbereid.</h1>
-<p>Bekijk hoe persoonsgegevens worden afgeschermd voordat een dossier verder wordt verwerkt. De medische inhoud blijft daarbij intact.</p>
+<div class="section-label">Stap 1 · Pseudonimiseren</div>
+<h1>Eerst gaan de persoonsgegevens eruit.</h1>
+<p>Namen, BSN's, adressen en datums vervangen we voordat we met een dossier verder werken. De medische inhoud blijft staan.</p>
 </div>
 
 <div data-kinetic="pipeline"></div>
 
 <div class="demo-section"><div class="demo-inner">
 <div class="demo-top">
-<h2 class="demo-title">Pseudonymizer</h2>
+<h2 class="demo-title">Probeer het zelf</h2>
 <div class="demo-actions">
-<button class="btn btn-secondary" id="br">Reset voorbeeld</button>
+<button class="btn btn-secondary" id="br">Voorbeeld herstellen</button>
 <button class="btn btn-primary" id="bp">Pseudonimiseer</button>
 </div>
 </div>
 <div class="editor">
 <div class="editor-pane">
-<div class="pane-header"><span class="pane-label">Invoer &mdash; Medisch dossier</span><span class="pane-dot green"></span></div>
-<textarea class="editor-textarea" id="inp" placeholder="Plak hier een medisch dossier..."></textarea>
+<div class="pane-header"><span class="pane-label">Invoer · medisch dossier</span><span class="pane-dot green"></span></div>
+<textarea class="editor-textarea" id="inp" placeholder="Plak hier een tekst. De pseudonimisering gebeurt in uw eigen browser; er wordt niets verstuurd."></textarea>
 </div>
 <div class="editor-pane">
-<div class="pane-header"><span class="pane-label">Uitvoer &mdash; Gepseudonimiseerd</span><span class="pane-dot red"></span></div>
+<div class="pane-header"><span class="pane-label">Uitvoer · gepseudonimiseerd</span><span class="pane-dot red"></span></div>
 <div class="editor-output" id="outp"><span class="placeholder">Klik op &ldquo;Pseudonimiseer&rdquo; om het resultaat te zien&hellip;</span></div>
 </div>
 </div>
@@ -54,20 +54,20 @@
 
 <div class="section">
 <div class="section-header">
-<div class="section-label">Zo beschermen we gegevens</div>
-<h2 class="section-title">Zorgvuldigheid vóór verwerking</h2>
+<div class="section-label">Werkwijze</div>
+<h2 class="section-title">Vier regels voor de pseudonimisering</h2>
 </div>
 <div class="how-grid">
-<div class="how-card"><div class="how-num">01</div><h3>BSN Elfproef</h3><p>Elk 9-cijferig getal wordt gevalideerd met de modulo-11 elfproef. Alleen geldige BSN&rsquo;s worden vervangen.</p></div>
-<div class="how-card"><div class="how-num">02</div><h3>Medisch Woordenboek</h3><p>100+ beschermde medische termen worden nooit gepseudonimiseerd. De klinische inhoud blijft intact.</p></div>
-<div class="how-card"><div class="how-num">03</div><h3>T-notatie</h3><p>Datums worden omgezet naar T&plusmn;dagen/weken/maanden relatief aan de ongevalsdatum.</p></div>
-<div class="how-card"><div class="how-num">04</div><h3>Consistente Mapping</h3><p>Dezelfde naam krijgt altijd hetzelfde pseudoniem binnen &eacute;&eacute;n document.</p></div>
+<div class="how-card"><div class="how-num">01</div><h3>BSN met elfproef</h3><p>Een getal van negen cijfers wordt alleen vervangen als het de elfproef doorstaat. Andere nummers blijven staan.</p></div>
+<div class="how-card"><div class="how-num">02</div><h3>Medische termen blijven staan</h3><p>Ruim honderd medische termen worden nooit vervangen, zodat de klinische inhoud leesbaar blijft.</p></div>
+<div class="how-card"><div class="how-num">03</div><h3>Datums worden relatief</h3><p>Een datum wordt het aantal dagen, weken of maanden voor of na het ongeval, genoteerd als T&plusmn;.</p></div>
+<div class="how-card"><div class="how-num">04</div><h3>Vaste pseudoniemen</h3><p>Dezelfde naam krijgt binnen een document steeds hetzelfde pseudoniem.</p></div>
 </div>
 </div>
 
 <div data-kinetic="footer"></div>
 
-<script src="assets/demo/layout.js"></script>
-<script src="assets/demo/tooling-demo.js"></script>
+<script src="assets/demo/layout.js?v=20260923"></script>
+<script src="assets/demo/tooling-demo.js?v=20260923"></script>
 </body>
 </html>
