@@ -173,6 +173,155 @@ var EXAMPLE_RAPPORT = {
   stats: {aiSections:8, artsSections:3, bronnen:10, hiaten:3, tegenstrijdigheden:3}
 };
 
+/* Tweede voorbeeld: medische expertise volgens de NVMSR-richtlijn (deel 1 met ongeval,
+   deel 2 zonder ongeval, deel 3 overig). Fictieve casus, geen echte persoon. */
+var EXAMPLE_NVMSR = {
+  meta: {
+    zaaknummer: "2025-KME-01317",
+    betrokkene: "[PERSOON-1]",
+    geboortedatum: "[GEBOORTEDATUM]",
+    status: "Concept",
+    specialisme: "Orthopedisch",
+    kicker: "Medische expertise &middot; fictief voorbeeld",
+    titel: "Opbouw van een medisch specialistische rapportage",
+    subtitel: "Volgens de richtlijn Medisch Specialistische Rapportage (NVMSR) · Orthopedisch",
+    nav: [
+      {label:"Dossier", target:"Gegevens opdrachtgever en betrokkene"},
+      {label:"Tijdlijn", target:"Samenvatting medische informatie"},
+      {label:"Oordeel", target:"Diagnose"}
+    ]
+  },
+  compleetheid: {
+    score: 88,
+    aanwezig: ["SEH-verslag","Operatieverslag","Ontslagbrief","Poliklinische brieven orthopedie","Röntgenverslagen","Fysiotherapie eindverslag","Huisartsjournaal"],
+    ontbrekend: [
+      {doc:"Verslag arbeidsdeskundige / bedrijfsarts", prio:"belangrijk"}
+    ]
+  },
+  sections: [
+    {
+      num:"0", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
+      fields: [
+        {label:"Opdrachtgever", value:"[OPDRACHTGEVER]", redacted:true},
+        {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
+        {label:"Geboortedatum", value:"[GEBOORTEDATUM]", redacted:true},
+        {label:"Beroep", value:"Monteur installatietechniek"},
+        {label:"Kader", value:"Civiele aansprakelijkheid, beoordeling van de ongevalsgevolgen"},
+        {label:"Ongeval", value:"T±0: val van een trap tijdens werkzaamheden"},
+        {label:"Datum onderzoek", value:"T+24m"}
+      ]
+    },
+    {
+      num:"0", title:"Opzet van de rapportage", badge:"ai", type:"text",
+      paragraphs: [
+        "De rapportage volgt de richtlijn Medisch Specialistische Rapportage. Deel 1 beschrijft de gezondheidstoestand en het functioneren in de situatie met ongeval, deel 2 de hypothetische situatie zonder ongeval en deel 3 overige vragen van de opdrachtgever."
+      ]
+    },
+    {
+      num:"0", title:"Medische voorgeschiedenis", badge:"ai", type:"text",
+      paragraphs: [
+        "Huisartsjournaal (T−5j tot T±0): geen klachten of behandelingen van de bovenste extremiteiten. Geen operaties in de voorgeschiedenis."
+      ],
+      sources: ["Huisartsjournaal, p. 1–2"]
+    },
+    {
+      num:"0", title:"Samenvatting medische informatie", badge:"ai", type:"text",
+      paragraphs: [
+        "T±0 — SEH: distale radiusfractuur rechts, dorsaal gedisloceerd (SEH-verslag, p. 1)\nT+2d — Operatie: open repositie en plaatfixatie (operatieverslag, p. 1)\nT+6w — Polikliniek orthopedie: consolidatie op röntgenfoto, start fysiotherapie (brief, p. 2)\nT+6m — Fysiotherapie eindverslag: restbeperking pols, knijpkracht verminderd (eindverslag, p. 3)\nT+14m — Polikliniek orthopedie: verwijdering osteosynthesemateriaal (brief, p. 1)"
+      ],
+      sources: ["SEH-verslag, p. 1","Operatieverslag, p. 1","Poliklinische brieven orthopedie, p. 1–2","Fysiotherapie eindverslag, p. 3"]
+    },
+    {
+      num:"0", title:"Hiaten in het dossier", badge:"ai", type:"hiaten",
+      hiaten: [
+        {prio:"belangrijk", doc:"Verslag arbeidsdeskundige / bedrijfsarts", verwacht:"T+3m tot T+12m", toelichting:"Werkhervatting wordt genoemd in de poliklinische brief, maar er is geen verslag over belastbaarheid in het werk.", actie:"Opvragen bij de werkgever of arbodienst."}
+      ]
+    },
+    {
+      num:"1a", title:"Anamnese", badge:"arts", type:"arts_template",
+      prompt:"Door de arts in te vullen na het gesprek met betrokkene.",
+      subfields: [
+        {label:"Toedracht en beloop", context:"Zie samenvatting medische informatie: fractuur, operatie T+2d, fysiotherapie tot T+6m, materiaalverwijdering T+14m."},
+        {label:"Huidige klachten en beperkingen in werk en vrije tijd", context:null}
+      ]
+    },
+    {
+      num:"1b", title:"Medische gegevens", badge:"arts", type:"arts_template",
+      prompt:"Door de arts te bevestigen op basis van anamnese en dossier.",
+      subfields: [
+        {label:"Voorgeschiedenis, medicatie, allergieën", context:"Huisartsjournaal: geen klachten bovenste extremiteiten voor het ongeval."}
+      ]
+    },
+    {
+      num:"1c", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
+      prompt:"Bevindingen door de onderzoekend arts in te vullen.",
+      subfields: [
+        {label:"Algemeen en inspectie", context:null},
+        {label:"Palpatie en functie", context:"Fysiotherapie eindverslag T+6m: extensie pols rechts 45°, knijpkracht 70% van links (p. 3)."}
+      ],
+      table: {
+        kolommen: ["Rechts (aangedane zijde)","Links"],
+        rijen: ["Omtrek pols","Omtrek onderarm (10 cm distaal elleboog)","Pols extensie-flexie","Pols radiaal-ulnairdeviatie","Onderarm pronatie-supinatie","Knijpkracht (kg)"]
+      }
+    },
+    {
+      num:"1d", title:"Consistentie", badge:"arts", type:"arts_template",
+      prompt:"Samenhang tussen anamnese, dossier en eigen bevindingen.",
+      subfields: [{label:"Oordeel over de consistentie", context:null}]
+    },
+    {
+      num:"1f", title:"Diagnose", badge:"arts", type:"arts_template",
+      prompt:"Diagnose op het eigen vakgebied.",
+      subfields: [{label:"Diagnose", context:"Status na distale radiusfractuur rechts, plaatfixatie en materiaalverwijdering."}]
+    },
+    {
+      num:"1g", title:"Beperkingen", badge:"arts", type:"arts_template",
+      prompt:"Beperkingen in werk, huishouden en vrije tijd.",
+      subfields: [{label:"Beperkingen", context:null}]
+    },
+    {
+      num:"1h", title:"Blijvende invaliditeit", badge:"arts", type:"arts_template",
+      prompt:"Volgens de AMA Guides 6e editie en de leidraad van de Werkgroep Invaliditeit en Arbeidsongeschiktheid van de NOV.",
+      subfields: [{label:"Berekening per diagnose en totaal", context:null}]
+    },
+    {
+      num:"1i", title:"Medische eindsituatie", badge:"arts", type:"arts_template",
+      prompt:"Is er sprake van een medische eindsituatie, en zo nee, wanneer wordt die verwacht?",
+      subfields: [{label:"Medische eindsituatie", context:"Laatste poliklinisch contact T+14m (materiaalverwijdering)."}]
+    },
+    {
+      num:"–", title:"Inzage en blokkeringsrecht", badge:"arts", type:"arts_template",
+      prompt:"Vastleggen of betrokkene het concept wil inzien en of gebruik wordt gemaakt van het blokkeringsrecht.",
+      subfields: [{label:"Keuze van betrokkene", context:null}]
+    },
+    {
+      num:"2", title:"Situatie zonder ongeval", badge:"arts", type:"arts_template",
+      prompt:"Klachten, afwijkingen en beperkingen in de hypothetische situatie zonder ongeval.",
+      subfields: [
+        {label:"Klachten en beperkingen voor het ongeval", context:"Huisartsjournaal: geen klachten bovenste extremiteiten."},
+        {label:"Klachten die ook zonder ongeval waren ontstaan", context:null},
+        {label:"Blijvende invaliditeit zonder ongeval", context:null}
+      ]
+    },
+    {
+      num:"3", title:"Overige vragen", badge:"arts", type:"arts_template",
+      prompt:"Aanvullende vragen van de opdrachtgever.",
+      subfields: [{label:"Overig", context:null}]
+    },
+    {
+      num:"–", title:"Bronnenlijst", badge:"ai", type:"bronnen",
+      bronnen: [
+        {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-1]", datum:"T±0", paginas:"1"},
+        {nr:"2", doc:"Operatieverslag", bron:"[ORGANISATIE-1]", datum:"T+2d", paginas:"1"},
+        {nr:"3", doc:"Poliklinische brieven orthopedie", bron:"[ORGANISATIE-1]", datum:"T+6w–T+14m", paginas:"1–2"},
+        {nr:"4", doc:"Fysiotherapie eindverslag", bron:"[ORGANISATIE-2]", datum:"T+6m", paginas:"3"},
+        {nr:"5", doc:"Huisartsjournaal", bron:"[ORGANISATIE-3]", datum:"T−5j–T+24m", paginas:"1–2"}
+      ]
+    }
+  ],
+  stats: {aiSections:6, artsSections:10, bronnen:5, hiaten:1, tegenstrijdigheden:0}
+};
+
 
 function prioColor(p){return p==="kritiek"?"#D94F4F":p==="belangrijk"?"#C77B2E":"var(--warm-teal)";}
 function prioLabel(p){return p==="kritiek"?"Kritiek":p==="belangrijk"?"Belangrijk":"Aandacht";}
@@ -182,10 +331,9 @@ function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk
 function renderRapport(data,target){
 var o=target||document.getElementById("output");
 var h='';
+var nav=(data.meta&&data.meta.nav)||[{label:"Dossier",target:"Gegevens opdrachtgever en betrokkene"},{label:"Tijdlijn",target:"Samenvatting medische informatie"},{label:"Oordeel",target:"Diagnose en beschouwing"}];
 h+='<nav class="rp-document-nav" aria-label="Rapportonderdelen">';
-h+='<button type="button" class="rp-document-nav-item is-active" aria-pressed="true" data-report-target="Gegevens opdrachtgever en betrokkene"><span>01</span>Dossier</button>';
-h+='<button type="button" class="rp-document-nav-item" aria-pressed="false" data-report-target="Samenvatting medische informatie"><span>02</span>Tijdlijn</button>';
-h+='<button type="button" class="rp-document-nav-item" aria-pressed="false" data-report-target="Diagnose en beschouwing"><span>03</span>Oordeel</button>';
+nav.forEach(function(n,i){h+='<button type="button" class="rp-document-nav-item'+(i===0?' is-active':'')+'" aria-pressed="'+(i===0)+'" data-report-target="'+esc(n.target)+'"><span>'+String(i+1).padStart(2,"0")+'</span>'+esc(n.label)+'</button>';});
 h+='</nav>';
 h+='<div class="rapport">';
 
@@ -219,14 +367,14 @@ h+='</div></div>';
 }
 
 h+='<div class="rapport-body">';
-h+='<div class="rapport-kicker">Orthopedische expertise &middot; voorbeeld</div>';
+h+='<div class="rapport-kicker">'+((data.meta&&data.meta.kicker)||'Letselschade &middot; IWMD &middot; voorbeeld')+'</div>';
 h+='<div class="rapport-title">'+esc((data.meta&&data.meta.titel)||"Opbouw van een expertiserapport")+'</div>';
 h+='<div class="rapport-subtitle">'+esc((data.meta&&data.meta.subtitel)||("Vraagstelling volgens IWMD · "+(data.meta.specialisme||"")))+'</div>';
 
 // Sections
 data.sections.forEach(function(s){
 h+='<div class="rp-section">';
-h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
+if(s.num&&s.num!=="0"&&s.num!=="\u2013")h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
 h+='<h3 class="rp-section-title">'+esc(s.title);
 if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">Dossierordening</span>';
 else h+='<span class="rp-badge rp-badge-arts">Arts</span>';
@@ -316,6 +464,13 @@ h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span><strong>'+
 if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossier:</span> '+esc(ctx)+'</div>';}
 h+='</div>';
 });
+if(s.table){
+h+='<table class="rp-bronnen-table rp-meettabel"><thead><tr><th>Meting</th>';
+s.table.kolommen.forEach(function(k){h+='<th>'+esc(k)+'</th>';});
+h+='</tr></thead><tbody>';
+s.table.rijen.forEach(function(r){h+='<tr><td>'+esc(r)+'</td>';s.table.kolommen.forEach(function(){h+='<td class="rp-meet-leeg">&middot;&middot;&middot;</td>';});h+='</tr>';});
+h+='</tbody></table>';
+}
 h+='</div>';
 }
 
@@ -376,7 +531,7 @@ h+='</div>';
 // Stats
 h+='<div class="rp-summary">';
 h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.aiSections+'</div><div class="rp-stat-lbl">Voorbereide secties</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.artsSections+'</div><div class="rp-stat-lbl">Specialistsecties</div></div>';
+h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.artsSections+'</div><div class="rp-stat-lbl">Artssecties</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.bronnen+'</div><div class="rp-stat-lbl">Bronverwijzingen</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#D94F4F">'+data.stats.hiaten+'</div><div class="rp-stat-lbl">Hiaten</div></div>';
 h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#C77B2E">'+(data.stats.tegenstrijdigheden||0)+'</div><div class="rp-stat-lbl">Aandachtspunten</div></div>';
@@ -451,6 +606,11 @@ btn.innerHTML="Maak conceptstructuur";
 
 function init(){
 if(!document.getElementById("output"))return;
+var btns=document.querySelectorAll("[data-rapport-variant]");
+btns.forEach(function(b){b.addEventListener("click",function(){
+  btns.forEach(function(x){var on=x===b;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
+  renderRapport(b.getAttribute("data-rapport-variant")==="nvmsr"?EXAMPLE_NVMSR:EXAMPLE_RAPPORT);
+});});
 renderRapport(EXAMPLE_RAPPORT);
 }
 

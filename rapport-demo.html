@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/demo/base.css?v=20260923">
-<link rel="stylesheet" href="assets/demo/rapport-demo.css?v=20260923">
+<link rel="stylesheet" href="assets/demo/rapport-demo.css?v=20260923f">
 </head>
 <body data-kinetic-step="3">
 
@@ -20,7 +20,7 @@
   <div class="report-hero-copy">
     <div class="section-label">Stap 3 · Rapportopbouw</div>
     <h1>Zo is een rapport opgebouwd.</h1>
-    <p>Bij elke sectie staat wie die invult: de dossierordening of de arts. Onderzoek, diagnose en de antwoorden op de vraagstelling zijn in dit voorbeeld leeg, want die schrijft de arts. De specialist controleert het rapport en tekent af.</p>
+    <p>Twee voorbeelden: een letselschade-expertise met de IWMD-vraagstelling en een medische expertise volgens de NVMSR-richtlijn. Bij elke sectie staat wie die invult: de dossierordening of de arts. De secties van de arts zijn in dit voorbeeld leeg.</p>
     <div class="report-hero-actions"><a class="btn btn-primary" href="#rapportviewer">Bekijk het voorbeeld <span>→</span></a><a class="report-hero-link" href="#werkwijze">Waarom deze opbouw <span>↓</span></a></div>
   </div>
   <aside class="report-hero-panel" aria-label="Kernprincipes van de expertise">
@@ -35,10 +35,11 @@
 
 <div class="demo-section" id="rapportviewer"><div class="demo-inner">
 <div class="demo-intro">
-<div><div class="section-label">Voorbeeldrapport</div><h2 class="demo-title">Ingekort voorbeeld</h2><p>De structuur, controlepunten en bronverwijzingen van een rapport, zonder persoonsgegevens.</p></div>
+<div><div class="section-label">Voorbeeldrapport</div><h2 class="demo-title">Ingekort voorbeeld</h2><p>Kies het soort expertise. Beide voorbeelden zijn fictief en bevatten geen persoonsgegevens.</p></div>
 <div class="demo-confidential"><span></span><div><strong>Vertrouwelijk voorbeeld</strong><small>Geen persoonsgegevens of zaakgegevens</small></div></div>
 </div>
 
+<div class="mode-toggle rp-variant-toggle" role="group" aria-label="Soort expertise"><button type="button" class="mode-btn active" aria-pressed="true" data-rapport-variant="iwmd">Letselschade · IWMD</button><button type="button" class="mode-btn" aria-pressed="false" data-rapport-variant="nvmsr">Medische expertise · NVMSR</button></div>
 <div id="output"></div>
 </div></div>
 
@@ -58,6 +59,6 @@
 <div data-kinetic="footer"></div>
 
 <script src="assets/demo/layout.js?v=20260923e"></script>
-<script src="assets/demo/rapport-demo.js?v=20260923c"></script>
+<script src="assets/demo/rapport-demo.js?v=20260923f"></script>
 </body>
 </html>

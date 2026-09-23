@@ -190,3 +190,7 @@
 
 @media(max-width:900px){.report-hero{grid-template-columns:1fr;gap:2.5rem;padding-top:4.5rem}.report-hero-panel{max-width:570px}.demo-intro{align-items:flex-start;flex-direction:column}.rapport-header{grid-template-columns:repeat(2,1fr)}.rapport-body{padding:2.4rem}.rp-field{grid-template-columns:1fr}}
 @media(max-width:600px){.report-hero{padding:3.7rem 1.25rem 3.3rem}.report-hero-copy h1{font-size:2.45rem}.report-hero-actions{align-items:flex-start;flex-direction:column;gap:.85rem}.report-hero-panel{padding:1.5rem}.demo-section{padding:2.8rem 1rem 3.5rem}.demo-confidential{width:100%}.rapport-body{padding:2rem 1rem}.rapport-header{grid-template-columns:1fr}.rp-compl-detail{grid-template-columns:1fr}.rp-hiaat-header{flex-direction:column;align-items:flex-start}.rp-hiaat-verwacht{margin-left:0}.rp-document-nav{top:62px}.rp-document-nav-item{padding:.6rem .35rem;font-size:.6875rem}.rp-document-nav-item span{display:none}.rp-timeline-event{grid-template-columns:70px 1fr;gap:.55rem}}
+
+.rp-meettabel{margin-top:1rem;background:#FFF}
+.rp-meet-leeg{color:#C77B2E;letter-spacing:.1em}
+.rp-variant-toggle{margin:0 0 1.25rem}
