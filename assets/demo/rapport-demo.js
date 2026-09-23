@@ -1961,7 +1961,9 @@ btns.forEach(function(b){b.addEventListener("click",function(){
   btns.forEach(function(x){var on=x===b;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
   renderRapport(b.getAttribute("data-rapport-variant")==="nvmsr"?EXAMPLE_NVMSR:EXAMPLE_RAPPORT);
 });});
-renderRapport(EXAMPLE_RAPPORT);
+var start=/ongevallenverzekering|nvmsr/i.test(location.hash)?"nvmsr":"iwmd";
+btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===start;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
+renderRapport(start==="nvmsr"?EXAMPLE_NVMSR:EXAMPLE_RAPPORT);
 }
 
 // Herbruikbaar voor de tooling-werkruimte.
