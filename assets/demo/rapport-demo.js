@@ -876,7 +876,7 @@ var EXAMPLE_NVMSR = {
   "zaaknummer": "2025-KME-01317",
   "betrokkene": "[PERSOON-1]",
   "geboortedatum": "[GEBOORTEDATUM]",
-  "status": "Concept · voorlopig oordeel",
+  "status": "Definitief",
   "specialisme": "Orthopedisch",
   "onderzoeksdatum": "T+24m",
   "kicker": "Ongevallenverzekering &middot; fictief voorbeeld",
@@ -885,7 +885,7 @@ var EXAMPLE_NVMSR = {
   "kern": [
    {
     "label": "Diagnose",
-    "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na een distale radiusfractuur",
+    "waarde": "Lichte bewegingsbeperking en belastingspijn van de rechter knie na een tibiaplateaufractuur",
     "breed": true
    },
    {
@@ -895,28 +895,23 @@ var EXAMPLE_NVMSR = {
    },
    {
     "label": "Eindsituatie",
-    "waarde": "Nog niet vast te stellen",
-    "toelichting": "Verwacht per [DATUM], na controlegegevens"
-   },
-   {
-    "label": "Knijpkracht",
-    "waarde": "32 / 46 kg",
-    "toelichting": "Rechts / links, Jamar stand II"
+    "waarde": "Bereikt",
+    "toelichting": "Per T+24m"
    },
    {
     "label": "Voorafbestaand",
-    "waarde": "Niet gedocumenteerd",
-    "toelichting": "Geen klachten of afwijkingen bekend"
+    "waarde": "Geen",
+    "toelichting": "Geen knieklachten of afwijkingen bekend"
    },
    {
     "label": "Blijvende invaliditeit",
-    "waarde": "Niet vast te stellen",
-    "toelichting": "Eindsituatie nog niet bereikt"
+    "waarde": "19%",
+    "toelichting": "Functieverlies rechterbeen, AMA Guides 6e druk"
    },
    {
     "label": "Dossier",
     "waarde": "8 van 9 stukken",
-    "toelichting": "1 hiaat"
+    "toelichting": "1 hiaat, niet bepalend"
    }
   ],
   "ondertekening": {
@@ -941,32 +936,32 @@ var EXAMPLE_NVMSR = {
     ],
     [
      "Kernbevindingen geverifieerd",
-     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op [DATUM]"
+     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op T+24m"
     ],
     [
      "Eindverantwoordelijk en ondertekend",
      "Orthopedisch chirurg, BIG [BIG-NR]"
     ]
    ],
-   "status": "Concept. Definitief na toetsing door de specialist, controle van vraagstelling en feitelijke gegevens door de verzekeraar, en inzage door betrokkene."
+   "status": "Definitief. Ondertekend op T+25m, na controle van vraagstelling en feitelijke gegevens door de verzekeraar en inzage door betrokkene."
   }
  },
  "compleetheid": {
   "score": 89,
   "aanwezig": [
-   "SEH-verslag",
-   "Röntgenverslagen pols",
-   "Operatieverslag plaatfixatie",
+   "SEH-verslag met CT",
+   "Operatieverslag",
    "Ontslagbrief",
    "Poliklinische brieven orthopedie",
-   "Fysiotherapie eindverslag",
-   "Operatieverslag materiaalverwijdering",
-   "Huisartsjournaal"
+   "Fysiotherapie intake en tussenrapportage",
+   "Röntgenverslag controle",
+   "Huisartsjournaal",
+   "AAOS-vragenlijst"
   ],
   "ontbrekend": [
    {
-    "doc": "Controle na materiaalverwijdering",
-    "prio": "kritiek"
+    "doc": "Fysiotherapie eindverslag",
+    "prio": "belangrijk"
    }
   ]
  },
@@ -992,7 +987,7 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Beroep",
-     "value": "Monteur installatietechniek, rechtshandig"
+     "value": "Monteur installatietechniek"
     },
     {
      "label": "Ongeval",
@@ -1056,11 +1051,11 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Polisvoorwaarden",
-     "value": "[POLISVERSIE], artikel [NR] (blijvende invaliditeit)"
+     "value": "[POLISVERSIE], artikel 7 (blijvende invaliditeit)"
     },
     {
      "label": "Begrip ongeval",
-     "value": "Zoals omschreven in artikel [NR] van de polis"
+     "value": "Zoals omschreven in artikel 1 van de polis"
     },
     {
      "label": "Dekking als uitgangspunt",
@@ -1068,19 +1063,15 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Invaliditeitsmaatstaf",
-     "value": "Volgens de polis: [TABEL] (bijvoorbeeld AMA Guides 6e druk)"
-    },
-    {
-     "label": "Dominante hand",
-     "value": "Rechts, volgens betrokkene en bij onderzoek; alleen van belang als de polis onderscheid maakt"
+     "value": "AMA Guides to the Evaluation of Permanent Impairment, 6e druk, uitgedrukt als percentage functieverlies van het betrokken lichaamsdeel"
     },
     {
      "label": "Maximum voor dit lichaamsdeel",
-     "value": "[PERCENTAGE] voor volledig functieverlies van de hand, volgens de polis"
+     "value": "70% voor volledig functieverlies van een been, volgens de polis"
     },
     {
      "label": "Peildatum en termijn",
-     "value": "Vaststelling blijvende invaliditeit volgens de polis uiterlijk [TERMIJN] na het ongeval"
+     "value": "Vaststelling blijvende invaliditeit volgens de polis uiterlijk twee jaar na het ongeval"
     },
     {
      "label": "Voorafbestaande invaliditeit",
@@ -1117,10 +1108,10 @@ var EXAMPLE_NVMSR = {
    "badge": "ai",
    "type": "text",
    "paragraphs": [
-    "T±0 — SEH: distale radiusfractuur rechts, dorsaal gedisloceerd (bron 1, p. 1)\nT+2d — Operatie: open repositie en plaatfixatie (bron 3, p. 1)\nT+6w — Polikliniek orthopedie: consolidatie op de röntgenfoto, start fysiotherapie (bron 5, p. 1)\nT+6m — Fysiotherapie eindverslag: restbeperking pols, knijpkracht verminderd (bron 6, p. 3)\nT+14m — Materiaalverwijdering (bron 7, p. 1)\nT+24m — Expertiseonderzoek"
+    "T±0 — SEH: laterale tibiaplateaufractuur rechts, split-depressie; CT: impressie 6 mm (bron 1, p. 1–2)\nT+3d — Operatie: open repositie, botplastiek en plaatosteosynthese (bron 2, p. 1)\nT+6w — Polikliniek: goede stand, start gedeeltelijk belasten en fysiotherapie (bron 4, p. 1)\nT+3m — Polikliniek: consolidatie, volledig belasten (bron 4, p. 2)\nT+5m — Fysiotherapie tussenrapportage: flexie 110°, loopt zonder hulpmiddel (bron 5, p. 3)\nT+12m — Polikliniek: restklachten bij lang lopen, geen verdere behandeling (bron 4, p. 4)\nT+22m — Röntgen: geconsolideerd, restcongruentie 2 mm, gewrichtsspleet behouden (bron 6, p. 1)\nT+24m — Expertiseonderzoek"
    ],
    "sources": [
-    "Bronnen 1, 3, 5, 6, 7"
+    "Bronnen 1, 2, 4, 5, 6"
    ]
   },
   {
@@ -1130,11 +1121,11 @@ var EXAMPLE_NVMSR = {
    "type": "hiaten",
    "hiaten": [
     {
-     "prio": "kritiek",
-     "doc": "Controle na materiaalverwijdering",
-     "verwacht": "T+15m",
-     "toelichting": "Na de materiaalverwijdering is geen poliklinische controle of röntgenfoto in het dossier. Zonder deze informatie is de eindsituatie niet betrouwbaar vast te stellen.",
-     "actie": "Opvragen bij [ORGANISATIE-1]."
+     "prio": "belangrijk",
+     "doc": "Fysiotherapie eindverslag",
+     "verwacht": "T+8m",
+     "toelichting": "Intake en tussenrapportage aanwezig (bron 5), maar geen afsluitend verslag.",
+     "actie": "Opgevraagd bij [ORGANISATIE-2]; niet ontvangen. Niet bepalend: het verdere beloop staat in de poliklinische brieven (bron 4)."
     }
    ]
   },
@@ -1147,27 +1138,27 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Anamnese",
-     "tekst": "Betrokkene vertelt dat hij van een trap viel en zich opving met de rechterhand. Hij heeft pijn aan de pols bij draaien en steunen, bijvoorbeeld bij het aandraaien van koppelingen en bij opstaan uit een stoel. Langdurig gereedschap vasthouden lukt minder lang. Hij werkt weer volledig, maar laat zwaar trekwerk aan collega’s over. Geen pijnstillers.",
+     "tekst": "Betrokkene vertelt dat hij van een trap viel en met gestrekt rechterbeen neerkwam. Hij werd geopereerd en liep enkele maanden met krukken. Nu heeft hij pijn aan de buitenzijde van de rechter knie na ongeveer een uur lopen en bij traplopen met gewicht. Hurken en knielen lukken slecht. Hij werkt weer volledig, maar vermijdt werk in geknielde houding. Geen pijnstillers; de plaat zit er nog.",
      "context": null
     },
     {
      "label": "Medische gegevens",
-     "tekst": "Distale radiusfractuur rechts, behandeld met plaatfixatie op T+2d. Fysiotherapie tot T+6m. Materiaalverwijdering op T+14m.",
-     "context": "Bronnen 1, 3, 6 en 7."
+     "tekst": "Laterale tibiaplateaufractuur rechts, behandeld met open repositie en plaatosteosynthese op T+3d. Volledig belasten vanaf T+3m, fysiotherapie tot ongeveer T+8m. De röntgenfoto op T+22m toont een geconsolideerde fractuur met een restincongruentie van het gewrichtsvlak van 2 mm; de gewrichtsspleet is behouden.",
+     "context": "Bronnen 1, 2, 4 en 6."
     },
     {
      "label": "Onderzoek",
-     "tekst": "Rustig litteken van 8 cm aan de handpalmzijde van de rechter pols, geen zwelling of standsafwijking. Drukpijn over het distale radio-ulnaire gewricht rechts, geen drukpijn in de tabatière. Pro- en supinatie eindstandig pijnlijk. Fijne motoriek normaal. Meetwaarden in de tabel.",
+     "tekst": "Loopt zonder hulpmiddel, zonder duidelijk manken. Rustig litteken van 14 cm aan de buitenzijde van de rechter knie. Geen hydrops. Lichte drukpijn over de laterale gewrichtsspleet, zonder zwelling of crepitaties. Stabiel bij Lachman en bij varus- en valgusstress. Klinisch geen asafwijking. Meetwaarden in de tabel.",
      "context": null
     },
     {
      "label": "Meetprotocol",
-     "tekst": "Actieve bewegingsuitslagen, gemeten met een goniometer volgens de neutraal-nulmethode, drie keer per richting; vermeld is de hoogste reproduceerbare waarde. Passief geen verdere uitslag. Knijpkracht met de Jamar-dynamometer in stand II, drie keer per zijde; vermeld is het gemiddelde. Beide zijden in dezelfde volgorde en houding gemeten. De pijnreactie staat per beweging in de tabel. De metingen waren reproduceerbaar: per richting minder dan 5° verschil, bij knijpkracht minder dan 10%.",
+     "tekst": "Actieve bewegingsuitslag in rugligging, gemeten met een goniometer volgens de neutraal-nulmethode, drie keer per richting; vermeld is de hoogste waarde. Passief geen verdere uitslag. Omtrek met meetlint op vaste afstand van de bovenrand van de patella. Beide zijden in dezelfde volgorde gemeten. De metingen waren reproduceerbaar: per richting minder dan 5° verschil.",
      "context": null
     },
     {
      "label": "Diagnose",
-     "tekst": "Pijnlijke bewegingsbeperking en verminderde knijpkracht van de rechter pols bij status na een distale radiusfractuur, behandeld met plaatfixatie en materiaalverwijdering.",
+     "tekst": "Lichte flexiebeperking en belastingspijn van de rechter knie bij een geconsolideerde laterale tibiaplateaufractuur met een restincongruentie van het gewrichtsvlak van 2 mm.",
      "context": null
     }
    ],
@@ -1178,60 +1169,52 @@ var EXAMPLE_NVMSR = {
      "Links (contralaterale vergelijking)",
      "Algemene referentie*",
      "Klinische duiding",
-     "Score volgens polismaatstaf"
+     "Grade modifier (AMA 6e druk)"
     ],
     "rijen": [
      [
-      "Omtrek pols",
-      "17,5 cm",
-      "17,0 cm",
-      "—",
-      "licht verdikt",
-      null
-     ],
-     [
-      "Omtrek onderarm",
-      "27,0 cm",
-      "28,0 cm",
-      "—",
-      "licht spierverlies",
-      null
-     ],
-     [
       "Extensie-flexie",
-      "45-0-55",
-      "70-0-80",
-      "70-0-80",
-      "beperkt, eindstandig pijnlijk",
-      null
+      "0-0-120",
+      "0-0-140",
+      "0-0-135",
+      "lichte flexiebeperking",
+      "1 (licht)"
      ],
      [
-      "Radiaal-ulnairdeviatie",
-      "15-0-25",
-      "20-0-35",
-      "20-0-30",
-      "licht beperkt",
-      null
-     ],
-     [
-      "Pronatie-supinatie",
-      "80-0-70",
-      "85-0-85",
-      "80-0-80",
-      "licht beperkt, eindstandig pijnlijk",
-      null
-     ],
-     [
-      "Knijpkracht",
-      "32 kg",
-      "46 kg",
+      "Omtrek bovenbeen, 10 cm boven patella",
+      "49,5 cm",
+      "51,0 cm",
       "—",
-      "circa 30% minder dan links",
-      null
+      "1,5 cm atrofie",
+      "1 (1,0–1,9 cm)"
+     ],
+     [
+      "Omtrek knie, midden patella",
+      "40,0 cm",
+      "39,5 cm",
+      "—",
+      "geen hydrops",
+      "—"
+     ],
+     [
+      "Stabiliteit",
+      "stabiel",
+      "stabiel",
+      "—",
+      "geen instabiliteit",
+      "0"
+     ],
+     [
+      "Stand (klinisch)",
+      "neutraal",
+      "neutraal",
+      "—",
+      "geen asafwijking",
+      "0"
      ]
     ]
    },
-   "tableNote": "* Algemene referentiewaarden uitsluitend ter klinische oriëntatie; zij vormen geen zelfstandige classificatie. Bron: [BRON]. De linkerzijde is een contralaterale vergelijking, geen referentie. Score (···): na vaststelling van de eindsituatie, volgens de maatstaf van de polis; schrijft de polis de AMA Guides voor, dan met vermelding van de exacte editie en versie."
+   "tableNote": "* Algemene referentiewaarde uitsluitend ter klinische oriëntatie; zij vormt geen zelfstandige classificatie. De linkerzijde is een contralaterale vergelijking, geen referentie. Grade modifiers volgens tabel 16-7 van de AMA Guides, 6e druk."
   },
   {
    "num": "2",
@@ -1242,17 +1225,17 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Conclusie",
-     "tekst": "Op basis van het letselmechanisme, het gedocumenteerde beloop en het huidige onderzoek acht ik de bewegingsbeperking en het krachtverlies medisch aannemelijk gerelateerd aan de distale radiusfractuur en de behandeling daarvan.",
+     "tekst": "Op basis van het letselmechanisme, het gedocumenteerde beloop en het huidige onderzoek acht ik de bewegingsbeperking en de belastingspijn medisch aannemelijk gerelateerd aan de tibiaplateaufractuur en de behandeling daarvan.",
      "context": null
     },
     {
      "label": "Basis",
-     "tekst": "De afwijkingen zijn goed te verklaren uit de polsbreuk en de behandeling daarvan. Klachten van het distale radio-ulnaire gewricht passen bij dit letsel. Voor peesproblemen of CRPS zijn bij onderzoek geen aanwijzingen, en voor een oorzaak buiten het ongeval evenmin.",
-     "context": "Bronnen 1, 3 en 6."
+     "tekst": "De fractuur is op de ongevalsdag met CT vastgesteld. De klachten zijn sindsdien consistent beschreven en passen bij de restincongruentie van het laterale gewrichtsvlak. Voor een oorzaak buiten het ongeval zijn geen aanwijzingen.",
+     "context": "Bronnen 1, 4 en 6."
     },
     {
      "label": "Onzekerheid",
-     "tekst": "Zonder röntgenfoto na de materiaalverwijdering kan ik beginnende posttraumatische artrose niet uitsluiten.",
+     "tekst": "Door de restincongruentie bestaat op lange termijn een verhoogd risico op artrose van het laterale compartiment. Dat is een risico, geen huidige afwijking, en telt niet mee in de huidige beoordeling.",
      "context": null
     },
     {
@@ -1261,7 +1244,7 @@ var EXAMPLE_NVMSR = {
      "context": null
     }
    ],
-   "quote": "De bewegingsbeperking en het krachtverlies zijn medisch aannemelijk gerelateerd aan de polsbreuk en de behandeling daarvan."
+   "quote": "De bewegingsbeperking en de belastingspijn zijn medisch aannemelijk gerelateerd aan de tibiaplateaufractuur en de behandeling daarvan."
   },
   {
    "num": "3",
@@ -1272,17 +1255,17 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Klachten",
-     "tekst": "In de huisartsinformatie over vijf jaar voor het ongeval zijn geen pols- of handklachten gedocumenteerd.",
-     "context": "Bron 8, p. 1–2."
+     "tekst": "In de huisartsinformatie over vijf jaar voor het ongeval zijn geen knieklachten gedocumenteerd.",
+     "context": "Bron 7, p. 1–2."
     },
     {
      "label": "Objectieve afwijkingen en functieverlies",
-     "tekst": "Uit de beschikbare gegevens blijken geen eerdere afwijkingen of functieverlies. De röntgenfoto van de ongevalsdag toont geen aanwijzingen voor bestaande artrose.",
-     "context": "Bron 2, p. 1."
+     "tekst": "Op de CT van de ongevalsdag zijn geen aanwijzingen voor bestaande artrose. De linker knie is bij onderzoek normaal.",
+     "context": "Bron 1, p. 2."
     },
     {
      "label": "Conclusie",
-     "tekst": "Er zijn geen aanwijzingen voor voorafbestaande invaliditeit van de rechter pols.",
+     "tekst": "Er zijn geen aanwijzingen voor voorafbestaande invaliditeit van het rechterbeen.",
      "context": null
     }
    ]
@@ -1296,22 +1279,17 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Klinisch lijkt de toestand stationair. Omdat controle na materiaalverwijdering en actuele beeldvorming ontbreken, kan deze vermoedelijke stationaire toestand nog niet als definitieve medische eindsituatie worden vastgesteld.",
+     "tekst": "Gelet op de tijd sinds het ongeval, de behandeling, het huidige klinisch onderzoek en de beschikbare controle-informatie acht ik de orthopedische toestand stationair. De medische eindsituatie wordt vastgesteld per T+24m.",
      "context": null
     },
     {
      "label": "Basis",
-     "tekst": "De bevindingen bij onderzoek komen overeen met de restbeperking in het eindverslag van de fysiotherapie. De materiaalverwijdering ligt tien maanden terug.",
-     "context": "Bron 6, p. 3; bron 7, p. 1."
+     "tekst": "De fractuur is geconsolideerd. Sinds de polikliniek op T+12m zijn klachten en bevindingen gelijk gebleven, en er is geen verdere behandeling gepland.",
+     "context": "Bron 4, p. 4; bron 6, p. 1."
     },
     {
      "label": "Onzekerheid",
-     "tekst": "Beginnende artrose kan de uitkomst nog veranderen. Dat is alleen met beeldvorming te beoordelen.",
-     "context": null
-    },
-    {
-     "label": "Vervolg",
-     "tekst": "Tonen de controlegegevens en de röntgenfoto geen bijzonderheden, dan luidt het oordeel: ‘Gelet op de tijd sinds het ongeval, de behandeling, het huidige klinisch onderzoek en de beschikbare controle-informatie acht ik de orthopedische toestand stationair. De medische eindsituatie wordt vastgesteld per [DATUM].’ Anders volgt een herbeoordeling.",
+     "tekst": "Het verwijderen van de plaat, als dat later gebeurt, verandert het functieverlies naar verwachting niet wezenlijk.",
      "context": null
     }
    ]
@@ -1325,12 +1303,12 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Niet vast te stellen, omdat de medische eindsituatie nog niet is bereikt.",
+     "tekst": "19% functieverlies van het rechterbeen volgens de AMA Guides, 6e druk. Er is geen voorafbestaande invaliditeit om in mindering te brengen. De berekening staat per stap in de rekenbijlage.",
      "context": null
     },
     {
-     "label": "Vervolg",
-     "tekst": "Na vaststelling van de eindsituatie volgt de berekening volgens de rekenbijlage achter in dit rapport.",
+     "label": "Toepassing van de polis",
+     "tekst": "De omzetting naar een uitkeringspercentage volgens de polis is aan de verzekeraar.",
      "context": null
     }
    ]
@@ -1374,7 +1352,7 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Verificatie en eindverantwoordelijkheid",
-     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op [DATUM], de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
+     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op T+24m, de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
     },
     {
      "label": "Verzekeraar",
@@ -1398,7 +1376,7 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Concept toegezonden",
-     "value": "[DATUM], met termijn van twee weken"
+     "value": "T+24m, met termijn van twee weken"
     },
     {
      "label": "Reactie betrokkene",
@@ -1418,19 +1396,19 @@ var EXAMPLE_NVMSR = {
    "fields": [
     {
      "label": "Specialist",
-     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkgever: [OPGAVE]"
+     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkzaam in [ORGANISATIE-9]"
     },
     {
      "label": "Onderzoekend arts",
-     "value": "Basisarts, BIG [BIG-NR]; werkgever: [OPGAVE]"
+     "value": "Basisarts, BIG [BIG-NR]; in dienst van Kinetic"
     },
     {
      "label": "Ervaring als deskundige",
-     "value": "Specialist: [AANTAL] jaar, circa [AANTAL] expertises per jaar; onderzoekend arts: [OPGAVE]"
+     "value": "Specialist: ruim twintig jaar orthopedisch chirurg, circa 50 expertises per jaar; onderzoekend arts: drie jaar ervaring met expertiseonderzoek"
     },
     {
      "label": "Nevenfuncties",
-     "value": "[OPGAVE]"
+     "value": "Geen nevenfuncties met een relatie tot partijen in deze zaak"
     },
     {
      "label": "Belangenconflicten",
@@ -1438,7 +1416,7 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Relatie met de verzekeraar",
-     "value": "In de afgelopen twaalf maanden [AANTAL] opdrachten van deze verzekeraar"
+     "value": "In de afgelopen twaalf maanden zes opdrachten van deze verzekeraar"
     }
    ]
   },
@@ -1447,67 +1425,64 @@ var EXAMPLE_NVMSR = {
    "title": "Rekenbijlage blijvende invaliditeit",
    "badge": "arts",
    "type": "arts_template",
-   "prompt": "Template. Te gebruiken na vaststelling van de medische eindsituatie.",
+   "prompt": "Berekening volgens de AMA Guides, 6e druk, hoofdstuk 16 (onderste extremiteit).",
    "subfields": [
     {
-     "label": "Status",
-     "tekst": "Nog niet ingevuld: de medische eindsituatie is niet bereikt (vraag 4).",
+     "label": "Methode",
+     "tekst": "Diagnosegebonden methode (DBI). De bewegingsuitslag is niet als zelfstandige methode gebruikt, omdat er een passende diagnoserij is; de bewegingsbeperking telt mee als grade modifier.",
+     "context": null
+    },
+    {
+     "label": "Gevoeligheid",
+     "tekst": "Wordt de grade modifier voor aanvullend onderzoek niet meegeteld, dan blijft de uitkomst 19%. De netto-aanpassing is dan −2 in plaats van −3, en beide leiden tot graad A.",
      "context": null
     }
    ],
    "deel": "Bijlage",
    "stappen": [
     [
-     "Maatstaf volgens de polis",
-     "[TABEL] volgens [POLISVERSIE]"
+     "Editie en versie",
+     "AMA Guides to the Evaluation of Permanent Impairment, 6e druk"
     ],
     [
-     "Exacte editie, publicatieversie en eventuele update van de maatstaf",
-     "Door de ondertekenend specialist in te vullen"
+     "Diagnoserij (tabel 16-3, knie)",
+     "Tibiaplateaufractuur met ≤ 2 mm stapvorming in het gewrichtsvlak"
     ],
     [
-     "Methode (bewegingsuitslag of diagnose) en reden, als de maatstaf die keuze laat",
-     "Door de ondertekenend specialist in te vullen"
+     "Klasse",
+     "Klasse 2: 14–25% onderste extremiteit (graad A–E: 19, 20, 22, 24, 25)"
     ],
     [
-     "Pols extensie: gemeten 45°, afgerond volgens de maatstaf [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
+     "Standaardwaarde",
+     "Graad C = 22%"
     ],
     [
-     "Pols flexie: gemeten 55°, afgerond [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
+     "Grade modifier functionele historie (tabel 16-6)",
+     "1: AAOS Lower Limb-vragenlijst licht verminderd; geen hulpmiddel"
     ],
     [
-     "Radiaaldeviatie: gemeten 15°, afgerond [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
+     "Grade modifier lichamelijk onderzoek (tabel 16-7)",
+     "1: minimale palpatoire bevindingen, lichte bewegingsbeperking, 1,5 cm atrofie"
     ],
     [
-     "Ulnairdeviatie: gemeten 25°, afgerond [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
+     "Grade modifier aanvullend onderzoek (tabel 16-8)",
+     "1: gewrichtsspleet minder dan 25% versmald ten opzichte van links. De stapvorming is al gebruikt voor de klasse en telt niet opnieuw mee"
     ],
     [
-     "Subtotaal pols (optellen)",
-     "Door de ondertekenend specialist in te vullen"
+     "Netto-aanpassing",
+     "(1 − 2) + (1 − 2) + (1 − 2) = −3; maximaal twee graden omlaag, dus graad A"
     ],
     [
-     "Pronatie en supinatie: gemeten 80° en 70°, afgerond, tabelscore",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Functionele historie (QuickDASH) en eventuele aanpassing",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Combineren en omzetten via de conversietabel naar de maatstaf van de polis",
-     "Door de ondertekenend specialist in te vullen"
+     "Functieverlies onderste extremiteit",
+     "19%"
     ],
     [
      "Aftrek voorafbestaande invaliditeit",
      "Niet van toepassing (vraag 3)"
     ],
     [
-     "Uitkomst volgens de polis, getoetst aan het maximum voor de hand",
-     "Door de ondertekenend specialist in te vullen"
+     "Uitkomst volgens de maatstaf van de polis",
+     "19% functieverlies van het rechterbeen"
     ]
    ]
   },
@@ -1519,58 +1494,58 @@ var EXAMPLE_NVMSR = {
    "bronnen": [
     {
      "nr": "1",
-     "doc": "SEH-verslag",
+     "doc": "SEH-verslag met CT rechter knie",
      "bron": "[ORGANISATIE-1]",
      "datum": "T±0",
-     "paginas": "1"
-    },
-    {
-     "nr": "2",
-     "doc": "Röntgenverslagen pols",
-     "bron": "Radiologie [ORGANISATIE-1]",
-     "datum": "T±0–T+6w",
      "paginas": "1–2"
     },
     {
-     "nr": "3",
-     "doc": "Operatieverslag plaatfixatie",
-     "bron": "[ORGANISATIE-1]",
-     "datum": "T+2d",
-     "paginas": "1"
-    },
-    {
-     "nr": "4",
-     "doc": "Ontslagbrief",
+     "nr": "2",
+     "doc": "Operatieverslag plaatosteosynthese",
      "bron": "[ORGANISATIE-1]",
      "datum": "T+3d",
      "paginas": "1"
     },
     {
-     "nr": "5",
+     "nr": "3",
+     "doc": "Ontslagbrief",
+     "bron": "[ORGANISATIE-1]",
+     "datum": "T+6d",
+     "paginas": "1"
+    },
+    {
+     "nr": "4",
      "doc": "Poliklinische brieven orthopedie",
      "bron": "[ORGANISATIE-1]",
      "datum": "T+6w–T+12m",
+     "paginas": "1–4"
+    },
+    {
+     "nr": "5",
+     "doc": "Fysiotherapie intake en tussenrapportage",
+     "bron": "[ORGANISATIE-2]",
+     "datum": "T+2m–T+5m",
      "paginas": "1–3"
     },
     {
      "nr": "6",
-     "doc": "Fysiotherapie eindverslag",
-     "bron": "[ORGANISATIE-2]",
-     "datum": "T+6m",
-     "paginas": "1–3"
-    },
-    {
-     "nr": "7",
-     "doc": "Operatieverslag materiaalverwijdering",
-     "bron": "[ORGANISATIE-1]",
-     "datum": "T+14m",
+     "doc": "Röntgenverslag controle beide knieën",
+     "bron": "Radiologie [ORGANISATIE-1]",
+     "datum": "T+22m",
      "paginas": "1"
     },
     {
-     "nr": "8",
+     "nr": "7",
      "doc": "Huisartsjournaal",
      "bron": "[ORGANISATIE-3]",
      "datum": "T−5j–T+24m",
+     "paginas": "1–2"
+    },
+    {
+     "nr": "8",
+     "doc": "AAOS Lower Limb-vragenlijst",
+     "bron": "Ingevuld door betrokkene",
+     "datum": "T+24m",
      "paginas": "1–2"
     }
    ]
