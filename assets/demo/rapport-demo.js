@@ -1855,7 +1855,7 @@ if(s.table){
   h+='<div class="kr-table-wrap"><table class="kr-table"><thead><tr><th>Meting</th>';
   s.table.kolommen.forEach(function(k,ki){h+='<th'+(ki===0?' class="kr-affected"':'')+'>'+esc(k)+'</th>';});
   h+='</tr></thead><tbody>';
-  s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><th scope="row">'+esc(row[0])+'</th>';s.table.kolommen.forEach(function(k,ki){h+='<td'+(ki===0?' class="kr-affected"':'')+'>'+(row[ki+1]!=null?esc(row[ki+1]):'&middot;&middot;&middot;')+'</td>';});h+='</tr>';});
+  s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><th scope="row">'+esc(row[0])+'</th>';s.table.kolommen.forEach(function(k,ki){h+='<td data-l="'+esc(k)+'"'+(ki===0?' class="kr-affected"':'')+'><span class="kr-v">'+(row[ki+1]!=null?esc(row[ki+1]):'&middot;&middot;&middot;')+'</span></td>';});h+='</tr>';});
   h+='</tbody></table></div>';
   if(s.tableNote)h+='<p class="kr-tablenote">'+redact(s.tableNote)+'</p>';
 }
@@ -1878,7 +1878,7 @@ h+='</ol>';
 
 if(s.type==="bronnen"){
 h+='<div class="kr-table-wrap"><table class="kr-table kr-bronnen"><thead><tr><th>Nr.</th><th>Document</th><th>Bron</th><th>Datum</th><th>Pag.</th></tr></thead><tbody>';
-s.bronnen.forEach(function(b){h+='<tr><td>'+esc(b.nr)+'</td><th scope="row">'+redact(b.doc)+'</th><td>'+redact(b.bron)+'</td><td>'+esc(b.datum)+'</td><td>'+esc(b.paginas)+'</td></tr>';});
+s.bronnen.forEach(function(b){h+='<tr><td class="kr-bnr">'+esc(b.nr)+'</td><th scope="row">'+redact(b.doc)+'</th><td data-l="Bron"><span class="kr-v">'+redact(b.bron)+'</span></td><td data-l="Datum"><span class="kr-v">'+esc(b.datum)+'</span></td><td data-l="Pag."><span class="kr-v">'+esc(b.paginas)+'</span></td></tr>';});
 h+='</tbody></table></div>';
 }
 

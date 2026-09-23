@@ -133,3 +133,5 @@ a.pipe-step:hover .pipe-label{color:var(--warm-teal)}
 .nav-cta{background:var(--warm-teal);color:#FFF;padding:11px 20px;border-radius:8px;font:600 14px 'Inter',sans-serif;text-decoration:none;transition:background .2s}
 .nav-cta:hover{background:var(--warm-teal-hover)}
 @media (max-width:760px){.header .nav-links{display:none}.header .nav-content{height:64px;padding:0 1.25rem}}
+@media (max-width:960px){.topbar{display:none}}
+@media (min-width:761px) and (max-width:900px){.header .nav-links{gap:20px}.header .nav-content{padding:0 2rem}}
