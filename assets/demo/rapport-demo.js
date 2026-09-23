@@ -1957,17 +1957,27 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-btns.forEach(function(b){b.addEventListener("click",function(){
-  btns.forEach(function(x){var on=x===b;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
-  renderRapport(b.getAttribute("data-rapport-variant")==="nvmsr"?EXAMPLE_NVMSR:EXAMPLE_RAPPORT);
-});});
-function fromHash(){
-  var start=/ongevallenverzekering|nvmsr/i.test(location.hash)?"nvmsr":"iwmd";
-  btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===start;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
-  renderRapport(start==="nvmsr"?EXAMPLE_NVMSR:EXAMPLE_RAPPORT);
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf"};
+var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
+function show(v,scroll){
+  btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
+  document.querySelectorAll("[data-pick]").forEach(function(c){c.classList.toggle("is-active",c.getAttribute("data-pick")===v);});
+  renderRapport(v==="nvmsr"?EXAMPLE_NVMSR:EXAMPLE_RAPPORT);
+  if(dl)dl.setAttribute("href",PDF[v]);
+  if(frame)frame.classList.add("is-collapsed");
+  if(expand)expand.parentNode.style.display="";
+  if(scroll&&viewer)viewer.scrollIntoView({behavior:"smooth",block:"start"});
 }
-window.addEventListener("hashchange",fromHash);
-fromHash();
+function fromHash(scroll){
+  var h=location.hash;
+  if(!/letselschade|ongevallenverzekering|nvmsr|iwmd/i.test(h)){if(scroll!==true)show("iwmd",false);return;}
+  show(/ongevallenverzekering|nvmsr/i.test(h)?"nvmsr":"iwmd",true);
+}
+btns.forEach(function(b){b.addEventListener("click",function(){show(b.getAttribute("data-rapport-variant"),false);});});
+if(expand)expand.addEventListener("click",function(){frame.classList.remove("is-collapsed");});
+document.querySelectorAll("[data-pick]").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var v=c.getAttribute("data-pick");if(history.replaceState)history.replaceState(null,"",v==="nvmsr"?"#ongevallenverzekering":"#letselschade");show(v,true);});});
+window.addEventListener("hashchange",function(){fromHash(true);});
+fromHash(false);
 }
 
 // Herbruikbaar voor de tooling-werkruimte.

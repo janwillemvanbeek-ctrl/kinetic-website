@@ -521,7 +521,6 @@
 
 .report-hero{grid-template-columns:1fr}.report-hero-copy{max-width:760px}
 #verschil .opbouw-verschil{margin-top:0}
-.rp-cta{text-align:center}.rp-cta .section-header{margin:0 auto}.rp-cta .btn{margin-top:1.5rem;display:inline-flex}
 @media (max-width:640px){
   .opbouw-verschil{padding:0 1rem}
   .opbouw-verschil .kr-table,.opbouw-verschil .kr-table tbody,.opbouw-verschil .kr-table tr{display:block;width:100%}
@@ -530,4 +529,84 @@
   .opbouw-verschil .kr-table th,.opbouw-verschil .kr-table td{display:block;border:0;padding:.15rem 0;white-space:normal}
   .opbouw-verschil .kr-table th{font-weight:600;margin-bottom:.3rem}
   .opbouw-verschil .kr-table td::before{content:attr(data-l);display:block;font:500 .62rem var(--kr-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--kr-stone);margin-top:.35rem}
+}
+
+/* ==========================================================================
+   Pagina Voorbeeldrapporten (rp-)
+   ========================================================================== */
+.rp{--rp-mono:"IBM Plex Mono",ui-monospace,monospace}
+.rp-wrap{max-width:1200px;margin:0 auto;padding:0 2.5rem}
+.rp-eyebrow{font:500 .6875rem/1.4 var(--rp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--warm-teal);margin-bottom:1rem}
+.rp h2{font-size:clamp(1.75rem,2.6vw,2.25rem);letter-spacing:-.03em;line-height:1.15;max-width:640px}
+.rp-lead{margin-top:1rem;max-width:520px;font-size:1rem;line-height:1.7}
+
+/* Hero */
+.rp-hero{padding:5.5rem 0 4rem}
+.rp-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4.5rem;align-items:center}
+.rp-hero-copy h1{font-size:clamp(2.4rem,4.4vw,3.75rem);letter-spacing:-.05em;line-height:1.04;margin-bottom:1.35rem;max-width:560px}
+.rp-hero-copy>p{max-width:500px;font-size:1.0625rem;line-height:1.75}
+.rp-textlink{display:inline-flex;gap:.45rem;margin-top:1.75rem;color:var(--warm-ink);font-size:.875rem;font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:.3rem;transition:color .2s,border-color .2s}
+.rp-textlink:hover{color:var(--warm-teal);border-color:var(--warm-teal)}
+.rp-picks{display:grid;gap:1rem}
+.rp-pick{display:grid;gap:.55rem;padding:1.5rem 1.6rem 1.35rem;background:#FFF;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--stone);transition:border-color .2s,transform .2s,box-shadow .2s}
+.rp-pick:hover{border-color:var(--warm-teal);transform:translateY(-2px);box-shadow:0 16px 30px -26px rgba(26,25,22,.55)}
+.rp-pick.is-active{border-color:var(--warm-ink)}
+.rp-pick-kicker{font:500 .625rem/1.4 var(--rp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+.rp-pick-title{font-size:1.125rem;font-weight:600;letter-spacing:-.015em;color:var(--warm-ink);line-height:1.3}
+.rp-pick-meta{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;font-size:.8125rem;padding-top:.7rem;margin-top:.2rem;border-top:1px solid var(--line)}
+.rp-pick-meta b{color:var(--warm-ink);font-weight:600}
+.rp-pick-go{font-size:.8125rem;font-weight:600;color:var(--warm-teal)}
+.rp-pick-go span{display:inline-block;transition:transform .2s}
+.rp-pick:hover .rp-pick-go span{transform:translateX(3px)}
+
+/* Viewer */
+.rp-viewer{padding:3rem 0 4.5rem;background:var(--fog);border-top:1px solid var(--line);border-bottom:1px solid var(--line);scroll-margin-top:64px}
+.rp-viewer-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.25rem;position:sticky;top:64px;z-index:5;padding:.75rem 0;background:var(--fog)}
+.rp-download{font-size:.8125rem;font-weight:600;color:var(--warm-ink);text-decoration:none;border:1px solid var(--line);background:#FFF;border-radius:8px;padding:.6rem 1rem;transition:border-color .2s,color .2s}
+.rp-download:hover{border-color:var(--warm-teal);color:var(--warm-teal)}
+.rp-frame{position:relative}
+.rp-frame.is-collapsed{max-height:1500px;overflow:hidden}
+.rp-fade{display:none}
+.rp-frame.is-collapsed .rp-fade{display:flex;position:absolute;left:0;right:0;bottom:0;height:260px;align-items:flex-end;justify-content:center;padding-bottom:2rem;background:linear-gradient(to bottom,rgba(239,233,220,0),var(--fog) 72%)}
+.rp-expand{font:600 .9375rem 'Inter',sans-serif;color:#FFF;background:var(--warm-teal);border:0;border-radius:8px;padding:.9rem 1.6rem;cursor:pointer;box-shadow:0 12px 24px -18px rgba(14,94,87,.9)}
+.rp-expand:hover{background:var(--warm-teal-hover)}
+
+/* Principes */
+.rps{padding:5.5rem 0}
+.rps-alt{background:#FFF;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rp-principles{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;margin-top:2.75rem}
+.rp-principles>div{border-top:1px solid var(--warm-ink);padding-top:1.25rem}
+.rp-principles span{font:500 .75rem var(--rp-mono);color:var(--warm-teal)}
+.rp-principles h3{font-size:1.0625rem;letter-spacing:-.01em;margin:.8rem 0 .5rem}
+.rp-principles p{font-size:.9rem;line-height:1.65}
+
+/* Verschil */
+.rp-split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:4rem;align-items:start}
+#verschil .opbouw-verschil{max-width:none;margin:0}
+#verschil .kr-table{background:transparent}
+
+/* Afsluiter */
+.rp-cta{padding:4.5rem 0 5rem}
+.rp-cta-inner{display:flex;justify-content:space-between;align-items:center;gap:2rem;border-top:1px solid var(--warm-ink);padding-top:2.25rem}
+.rp-cta h2{font-size:clamp(1.5rem,2.2vw,1.875rem)}
+.rp-cta p{margin-top:.5rem}
+.rp-cta .btn{flex-shrink:0}
+
+@media (max-width:960px){
+  .rp-hero-grid,.rp-split{grid-template-columns:1fr;gap:2.5rem}
+  .rp-principles{grid-template-columns:repeat(2,1fr);gap:2rem}
+}
+@media (max-width:640px){
+  .rp-wrap{padding:0 1.25rem}
+  .rp-hero{padding:3.25rem 0 2.75rem}
+  .rps{padding:3.75rem 0}
+  .rp-principles{grid-template-columns:1fr;gap:1.75rem}
+  .rp-viewer{padding-top:1.5rem}
+  .rp-viewer-bar{flex-direction:column;align-items:stretch;top:56px}
+  .rp-viewer-bar .mode-toggle{display:flex}
+  .rp-viewer-bar .mode-btn{flex:1;padding:.6rem .5rem;font-size:.75rem;justify-content:center}
+  .rp-download{text-align:center}
+  .rp-frame.is-collapsed{max-height:1100px}
+  .rp-cta-inner{flex-direction:column;align-items:flex-start}
+  #verschil .opbouw-verschil{padding:0}
 }
