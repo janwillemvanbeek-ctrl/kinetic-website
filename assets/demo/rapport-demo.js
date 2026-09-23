@@ -23,7 +23,7 @@ var EXAMPLE_RAPPORT = {
     kicker: "Letselschade &middot; IWMD &middot; fictief voorbeeld",
     titel: "Medische expertise orthopedie",
     subtitel: "Letselschade · vraagstelling volgens IWMD",
-    kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 23-04-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "78% compleet", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
+    kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 23-04-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "9 van 12 stukken", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
     ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
   },
   compleetheid: {
@@ -124,6 +124,7 @@ var EXAMPLE_RAPPORT = {
     {
       num:"7", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
       prompt:"Bevindingen van de onderzoekend arts.",
+      table: {"vergelijk": "Ten opzichte van de normaalwaarde", "kolommen": ["Gemeten", "Normaalwaarde"], "rijen": [["Flexie", "40°", "50°"], ["Extensie", "30°", "60°"], ["Rotatie links", "50°", "80°"], ["Rotatie rechts", "60°", "80°"], ["Lateroflexie links", "25°", "45°"], ["Lateroflexie rechts", "25°", "45°"]]},
       subfields: [
         {label:"Algemene indruk", tekst:"Verzorgde man die zich wat voorzichtig beweegt en tijdens het gesprek regelmatig van houding wisselt. Lengte 182 cm, gewicht 84 kg.", context:null},
         {label:"Cervicale wervelkolom", tekst:"Geen standsafwijking. Actieve beweeglijkheid: flexie 40°, extensie 30°, rotatie links 50° en rechts 60°, lateroflexie 25° beiderzijds. Eindstandige pijn bij extensie en rotatie naar links. Drukpijn paravertebraal C4–C6 links, verhoogde spierspanning van de m. trapezius links.", context:"Vergelijk: fysio 21-02-2022 (flex 35\u00b0, ext 25\u00b0), neuroloog 08-03-2023 (rot L 40\u00b0, R 55\u00b0, Spurling+). MRI: protrusie C5\u2013C6."},
@@ -134,7 +135,8 @@ var EXAMPLE_RAPPORT = {
     },
     {
       num:"8", title:"Diagnose en beschouwing", badge:"arts", type:"arts_template",
-      prompt:"Per subveld zijn de relevante dossiergegevens samengevat. Zie ook tegenstrijdigheden (sectie 5b).",
+      prompt:"Per onderdeel staan de relevante dossiergegevens erbij. Zie ook de tegenstrijdigheden in sectie 5b.",
+      flow: [{"waarde": "Tabel 17-2", "label": "cervicale wervelkolom"}, {"waarde": "Klasse 1", "label": "na grade modifiers"}, {"waarde": "5%", "label": "gehele persoon"}],
       subfields: [
         {label:"Diagnose op vakgebied", tekst:"Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma (WAD graad II), bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links. De ulnarisneuropathie en de cognitieve klachten vallen buiten mijn vakgebied.", context:"Neuroloog: (1) cervicobrachialgie C5\u2013C6, (2) ulnaris neuropathie, (3) PCS. Zie sectie 5b."},
         {label:"Causaal verband", tekst:"De nekklachten zijn direct na het ongeval ontstaan, bij een blanco voorgeschiedenis voor het bewegingsapparaat. De degeneratie C5–C6 bestond al, maar gaf geen klachten. Naar mijn oordeel heeft het ongeval de klachten uitgelokt; een causaal verband acht ik aanwezig.", context:"CT SEH: spondylose pre-existent. MRI: protrusie. Neuroloog: traumatisch geagraveerd. EMG: causaliteit open. \u2192 Zie tegenstrijdigheden 5b."},
@@ -191,7 +193,7 @@ var EXAMPLE_NVMSR = {
     titel: "Medisch specialistische rapportage",
     subtitel: "Volgens de richtlijn Medisch Specialistische Rapportage (NVMSR) · Orthopedisch",
     onderzoeksdatum: "T+24m",
-    kern: [{"label": "Diagnose", "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na distale radiusfractuur", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "4%", "toelichting": "van de gehele persoon (7% bovenste extremiteit)", "groot": true}, {"label": "Medische eindsituatie", "waarde": "Bereikt", "toelichting": "Verdere verbetering niet verwacht"}, {"label": "Consistentie", "waarde": "Consistent", "toelichting": "Anamnese, dossier en onderzoek"}, {"label": "Knijpkracht rechts", "waarde": "70%", "toelichting": "van de niet-aangedane zijde"}, {"label": "Zonder ongeval", "waarde": "Geen klachten", "toelichting": "Geen invaliditeit"}, {"label": "Dossier", "waarde": "88% compleet", "toelichting": "1 hiaat"}],
+    kern: [{"label": "Diagnose", "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na distale radiusfractuur", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "4%", "toelichting": "van de gehele persoon (7% bovenste extremiteit)", "groot": true}, {"label": "Medische eindsituatie", "waarde": "Bereikt", "toelichting": "Verdere verbetering niet verwacht"}, {"label": "Consistentie", "waarde": "Consistent", "toelichting": "Anamnese, dossier en onderzoek"}, {"label": "Knijpkracht rechts", "waarde": "70%", "toelichting": "van de niet-aangedane zijde"}, {"label": "Zonder ongeval", "waarde": "Geen klachten", "toelichting": "Geen invaliditeit"}, {"label": "Dossier", "waarde": "7 van 8 stukken", "toelichting": "1 hiaat"}],
     ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
   },
   compleetheid: {
@@ -263,6 +265,7 @@ var EXAMPLE_NVMSR = {
         {label:"Palpatie en functie", tekst:"Drukpijn over het distale radio-ulnaire gewricht rechts, geen drukpijn in de tabatière. Pro- en supinatie eindstandig pijnlijk. Fijne motoriek normaal.", context:"Fysiotherapie eindverslag T+6m: extensie pols rechts 45°, knijpkracht 70% van links (p. 3)."}
       ],
       table: {
+        vergelijk: "Rechts ten opzichte van links",
         kolommen: ["Rechts (aangedane zijde)","Links"],
         rijen: [["Omtrek pols","17,5 cm","17,0 cm"],["Omtrek onderarm (10 cm distaal elleboog)","27,0 cm","28,0 cm"],["Pols extensie-flexie","45-0-55","70-0-80"],["Pols radiaal-ulnairdeviatie","15-0-25","20-0-35"],["Onderarm pronatie-supinatie","80-0-70","85-0-85"],["Knijpkracht (kg)","32","46"]]
       }
@@ -284,6 +287,7 @@ var EXAMPLE_NVMSR = {
     },
     {
       num:"1h", title:"Blijvende invaliditeit", badge:"arts", type:"arts_template",
+      flow: [{"waarde": "7%", "label": "bovenste extremiteit"}, {"waarde": "× 0,6", "label": "omrekening"}, {"waarde": "4%", "label": "gehele persoon"}],
       prompt:"Volgens de AMA Guides 6e editie en de leidraad van de Werkgroep Invaliditeit en Arbeidsongeschiktheid van de NOV.",
       subfields: [{label:"Berekening per diagnose en totaal", tekst:"De bewegingsbeperking van de pols (tabel 15-32) geeft 7% van de bovenste extremiteit. Die waarde is hoger dan de diagnosegebonden waarde en wordt daarom gebruikt. Blijvende invaliditeit: 7% van de bovenste extremiteit, 4% van de gehele persoon.", context:null}]
     },
@@ -331,6 +335,78 @@ function prioLabel(p){return p==="kritiek"?"Kritiek":p==="belangrijk"?"Belangrij
 function sevColor(s){return s==="kritiek"?"#D94F4F":s==="belangrijk"?"#C77B2E":"var(--warm-teal)";}
 function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk":"Aandacht";}
 
+/* ---------- Visualisaties ---------- */
+function tDays(str,base){
+  str=String(str).trim();
+  var m=str.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if(m){var d=Date.UTC(+m[3],+m[2]-1,+m[1])/864e5;return base==null?d:d-base;}
+  if(/^T\s*±\s*0$/.test(str))return 0;
+  m=str.match(/^T\s*([+−-])\s*(\d+)\s*([dwmj])/);
+  if(m){var f={d:1,w:7,m:30.44,j:365.25}[m[3]];return (m[1]==="+"?1:-1)*(+m[2])*f;}
+  return null;
+}
+function fmtSpan(days){
+  if(days<60)return Math.round(days)+" dagen";
+  if(days<730)return Math.round(days/30.44)+" maanden";
+  return (Math.round(days/365.25*10)/10).toString().replace(".",",")+" jaar";
+}
+function timelineAxis(lines){
+  var ev=[],base=null;
+  lines.forEach(function(line){
+    var p=line.split(" — "),d=p.shift()||"",txt=p.join(" — ");
+    var abs=/^\d{2}-\d{2}-\d{4}$/.test(d);
+    if(abs&&base==null)base=tDays(d);
+    var t=abs?tDays(d,base):tDays(d);
+    if(t==null)return;
+    var lab=txt.split(/[.:]/)[0].replace(/\[[A-Z0-9-]+\]/g,"").replace(/\s+/g," ").trim();
+    ev.push({t:t,d:d,lab:lab});
+  });
+  if(ev.length<2)return "";
+  var max=Math.max.apply(null,ev.map(function(e){return e.t;}))||1;
+  var h='<figure class="kr-axis" aria-label="Verloop in de tijd"><div class="kr-axis-track">';
+  ev.forEach(function(e,i){
+    var x=Math.max(0,Math.min(100,e.t/max*100));
+    h+='<div class="kr-axis-ev kr-lvl-'+(i%3)+(x>62?' kr-axis-right':'')+'" style="left:'+x.toFixed(2)+'%"><span class="kr-axis-dot"></span><span class="kr-axis-lab"><b>'+esc(e.d)+'</b>'+esc(e.lab)+'</span></div>';
+  });
+  h+='</div><figcaption><span>Ongeval</span><span>'+fmtSpan(max)+' later</span></figcaption></figure>';
+  return h;
+}
+function numVal(v){
+  if(v==null)return null;v=String(v);
+  if(/cm/.test(v))return null;
+  var m=v.match(/^\s*(\d+)\s*-\s*0\s*-\s*(\d+)\s*$/);if(m)return +m[1]+ +m[2];
+  m=v.match(/^\s*(\d+(?:[.,]\d+)?)\s*°?\s*$/);if(m)return parseFloat(m[1].replace(",","."));
+  return null;
+}
+function compareBars(tbl){
+  var rows=[];
+  tbl.rijen.forEach(function(r){
+    if(!Array.isArray(r))return;
+    var a=numVal(r[1]),b=numVal(r[2]);
+    if(a==null||!b)return;
+    rows.push({lab:r[0],pct:Math.round(a/b*100),a:r[1],b:r[2]});
+  });
+  if(!rows.length)return "";
+  var h='<figure class="kr-bars"><figcaption>'+esc(tbl.vergelijk||"Ten opzichte van de andere zijde")+'</figcaption>';
+  rows.forEach(function(r){
+    h+='<div class="kr-bar"><span class="kr-bar-lab">'+esc(r.lab)+'</span><span class="kr-bar-track"><span class="kr-bar-fill" style="width:'+Math.min(r.pct,100)+'%"></span><span class="kr-bar-ref"></span></span><span class="kr-bar-pct">'+r.pct+'%</span></div>';
+  });
+  h+='</figure>';
+  return h;
+}
+function ring(pct){
+  var r=58,c=2*Math.PI*r,l=Math.max(0,Math.min(100,pct))/100*c;
+  return '<svg class="kr-ring" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="'+r+'" class="kr-ring-track"/><circle cx="70" cy="70" r="'+r+'" class="kr-ring-val" stroke-dasharray="'+l.toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 70 70)"/></svg>';
+}
+function flow(steps){
+  var h='<div class="kr-flow">';
+  steps.forEach(function(s,i){
+    if(i)h+='<span class="kr-flow-arrow" aria-hidden="true">→</span>';
+    h+='<div class="kr-flow-step'+(i===steps.length-1?' kr-flow-end':'')+'"><span class="kr-flow-val">'+esc(s.waarde)+'</span><span class="kr-flow-lab">'+esc(s.label)+'</span></div>';
+  });
+  return h+'</div>';
+}
+
 function redact(t){
   return esc(t).replace(/\[([A-Z]+(?:-[0-9]+)?)\]/g,'<span class="kr-redact" title="Gepseudonimiseerd">$1</span>');
 }
@@ -361,8 +437,13 @@ h+='</header>';
 if(m.kern&&m.kern.length){
 h+='<section class="kr-kern" aria-label="Kernbevindingen">';
 h+='<div class="kr-kern-head"><span class="kr-eyebrow">Kernbevindingen</span><span class="kr-kern-note">De conclusies van de arts, vooraf samengevat</span></div>';
+var big=m.kern.filter(function(k){return k.groot;})[0], wide=m.kern.filter(function(k){return k.breed;})[0];
+h+='<div class="kr-hero">';
+if(wide)h+='<div class="kr-hero-diag"><span class="kr-kern-label">'+esc(wide.label)+'</span><p>'+esc(wide.waarde)+'</p></div>';
+if(big)h+='<div class="kr-hero-fig"><span class="kr-kern-label">'+esc(big.label)+'</span><span class="kr-hero-big">'+esc(big.waarde)+'</span><span class="kr-kern-sub">'+esc(big.toelichting||"")+'</span></div>';
+h+='</div>';
 h+='<div class="kr-kern-grid">';
-m.kern.forEach(function(k){
+m.kern.filter(function(k){return !k.groot&&!k.breed;}).forEach(function(k){
   h+='<div class="kr-kern-item'+(k.groot?' kr-kern-big':'')+(k.breed?' kr-kern-wide':'')+'"><span class="kr-kern-label">'+esc(k.label)+'</span><span class="kr-kern-value">'+esc(k.waarde)+'</span>'+(k.toelichting?'<span class="kr-kern-sub">'+esc(k.toelichting)+'</span>':'')+'</div>';
 });
 h+='</div></section>';
@@ -387,11 +468,14 @@ h+='<div class="kr-doc">';
 if(data.compleetheid){
 var c=data.compleetheid, tot=c.aanwezig.length+c.ontbrekend.length;
 h+='<div class="kr-compl"><div class="kr-compl-head"><span class="kr-eyebrow">Aangeleverde stukken</span><span class="kr-compl-score">'+c.aanwezig.length+' van '+tot+' stukken aanwezig</span></div>';
-h+='<div class="kr-compl-bar"><span style="width:'+c.score+'%"></span></div>';
-h+='<ul class="kr-compl-list">';
-c.aanwezig.forEach(function(d){h+='<li>'+esc(typeof d==="string"?d:d.doc)+'</li>';});
-c.ontbrekend.forEach(function(d){h+='<li class="kr-miss">'+esc(typeof d==="string"?d:d.doc)+' <em>ontbreekt</em></li>';});
-h+='</ul></div>';
+h+='<div class="kr-compl-bar"><span style="width:'+Math.round(c.aanwezig.length/tot*100)+'%"></span></div>';
+h+='<ul class="kr-tiles">';
+c.aanwezig.forEach(function(d){h+='<li><span class="kr-tile-ic"></span>'+esc(typeof d==="string"?d:d.doc)+'</li>';});
+c.ontbrekend.forEach(function(d){h+='<li class="kr-miss"><span class="kr-tile-ic"></span>'+esc(typeof d==="string"?d:d.doc)+'<em>Ontbreekt</em></li>';});
+h+='</ul>';
+var nDo=data.sections.filter(function(x){return x.badge!=="arts";}).length, nAr=data.sections.length-nDo;
+h+='<div class="kr-share"><div class="kr-share-bar"><span class="kr-share-do" style="flex:'+nDo+'"></span><span class="kr-share-ar" style="flex:'+nAr+'"></span></div><div class="kr-share-leg"><span><i class="kr-dot kr-dot-do"></i>Dossierordening &middot; '+nDo+' onderdelen</span><span><i class="kr-dot kr-dot-arts"></i>Arts &middot; '+nAr+' onderdelen</span></div></div>';
+h+='</div>';
 }
 
 data.sections.forEach(function(s,i){
@@ -416,6 +500,7 @@ h+='</ol>';
 if(s.type==="text"){
 s.paragraphs.forEach(function(p){
   if(s.title==="Samenvatting medische informatie"&&p.indexOf("\n")!==-1){
+    h+=timelineAxis(p.split("\n"));
     h+='<ol class="kr-timeline">';
     p.split("\n").forEach(function(line){
       var parts2=line.split(" — ");var d=parts2.shift()||"";
@@ -464,7 +549,9 @@ if(s.table){
   h+='</tr></thead><tbody>';
   s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><th scope="row">'+esc(row[0])+'</th>';s.table.kolommen.forEach(function(k,ki){h+='<td'+(ki===0?' class="kr-affected"':'')+'>'+(row[ki+1]!=null?esc(row[ki+1]):'&middot;&middot;&middot;')+'</td>';});h+='</tr>';});
   h+='</tbody></table></div>';
+  h+=compareBars(s.table);
 }
+if(s.flow)h+=flow(s.flow);
 }
 
 if(s.type==="iwmd_answers"){
