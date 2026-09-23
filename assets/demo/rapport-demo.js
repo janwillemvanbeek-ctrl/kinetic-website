@@ -52,7 +52,7 @@ var EXAMPLE_RAPPORT = {
    {
     "label": "Functieverlies (AMA)",
     "waarde": "3%",
-    "toelichting": "Gehele persoon; voorbeeldberekening, te verifiëren door de specialist"
+    "toelichting": "Gehele persoon, AMA Guides 6e druk; niet gelijk aan arbeidsongeschiktheid"
    },
    {
     "label": "Dossier",
@@ -536,7 +536,7 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Voorbeeldberekening: 3% functieverlies van de gehele persoon volgens de AMA Guides, 6e druk. De keuze van de diagnoserij en de grade modifiers is een oordeel van de ondertekenend specialist en wordt door hem geverifieerd.",
+     "tekst": "3% functieverlies van de gehele persoon volgens de AMA Guides, 6e druk. De berekening staat per stap in de rekenbijlage.",
      "context": null
     },
     {
@@ -558,7 +558,7 @@ var EXAMPLE_RAPPORT = {
    "stappen": [
     [
      "Editie en versie",
-     "AMA Guides, 6e druk; eventuele update door de specialist te bevestigen"
+     "AMA Guides to the Evaluation of Permanent Impairment, 6e druk"
     ],
     [
      "Methode",
@@ -578,7 +578,7 @@ var EXAMPLE_RAPPORT = {
     ],
     [
      "Grade modifier functionele historie (tabel 17-6)",
-     "1, op basis van [VRAGENLIJST]"
+     "1: pijnklachten bij normale activiteit"
     ],
     [
      "Grade modifier lichamelijk onderzoek (tabel 17-7)",
