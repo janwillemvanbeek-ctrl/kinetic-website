@@ -15,7 +15,7 @@ var EXAMPLE_RAPPORT = {
   "zaaknummer": "2024-KME-01583",
   "betrokkene": "[PERSOON-1]",
   "geboortedatum": "[GEBOORTEDATUM]",
-  "status": "Concept",
+  "status": "Concept · voorlopig oordeel",
   "specialisme": "Orthopedisch",
   "opdrachtgever": "[OPDRACHTGEVER]",
   "ongevalsdatum": "07-10-2021",
@@ -31,8 +31,8 @@ var EXAMPLE_RAPPORT = {
    },
    {
     "label": "Relatie met het ongeval",
-    "waarde": "Aanwijzingen voor aggravatie",
-    "toelichting": "Van bestaande degeneratie C5–C6; omvang niet vast te stellen"
+    "waarde": "Verenigbaar met aggravatie",
+    "toelichting": "Van bestaande degeneratie C5–C6; bijdrage ongeval niet kwantificeerbaar"
    },
    {
     "label": "Eindsituatie",
@@ -79,6 +79,10 @@ var EXAMPLE_RAPPORT = {
     [
      "Inhoudelijke supervisie",
      "Orthopedisch chirurg, BIG [BIG-NR]"
+    ],
+    [
+     "Kernbevindingen geverifieerd",
+     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op [DATUM]"
     ],
     [
      "Eindverantwoordelijk en ondertekend",
@@ -247,7 +251,7 @@ var EXAMPLE_RAPPORT = {
   },
   {
    "num": "–",
-   "title": "Tegenstrijdigheden en aandachtspunten",
+   "title": "Medische aandachtspunten en onzekerheden",
    "badge": "ai",
    "type": "tegenstrijdigheden",
    "items": [
@@ -356,7 +360,7 @@ var EXAMPLE_RAPPORT = {
    "table": {
     "kolommen": [
      "Gemeten",
-     "Normaalwaarde*",
+     "Algemene referentie*",
      "Methode",
      "Pijn"
     ],
@@ -405,7 +409,7 @@ var EXAMPLE_RAPPORT = {
      ]
     ]
    },
-   "tableNote": "* Algemene normaalwaarde; bron en eventuele correctie in de rekenbijlage. Weergegeven is de beste reproduceerbare waarde van drie metingen."
+   "tableNote": "* Algemene referentiewaarden uitsluitend ter klinische oriëntatie; zij vormen geen zelfstandige AMA-classificatie. Bron: [BRON]. Weergegeven is de beste reproduceerbare waarde van drie metingen."
   },
   {
    "num": "1d",
@@ -430,7 +434,7 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Niet van toepassing; er zijn geen inconsistenties vastgesteld.",
+     "tekst": "Niet van toepassing; er zijn geen inconsistenties vastgesteld die met betrokkene moesten worden besproken.",
      "context": null
     }
    ]
@@ -454,26 +458,26 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Conclusie",
-     "tekst": "Er bestaat een temporeel verband tussen het ongeval en het ontstaan van de nekklachten. De beschikbare gegevens bieden aanwijzingen voor traumatische aggravatie van reeds aanwezige cervicale degeneratieve afwijkingen. De precieze bijdrage van deze afwijkingen en van eventuele neurologische problematiek kan op basis van het huidige dossier niet definitief worden vastgesteld.",
+     "tekst": "Er bestaat een temporeel verband tussen het ongeval en het ontstaan van de nekklachten. De beschikbare gegevens zijn verenigbaar met een traumatische aggravatie van reeds aanwezige cervicale degeneratieve afwijkingen. De relatieve bijdrage van het ongeval, de degeneratieve afwijkingen en eventuele neurologische problematiek is op basis van de beschikbare informatie niet kwantificeerbaar.",
      "context": null
     },
     {
      "label": "Basis",
-     "tekst": "Vóór het ongeval zijn geen nekklachten gedocumenteerd, terwijl de degeneratie op de CT van de ongevalsdag al zichtbaar was. De klachten ontstonden direct na het ongeval en zijn sindsdien consistent beschreven. Het klachtenpatroon en de bevindingen bij onderzoek passen bij het niveau C5–C6.",
+     "tekst": "Vóór het ongeval zijn geen nekklachten gedocumenteerd, terwijl de degeneratie op de CT van de ongevalsdag al zichtbaar was. De klachten ontstonden direct na het ongeval en zijn sindsdien consistent beschreven. Het klachtenpatroon is verenigbaar met cervicale klachten bij de op beeldvorming beschreven afwijkingen op C5–C6; een zelfstandige C6-radiculopathie is hiermee niet aangetoond.",
      "context": "Bron 1, p. 2; bron 3, p. 1–3; bron 6, p. 1."
     },
     {
      "label": "Onzekerheid",
      "tekst": "Welk deel van de huidige klachten door het ongeval komt en welk deel door het natuurlijk beloop van de degeneratie, kan ik niet met redelijke zekerheid vaststellen. Ook of er sprake is van een zelfstandige radiculopathie C6 is niet zeker. Het eindverslag van de fysiotherapie zou het beloop in het eerste jaar kunnen verduidelijken.",
-     "context": "Zie hiaat 1 en tegenstrijdigheid 1."
+     "context": "Zie hiaat 1 en aandachtspunt 1."
     },
     {
      "label": "Buiten mijn vakgebied",
      "tekst": "De ulnarisklachten en de cognitieve klachten beoordeel ik niet; daarvoor adviseer ik een neurologische expertise.",
-     "context": "Zie tegenstrijdigheden 2 en 3."
+     "context": "Zie aandachtspunten 2 en 3."
     }
    ],
-   "quote": "De beschikbare gegevens bieden aanwijzingen voor traumatische aggravatie van reeds aanwezige cervicale degeneratieve afwijkingen. De precieze bijdrage kan op basis van het huidige dossier niet definitief worden vastgesteld."
+   "quote": "De beschikbare gegevens zijn verenigbaar met een traumatische aggravatie van reeds aanwezige degeneratieve afwijkingen. De relatieve bijdrage van het ongeval is niet kwantificeerbaar."
   },
   {
    "num": "1g",
@@ -528,7 +532,7 @@ var EXAMPLE_RAPPORT = {
    "title": "Functieverlies (optioneel)",
    "badge": "arts",
    "type": "arts_template",
-   "prompt": "Percentage functieverlies volgens de AMA Guides 6e druk en de richtlijnen van de NOV. Dit betreft alleen algemene dagelijkse activiteiten, niet het beroep.",
+   "prompt": "Percentage functieverlies volgens de AMA Guides en de richtlijnen van de NOV. Dit betreft alleen algemene dagelijkse activiteiten, niet het beroep.",
    "subfields": [
     {
      "label": "Oordeel",
@@ -536,8 +540,8 @@ var EXAMPLE_RAPPORT = {
      "context": null
     },
     {
-     "label": "Methode",
-     "tekst": "Diagnosegebonden methode (DBI), hoofdstuk 17 (wervelkolom). Een grade modifier die al is gebruikt voor de indeling in een klasse, telt niet mee in de berekening.",
+     "label": "Versie en rekenroute",
+     "tekst": "De ondertekenend specialist vermeldt vóór berekening de exacte editie, publicatieversie en eventuele update, en past daarna de rekenroute toe die bij die versie hoort.",
      "context": null
     },
     {
@@ -548,8 +552,12 @@ var EXAMPLE_RAPPORT = {
    ],
    "stappen": [
     [
-     "AMA-editie en eventuele update",
-     "6e druk; update: door de ondertekenend specialist in te vullen"
+     "Editie, publicatieversie en eventuele update",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Methode en reden (bijvoorbeeld diagnosegebonden)",
+     "Door de ondertekenend specialist in te vullen"
     ],
     [
      "Diagnoserij in de regionale tabel cervicale wervelkolom",
@@ -560,23 +568,15 @@ var EXAMPLE_RAPPORT = {
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Standaardwaarde (default grade C)",
+     "Standaardwaarde (default grade)",
      "[%] · door de ondertekenend specialist in te vullen"
     ],
     [
-     "Grade modifier functionele historie (GMFH), met gebruikte vragenlijst",
+     "Grade modifiers: functionele historie, lichamelijk onderzoek, klinische studies",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Grade modifier lichamelijk onderzoek (GMPE)",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Grade modifier klinische studies (GMCS), of reden van uitsluiting",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Netto-aanpassing: (GMFH − klasse) + (GMPE − klasse) + (GMCS − klasse)",
+     "Berekening volgens de rekenroute van de vastgelegde versie",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
@@ -688,11 +688,11 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Aanwezig bij onderzoek",
-     "value": "Betrokkene en de onderzoekend arts"
+     "value": "Betrokkene en de onderzoekend arts; bij de verificatie betrokkene en de specialist"
     },
     {
-     "label": "Toetsing",
-     "value": "De ondertekenend specialist heeft dossier, onderzoeksbevindingen en conclusies zelfstandig getoetst"
+     "label": "Verificatie en eindverantwoordelijkheid",
+     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op [DATUM], de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
     },
     {
      "label": "Opdrachtgever",
@@ -863,7 +863,7 @@ var EXAMPLE_NVMSR = {
   "zaaknummer": "2025-KME-01317",
   "betrokkene": "[PERSOON-1]",
   "geboortedatum": "[GEBOORTEDATUM]",
-  "status": "Concept",
+  "status": "Concept · voorlopig oordeel",
   "specialisme": "Orthopedisch",
   "onderzoeksdatum": "T+24m",
   "kicker": "Ongevallenverzekering &middot; fictief voorbeeld",
@@ -897,8 +897,8 @@ var EXAMPLE_NVMSR = {
    },
    {
     "label": "Blijvende invaliditeit",
-    "waarde": "Open",
-    "toelichting": "Na eindsituatie, volgens polistabel"
+    "waarde": "Niet vast te stellen",
+    "toelichting": "Eindsituatie nog niet bereikt"
    },
    {
     "label": "Dossier",
@@ -925,6 +925,10 @@ var EXAMPLE_NVMSR = {
     [
      "Inhoudelijke supervisie",
      "Orthopedisch chirurg, BIG [BIG-NR]"
+    ],
+    [
+     "Kernbevindingen geverifieerd",
+     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op [DATUM]"
     ],
     [
      "Eindverantwoordelijk en ondertekend",
@@ -1070,6 +1074,10 @@ var EXAMPLE_NVMSR = {
      "value": "Volgens de polis in mindering te brengen"
     },
     {
+     "label": "Maatstaf",
+     "value": "De specialist past uitsluitend de door de verzekeraar aangewezen medische maatstaf toe. De uitleg en toepassing van de polisvoorwaarden blijft voorbehouden aan de verzekeraar. Bij verschil tussen dit rapport en de polis prevaleert de polis."
+    },
+    {
      "label": "Rol van de deskundige",
      "value": "De deskundige beoordeelt uitsluitend de medische gevolgen en eventuele functionele invaliditeit. De uitleg van polisvoorwaarden en de beslissing over dekking zijn aan de verzekeraar."
     }
@@ -1157,7 +1165,7 @@ var EXAMPLE_NVMSR = {
      "Links (contralaterale vergelijking)",
      "Algemene referentie*",
      "Klinische duiding",
-     "AMA-score"
+     "Score volgens polismaatstaf"
     ],
     "rijen": [
      [
@@ -1210,7 +1218,7 @@ var EXAMPLE_NVMSR = {
      ]
     ]
    },
-   "tableNote": "* Algemene referentie ter indicatie. De score volgt uit de tabel die de polis voorschrijft; zie de rekenbijlage bij vraag 5. De linkerzijde is een contralaterale vergelijking, geen referentie. AMA-score (···): door de specialist in te vullen."
+   "tableNote": "* Algemene referentiewaarden uitsluitend ter klinische oriëntatie; zij vormen geen zelfstandige classificatie. Bron: [BRON]. De linkerzijde is een contralaterale vergelijking, geen referentie. Score (···): na vaststelling van de eindsituatie, volgens de maatstaf van de polis; schrijft de polis de AMA Guides voor, dan met vermelding van de exacte editie en versie."
   },
   {
    "num": "2",
@@ -1221,7 +1229,7 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Conclusie",
-     "tekst": "De bewegingsbeperking en het krachtverlies van de rechter pols zijn medisch het gevolg van het ongeval.",
+     "tekst": "Op basis van het letselmechanisme, het gedocumenteerde beloop en het huidige onderzoek acht ik de bewegingsbeperking en het krachtverlies medisch aannemelijk gerelateerd aan de distale radiusfractuur en de behandeling daarvan.",
      "context": null
     },
     {
@@ -1240,7 +1248,7 @@ var EXAMPLE_NVMSR = {
      "context": null
     }
    ],
-   "quote": "De beperking is medisch goed te verklaren uit de polsbreuk. Voor een andere oorzaak zijn geen aanwijzingen."
+   "quote": "De bewegingsbeperking en het krachtverlies zijn medisch aannemelijk gerelateerd aan de polsbreuk en de behandeling daarvan."
   },
   {
    "num": "3",
@@ -1275,13 +1283,13 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Nee, nog niet. Een definitieve eindsituatie stel ik niet vast zonder de gegevens van de controle na de materiaalverwijdering en een actuele röntgenfoto.",
+     "tekst": "Klinisch lijkt de toestand stationair. Omdat controle na materiaalverwijdering en actuele beeldvorming ontbreken, kan deze vermoedelijke stationaire toestand nog niet als definitieve medische eindsituatie worden vastgesteld.",
      "context": null
     },
     {
      "label": "Basis",
-     "tekst": "Klinisch is de situatie de afgelopen maanden gelijk gebleven en verwacht ik geen relevante verbetering meer.",
-     "context": null
+     "tekst": "De bevindingen bij onderzoek komen overeen met de restbeperking in het eindverslag van de fysiotherapie. De materiaalverwijdering ligt tien maanden terug.",
+     "context": "Bron 6, p. 3; bron 7, p. 1."
     },
     {
      "label": "Onzekerheid",
@@ -1304,59 +1312,14 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Het percentage wordt vastgesteld zodra de eindsituatie vaststaat, door de ondertekenend specialist, met de volledige berekening in de rekenbijlage.",
+     "tekst": "Niet vast te stellen, omdat de medische eindsituatie nog niet is bereikt.",
+     "context": null
+    },
+    {
+     "label": "Vervolg",
+     "tekst": "Na vaststelling van de eindsituatie volgt de berekening volgens de rekenbijlage achter in dit rapport.",
      "context": null
     }
-   ],
-   "stappen": [
-    [
-     "Maatstaf volgens de polis",
-     "[TABEL] volgens [POLISVERSIE]"
-    ],
-    [
-     "Reden voor de bewegingsmethode (ROM) in plaats van de diagnosemethode",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Pols extensie: gemeten 45°, afgerond volgens AMA [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Pols flexie: gemeten 55°, afgerond [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Radiaaldeviatie: gemeten 15°, afgerond [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Ulnairdeviatie: gemeten 25°, afgerond [..]°, tabelscore [..]%",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Subtotaal pols (optellen)",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Pronatie en supinatie: gemeten 80° en 70°, afgerond, tabelscore",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Functionele historie (QuickDASH) en eventuele aanpassing",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Combineren en omzetten via de conversietabel naar de maatstaf van de polis",
-     "Door de ondertekenend specialist in te vullen"
-    ],
-    [
-     "Aftrek voorafbestaande invaliditeit",
-     "Niet van toepassing (vraag 3)"
-    ],
-    [
-     "Uitkomst volgens de polis, getoetst aan het maximum voor de hand",
-     "Door de ondertekenend specialist in te vullen"
-    ]
    ]
   },
   {
@@ -1397,8 +1360,8 @@ var EXAMPLE_NVMSR = {
      "value": "Anamnese en lichamelijk onderzoek door [ARTS], basisarts, onder supervisie van de specialist"
     },
     {
-     "label": "Toetsing",
-     "value": "De ondertekenend specialist heeft dossier, onderzoeksbevindingen en conclusies zelfstandig getoetst"
+     "label": "Verificatie en eindverantwoordelijkheid",
+     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op [DATUM], de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
     },
     {
      "label": "Verzekeraar",
@@ -1467,8 +1430,76 @@ var EXAMPLE_NVMSR = {
    ]
   },
   {
-   "num": "–",
+   "num": "B",
+   "title": "Rekenbijlage blijvende invaliditeit",
+   "badge": "arts",
+   "type": "arts_template",
+   "prompt": "Template. Te gebruiken na vaststelling van de medische eindsituatie.",
+   "subfields": [
+    {
+     "label": "Status",
+     "tekst": "Nog niet ingevuld: de medische eindsituatie is niet bereikt (vraag 4).",
+     "context": null
+    }
+   ],
    "deel": "Bijlage",
+   "stappen": [
+    [
+     "Maatstaf volgens de polis",
+     "[TABEL] volgens [POLISVERSIE]"
+    ],
+    [
+     "Exacte editie, publicatieversie en eventuele update van de maatstaf",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Methode (bewegingsuitslag of diagnose) en reden, als de maatstaf die keuze laat",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Pols extensie: gemeten 45°, afgerond volgens de maatstaf [..]°, tabelscore [..]%",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Pols flexie: gemeten 55°, afgerond [..]°, tabelscore [..]%",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Radiaaldeviatie: gemeten 15°, afgerond [..]°, tabelscore [..]%",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Ulnairdeviatie: gemeten 25°, afgerond [..]°, tabelscore [..]%",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Subtotaal pols (optellen)",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Pronatie en supinatie: gemeten 80° en 70°, afgerond, tabelscore",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Functionele historie (QuickDASH) en eventuele aanpassing",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Combineren en omzetten via de conversietabel naar de maatstaf van de polis",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Aftrek voorafbestaande invaliditeit",
+     "Niet van toepassing (vraag 3)"
+    ],
+    [
+     "Uitkomst volgens de polis, getoetst aan het maximum voor de hand",
+     "Door de ondertekenend specialist in te vullen"
+    ]
+   ]
+  },
+  {
+   "num": "–",
    "title": "Bronnenlijst",
    "badge": "ai",
    "type": "bronnen",
