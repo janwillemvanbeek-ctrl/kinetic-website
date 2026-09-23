@@ -21,8 +21,8 @@ var EXAMPLE_RAPPORT = {
   "ongevalsdatum": "07-10-2021",
   "onderzoeksdatum": "14-03-2024",
   "kicker": "Letselschade &middot; IWMD 2025 &middot; fictief voorbeeld",
-  "titel": "Orthopedische expertise",
-  "subtitel": "Letselschade · vraagstelling volgens IWMD 2025",
+  "titel": "Orthopedische expertise letselschade",
+  "subtitel": "Vraagstelling volgens IWMD 2025",
   "kern": [
    {
     "label": "Diagnose (orthopedisch)",
@@ -794,8 +794,8 @@ var EXAMPLE_NVMSR = {
   "specialisme": "Orthopedisch",
   "onderzoeksdatum": "T+24m",
   "kicker": "Ongevallenverzekering &middot; fictief voorbeeld",
-  "titel": "Orthopedische expertise blijvende invaliditeit",
-  "subtitel": "Ongevallenverzekering · vraagstelling van de verzekeraar",
+  "titel": "Orthopedische expertise ongevallenverzekering",
+  "subtitel": "Vraagstelling van de verzekeraar · blijvende invaliditeit",
   "kern": [
    {
     "label": "Diagnose",
