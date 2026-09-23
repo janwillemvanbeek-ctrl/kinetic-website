@@ -21,7 +21,7 @@ var EXAMPLE_RAPPORT = {
     ongevalsdatum: "07-10-2021",
     onderzoeksdatum: "14-03-2024",
     kicker: "Letselschade &middot; IWMD &middot; fictief voorbeeld",
-    titel: "Medische expertise orthopedie",
+    titel: "Orthopedische expertise",
     subtitel: "Letselschade · vraagstelling volgens IWMD",
     kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 14-03-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "9 van 12 stukken", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
     ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
@@ -192,8 +192,8 @@ var EXAMPLE_NVMSR = {
     status: "Concept",
     specialisme: "Orthopedisch",
     kicker: "Ongevallenverzekering &middot; NVMSR &middot; fictief voorbeeld",
-    titel: "Medisch specialistische rapportage",
-    subtitel: "Vraagstelling van de verzekeraar · rapportage volgens de NVMSR-richtlijn",
+    titel: "Orthopedische expertise blijvende invaliditeit",
+    subtitel: "Ongevallenverzekering · vraagstelling van de verzekeraar",
     onderzoeksdatum: "T+24m",
     kern: [{"label": "Diagnose", "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na distale radiusfractuur", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "4%", "toelichting": "van de gehele persoon (7% bovenste extremiteit)", "groot": true}, {"label": "Medische eindsituatie", "waarde": "Bereikt", "toelichting": "Verdere verbetering niet verwacht"}, {"label": "Consistentie", "waarde": "Consistent", "toelichting": "Anamnese, dossier en onderzoek"}, {"label": "Knijpkracht rechts", "waarde": "70%", "toelichting": "van de niet-aangedane zijde"}, {"label": "Zonder ongeval", "waarde": "Geen klachten", "toelichting": "Geen invaliditeit"}, {"label": "Dossier", "waarde": "7 van 8 stukken", "toelichting": "1 hiaat"}],
     ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
