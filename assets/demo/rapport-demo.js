@@ -191,9 +191,9 @@ var EXAMPLE_NVMSR = {
     geboortedatum: "[GEBOORTEDATUM]",
     status: "Concept",
     specialisme: "Orthopedisch",
-    kicker: "Medische expertise &middot; fictief voorbeeld",
+    kicker: "Ongevallenverzekering &middot; NVMSR &middot; fictief voorbeeld",
     titel: "Medisch specialistische rapportage",
-    subtitel: "Volgens de richtlijn Medisch Specialistische Rapportage (NVMSR) · Orthopedisch",
+    subtitel: "Vraagstelling van de verzekeraar · rapportage volgens de NVMSR-richtlijn",
     onderzoeksdatum: "T+24m",
     kern: [{"label": "Diagnose", "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na distale radiusfractuur", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "4%", "toelichting": "van de gehele persoon (7% bovenste extremiteit)", "groot": true}, {"label": "Medische eindsituatie", "waarde": "Bereikt", "toelichting": "Verdere verbetering niet verwacht"}, {"label": "Consistentie", "waarde": "Consistent", "toelichting": "Anamnese, dossier en onderzoek"}, {"label": "Knijpkracht rechts", "waarde": "70%", "toelichting": "van de niet-aangedane zijde"}, {"label": "Zonder ongeval", "waarde": "Geen klachten", "toelichting": "Geen invaliditeit"}, {"label": "Dossier", "waarde": "7 van 8 stukken", "toelichting": "1 hiaat"}],
     ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
@@ -213,7 +213,7 @@ var EXAMPLE_NVMSR = {
         {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
         {label:"Geboortedatum", value:"[GEBOORTEDATUM]", redacted:true},
         {label:"Beroep", value:"Monteur installatietechniek"},
-        {label:"Kader", value:"Civiele aansprakelijkheid, beoordeling van de ongevalsgevolgen"},
+        {label:"Kader", value:"Ongevallenverzekering, vaststelling van blijvende invaliditeit"},
         {label:"Ongeval", value:"T±0: val van een trap tijdens werkzaamheden"},
         {label:"Datum onderzoek", value:"T+24m"}
       ]
@@ -221,7 +221,7 @@ var EXAMPLE_NVMSR = {
     {
       num:"0", title:"Opzet van de rapportage", badge:"ai", type:"text",
       paragraphs: [
-        "De rapportage volgt de richtlijn Medisch Specialistische Rapportage. Deel 1 beschrijft de gezondheidstoestand en het functioneren in de situatie met ongeval, deel 2 de hypothetische situatie zonder ongeval en deel 3 overige vragen van de opdrachtgever."
+        "Geen letselschadezaak: de verzekeraar vraagt om vaststelling van de blijvende invaliditeit onder de ongevallenverzekering. De vraagstelling komt van de verzekeraar; de rapportage volgt de richtlijn Medisch Specialistische Rapportage (NVMSR). Deel 1 beschrijft de situatie met ongeval, deel 2 de situatie zonder ongeval (voorafbestaande afwijkingen) en deel 3 overige vragen van de verzekeraar."
       ]
     },
     {
