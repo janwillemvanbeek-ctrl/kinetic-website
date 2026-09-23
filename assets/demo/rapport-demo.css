@@ -206,3 +206,167 @@
 .opbouw-list .rp-badge{margin-left:.5rem}
 @media(max-width:900px){.opbouw-grid{grid-template-columns:1fr}}
 .rp-arts-tekst{color:var(--warm-ink);font-size:.875rem;line-height:1.65;margin:.35rem 0 0;padding-right:2.5rem}
+
+/* ==========================================================================
+   Kinetic rapport (kr) — het rapport als product. Calm Authority:
+   ink, papier, hairlines, één teal accent.
+   ========================================================================== */
+.kr{--kr-ink:#1A1916;--kr-ink2:#4F4A42;--kr-stone:#8B8579;--kr-line:#E7E1D4;--kr-paper:#FFFFFF;--kr-fog:#F7F3EA;--kr-teal:var(--warm-teal,#0E5E57);--kr-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--kr-paper);border:1px solid var(--kr-line);border-radius:14px;overflow:hidden;box-shadow:0 40px 80px -60px rgba(26,25,22,.55),0 2px 6px rgba(26,25,22,.04);color:var(--kr-ink)}
+.kr i{font-style:normal}
+.kr-eyebrow{font:600 .6875rem/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--kr-teal)}
+
+/* Omslag */
+.kr-cover{background:#141414;color:#FAF9F7;padding:2.25rem clamp(1.5rem,5vw,4rem) 2.5rem;background-image:radial-gradient(60% 90% at 88% 0%,rgba(47,111,106,.28),transparent 60%)}
+.kr-cover-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3.25rem}
+.kr-mark{font:600 1.25rem/1 Inter,sans-serif;letter-spacing:-.015em}.kr-mark i{color:#5FB3A6}
+.kr-cover-conf{font:500 .6875rem/1 var(--kr-mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(250,249,247,.55)}
+.kr-cover-kicker{font:500 .75rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:#8FCFC4;margin-bottom:.9rem}
+.kr-cover-title{font:600 clamp(1.75rem,3.4vw,2.6rem)/1.08 Inter,sans-serif;letter-spacing:-.02em;margin:0;max-width:24ch;color:#FAF9F7}
+.kr-cover-sub{margin:.9rem 0 0;color:rgba(250,249,247,.68);font-size:.95rem}
+.kr-cover-meta{display:grid;grid-template-columns:repeat(4,1fr);margin:2.5rem 0 0;border-top:1px solid rgba(250,249,247,.15)}
+.kr-cover-meta div{padding:1rem 1rem 0 0}
+.kr-cover-meta dt{font:500 .625rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(250,249,247,.5);margin-bottom:.45rem}
+.kr-cover-meta dd{margin:0;font-weight:600;font-size:.95rem}
+
+/* Redactie */
+.kr-redact{display:inline-block;background:#141414;color:#EDE9E0;font:500 .72em/1.5 var(--kr-mono);letter-spacing:.04em;padding:0 .45em;border-radius:3px;vertical-align:.08em}
+.kr-cover .kr-redact{background:rgba(250,249,247,.14);color:#FAF9F7}
+
+/* Kernbevindingen */
+.kr-kern{padding:2rem clamp(1.5rem,5vw,4rem) 2.25rem;background:var(--kr-fog);border-bottom:1px solid var(--kr-line)}
+.kr-kern-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.kr-kern-note{font-size:.8125rem;color:var(--kr-stone)}
+.kr-kern-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--kr-line);border:1px solid var(--kr-line);border-radius:10px;overflow:hidden}
+.kr-kern-item{background:var(--kr-paper);padding:1.1rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.4rem;min-height:112px}
+.kr-kern-wide{grid-column:span 2}
+.kr-kern-label{font:500 .625rem/1.2 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-stone)}
+.kr-kern-value{font-weight:600;font-size:.98rem;line-height:1.35;letter-spacing:-.005em}
+.kr-kern-big .kr-kern-value{font-size:2.4rem;line-height:1;color:var(--kr-teal);letter-spacing:-.03em}
+.kr-kern-sub{font-size:.78rem;color:var(--kr-stone);line-height:1.45}
+
+/* Layout */
+.kr-layout{display:grid;grid-template-columns:230px minmax(0,1fr)}
+.kr-toc{border-right:1px solid var(--kr-line);padding:2.25rem 1.25rem 2rem 1.75rem;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto}
+.kr-toc ol{list-style:none;margin:1rem 0 0;padding:0}
+.kr-toc li a{display:grid;grid-template-columns:1.9rem 1fr;gap:.25rem;padding:.32rem 0;font-size:.8rem;color:var(--kr-ink2);text-decoration:none;line-height:1.35}
+.kr-toc li a:hover{color:var(--kr-teal)}
+.kr-toc li a span{font:500 .7rem/1.6 var(--kr-mono);color:var(--kr-stone)}
+.kr-toc-part{font:600 .625rem/1.4 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--kr-stone);margin:1.1rem 0 .35rem}
+.kr-legend{display:flex;flex-direction:column;gap:.45rem;margin-top:1.75rem;padding-top:1.1rem;border-top:1px solid var(--kr-line);font-size:.75rem;color:var(--kr-ink2)}
+.kr-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.5rem;vertical-align:.05em}
+.kr-dot-do{border:1.5px solid var(--kr-teal)}.kr-dot-arts{background:var(--kr-teal)}
+.kr-doc{padding:2.25rem clamp(1.5rem,4.5vw,4rem) 0;min-width:0}
+
+/* Dossier compleetheid */
+.kr-compl{padding-bottom:1.75rem;border-bottom:1px solid var(--kr-line)}
+.kr-compl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.7rem}
+.kr-compl-score{font-size:.8125rem;color:var(--kr-ink2)}
+.kr-compl-bar{height:3px;background:var(--kr-line);border-radius:3px;overflow:hidden}
+.kr-compl-bar span{display:block;height:100%;background:var(--kr-teal)}
+.kr-compl-list{list-style:none;padding:0;margin:.9rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem}
+.kr-compl-list li{font-size:.75rem;padding:.25rem .6rem;border:1px solid var(--kr-line);border-radius:100px;color:var(--kr-ink2)}
+.kr-compl-list li.kr-miss{border-style:dashed;color:#9A3B34;border-color:rgba(154,59,52,.35)}
+.kr-compl-list li em{font-style:normal;opacity:.75}
+
+/* Delen en secties */
+.kr-part{margin:2.75rem 0 0;padding:.75rem 0;border-top:2px solid var(--kr-ink)}
+.kr-part span{font:600 .75rem/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.kr-sec{padding:1.9rem 0 2rem;border-bottom:1px solid var(--kr-line);scroll-margin-top:96px}
+.kr-sec-head{display:grid;grid-template-columns:2.6rem 1fr auto;align-items:baseline;gap:.5rem;margin-bottom:1rem}
+.kr-sec-num{font:500 .8rem/1 var(--kr-mono);color:var(--kr-teal)}
+.kr-sec-head h3{margin:0;font:600 1.2rem/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.kr-sec-by{display:inline-flex;align-items:center;gap:.4rem;font:500 .625rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-stone)}
+.kr-sec-by::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid var(--kr-teal)}
+.kr-sec-arts .kr-sec-by{color:var(--kr-teal)}
+.kr-sec-arts .kr-sec-by::before{background:var(--kr-teal)}
+.kr-sec>*:not(.kr-sec-head){margin-left:3.1rem}
+.kr-intro{font-size:.85rem;color:var(--kr-stone);margin:0 0 1rem;line-height:1.55}
+.kr-p{font-size:.95rem;line-height:1.7;color:var(--kr-ink);margin:0 0 .75rem;max-width:66ch}
+.kr-empty{font-size:.85rem;color:var(--kr-stone);font-style:italic;margin:0}
+
+/* Velden */
+.kr-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem;margin:0}
+.kr-fields div{display:grid;grid-template-columns:9.5rem 1fr;gap:.75rem;padding:.6rem 0;border-top:1px solid var(--kr-line)}
+.kr-fields dt{font-size:.78rem;color:var(--kr-stone)}
+.kr-fields dd{margin:0;font-size:.875rem;font-weight:500}
+
+/* Vragen */
+.kr-questions,.kr-answers{list-style:none;padding:0;margin:0;counter-reset:q}
+.kr-questions li{display:grid;grid-template-columns:1.8rem 1fr;gap:.5rem;padding:.55rem 0;border-top:1px solid var(--kr-line)}
+.kr-questions span,.kr-answers-num{font:500 .75rem/1.7 var(--kr-mono);color:var(--kr-teal)}
+.kr-questions p{margin:0;font-size:.85rem;line-height:1.6;color:var(--kr-ink2)}
+.kr-answers li{display:grid;grid-template-columns:1.8rem 1fr;gap:.5rem;padding:1rem 0;border-top:1px solid var(--kr-line)}
+.kr-answers-q{margin:0 0 .35rem;font-size:.8rem;color:var(--kr-stone);font-weight:500}
+
+/* Tijdlijn */
+.kr-timeline{list-style:none;margin:0 0 1rem;padding:0;position:relative}
+.kr-timeline::before{content:"";position:absolute;left:5.9rem;top:.4rem;bottom:.4rem;width:1px;background:var(--kr-line)}
+.kr-timeline li{display:grid;grid-template-columns:5.2rem 1fr;gap:1.4rem;padding:.45rem 0;position:relative}
+.kr-timeline li::after{content:"";position:absolute;left:5.66rem;top:.9rem;width:9px;height:9px;border-radius:50%;background:var(--kr-paper);border:1.5px solid var(--kr-teal)}
+.kr-timeline time{font:500 .75rem/1.9 var(--kr-mono);color:var(--kr-teal);text-align:right}
+.kr-timeline p{margin:0;font-size:.9rem;line-height:1.6}
+
+/* Bronverwijzing */
+.kr-cite{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-top:.5rem}
+.kr-cite-label{font:500 .625rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-teal);margin-right:.2rem}
+.kr-cite-item{font-size:.72rem;color:var(--kr-ink2);padding:.2rem .55rem;border:1px solid rgba(14,94,87,.22);border-radius:4px;background:rgba(14,94,87,.03)}
+
+/* Hiaten en tegenstrijdigheden */
+.kr-gap,.kr-contra{padding:1rem 1.15rem;border:1px solid var(--kr-line);border-left:3px solid var(--kr-ink);border-radius:0 8px 8px 0;margin-bottom:.75rem;background:#FCFBF8}
+.kr-gap-head{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;margin-bottom:.4rem}
+.kr-gap-head strong{font-size:.92rem}
+.kr-gap-prio{font:500 .625rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.kr-prio-kritiek{color:#9A3B34}.kr-prio-belangrijk{color:#8A5A1F}.kr-prio-aandacht{color:var(--kr-stone)}
+.kr-gap p,.kr-contra p{margin:0;font-size:.85rem;line-height:1.6;color:var(--kr-ink2)}
+.kr-gap-meta{margin-top:.5rem!important;font-size:.8rem!important}
+.kr-gap-meta span{font:500 .625rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-stone);margin-right:.25rem}
+.kr-contra ul{margin:.35rem 0 .5rem;padding:0;list-style:none}
+.kr-contra li{font-size:.82rem;line-height:1.55;color:var(--kr-ink2);padding:.25rem 0 .25rem .8rem;border-left:1px solid var(--kr-line);margin-bottom:.2rem}
+
+/* Bevindingen arts */
+.kr-finding{padding:.9rem 0;border-top:1px solid var(--kr-line)}
+.kr-finding:first-of-type{border-top:0;padding-top:0}
+.kr-finding h4{margin:0 0 .4rem;font:600 .8rem/1.3 Inter,sans-serif;letter-spacing:.01em;color:var(--kr-ink)}
+.kr-note{margin:.2rem 0 0;font-size:.78rem;line-height:1.55;color:var(--kr-ink2);padding:.1rem 0 .1rem .75rem;border-left:2px solid var(--kr-teal);max-width:66ch}
+.kr-note span{display:block;font:500 .6rem/1.4 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-teal);margin-bottom:.1rem}
+
+/* Tabellen */
+.kr-table-wrap{overflow-x:auto;margin-top:1rem}
+.kr-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.kr-table thead th{font:500 .625rem/1.3 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-stone);text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--kr-ink)}
+.kr-table tbody th{font-weight:500;text-align:left;color:var(--kr-ink)}
+.kr-table td,.kr-table tbody th{padding:.6rem .75rem;border-bottom:1px solid var(--kr-line);vertical-align:top}
+.kr-table td{font-variant-numeric:tabular-nums;color:var(--kr-ink2)}
+.kr-table .kr-affected{background:rgba(14,94,87,.045);color:var(--kr-ink);font-weight:600}
+.kr-table thead .kr-affected{color:var(--kr-teal)}
+.kr-bronnen td:first-child{font-family:var(--kr-mono);color:var(--kr-teal)}
+
+/* Ondertekening en voet */
+.kr-sign{padding:2rem 0 2.25rem;scroll-margin-top:96px}
+.kr-sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-left:3.1rem}
+.kr-sign-role{display:block;font:500 .625rem/1 var(--kr-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--kr-stone)}
+.kr-sign-line{display:block;height:44px;border-bottom:1px solid var(--kr-ink);margin:.5rem 0 .5rem}
+.kr-sign-name{font-size:.85rem;font-weight:500}
+.kr-sign-status{margin:1.25rem 0 0 3.1rem;font-size:.8rem;color:var(--kr-stone)}
+.kr-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.1rem 0 1.4rem;border-top:1px solid var(--kr-line);font:500 .6875rem/1.4 var(--kr-mono);letter-spacing:.04em;color:var(--kr-stone)}
+.kr-foot i{color:var(--kr-teal)}
+
+@media(max-width:1000px){
+  .kr-layout{grid-template-columns:1fr}
+  .kr-toc{display:none}
+  .kr-kern-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .kr-cover-meta{grid-template-columns:1fr 1fr}
+  .kr-kern-grid{grid-template-columns:1fr}
+  .kr-kern-wide{grid-column:auto}
+  .kr-sec>*:not(.kr-sec-head),.kr-sign-grid,.kr-sign-status{margin-left:0}
+  .kr-sec-head{grid-template-columns:2.2rem 1fr}
+  .kr-sec-by{grid-column:2}
+  .kr-fields{grid-template-columns:1fr}
+  .kr-fields div{grid-template-columns:8rem 1fr}
+  .kr-sign-grid{grid-template-columns:1fr;gap:1.5rem}
+  .kr-timeline::before{left:4.3rem}.kr-timeline li{grid-template-columns:3.7rem 1fr}.kr-timeline li::after{left:4.06rem}
+}
+@media print{.kr-toc{display:none}.kr-layout{grid-template-columns:1fr}.kr{box-shadow:none}}

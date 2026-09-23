@@ -19,7 +19,12 @@ var EXAMPLE_RAPPORT = {
     specialisme: "Orthopedisch",
     opdrachtgever: "[OPDRACHTGEVER]",
     ongevalsdatum: "29-01-2022",
-    onderzoeksdatum: "23-04-2024"
+    onderzoeksdatum: "23-04-2024",
+    kicker: "Letselschade &middot; IWMD &middot; fictief voorbeeld",
+    titel: "Medische expertise orthopedie",
+    subtitel: "Letselschade · vraagstelling volgens IWMD",
+    kern: [{"label": "Diagnose", "waarde": "Chronische nekklachten met uitstraling naar de linker arm na WAD graad II", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "5%", "toelichting": "van de gehele persoon", "groot": true}, {"label": "Causaal verband", "waarde": "Aanwezig", "toelichting": "Klachten direct na het ongeval, blanco voorgeschiedenis"}, {"label": "Eindtoestand", "waarde": "Bereikt", "toelichting": "Per 23-04-2024"}, {"label": "Pre-existent", "waarde": "Degeneratie C5–C6", "toelichting": "Zonder klachten voor het ongeval"}, {"label": "Dossier", "waarde": "78% compleet", "toelichting": "3 hiaten, 3 aandachtspunten"}, {"label": "Buiten vakgebied", "waarde": "Neurologie", "toelichting": "Ulnarisneuropathie en cognitieve klachten"}],
+    ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
   },
   compleetheid: {
     score: 78,
@@ -32,7 +37,7 @@ var EXAMPLE_RAPPORT = {
   },
   sections: [
     {
-      num:"1", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
+      num:"1", deel:"Dossier", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
       fields: [
         {label:"Opdrachtgever", value:"[OPDRACHTGEVER]", redacted:true},
         {label:"Dossierbehandelaar", value:"[PERSOON-8]", redacted:true},
@@ -109,7 +114,7 @@ var EXAMPLE_RAPPORT = {
       ]
     },
     {
-      num:"6", title:"Huidige klachten (anamnese)", badge:"arts", type:"text",
+      num:"6", deel:"Onderzoek en oordeel", title:"Huidige klachten (anamnese)", badge:"arts", type:"text",
       paragraphs: [
         "Betrokkene rapporteert bij onderzoek d.d. 23-04-2024:",
         "Nek: VAS 5\u20136/10, uitstraling linker schouder/arm. Verergering bij beeldschermwerk en autorijden.\nHoofdpijn: 3\u20134x/week, fronto-temporaal, 4\u20138 uur.\nCognitief: verminderde concentratie, multitasking bemoeilijkt.\nSlaap: moeite met inslapen, 1\u20132x/nacht wakker.\nArbeid: 40% arbeidsongeschikt, werkt 3 dagen/week bij [ORGANISATIE-4]."
@@ -155,7 +160,7 @@ var EXAMPLE_RAPPORT = {
       ]
     },
     {
-      num:"10", title:"Bronnenlijst", badge:"ai", type:"bronnen",
+      num:"10", deel:"Bijlage", title:"Bronnenlijst", badge:"ai", type:"bronnen",
       bronnen: [
         {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-2]", datum:"29-01-2022", paginas:"1\u20132"},
         {nr:"2", doc:"Huisartsbrief", bron:"[ORGANISATIE-1]", datum:"14-02-2022", paginas:"1"},
@@ -183,13 +188,11 @@ var EXAMPLE_NVMSR = {
     status: "Concept",
     specialisme: "Orthopedisch",
     kicker: "Medische expertise &middot; fictief voorbeeld",
-    titel: "Opbouw van een medisch specialistische rapportage",
+    titel: "Medisch specialistische rapportage",
     subtitel: "Volgens de richtlijn Medisch Specialistische Rapportage (NVMSR) · Orthopedisch",
-    nav: [
-      {label:"Dossier", target:"Gegevens opdrachtgever en betrokkene"},
-      {label:"Tijdlijn", target:"Samenvatting medische informatie"},
-      {label:"Oordeel", target:"Diagnose"}
-    ]
+    onderzoeksdatum: "T+24m",
+    kern: [{"label": "Diagnose", "waarde": "Pijnlijke bewegingsbeperking van de rechter pols na distale radiusfractuur", "breed": true}, {"label": "Blijvende invaliditeit", "waarde": "4%", "toelichting": "van de gehele persoon (7% bovenste extremiteit)", "groot": true}, {"label": "Medische eindsituatie", "waarde": "Bereikt", "toelichting": "Verdere verbetering niet verwacht"}, {"label": "Consistentie", "waarde": "Consistent", "toelichting": "Anamnese, dossier en onderzoek"}, {"label": "Knijpkracht rechts", "waarde": "70%", "toelichting": "van de niet-aangedane zijde"}, {"label": "Zonder ongeval", "waarde": "Geen klachten", "toelichting": "Geen invaliditeit"}, {"label": "Dossier", "waarde": "88% compleet", "toelichting": "1 hiaat"}],
+    ondertekening: {"arts": "[ARTS]", "specialist": "Orthopedisch chirurg, BIG-geregistreerd", "status": "Concept. Na controle door de specialist en inzage door betrokkene wordt het rapport definitief."}
   },
   compleetheid: {
     score: 88,
@@ -200,7 +203,7 @@ var EXAMPLE_NVMSR = {
   },
   sections: [
     {
-      num:"0", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
+      num:"0", deel:"Dossier", title:"Gegevens opdrachtgever en betrokkene", badge:"ai", type:"fields",
       fields: [
         {label:"Opdrachtgever", value:"[OPDRACHTGEVER]", redacted:true},
         {label:"Betrokkene", value:"[PERSOON-1]", redacted:true},
@@ -238,7 +241,7 @@ var EXAMPLE_NVMSR = {
       ]
     },
     {
-      num:"1a", title:"Anamnese", badge:"arts", type:"arts_template",
+      num:"1a", deel:"Deel 1 · Situatie met ongeval", title:"Anamnese", badge:"arts", type:"arts_template",
       prompt:"Het gesprek met betrokkene.",
       subfields: [
         {label:"Toedracht en beloop", tekst:"Op T±0 viel betrokkene tijdens werkzaamheden van een trap en ving zich op met de rechterhand. Op de SEH bleek de pols gebroken; twee dagen later volgde een operatie met een plaat. Na zes weken gips startte fysiotherapie, die tot een half jaar na het ongeval duurde. Na veertien maanden is de plaat verwijderd.", context:"Zie samenvatting medische informatie: fractuur, operatie T+2d, fysiotherapie tot T+6m, materiaalverwijdering T+14m."},
@@ -295,7 +298,7 @@ var EXAMPLE_NVMSR = {
       subfields: [{label:"Keuze van betrokkene", tekst:"Betrokkene wil het concept inzien. Op het blokkeringsrecht gewezen; hij maakt daar geen gebruik van.", context:null}]
     },
     {
-      num:"2", title:"Situatie zonder ongeval", badge:"arts", type:"arts_template",
+      num:"2", deel:"Deel 2 · Situatie zonder ongeval", title:"Situatie zonder ongeval", badge:"arts", type:"arts_template",
       prompt:"Klachten, afwijkingen en beperkingen in de hypothetische situatie zonder ongeval.",
       subfields: [
         {label:"Klachten en beperkingen voor het ongeval", tekst:"Geen klachten aan de rechter pols of hand.", context:"Huisartsjournaal: geen klachten bovenste extremiteiten."},
@@ -304,12 +307,12 @@ var EXAMPLE_NVMSR = {
       ]
     },
     {
-      num:"3", title:"Overige vragen", badge:"arts", type:"arts_template",
+      num:"3", deel:"Deel 3 · Overig", title:"Overige vragen", badge:"arts", type:"arts_template",
       prompt:"Aanvullende vragen van de opdrachtgever.",
       subfields: [{label:"Overig", tekst:"Geen aanvullende vragen.", context:null}]
     },
     {
-      num:"–", title:"Bronnenlijst", badge:"ai", type:"bronnen",
+      num:"–", deel:"Bijlage", title:"Bronnenlijst", badge:"ai", type:"bronnen",
       bronnen: [
         {nr:"1", doc:"SEH-verslag", bron:"[ORGANISATIE-1]", datum:"T±0", paginas:"1"},
         {nr:"2", doc:"Operatieverslag", bron:"[ORGANISATIE-1]", datum:"T+2d", paginas:"1"},
@@ -328,239 +331,187 @@ function prioLabel(p){return p==="kritiek"?"Kritiek":p==="belangrijk"?"Belangrij
 function sevColor(s){return s==="kritiek"?"#D94F4F":s==="belangrijk"?"#C77B2E":"var(--warm-teal)";}
 function sevLabel(s){return s==="kritiek"?"Kritiek":s==="belangrijk"?"Belangrijk":"Aandacht";}
 
+function redact(t){
+  return esc(t).replace(/\[([A-Z]+(?:-[0-9]+)?)\]/g,'<span class="kr-redact" title="Gepseudonimiseerd">$1</span>');
+}
+function slug(t,i){return "kr-s"+i+"-"+String(t).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+function secNum(n){return (n&&n!=="0"&&n!=="–")?n:"";}
+
 function renderRapport(data,target){
 var o=target||document.getElementById("output");
+var m=data.meta||{};
 var h='';
-var nav=(data.meta&&data.meta.nav)||[{label:"Dossier",target:"Gegevens opdrachtgever en betrokkene"},{label:"Tijdlijn",target:"Samenvatting medische informatie"},{label:"Oordeel",target:"Diagnose en beschouwing"}];
-h+='<nav class="rp-document-nav" aria-label="Rapportonderdelen">';
-nav.forEach(function(n,i){h+='<button type="button" class="rp-document-nav-item'+(i===0?' is-active':'')+'" aria-pressed="'+(i===0)+'" data-report-target="'+esc(n.target)+'"><span>'+String(i+1).padStart(2,"0")+'</span>'+esc(n.label)+'</button>';});
+
+/* ---------- Omslag ---------- */
+h+='<article class="kr">';
+h+='<header class="kr-cover">';
+h+='<div class="kr-cover-top"><span class="kr-mark">Kinetic<i>.</i></span><span class="kr-cover-conf">Vertrouwelijk &middot; '+esc(m.status||"Concept")+'</span></div>';
+h+='<div class="kr-cover-kicker">'+(m.kicker||"Letselschade &middot; IWMD")+'</div>';
+h+='<h2 class="kr-cover-title">'+esc(m.titel||"Medische expertise")+'</h2>';
+h+='<p class="kr-cover-sub">'+esc(m.subtitel||("Vraagstelling volgens IWMD · "+(m.specialisme||"")))+'</p>';
+h+='<dl class="kr-cover-meta">';
+h+='<div><dt>Zaaknummer</dt><dd>'+esc(m.zaaknummer||"")+'</dd></div>';
+h+='<div><dt>Betrokkene</dt><dd>'+redact(m.betrokkene||"")+'</dd></div>';
+h+='<div><dt>Specialisme</dt><dd>'+esc(m.specialisme||"")+'</dd></div>';
+h+='<div><dt>Onderzoek</dt><dd>'+esc(m.onderzoeksdatum||"")+'</dd></div>';
+h+='</dl>';
+h+='</header>';
+
+/* ---------- Kernbevindingen ---------- */
+if(m.kern&&m.kern.length){
+h+='<section class="kr-kern" aria-label="Kernbevindingen">';
+h+='<div class="kr-kern-head"><span class="kr-eyebrow">Kernbevindingen</span><span class="kr-kern-note">De conclusies van de arts, vooraf samengevat</span></div>';
+h+='<div class="kr-kern-grid">';
+m.kern.forEach(function(k){
+  h+='<div class="kr-kern-item'+(k.groot?' kr-kern-big':'')+(k.breed?' kr-kern-wide':'')+'"><span class="kr-kern-label">'+esc(k.label)+'</span><span class="kr-kern-value">'+esc(k.waarde)+'</span>'+(k.toelichting?'<span class="kr-kern-sub">'+esc(k.toelichting)+'</span>':'')+'</div>';
+});
+h+='</div></section>';
+}
+
+/* ---------- Inhoud + document ---------- */
+var parts=[];data.sections.forEach(function(s,i){if(s.deel)parts.push({titel:s.deel,id:slug(s.deel,i)});});
+h+='<div class="kr-layout">';
+h+='<nav class="kr-toc" aria-label="Inhoud"><span class="kr-eyebrow">Inhoud</span><ol>';
+data.sections.forEach(function(s,i){
+  if(s.deel)h+='<li class="kr-toc-part">'+esc(s.deel)+'</li>';
+  h+='<li><a href="#'+slug(s.title,i)+'"><span>'+esc(secNum(s.num))+'</span>'+esc(s.title)+'</a></li>';
+});
+h+='<li class="kr-toc-part">Afsluiting</li><li><a href="#kr-ondertekening"><span></span>Ondertekening</a></li>';
+h+='</ol>';
+h+='<div class="kr-legend"><span><i class="kr-dot kr-dot-do"></i>Dossierordening</span><span><i class="kr-dot kr-dot-arts"></i>Arts</span></div>';
 h+='</nav>';
-h+='<div class="rapport">';
 
-// Header
-h+='<div class="rapport-header">';
-h+='<div class="rapport-meta"><span class="rapport-meta-label">Zaaknummer</span><span class="rapport-meta-value">'+esc(data.meta.zaaknummer)+'</span></div>';
-h+='<div class="rapport-meta"><span class="rapport-meta-label">Betrokkene</span><span class="rapport-meta-value rapport-meta-redacted">'+esc(data.meta.betrokkene)+'</span></div>';
-h+='<div class="rapport-meta"><span class="rapport-meta-label">Specialisme</span><span class="rapport-meta-value">'+esc(data.meta.specialisme)+'</span></div>';
-h+='<div class="rapport-meta"><span class="rapport-meta-label">Status</span><span class="rapport-status">'+esc(data.meta.status)+'</span></div>';
-h+='</div>';
+h+='<div class="kr-doc">';
 
-// Completeness bar
+/* Dossiercompleetheid, compact */
 if(data.compleetheid){
-var sc=data.compleetheid.score;
-var col=sc>=90?'var(--warm-teal)':sc>=70?'#C77B2E':'#D94F4F';
-h+='<div class="rp-completeness">';
-h+='<div class="rp-compl-header"><span class="rp-compl-title">Dossiercompleetheid</span><span class="rp-compl-score" style="--score:'+sc+';color:'+col+'"><span>'+sc+'%</span></span></div>';
-h+='<div class="rp-compl-bar"><div class="rp-compl-fill" style="width:'+sc+'%;background:'+col+'"></div></div>';
-h+='<div class="rp-compl-detail">';
-h+='<div class="rp-compl-col"><span class="rp-compl-label">Aanwezig ('+data.compleetheid.aanwezig.length+')</span>';
-data.compleetheid.aanwezig.forEach(function(d){var t=typeof d==="string"?d:d.doc;h+='<span class="rp-compl-item rp-compl-ok">'+esc(t)+'</span>';});
-h+='</div>';
-h+='<div class="rp-compl-col"><span class="rp-compl-label">Ontbrekend ('+data.compleetheid.ontbrekend.length+')</span>';
-data.compleetheid.ontbrekend.forEach(function(d){
-var t=typeof d==="string"?d:d.doc;
-var p=(typeof d==="object"&&d.prio)?d.prio:"aandacht";
-h+='<span class="rp-compl-item rp-compl-miss"><span class="rp-prio-dot" style="background:'+prioColor(p)+'"></span>'+esc(t)+'</span>';
-});
-h+='</div>';
-h+='</div></div>';
+var c=data.compleetheid, tot=c.aanwezig.length+c.ontbrekend.length;
+h+='<div class="kr-compl"><div class="kr-compl-head"><span class="kr-eyebrow">Aangeleverde stukken</span><span class="kr-compl-score">'+c.aanwezig.length+' van '+tot+' stukken aanwezig</span></div>';
+h+='<div class="kr-compl-bar"><span style="width:'+c.score+'%"></span></div>';
+h+='<ul class="kr-compl-list">';
+c.aanwezig.forEach(function(d){h+='<li>'+esc(typeof d==="string"?d:d.doc)+'</li>';});
+c.ontbrekend.forEach(function(d){h+='<li class="kr-miss">'+esc(typeof d==="string"?d:d.doc)+' <em>ontbreekt</em></li>';});
+h+='</ul></div>';
 }
 
-h+='<div class="rapport-body">';
-h+='<div class="rapport-kicker">'+((data.meta&&data.meta.kicker)||'Letselschade &middot; IWMD &middot; voorbeeld')+'</div>';
-h+='<div class="rapport-title">'+esc((data.meta&&data.meta.titel)||"Opbouw van een expertiserapport")+'</div>';
-h+='<div class="rapport-subtitle">'+esc((data.meta&&data.meta.subtitel)||("Vraagstelling volgens IWMD · "+(data.meta.specialisme||"")))+'</div>';
+data.sections.forEach(function(s,i){
+if(s.deel)h+='<div class="kr-part"><span>'+esc(s.deel)+'</span></div>';
+var arts=s.badge==="arts";
+h+='<section class="kr-sec'+(arts?' kr-sec-arts':'')+'" id="'+slug(s.title,i)+'">';
+h+='<div class="kr-sec-head"><span class="kr-sec-num">'+esc(secNum(s.num))+'</span><h3>'+esc(s.title)+'</h3><span class="kr-sec-by">'+(arts?'Arts':'Dossierordening')+'</span></div>';
 
-// Sections
-data.sections.forEach(function(s){
-h+='<div class="rp-section">';
-if(s.num&&s.num!=="0"&&s.num!=="\u2013")h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
-h+='<h3 class="rp-section-title">'+esc(s.title);
-if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">Dossierordening</span>';
-else h+='<span class="rp-badge rp-badge-arts">Arts</span>';
-h+='</h3>';
-
-// Fields
 if(s.type==="fields"){
-s.fields.forEach(function(f){
-h+='<div class="rp-field"><span class="rp-field-label">'+esc(f.label)+'</span><span class="rp-field-value'+(f.redacted?' rp-field-redacted':'')+'">'+esc(f.value)+'</span></div>';
-});
+h+='<dl class="kr-fields">';
+s.fields.forEach(function(f){h+='<div><dt>'+esc(f.label)+'</dt><dd>'+redact(f.value)+'</dd></div>';});
+h+='</dl>';
 }
 
-// IWMD questions (section 2)
 if(s.type==="iwmd"){
-h+='<p class="rp-text">'+esc(s.intro)+'</p>';
-s.questions.forEach(function(q,i){
-h+='<div class="rp-question"><span class="rp-q-num">Vraag '+(i+1)+'</span><p class="rp-q-text">'+esc(q)+'</p></div>';
-});
+if(s.intro)h+='<p class="kr-intro">'+esc(s.intro)+'</p>';
+h+='<ol class="kr-questions">';
+s.questions.forEach(function(q,qi){h+='<li><span>'+(qi+1)+'</span><p>'+esc(q)+'</p></li>';});
+h+='</ol>';
 }
 
-// Text
 if(s.type==="text"){
 s.paragraphs.forEach(function(p){
-if(s.title==="Samenvatting medische informatie"&&p.indexOf("\n")!==-1){
-  h+='<div class="rp-medical-timeline">';
-  p.split("\n").forEach(function(line){
-    var parts=line.split(" — ");
-    var date=parts.shift()||"";
-    h+='<div class="rp-timeline-event"><div class="rp-timeline-date">'+esc(date)+'</div><div class="rp-timeline-content">'+esc(parts.join(" — "))+'</div></div>';
-  });
-  h+='</div>';
-}else{
-  h+='<p class="rp-text">'+esc(p).replace(/\n/g,'<br>')+'</p>';
-}
+  if(s.title==="Samenvatting medische informatie"&&p.indexOf("\n")!==-1){
+    h+='<ol class="kr-timeline">';
+    p.split("\n").forEach(function(line){
+      var parts2=line.split(" — ");var d=parts2.shift()||"";
+      h+='<li><time>'+esc(d)+'</time><p>'+redact(parts2.join(" — "))+'</p></li>';
+    });
+    h+='</ol>';
+  }else{
+    h+='<p class="kr-p">'+redact(p).replace(/\n/g,'<br>')+'</p>';
+  }
 });
 if(s.sources&&s.sources.length){
-h+='<div class="rp-sources"><div class="rp-sources-title">Bronverwijzingen</div>';
-s.sources.forEach(function(src){h+='<div class="rp-source-item">'+esc(src)+'</div>';});
-h+='<button class="rp-source-toggle" type="button" aria-expanded="false">Bekijk de bronroute <span>↓</span></button>';
-h+='<div class="rp-source-route" hidden>';
-h+='<div class="rp-source-step"><b>01</b><span>Medisch dossier</span></div>';
-s.sources.forEach(function(src,i){h+='<div class="rp-source-step"><b>'+String(i+2).padStart(2,"0")+'</b><span>'+esc(src)+'</span></div>';});
-h+='</div></div>';
+  h+='<div class="kr-cite"><span class="kr-cite-label">Bron</span>';
+  s.sources.forEach(function(src){h+='<span class="kr-cite-item">'+redact(src)+'</span>';});
+  h+='</div>';
 }
 }
 
-// Hiaten with priority
 if(s.type==="hiaten"){
 s.hiaten.forEach(function(hi){
-var p=hi.prio||"aandacht";
-var pc=prioColor(p);
-h+='<div class="rp-hiaat" style="border-color:'+pc+'22">';
-h+='<div class="rp-hiaat-header">';
-h+='<span class="rp-hiaat-status" style="background:'+pc+'">'+prioLabel(p)+'</span>';
-h+='<span class="rp-hiaat-doc">'+esc(hi.doc)+'</span>';
-h+='<span class="rp-hiaat-verwacht">Verwacht: '+esc(hi.verwacht)+'</span>';
-h+='</div>';
-h+='<p class="rp-hiaat-text">'+esc(hi.toelichting)+'</p>';
-h+='<div class="rp-hiaat-actie" style="background:'+pc+'0a"><span class="rp-hiaat-actie-label">Actie:</span> '+esc(hi.actie)+'</div>';
-h+='</div>';
+  h+='<div class="kr-gap"><div class="kr-gap-head"><strong>'+redact(hi.doc)+'</strong><span class="kr-gap-prio kr-prio-'+esc(hi.prio||"aandacht")+'">'+prioLabel(hi.prio||"aandacht")+'</span></div>';
+  h+='<p>'+redact(hi.toelichting)+'</p>';
+  h+='<p class="kr-gap-meta"><span>Verwacht</span> '+redact(hi.verwacht)+' &nbsp;&middot;&nbsp; <span>Actie</span> '+redact(hi.actie)+'</p></div>';
 });
 }
 
-// Tegenstrijdigheden with severity
 if(s.type==="tegenstrijdigheden"){
-s.items.forEach(function(item){
-var sv=item.severity||"aandacht";
-var sc=sevColor(sv);
-h+='<div class="rp-contra" style="border-color:'+sc+'22">';
-h+='<div class="rp-contra-header"><span class="rp-contra-sev" style="background:'+sc+'">'+sevLabel(sv)+'</span><span class="rp-contra-thema">'+esc(item.thema)+'</span></div>';
-h+='<div class="rp-contra-bronnen">';
-item.bronnen.forEach(function(b){h+='<div class="rp-contra-bron" style="border-left-color:'+sc+'44">'+esc(b)+'</div>';});
-h+='</div>';
-h+='<div class="rp-contra-relevantie" style="background:'+sc+'0a"><span class="rp-contra-rel-label">Relevantie:</span> '+esc(item.relevantie)+'</div>';
-h+='</div>';
+s.items.forEach(function(it){
+  h+='<div class="kr-contra"><div class="kr-gap-head"><strong>'+redact(it.thema)+'</strong><span class="kr-gap-prio kr-prio-'+esc(it.severity||"aandacht")+'">'+sevLabel(it.severity||"aandacht")+'</span></div>';
+  h+='<ul>';it.bronnen.forEach(function(b){h+='<li>'+redact(b)+'</li>';});h+='</ul>';
+  h+='<p class="kr-gap-meta"><span>Voor de arts</span> '+redact(it.relevantie)+'</p></div>';
 });
 }
 
-// Arts template with compact context
 if(s.type==="arts_template"){
-h+='<div class="rp-arts-template">';
-h+='<p class="rp-arts-prompt">'+esc(s.prompt)+'</p>';
+if(s.prompt)h+='<p class="kr-intro">'+esc(s.prompt)+'</p>';
 s.subfields.forEach(function(sf){
-var label=typeof sf==="string"?sf:sf.label;
-var ctx=typeof sf==="string"?null:sf.context;
-h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span><strong>'+esc(label)+'</strong>';
-if(sf.tekst){h+='<p class="rp-arts-tekst">'+esc(sf.tekst)+'</p>';}
-if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossier:</span> '+esc(ctx)+'</div>';}
-h+='</div>';
+  var label=typeof sf==="string"?sf:sf.label, ctx=typeof sf==="string"?null:sf.context, tx=typeof sf==="string"?null:sf.tekst;
+  h+='<div class="kr-finding"><h4>'+esc(label)+'</h4>';
+  h+=tx?'<p class="kr-p">'+redact(tx)+'</p>':'<p class="kr-empty">In te vullen door de arts</p>';
+  if(ctx)h+='<p class="kr-note"><span>Uit het dossier</span>'+redact(ctx)+'</p>';
+  h+='</div>';
 });
 if(s.table){
-h+='<table class="rp-bronnen-table rp-meettabel"><thead><tr><th>Meting</th>';
-s.table.kolommen.forEach(function(k){h+='<th>'+esc(k)+'</th>';});
-h+='</tr></thead><tbody>';
-s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><td>'+esc(row[0])+'</td>';s.table.kolommen.forEach(function(k,i){h+=row[i+1]!=null?'<td>'+esc(row[i+1])+'</td>':'<td class="rp-meet-leeg">&middot;&middot;&middot;</td>';});h+='</tr>';});
-h+='</tbody></table>';
+  h+='<div class="kr-table-wrap"><table class="kr-table"><thead><tr><th>Meting</th>';
+  s.table.kolommen.forEach(function(k,ki){h+='<th'+(ki===0?' class="kr-affected"':'')+'>'+esc(k)+'</th>';});
+  h+='</tr></thead><tbody>';
+  s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><th scope="row">'+esc(row[0])+'</th>';s.table.kolommen.forEach(function(k,ki){h+='<td'+(ki===0?' class="kr-affected"':'')+'>'+(row[ki+1]!=null?esc(row[ki+1]):'&middot;&middot;&middot;')+'</td>';});h+='</tr>';});
+  h+='</tbody></table></div>';
 }
-h+='</div>';
 }
 
-// IWMD answers with compact context
 if(s.type==="iwmd_answers"){
-h+='<p class="rp-text">'+esc(s.intro)+'</p>';
-s.questions.forEach(function(item,i){
-var q=typeof item==="string"?item:item.q;
-var ctx=typeof item==="string"?null:item.context;
-h+='<div class="rp-question"><span class="rp-q-num">'+(q.indexOf("Vraag")===0?"":"Vraag "+(i+1))+'</span><p class="rp-q-text">'+esc(q.replace(/^Vraag \d+ \u2014 /,""))+'</p>';
-if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossier:</span> '+esc(ctx)+'</div>';}
-h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span>'+(item.antwoord?'<p class="rp-arts-tekst">'+esc(item.antwoord)+'</p>':'')+'</div></div>';
+if(s.intro)h+='<p class="kr-intro">'+esc(s.intro)+'</p>';
+h+='<ol class="kr-answers">';
+s.questions.forEach(function(it,qi){
+  var q=typeof it==="string"?it:it.q, ctx=typeof it==="string"?null:it.context;
+  h+='<li><span class="kr-answers-num">'+(qi+1)+'</span><div><p class="kr-answers-q">'+esc(q.replace(/^Vraag \d+ — /,""))+'</p>';
+  h+=it.antwoord?'<p class="kr-p">'+redact(it.antwoord)+'</p>':'<p class="kr-empty">In te vullen door de arts</p>';
+  if(ctx)h+='<p class="kr-note"><span>Uit het dossier</span>'+redact(ctx)+'</p>';
+  h+='</div></li>';
 });
+h+='</ol>';
 }
 
-// Bronnenlijst
 if(s.type==="bronnen"){
-h+='<table class="rp-bronnen-table"><thead><tr><th>Nr.</th><th>Document</th><th>Bron</th><th>Datum</th><th>Pag.</th></tr></thead><tbody>';
-s.bronnen.forEach(function(b){
-h+='<tr><td>'+esc(b.nr)+'</td><td>'+esc(b.doc)+'</td><td>'+esc(b.bron)+'</td><td>'+esc(b.datum)+'</td><td>'+esc(b.paginas)+'</td></tr>';
-});
-h+='</tbody></table>';
+h+='<div class="kr-table-wrap"><table class="kr-table kr-bronnen"><thead><tr><th>Nr.</th><th>Document</th><th>Bron</th><th>Datum</th><th>Pag.</th></tr></thead><tbody>';
+s.bronnen.forEach(function(b){h+='<tr><td>'+esc(b.nr)+'</td><th scope="row">'+redact(b.doc)+'</th><td>'+redact(b.bron)+'</td><td>'+esc(b.datum)+'</td><td>'+esc(b.paginas)+'</td></tr>';});
+h+='</tbody></table></div>';
 }
 
-// AMA Guides voorlopige impairment rating
-if(s.type==="ama_rating"){
-h+='<p class="rp-text"><span class="rp-badge rp-badge-ai">Dossierordening</span> Voorberekening ter ondersteuning; de BIG-geregistreerde specialist verifieert en autoriseert de definitieve rating. AMA Guides berekening is optioneel onder IWMD 2025 (vraag 1l).</p>';
-(s.ratings||[]).forEach(function(r){
-h+='<div class="rp-ama">';
-h+='<div class="rp-ama-head"><span class="rp-ama-diag">'+esc(r.diagnose)+'</span><span class="rp-ama-tabel">'+esc(r.tabel)+'</span></div>';
-h+='<div class="rp-ama-row"><span class="rp-ama-class">Class '+esc(String(r.cdx))+'</span><span class="rp-ama-wpi">default '+esc(String(r.default_wpi))+'% WPI</span></div>';
-h+='<div class="rp-ama-gm">';
-[['FH',r.gmfh],['PE',r.gmpe],['CS',r.gmcs]].forEach(function(g){
-var gm=g[1]||{};
-h+='<div class="rp-ama-gmcol"><div class="rp-ama-gmlabel">GM '+g[0]+'</div><div class="rp-ama-gmval">'+esc(String(gm.waarde!=null?gm.waarde:"—"))+'</div><div class="rp-ama-gmtxt">'+esc(gm.onderbouwing||"")+'</div></div>';
-});
-h+='</div>';
-if(r.net_adjustment)h+='<div class="rp-ama-calc">Net adjustment: <strong>'+esc(r.net_adjustment)+'</strong></div>';
-h+='<div class="rp-ama-result"><span class="rp-ama-grade">Grade '+esc(r.grade||"")+'</span><span class="rp-ama-finalwpi">'+esc(r.wpi||"")+'</span></div>';
-if(r.opmerkingen&&r.opmerkingen.length){
-h+='<div class="rp-ama-notes">';
-r.opmerkingen.forEach(function(o){if(o)h+='<div class="rp-ama-note">'+esc(o)+'</div>';});
-h+='</div>';
-}
-h+='</div>';
-});
-if(s.combined_value)h+='<div class="rp-ama-combined"><strong>Combined Value (meerdere diagnosen):</strong> '+esc(s.combined_value)+'</div>';
-}
-
-h+='</div>';
+h+='</section>';
 });
 
-h+='<div class="rp-page">p. 1\u201314</div>';
+/* Ondertekening */
+var ot=m.ondertekening||{};
+h+='<section class="kr-sign" id="kr-ondertekening">';
+h+='<div class="kr-sec-head"><span class="kr-sec-num"></span><h3>Ondertekening</h3><span class="kr-sec-by">Arts &middot; specialist</span></div>';
+h+='<div class="kr-sign-grid">';
+h+='<div><span class="kr-sign-role">Onderzoekend arts</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+redact(ot.arts||"[ARTS]")+'</span></div>';
+h+='<div><span class="kr-sign-role">Gecontroleerd en ondertekend</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+esc(ot.specialist||"Medisch specialist, BIG-geregistreerd")+'</span></div>';
 h+='</div>';
-h+='<div class="rp-disclaimer"><strong>Ingekort voorbeeld.</strong><br>Kinetic ordent dossierinformatie en bronverwijzingen. Onderzoek en rapport zijn van de arts. De BIG-geregistreerde specialist controleert het rapport en ondertekent het.</div>';
-h+='</div>';
+h+='<p class="kr-sign-status">'+esc(ot.status||"Concept. Nog niet ondertekend.")+'</p>';
+h+='</section>';
 
-// Stats
-h+='<div class="rp-summary">';
-h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.aiSections+'</div><div class="rp-stat-lbl">Voorbereide secties</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.artsSections+'</div><div class="rp-stat-lbl">Artssecties</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val">'+data.stats.bronnen+'</div><div class="rp-stat-lbl">Bronverwijzingen</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#D94F4F">'+data.stats.hiaten+'</div><div class="rp-stat-lbl">Hiaten</div></div>';
-h+='<div class="rp-stat"><div class="rp-stat-val" style="color:#C77B2E">'+(data.stats.tegenstrijdigheden||0)+'</div><div class="rp-stat-lbl">Aandachtspunten</div></div>';
-h+='</div>';
+h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><span>Ingekort, fictief voorbeeld &middot; '+data.stats.bronnen+' bronnen &middot; '+data.stats.hiaten+(data.stats.hiaten===1?' hiaat':' hiaten')+'</span></footer>';
+h+='</div></div></article>';
 
 o.innerHTML=h;
-o.querySelectorAll('.rp-source-toggle').forEach(function(button){
-  button.addEventListener('click',function(){
-    var route=button.nextElementSibling;
-    var open=button.getAttribute('aria-expanded')==='true';
-    button.setAttribute('aria-expanded',String(!open));
-    route.hidden=open;
-  });
-});
-o.querySelectorAll('.rp-document-nav-item').forEach(function(button){
-  button.addEventListener('click',function(){
-    var target=button.getAttribute('data-report-target');
-    var heading=Array.prototype.slice.call(o.querySelectorAll('.rp-section-title')).filter(function(title){return title.firstChild.textContent.trim()===target;})[0];
-    if(!heading)return;
-    o.querySelectorAll('.rp-document-nav-item').forEach(function(item){
-      var selected=item===button;
-      item.classList.toggle('is-active',selected);
-      item.setAttribute('aria-pressed',String(selected));
-    });
-    heading.closest('.rp-section').scrollIntoView({behavior:'smooth',block:'start'});
+o.querySelectorAll('.kr-toc a').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=o.querySelector(a.getAttribute('href'));if(!t)return;
+    e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
 }
+
 
 var currentMode="example";
 function setMode(mode){
