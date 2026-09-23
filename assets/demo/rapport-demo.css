@@ -194,3 +194,14 @@
 .rp-meettabel{margin-top:1rem;background:#FFF}
 .rp-meet-leeg{color:#C77B2E;letter-spacing:.1em}
 .rp-variant-toggle{margin:0 0 1.25rem}
+.opbouw{background:#FFF;border-top:1px solid var(--line)}
+.opbouw-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+.opbouw-title{font-size:1.125rem;font-weight:600;letter-spacing:-.01em}
+.opbouw-sub{font-size:.8125rem;color:var(--stone);margin-top:.25rem}
+.opbouw-list{list-style:none;margin:1.25rem 0 0;padding:0;border-top:1px solid var(--line)}
+.opbouw-list li{display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
+.opbouw-num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.75rem;color:var(--warm-teal);padding-top:.15rem}
+.opbouw-list strong{font-size:.875rem;font-weight:600}
+.opbouw-list small{display:block;font-size:.8125rem;color:var(--stone);line-height:1.5;margin-top:.2rem}
+.opbouw-list .rp-badge{margin-left:.5rem}
+@media(max-width:900px){.opbouw-grid{grid-template-columns:1fr}}
