@@ -140,7 +140,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
       num:"9", title:"Beantwoording IWMD-vragen", badge:"arts", type:"iwmd_answers",
-      intro:"De specialist beantwoordt de vraagstelling. Per vraag staan de relevante vindplaatsen uit het dossier.",
+      intro:"De arts beantwoordt de vraagstelling. Per vraag staan de relevante vindplaatsen uit het dossier.",
       questions: [
         {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
         {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", context:"Zie sectie 3."},
@@ -229,7 +229,7 @@ h+='<div class="rp-section">';
 h+='<div class="rp-section-num">Sectie '+esc(s.num)+'</div>';
 h+='<h3 class="rp-section-title">'+esc(s.title);
 if(s.badge==="ai")h+='<span class="rp-badge rp-badge-ai">Dossierordening</span>';
-else h+='<span class="rp-badge rp-badge-arts">Specialist</span>';
+else h+='<span class="rp-badge rp-badge-arts">Arts</span>';
 h+='</h3>';
 
 // Fields
@@ -370,7 +370,7 @@ h+='</div>';
 
 h+='<div class="rp-page">p. 1\u201314</div>';
 h+='</div>';
-h+='<div class="rp-disclaimer"><strong>Ingekort voorbeeld.</strong><br>Kinetic ordent dossierinformatie en bronverwijzingen. Onderzoek, oordeel en rapport zijn van de BIG-geregistreerde specialist, die het rapport ondertekent.</div>';
+h+='<div class="rp-disclaimer"><strong>Ingekort voorbeeld.</strong><br>Kinetic ordent dossierinformatie en bronverwijzingen. Onderzoek en rapport zijn van de arts. De BIG-geregistreerde specialist controleert het rapport en ondertekent het.</div>';
 h+='</div>';
 
 // Stats
