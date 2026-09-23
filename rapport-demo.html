@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/demo/base.css?v=20260923">
-<link rel="stylesheet" href="assets/demo/rapport-demo.css?v=20260923j">
+<link rel="stylesheet" href="assets/demo/rapport-demo.css?v=20260923l">
 </head>
 <body data-kinetic-step="3">
 
@@ -19,62 +19,66 @@
 <section class="report-hero">
   <div class="report-hero-copy">
     <div class="section-label">Voorbeeldrapporten</div>
-    <h1>Zo is een rapport opgebouwd.</h1>
-    <p>Twee voorbeelden: een letselschadezaak met de IWMD-vraagstelling, en een expertise buiten letselschade voor een ongevallenverzekering, met de vraagstelling van de verzekeraar. Beide rapporten volgen de NVMSR-richtlijn. Bij elke sectie staat wie die invult: de dossierordening of de arts. Beide voorbeelden zijn volledig uitgeschreven, met een fictieve casus.</p>
-    <div class="report-hero-actions"><a class="btn btn-primary" href="#rapportviewer">Bekijk het voorbeeld <span>→</span></a><a class="report-hero-link" href="#werkwijze">Waarom deze opbouw <span>↓</span></a></div>
+    <h1>Zo ziet een Kinetic-rapport eruit.</h1>
+    <p>Twee volledig uitgeschreven voorbeelden met een fictieve casus: een letselschadezaak met de IWMD-vraagstelling, en een expertise voor een ongevallenverzekering met de vraagstelling van de verzekeraar. Bij elk onderdeel ziet u waar het op gebaseerd is en wie het heeft ingevuld.</p>
+    <div class="report-hero-actions"><a class="btn btn-primary" href="#rapportviewer">Bekijk het voorbeeld <span>→</span></a><a class="report-hero-link" href="#verschil">Welk voorbeeld past bij u <span>↓</span></a></div>
   </div>
-  <aside class="report-hero-panel" aria-label="Kernprincipes van de expertise">
-    <div class="report-hero-panel-label">ROLVERDELING</div>
-    <div class="report-hero-principle"><span>01</span><div><strong>Vraagstelling</strong><p>Komt van de opdrachtgever of van partijen samen.</p></div></div>
-    <div class="report-hero-principle"><span>02</span><div><strong>Bronnen</strong><p>Elke bevinding is herleidbaar naar de bron.</p></div></div>
-    <div class="report-hero-principle"><span>03</span><div><strong>Oordeel</strong><p>Onderzoek en antwoorden door de arts, controle door de specialist.</p></div></div>
-  </aside>
 </section>
 
 
+<div class="section" id="verschil">
+<div class="section-header">
+<div class="section-label">Twee soorten expertise</div>
+<h2 class="section-title">Het verschil in één oogopslag</h2>
+<p class="section-subtitle">Beide rapporten volgen de NVMSR-richtlijn. Het verschil zit in het kader, de vraagstelling en waar de uitkomst voor dient.</p>
+</div>
+<div class="opbouw-verschil"><table class="kr-table"><thead><tr><th></th><th>Letselschade · IWMD</th><th>Ongevallenverzekering</th></tr></thead><tbody>
+<tr><th scope="row">Kader</th><td data-l="Letselschade">Een ander is aansprakelijk</td><td data-l="Ongevallenverzekering">De eigen polis van de verzekerde</td></tr>
+<tr><th scope="row">Kernvraag</th><td data-l="Letselschade">Verschil tussen de situatie met en zonder ongeval</td><td data-l="Ongevallenverzekering">Blijvend functieverlies volgens de polismaatstaf</td></tr>
+<tr><th scope="row">Uitkomst dient voor</th><td data-l="Letselschade">Berekening van schadevergoeding</td><td data-l="Ongevallenverzekering">Vaste uitkering: percentage maal verzekerd bedrag</td></tr>
+<tr><th scope="row">Vraagstelling</th><td data-l="Letselschade">IWMD 2025</td><td data-l="Ongevallenverzekering">Van de verzekeraar</td></tr>
+<tr><th scope="row">Invaliditeitspercentage</th><td data-l="Letselschade">Optioneel</td><td data-l="Ongevallenverzekering">Hoofdvraag</td></tr>
+<tr><th scope="row">Richtlijn rapportage</th><td data-l="Letselschade">NVMSR 2024</td><td data-l="Ongevallenverzekering">NVMSR 2024</td></tr>
+</tbody></table></div>
+</div>
+
 <div class="demo-section" id="rapportviewer"><div class="demo-inner">
 <div class="demo-intro">
-<div><div class="section-label">Voorbeeldrapport</div><h2 class="demo-title">Ingekort voorbeeld</h2><p>Kies het soort expertise. Beide voorbeelden zijn fictief en bevatten geen persoonsgegevens.</p></div>
+<div><div class="section-label">Voorbeeldrapport</div><h2 class="demo-title">Bekijk het rapport</h2><p>Kies het soort expertise. Beide voorbeelden zijn fictief en bevatten geen persoonsgegevens.</p></div>
 <div class="demo-confidential"><span></span><div><strong>Vertrouwelijk voorbeeld</strong><small>Geen persoonsgegevens of zaakgegevens</small></div></div>
 </div>
 
-<div class="mode-toggle rp-variant-toggle" role="group" aria-label="Soort expertise"><button type="button" class="mode-btn active" aria-pressed="true" data-rapport-variant="iwmd">Letselschade · IWMD 2025</button><button type="button" class="mode-btn" aria-pressed="false" data-rapport-variant="nvmsr">Ongevallenverzekering · NVMSR</button></div>
+<div class="mode-toggle rp-variant-toggle" role="group" aria-label="Soort expertise"><button type="button" class="mode-btn active" aria-pressed="true" data-rapport-variant="iwmd">Letselschade · IWMD 2025</button><button type="button" class="mode-btn" aria-pressed="false" data-rapport-variant="nvmsr">Ongevallenverzekering · vraagstelling verzekeraar</button></div>
 <div id="output"></div>
 </div></div>
 
 
-<div class="section opbouw" id="opbouw">
-<div class="section-header">
-<div class="section-label">Opbouw</div>
-<h2 class="section-title">Twee soorten rapportage</h2>
-<p class="section-subtitle">Per onderdeel: wie het invult. Kinetic ordent het dossier, de arts onderzoekt en rapporteert, de specialist toetst en ondertekent.</p>
-</div>
-<div class="opbouw-grid"><div class="opbouw-col"><h3 class="opbouw-title">Letselschade · IWMD 2025</h3><p class="opbouw-sub">Vraagstelling volgens IWMD 2025, rapportage volgens NVMSR</p><ol class="opbouw-list"><li><span class="opbouw-num">–</span><div><strong>Dossier: gegevens, vraagstelling, tijdlijn</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Met bronverwijzing per gebeurtenis</small></div></li><li><span class="opbouw-num">–</span><div><strong>Hiaten en tegenstrijdigheden</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Zonder medische duiding</small></div></li><li><span class="opbouw-num">1a</span><div><strong>Anamnese</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Alleen het relaas van betrokkene</small></div></li><li><span class="opbouw-num">1b</span><div><strong>Medische gegevens</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Voorgeschiedenis en behandeling uit het dossier</small></div></li><li><span class="opbouw-num">1c</span><div><strong>Medisch onderzoek</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Met meetmethode, pijnreactie en normaalwaarde</small></div></li><li><span class="opbouw-num">1d–e</span><div><strong>Consistentie</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Samenhang en reactie op inconsistenties</small></div></li><li><span class="opbouw-num">1f</span><div><strong>Diagnose</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Met differentiaaldiagnose en beschouwing</small></div></li><li><span class="opbouw-num">1g</span><div><strong>Beperkingen</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Semi-kwantitatief, geen FML</small></div></li><li><span class="opbouw-num">1h–k</span><div><strong>Medische eindsituatie</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Stationair of te verwachten verandering</small></div></li><li><span class="opbouw-num">1l</span><div><strong>Functieverlies (optioneel)</strong><span class="rp-badge rp-badge-arts">Arts</span><small>AMA-berekening in rekenbijlage</small></div></li><li><span class="opbouw-num">2</span><div><strong>Situatie zonder ongeval</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Klachten, aanwijzingen en beperkingen zonder ongeval</small></div></li><li><span class="opbouw-num">3</span><div><strong>Overig</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Opmerkingen en therapeutische suggesties</small></div></li><li><span class="opbouw-num">–</span><div><strong>Verantwoording en disclosure</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Rolverdeling, inzage, belangen</small></div></li><li><span class="opbouw-num">–</span><div><strong>Bronnenlijst</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Elk geciteerd stuk, met datum en bladzijde</small></div></li></ol></div><div class="opbouw-col"><h3 class="opbouw-title">Ongevallenverzekering · NVMSR</h3><p class="opbouw-sub">Geen letselschade; vragen van de verzekeraar, rapportage volgens NVMSR</p><ol class="opbouw-list"><li><span class="opbouw-num">–</span><div><strong>Polis en opdracht</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Polisversie, maatstaf, termijn, wat niet wordt beoordeeld</small></div></li><li><span class="opbouw-num">–</span><div><strong>Vragen van de verzekeraar</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Zoals gesteld in de opdrachtbrief</small></div></li><li><span class="opbouw-num">–</span><div><strong>Tijdlijn en hiaten</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Met bronverwijzing per gebeurtenis</small></div></li><li><span class="opbouw-num">1</span><div><strong>Aard van het letsel en diagnose</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Anamnese, onderzoek met meetprotocol</small></div></li><li><span class="opbouw-num">2</span><div><strong>Relatie met het ongeval</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Met alternatieve verklaringen</small></div></li><li><span class="opbouw-num">3</span><div><strong>Toestand vóór het ongeval</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Klachten, afwijkingen en functieverlies</small></div></li><li><span class="opbouw-num">4</span><div><strong>Medische eindsituatie</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Voorwaardelijk bij ontbrekende controle</small></div></li><li><span class="opbouw-num">5</span><div><strong>Blijvende invaliditeit</strong><span class="rp-badge rp-badge-arts">Arts</span><small>Volgens polistabel, rekenbijlage per stap</small></div></li><li><span class="opbouw-num">6</span><div><strong>Overige opmerkingen</strong><span class="rp-badge rp-badge-arts">Arts</span></div></li><li><span class="opbouw-num">–</span><div><strong>Verantwoording en disclosure</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Rolverdeling, inzage, belangen</small></div></li><li><span class="opbouw-num">–</span><div><strong>Bronnenlijst</strong><span class="rp-badge rp-badge-ai">Dossierordening</span><small>Elk geciteerd stuk, met datum en bladzijde</small></div></li></ol></div></div><div class="opbouw-verschil"><h3 class="opbouw-title">Het verschil in één oogopslag</h3><table class="kr-table"><thead><tr><th></th><th>Letselschade · IWMD</th><th>Ongevallenverzekering</th></tr></thead><tbody>
-<tr><th scope="row">Kader</th><td>Een ander is aansprakelijk</td><td>De eigen polis van de verzekerde</td></tr>
-<tr><th scope="row">Kernvraag</th><td>Verschil tussen de situatie met en zonder ongeval</td><td>Blijvend functieverlies volgens de polismaatstaf</td></tr>
-<tr><th scope="row">Uitkomst dient voor</th><td>Berekening van schadevergoeding</td><td>Vaste uitkering: percentage maal verzekerd bedrag</td></tr>
-<tr><th scope="row">Vraagstelling</th><td>IWMD 2025</td><td>Van de verzekeraar</td></tr>
-<tr><th scope="row">Invaliditeitspercentage</th><td>Optioneel</td><td>Hoofdvraag</td></tr>
-<tr><th scope="row">Richtlijn rapportage</th><td>NVMSR 2024</td><td>NVMSR 2024</td></tr>
-</tbody></table></div>
-</div>
-
 <div class="section" id="werkwijze">
 <div class="section-header">
-<div class="section-label">Werkwijze</div>
+<div class="section-label">Opbouw</div>
 <h2 class="section-title">Waarom het rapport zo is opgebouwd</h2>
 </div>
 <div class="how-grid">
 <div class="how-card"><div class="how-num">01</div><h3>De vraag stuurt het dossier</h3><p>De vraagstelling bepaalt welke stukken relevant zijn en wat het rapport moet beantwoorden.</p></div>
 <div class="how-card"><div class="how-num">02</div><h3>De bron blijft zichtbaar</h3><p>Elk medisch feit verwijst naar het oorspronkelijke document en de bladzijde.</p></div>
-<div class="how-card"><div class="how-num">03</div><h3>Onzekerheid wordt benoemd</h3><p>Ontbrekende stukken en tegenstrijdigheden staan apart, zodat de arts ze kan meewegen.</p></div>
-<div class="how-card"><div class="how-num">04</div><h3>De artsen beslissen</h3><p>De dossierordening wijst de weg. Het medisch oordeel is van de arts en de specialist.</p></div>
+<div class="how-card"><div class="how-num">03</div><h3>Onzekerheid wordt benoemd</h3><p>Ontbrekende stukken en medische onzekerheden staan apart, met wat dat betekent voor de conclusies.</p></div>
+<div class="how-card"><div class="how-num">04</div><h3>De specialist tekent</h3><p>De dossierordening wijst de weg. De specialist ziet betrokkene zelf, verifieert de bevindingen en is eindverantwoordelijk.</p></div>
+</div>
+</div>
+
+
+<div class="section rp-cta">
+<div class="section-header">
+<div class="section-label">Contact</div>
+<h2 class="section-title">Een dossier bespreken?</h2>
+<p class="section-subtitle">Bij de opdracht hoort u wat het rapport kost en op welke datum het er is.</p>
+<a class="btn btn-primary" href="https://kineticmedical.nl/#contact">Plan een gesprek</a>
 </div>
 </div>
 
 <div data-kinetic="footer"></div>
 
 <script src="assets/demo/layout.js?v=20260923e"></script>
-<script src="assets/demo/rapport-demo.js?v=20260923j"></script>
+<script src="assets/demo/rapport-demo.js?v=20260923l"></script>
 </body>
 </html>

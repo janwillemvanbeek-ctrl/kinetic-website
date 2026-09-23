@@ -1897,7 +1897,7 @@ if(ot.rollen){h+='<dl class="kr-fields kr-sign-roles">';ot.rollen.forEach(functi
 h+='<p class="kr-sign-status">'+esc(ot.status||"Concept. Nog niet ondertekend.")+'</p>';
 h+='</section>';
 
-h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><span>Ingekort, fictief voorbeeld &middot; '+data.stats.bronnen+' bronnen &middot; '+data.stats.hiaten+(data.stats.hiaten===1?' hiaat':' hiaten')+'</span></footer>';
+h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><span>Fictief voorbeeld &middot; '+data.stats.bronnen+' bronnen &middot; '+data.stats.hiaten+(data.stats.hiaten===1?' hiaat':' hiaten')+'</span></footer>';
 h+='</div></div></article>';
 
 o.innerHTML=h;

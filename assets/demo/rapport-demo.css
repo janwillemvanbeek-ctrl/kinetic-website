@@ -518,3 +518,16 @@
 .kr-axis-hide .kr-axis-lab{display:none}
 .kr-cover-top{gap:1rem}.kr-cover-conf{text-align:right}
 .kr-doc .kr-axis-lab{white-space:nowrap;width:auto}
+
+.report-hero{grid-template-columns:1fr}.report-hero-copy{max-width:760px}
+#verschil .opbouw-verschil{margin-top:0}
+.rp-cta{text-align:center}.rp-cta .section-header{margin:0 auto}.rp-cta .btn{margin-top:1.5rem;display:inline-flex}
+@media (max-width:640px){
+  .opbouw-verschil{padding:0 1rem}
+  .opbouw-verschil .kr-table,.opbouw-verschil .kr-table tbody,.opbouw-verschil .kr-table tr{display:block;width:100%}
+  .opbouw-verschil .kr-table thead{display:none}
+  .opbouw-verschil .kr-table tr{padding:.85rem 0;border-bottom:1px solid var(--kr-line)}
+  .opbouw-verschil .kr-table th,.opbouw-verschil .kr-table td{display:block;border:0;padding:.15rem 0;white-space:normal}
+  .opbouw-verschil .kr-table th{font-weight:600;margin-bottom:.3rem}
+  .opbouw-verschil .kr-table td::before{content:attr(data-l);display:block;font:500 .62rem var(--kr-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--kr-stone);margin-top:.35rem}
+}
