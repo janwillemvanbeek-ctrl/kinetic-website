@@ -1730,7 +1730,7 @@ h+='<div class="kr-cover-top"><span class="kr-mark">Kinetic<i>.</i></span><span 
 h+='<div class="kr-cover-kicker">'+(m.kicker||"Letselschade &middot; IWMD")+'</div>';
 h+='<h2 class="kr-cover-title">'+esc(m.titel||"Medische expertise")+'</h2>';
 h+='<p class="kr-cover-sub">'+esc(m.subtitel||("Vraagstelling volgens IWMD · "+(m.specialisme||"")))+'</p>';
-h+=coverLine(data);
+// tijdas op omslag verwijderd; de tijdlijn staat bij de samenvatting
 h+='<dl class="kr-cover-meta">';
 h+='<div><dt>Zaaknummer</dt><dd>'+esc(m.zaaknummer||"")+'</dd></div>';
 h+='<div><dt>Betrokkene</dt><dd>'+redact(m.betrokkene||"")+'</dd></div>';
