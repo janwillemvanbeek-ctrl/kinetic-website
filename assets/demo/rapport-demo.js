@@ -31,8 +31,8 @@ var EXAMPLE_RAPPORT = {
    },
    {
     "label": "Relatie met het ongeval",
-    "waarde": "Temporeel verband",
-    "toelichting": "Blijvende traumatische verergering niet vast te stellen"
+    "waarde": "Aanwijzingen voor aggravatie",
+    "toelichting": "Van bestaande degeneratie C5–C6; omvang niet vast te stellen"
    },
    {
     "label": "Eindsituatie",
@@ -52,7 +52,7 @@ var EXAMPLE_RAPPORT = {
    {
     "label": "Functieverlies (AMA)",
     "waarde": "Open",
-    "toelichting": "Rekenbijlage, door de specialist"
+    "toelichting": "Rekenbijlage; niet gelijk aan arbeidsongeschiktheid"
    },
    {
     "label": "Dossier",
@@ -63,6 +63,28 @@ var EXAMPLE_RAPPORT = {
   "ondertekening": {
    "arts": "[ARTS] · basisarts, BIG [BIG-NR]",
    "specialist": "Orthopedisch chirurg · BIG [BIG-NR]",
+   "rollen": [
+    [
+     "Dossier geordend",
+     "Kinetic, case manager [CASEMANAGER]"
+    ],
+    [
+     "Anamnese en lichamelijk onderzoek",
+     "[ARTS], basisarts"
+    ],
+    [
+     "Concept opgesteld",
+     "[ARTS], basisarts"
+    ],
+    [
+     "Inhoudelijke supervisie",
+     "Orthopedisch chirurg, BIG [BIG-NR]"
+    ],
+    [
+     "Eindverantwoordelijk en ondertekend",
+     "Orthopedisch chirurg, BIG [BIG-NR]"
+    ]
+   ],
    "status": "Concept. Definitief na toetsing door de specialist, controle van vraagstelling en feitelijke gegevens door de opdrachtgever, en inzage door betrokkene."
   }
  },
@@ -431,12 +453,27 @@ var EXAMPLE_RAPPORT = {
      "context": null
     },
     {
-     "label": "Beschouwing",
-     "tekst": "Er is een plausibel temporeel verband tussen het ongeval en het ontstaan van de nekklachten. Of sprake is van een blijvende traumatische verergering van de degeneratie, dan wel van een zelfstandige radiculopathie, kan op basis van de nu beschikbare broninformatie niet met voldoende medische onderbouwing worden vastgesteld. Daarvoor zijn het eindverslag van de fysiotherapie en een neurologisch oordeel nodig.",
-     "context": "Zie tegenstrijdigheden 1 en 2."
+     "label": "Conclusie",
+     "tekst": "Er bestaat een temporeel verband tussen het ongeval en het ontstaan van de nekklachten. De beschikbare gegevens bieden aanwijzingen voor traumatische aggravatie van reeds aanwezige cervicale degeneratieve afwijkingen. De precieze bijdrage van deze afwijkingen en van eventuele neurologische problematiek kan op basis van het huidige dossier niet definitief worden vastgesteld.",
+     "context": null
+    },
+    {
+     "label": "Basis",
+     "tekst": "Vóór het ongeval zijn geen nekklachten gedocumenteerd, terwijl de degeneratie op de CT van de ongevalsdag al zichtbaar was. De klachten ontstonden direct na het ongeval en zijn sindsdien consistent beschreven. Het klachtenpatroon en de bevindingen bij onderzoek passen bij het niveau C5–C6.",
+     "context": "Bron 1, p. 2; bron 3, p. 1–3; bron 6, p. 1."
+    },
+    {
+     "label": "Onzekerheid",
+     "tekst": "Welk deel van de huidige klachten door het ongeval komt en welk deel door het natuurlijk beloop van de degeneratie, kan ik niet met redelijke zekerheid vaststellen. Ook of er sprake is van een zelfstandige radiculopathie C6 is niet zeker. Het eindverslag van de fysiotherapie zou het beloop in het eerste jaar kunnen verduidelijken.",
+     "context": "Zie hiaat 1 en tegenstrijdigheid 1."
+    },
+    {
+     "label": "Buiten mijn vakgebied",
+     "tekst": "De ulnarisklachten en de cognitieve klachten beoordeel ik niet; daarvoor adviseer ik een neurologische expertise.",
+     "context": "Zie tegenstrijdigheden 2 en 3."
     }
    ],
-   "quote": "De gegevens ondersteunen een temporeel verband. Een blijvende traumatische verergering is met de huidige broninformatie niet vast te stellen."
+   "quote": "De beschikbare gegevens bieden aanwijzingen voor traumatische aggravatie van reeds aanwezige cervicale degeneratieve afwijkingen. De precieze bijdrage kan op basis van het huidige dossier niet definitief worden vastgesteld."
   },
   {
    "num": "1g",
@@ -447,7 +484,17 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Beperkingen op orthopedisch gebied",
-     "tekst": "Matig beperkt voor langdurig statisch nekbelastend werk, zoals beeldschermwerk en autorijden. Matig beperkt voor bovenhands werk en herhaald eindstandig bewegen van de nek. Licht beperkt voor tillen. Niet beperkt voor lopen en staan.",
+     "tekst": "Betrokkene is orthopedisch bezien matig beperkt voor langdurige statische nekbelasting, repeterende eindstandige nekbewegingen en frequent bovenhands werken. Hij is licht beperkt voor tillen en niet beperkt voor lopen en staan. Voor een arbeidskundige vertaling naar concrete duur- of gewichtsgrenzen is afzonderlijk onderzoek aangewezen.",
+     "context": null
+    },
+    {
+     "label": "Basis",
+     "tekst": "De beperkingen volgen uit de bewegingsbeperking en de pijn bij eindstandig bewegen bij onderzoek (1c), en passen bij het klachtenbeloop in het dossier.",
+     "context": null
+    },
+    {
+     "label": "Wat dit oordeel niet is",
+     "tekst": "Dit is een medisch oordeel over beperkingen, geen oordeel over arbeidsongeschiktheid of belastbaarheid in het werk. Een FML en de vertaling naar werk zijn aan de bedrijfs- of verzekeringsarts.",
      "context": null
     }
    ]
@@ -485,7 +532,17 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Het percentage wordt vastgesteld door de ondertekenend specialist, met de volledige berekening in de rekenbijlage.",
+     "tekst": "Het percentage wordt vastgesteld door de ondertekenend specialist. Elke stap staat in de rekenbijlage, zodat de uitkomst te controleren is.",
+     "context": null
+    },
+    {
+     "label": "Methode",
+     "tekst": "Diagnosegebonden methode (DBI), hoofdstuk 17 (wervelkolom). Een grade modifier die al is gebruikt voor de indeling in een klasse, telt niet mee in de berekening.",
+     "context": null
+    },
+    {
+     "label": "Wat dit percentage niet is",
+     "tekst": "Functieverlies volgens de AMA Guides zegt iets over beperkingen in algemene dagelijkse activiteiten. Het is geen maat voor arbeidsongeschiktheid of verlies aan verdienvermogen.",
      "context": null
     }
    ],
@@ -495,28 +552,36 @@ var EXAMPLE_RAPPORT = {
      "6e druk; update: door de ondertekenend specialist in te vullen"
     ],
     [
-     "Gekozen methode en reden",
+     "Diagnoserij in de regionale tabel cervicale wervelkolom",
+     "[DIAGNOSERIJ] · door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Klasse en reden",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Diagnose en tabel (hoofdstuk 17)",
+     "Standaardwaarde (default grade C)",
+     "[%] · door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Grade modifier functionele historie (GMFH), met gebruikte vragenlijst",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Klasse en standaardwaarde",
+     "Grade modifier lichamelijk onderzoek (GMPE)",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Grade modifiers: functionele historie, lichamelijk onderzoek, klinische studies",
+     "Grade modifier klinische studies (GMCS), of reden van uitsluiting",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Berekening en afronding",
+     "Netto-aanpassing: (GMFH − klasse) + (GMPE − klasse) + (GMCS − klasse)",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Functieverlies gehele persoon",
-     "Door de ondertekenend specialist in te vullen"
+     "Uiteindelijke grade en functieverlies gehele persoon",
+     "[%] · door de ondertekenend specialist in te vullen"
     ]
    ]
   },
@@ -671,19 +736,27 @@ var EXAMPLE_RAPPORT = {
    "fields": [
     {
      "label": "Specialist",
-     "value": "Orthopedisch chirurg, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkgever: [OPGAVE]"
     },
     {
      "label": "Onderzoekend arts",
-     "value": "Basisarts, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+     "value": "Basisarts, BIG [BIG-NR]; werkgever: [OPGAVE]"
     },
     {
      "label": "Ervaring als deskundige",
+     "value": "Specialist: [AANTAL] jaar, circa [AANTAL] expertises per jaar; onderzoekend arts: [OPGAVE]"
+    },
+    {
+     "label": "Nevenfuncties",
      "value": "[OPGAVE]"
     },
     {
-     "label": "Relatie met partijen",
-     "value": "Geen eerdere behandelrelatie met betrokkene; geen belang bij de uitkomst"
+     "label": "Belangenconflicten",
+     "value": "Geen; geen eerdere behandelrelatie met betrokkene en geen financieel belang bij de uitkomst"
+    },
+    {
+     "label": "Relatie met de opdrachtgever",
+     "value": "In de afgelopen twaalf maanden [AANTAL] opdrachten van deze opdrachtgever; verhouding eisende en verwerende zijde: [OPGAVE]"
     },
     {
      "label": "Wetenschappelijke discussie",
@@ -810,7 +883,7 @@ var EXAMPLE_NVMSR = {
    {
     "label": "Eindsituatie",
     "waarde": "Nog niet vast te stellen",
-    "toelichting": "Controle na materiaalverwijdering ontbreekt"
+    "toelichting": "Verwacht per [DATUM], na controlegegevens"
    },
    {
     "label": "Knijpkracht",
@@ -836,6 +909,28 @@ var EXAMPLE_NVMSR = {
   "ondertekening": {
    "arts": "[ARTS] · basisarts, BIG [BIG-NR]",
    "specialist": "Orthopedisch chirurg · BIG [BIG-NR]",
+   "rollen": [
+    [
+     "Dossier geordend",
+     "Kinetic, case manager [CASEMANAGER]"
+    ],
+    [
+     "Anamnese en lichamelijk onderzoek",
+     "[ARTS], basisarts"
+    ],
+    [
+     "Concept opgesteld",
+     "[ARTS], basisarts"
+    ],
+    [
+     "Inhoudelijke supervisie",
+     "Orthopedisch chirurg, BIG [BIG-NR]"
+    ],
+    [
+     "Eindverantwoordelijk en ondertekend",
+     "Orthopedisch chirurg, BIG [BIG-NR]"
+    ]
+   ],
    "status": "Concept. Definitief na toetsing door de specialist, controle van vraagstelling en feitelijke gegevens door de verzekeraar, en inzage door betrokkene."
   }
  },
@@ -930,7 +1025,7 @@ var EXAMPLE_NVMSR = {
   },
   {
    "num": "–",
-   "title": "Polis en opdracht",
+   "title": "Polis en opdrachtkader",
    "badge": "ai",
    "type": "fields",
    "fields": [
@@ -939,28 +1034,44 @@ var EXAMPLE_NVMSR = {
      "value": "Collectieve ongevallenverzekering via de werkgever; geen letselschadezaak"
     },
     {
+     "label": "Polisnummer",
+     "value": "[POLISNUMMER]"
+    },
+    {
      "label": "Polisvoorwaarden",
      "value": "[POLISVERSIE], artikel [NR] (blijvende invaliditeit)"
     },
     {
-     "label": "Dekking",
-     "value": "De verzekeraar heeft het ongeval als gedekt uitgangspunt aanvaard"
+     "label": "Begrip ongeval",
+     "value": "Zoals omschreven in artikel [NR] van de polis"
+    },
+    {
+     "label": "Dekking als uitgangspunt",
+     "value": "Ja; de verzekeraar heeft het voorval als gedekt ongeval aanvaard (opdrachtbrief)"
     },
     {
      "label": "Invaliditeitsmaatstaf",
      "value": "Volgens de polis: [TABEL] (bijvoorbeeld AMA Guides 6e druk)"
     },
     {
-     "label": "Termijn",
-     "value": "Vaststelling volgens de polis uiterlijk [TERMIJN] na het ongeval"
+     "label": "Dominante hand",
+     "value": "Rechts, volgens betrokkene en bij onderzoek; alleen van belang als de polis onderscheid maakt"
+    },
+    {
+     "label": "Maximum voor dit lichaamsdeel",
+     "value": "[PERCENTAGE] voor volledig functieverlies van de hand, volgens de polis"
+    },
+    {
+     "label": "Peildatum en termijn",
+     "value": "Vaststelling blijvende invaliditeit volgens de polis uiterlijk [TERMIJN] na het ongeval"
     },
     {
      "label": "Voorafbestaande invaliditeit",
      "value": "Volgens de polis in mindering te brengen"
     },
     {
-     "label": "Niet beoordeeld",
-     "value": "Dekking, uitkering en uitleg van de polisvoorwaarden; dat is aan de verzekeraar"
+     "label": "Rol van de deskundige",
+     "value": "De deskundige beoordeelt uitsluitend de medische gevolgen en eventuele functionele invaliditeit. De uitleg van polisvoorwaarden en de beslissing over dekking zijn aan de verzekeraar."
     }
    ]
   },
@@ -1029,6 +1140,11 @@ var EXAMPLE_NVMSR = {
      "context": null
     },
     {
+     "label": "Meetprotocol",
+     "tekst": "Actieve bewegingsuitslagen, gemeten met een goniometer volgens de neutraal-nulmethode, drie keer per richting; vermeld is de hoogste reproduceerbare waarde. Passief geen verdere uitslag. Knijpkracht met de Jamar-dynamometer in stand II, drie keer per zijde; vermeld is het gemiddelde. Beide zijden in dezelfde volgorde en houding gemeten. De pijnreactie staat per beweging in de tabel. De metingen waren reproduceerbaar: per richting minder dan 5° verschil, bij knijpkracht minder dan 10%.",
+     "context": null
+    },
+    {
      "label": "Diagnose",
      "tekst": "Pijnlijke bewegingsbeperking en verminderde knijpkracht van de rechter pols bij status na een distale radiusfractuur, behandeld met plaatfixatie en materiaalverwijdering.",
      "context": null
@@ -1038,56 +1154,63 @@ var EXAMPLE_NVMSR = {
    "table": {
     "kolommen": [
      "Rechts (aangedaan)",
-     "Links (contralateraal)",
-     "Methode",
-     "Pijn"
+     "Links (contralaterale vergelijking)",
+     "Algemene referentie*",
+     "Klinische duiding",
+     "AMA-score"
     ],
     "rijen": [
      [
       "Omtrek pols",
       "17,5 cm",
       "17,0 cm",
-      "meetlint, processus styloideus",
-      "—"
+      "—",
+      "licht verdikt",
+      null
      ],
      [
       "Omtrek onderarm",
       "27,0 cm",
       "28,0 cm",
-      "meetlint, 10 cm distaal elleboog",
-      "—"
+      "—",
+      "licht spierverlies",
+      null
      ],
      [
       "Extensie-flexie",
       "45-0-55",
       "70-0-80",
-      "actief, 3×, goniometer, neutraal-nul",
-      "eindstandig"
+      "70-0-80",
+      "beperkt, eindstandig pijnlijk",
+      null
      ],
      [
       "Radiaal-ulnairdeviatie",
       "15-0-25",
       "20-0-35",
-      "actief, 3×, goniometer",
-      "eindstandig ulnair"
+      "20-0-30",
+      "licht beperkt",
+      null
      ],
      [
       "Pronatie-supinatie",
       "80-0-70",
       "85-0-85",
-      "actief, 3×, goniometer",
-      "eindstandig"
+      "80-0-80",
+      "licht beperkt, eindstandig pijnlijk",
+      null
      ],
      [
       "Knijpkracht",
       "32 kg",
       "46 kg",
-      "Jamar, stand II, gemiddelde van 3",
-      "licht"
+      "—",
+      "circa 30% minder dan links",
+      null
      ]
     ]
    },
-   "tableNote": "De linkerzijde is een individuele vergelijking, geen algemene normaalwaarde. Weergegeven is de beste reproduceerbare waarde van drie metingen."
+   "tableNote": "* Algemene referentie ter indicatie. De score volgt uit de tabel die de polis voorschrijft; zie de rekenbijlage bij vraag 5. De linkerzijde is een contralaterale vergelijking, geen referentie. AMA-score (···): door de specialist in te vullen."
   },
   {
    "num": "2",
@@ -1097,13 +1220,23 @@ var EXAMPLE_NVMSR = {
    "prompt": "Is de huidige afwijking medisch het gevolg van het ongeval?",
    "subfields": [
     {
-     "label": "Oordeel",
-     "tekst": "De bewegingsbeperking en het krachtverlies zijn medisch goed te verklaren uit de polsbreuk en de behandeling daarvan. Ik heb gekeken naar andere verklaringen: klachten van het distale radio-ulnaire gewricht passen bij het letsel; voor posttraumatische artrose, peesproblemen of CRPS zijn bij onderzoek geen aanwijzingen. Voor een oorzaak buiten het ongeval zijn geen aanwijzingen.",
+     "label": "Conclusie",
+     "tekst": "De bewegingsbeperking en het krachtverlies van de rechter pols zijn medisch het gevolg van het ongeval.",
      "context": null
     },
     {
+     "label": "Basis",
+     "tekst": "De afwijkingen zijn goed te verklaren uit de polsbreuk en de behandeling daarvan. Klachten van het distale radio-ulnaire gewricht passen bij dit letsel. Voor peesproblemen of CRPS zijn bij onderzoek geen aanwijzingen, en voor een oorzaak buiten het ongeval evenmin.",
+     "context": "Bronnen 1, 3 en 6."
+    },
+    {
      "label": "Onzekerheid",
-     "tekst": "Zonder röntgenfoto na de materiaalverwijdering kan ik beginnende artrose niet uitsluiten.",
+     "tekst": "Zonder röntgenfoto na de materiaalverwijdering kan ik beginnende posttraumatische artrose niet uitsluiten.",
+     "context": null
+    },
+    {
+     "label": "Buiten mijn vakgebied",
+     "tekst": "Niet van toepassing.",
      "context": null
     }
    ],
@@ -1142,12 +1275,22 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "Op basis van het klinisch onderzoek acht ik verdere relevante verbetering niet waarschijnlijk. Een definitieve eindsituatie kan ik echter pas vaststellen met de gegevens van de controle na de materiaalverwijdering en een actuele röntgenfoto.",
+     "tekst": "Nee, nog niet. Een definitieve eindsituatie stel ik niet vast zonder de gegevens van de controle na de materiaalverwijdering en een actuele röntgenfoto.",
      "context": null
     },
     {
-     "label": "Advies",
-     "tekst": "Controlegegevens opvragen en, als die geen bijzonderheden tonen, de eindsituatie stellen op T+24m. Anders herbeoordeling na aanvullende gegevens.",
+     "label": "Basis",
+     "tekst": "Klinisch is de situatie de afgelopen maanden gelijk gebleven en verwacht ik geen relevante verbetering meer.",
+     "context": null
+    },
+    {
+     "label": "Onzekerheid",
+     "tekst": "Beginnende artrose kan de uitkomst nog veranderen. Dat is alleen met beeldvorming te beoordelen.",
+     "context": null
+    },
+    {
+     "label": "Vervolg",
+     "tekst": "Tonen de controlegegevens en de röntgenfoto geen bijzonderheden, dan luidt het oordeel: ‘Gelet op de tijd sinds het ongeval, de behandeling, het huidige klinisch onderzoek en de beschikbare controle-informatie acht ik de orthopedische toestand stationair. De medische eindsituatie wordt vastgesteld per [DATUM].’ Anders volgt een herbeoordeling.",
      "context": null
     }
    ]
@@ -1171,27 +1314,39 @@ var EXAMPLE_NVMSR = {
      "[TABEL] volgens [POLISVERSIE]"
     ],
     [
-     "Gekozen methode (diagnose of bewegingsuitslag) en reden",
+     "Reden voor de bewegingsmethode (ROM) in plaats van de diagnosemethode",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Gemeten waarden en afronding",
+     "Pols extensie: gemeten 45°, afgerond volgens AMA [..]°, tabelscore [..]%",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Tabelcel per bewegingsrichting",
+     "Pols flexie: gemeten 55°, afgerond [..]°, tabelscore [..]%",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Subtotaal per gewricht",
+     "Radiaaldeviatie: gemeten 15°, afgerond [..]°, tabelscore [..]%",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Modifiers en formule",
+     "Ulnairdeviatie: gemeten 25°, afgerond [..]°, tabelscore [..]%",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
-     "Omzetting via de conversietabel",
+     "Subtotaal pols (optellen)",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Pronatie en supinatie: gemeten 80° en 70°, afgerond, tabelscore",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Functionele historie (QuickDASH) en eventuele aanpassing",
+     "Door de ondertekenend specialist in te vullen"
+    ],
+    [
+     "Combineren en omzetten via de conversietabel naar de maatstaf van de polis",
      "Door de ondertekenend specialist in te vullen"
     ],
     [
@@ -1199,7 +1354,7 @@ var EXAMPLE_NVMSR = {
      "Niet van toepassing (vraag 3)"
     ],
     [
-     "Uitkomst volgens de polis",
+     "Uitkomst volgens de polis, getoetst aan het maximum voor de hand",
      "Door de ondertekenend specialist in te vullen"
     ]
    ]
@@ -1287,15 +1442,27 @@ var EXAMPLE_NVMSR = {
    "fields": [
     {
      "label": "Specialist",
-     "value": "Orthopedisch chirurg, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkgever: [OPGAVE]"
     },
     {
      "label": "Onderzoekend arts",
-     "value": "Basisarts, BIG [BIG-NR]; werkgever en nevenfuncties: [OPGAVE]"
+     "value": "Basisarts, BIG [BIG-NR]; werkgever: [OPGAVE]"
     },
     {
-     "label": "Relatie met partijen",
-     "value": "Geen eerdere behandelrelatie met betrokkene; geen belang bij de uitkomst"
+     "label": "Ervaring als deskundige",
+     "value": "Specialist: [AANTAL] jaar, circa [AANTAL] expertises per jaar; onderzoekend arts: [OPGAVE]"
+    },
+    {
+     "label": "Nevenfuncties",
+     "value": "[OPGAVE]"
+    },
+    {
+     "label": "Belangenconflicten",
+     "value": "Geen; geen eerdere behandelrelatie met betrokkene en geen financieel belang bij de uitkomst"
+    },
+    {
+     "label": "Relatie met de verzekeraar",
+     "value": "In de afgelopen twaalf maanden [AANTAL] opdrachten van deze verzekeraar"
     }
    ]
   },
@@ -1689,6 +1856,7 @@ h+='<div class="kr-sign-grid">';
 h+='<div><span class="kr-sign-role">Onderzoekend arts</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+redact(ot.arts||"[ARTS]")+'</span></div>';
 h+='<div><span class="kr-sign-role">Gecontroleerd en ondertekend</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+esc(ot.specialist||"Medisch specialist, BIG-geregistreerd")+'</span></div>';
 h+='</div>';
+if(ot.rollen){h+='<dl class="kr-fields kr-sign-roles">';ot.rollen.forEach(function(r){h+='<div><dt>'+esc(r[0])+'</dt><dd>'+redact(r[1])+'</dd></div>';});h+='</dl>';}
 h+='<p class="kr-sign-status">'+esc(ot.status||"Concept. Nog niet ondertekend.")+'</p>';
 h+='</section>';
 

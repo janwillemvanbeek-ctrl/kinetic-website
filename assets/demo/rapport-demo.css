@@ -349,6 +349,7 @@
 .kr-sign-line{display:block;height:44px;border-bottom:1px solid var(--kr-ink);margin:.5rem 0 .5rem}
 .kr-sign-name{font-size:.85rem;font-weight:500}
 .kr-sign-status{margin:1.25rem 0 0 3.1rem;font-size:.8rem;color:var(--kr-stone)}
+.kr-sign-roles{margin:1.75rem 0 0 3.1rem}
 .kr-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.1rem 0 1.4rem;border-top:1px solid var(--kr-line);font:500 .6875rem/1.4 var(--kr-mono);letter-spacing:.04em;color:var(--kr-stone)}
 .kr-foot i{color:var(--kr-teal)}
 
@@ -361,7 +362,7 @@
   .kr-cover-meta{grid-template-columns:1fr 1fr}
   .kr-kern-grid{grid-template-columns:1fr}
   .kr-kern-wide{grid-column:auto}
-  .kr-sec>*:not(.kr-sec-head),.kr-sign-grid,.kr-sign-status{margin-left:0}
+  .kr-sec>*:not(.kr-sec-head),.kr-sign-grid,.kr-sign-status,.kr-sign-roles{margin-left:0}
   .kr-sec-head{grid-template-columns:2.2rem 1fr}
   .kr-sec-by{grid-column:2}
   .kr-fields{grid-template-columns:1fr}
@@ -513,3 +514,4 @@
 .opbouw-verschil{max-width:1100px;margin:3rem auto 0;--kr-ink:#1A1916;--kr-ink2:#4F4A42;--kr-stone:#8B8579;--kr-line:#E7E1D4;--kr-teal:var(--warm-teal);--kr-mono:"IBM Plex Mono",ui-monospace,monospace}
 .opbouw-verschil .kr-table{margin-top:1rem;background:#fff}
 .opbouw-verschil .kr-table td{color:var(--kr-ink)}
+
