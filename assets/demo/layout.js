@@ -60,7 +60,6 @@
     return '<footer class="footer">' +
       '<div class="footer-content">' +
       '<div class="footer-brand">' + logoWordmark(true) +
-      '<p>Orthopedische expertises in letselschadezaken.</p>' +
       '<div class="footer-trust"><span>AVG</span><span>NEN 7510</span><span>EU-hosting</span></div>' +
       '</div>' +
       '<div class="footer-links">' +
