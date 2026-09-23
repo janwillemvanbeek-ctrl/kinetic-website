@@ -205,3 +205,4 @@
 .opbouw-list small{display:block;font-size:.8125rem;color:var(--stone);line-height:1.5;margin-top:.2rem}
 .opbouw-list .rp-badge{margin-left:.5rem}
 @media(max-width:900px){.opbouw-grid{grid-template-columns:1fr}}
+.rp-arts-tekst{color:var(--warm-ink);font-size:.875rem;line-height:1.65;margin:.35rem 0 0;padding-right:2.5rem}

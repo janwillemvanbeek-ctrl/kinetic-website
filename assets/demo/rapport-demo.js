@@ -109,7 +109,7 @@ var EXAMPLE_RAPPORT = {
       ]
     },
     {
-      num:"6", title:"Huidige klachten (anamnese)", badge:"ai", type:"text",
+      num:"6", title:"Huidige klachten (anamnese)", badge:"arts", type:"text",
       paragraphs: [
         "Betrokkene rapporteert bij onderzoek d.d. 23-04-2024:",
         "Nek: VAS 5\u20136/10, uitstraling linker schouder/arm. Verergering bij beeldschermwerk en autorijden.\nHoofdpijn: 3\u20134x/week, fronto-temporaal, 4\u20138 uur.\nCognitief: verminderde concentratie, multitasking bemoeilijkt.\nSlaap: moeite met inslapen, 1\u20132x/nacht wakker.\nArbeid: 40% arbeidsongeschikt, werkt 3 dagen/week bij [ORGANISATIE-4]."
@@ -118,40 +118,40 @@ var EXAMPLE_RAPPORT = {
     },
     {
       num:"7", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
-      prompt:"Bevindingen door de onderzoekend arts in te vullen.",
+      prompt:"Bevindingen van de onderzoekend arts.",
       subfields: [
-        {label:"Algemene indruk", context:null},
-        {label:"Cervicale wervelkolom", context:"Vergelijk: fysio 21-02-2022 (flex 35\u00b0, ext 25\u00b0), neuroloog 08-03-2023 (rot L 40\u00b0, R 55\u00b0, Spurling+). MRI: protrusie C5\u2013C6."},
-        {label:"Neurologisch bovenste extremiteiten", context:"EMG: ulnaris neuropathie elleboog L (42 m/s, N>50). Hypoesthesie C6 L, sensibiliteitsverlies dig IV\u2013V."},
-        {label:"Provocatietesten", context:"Spurling positief L (neuroloog 08-03-2023)."},
-        {label:"Aanvullend onderzoek", context:null}
+        {label:"Algemene indruk", tekst:"Verzorgde man die zich wat voorzichtig beweegt en tijdens het gesprek regelmatig van houding wisselt. Lengte 182 cm, gewicht 84 kg.", context:null},
+        {label:"Cervicale wervelkolom", tekst:"Geen standsafwijking. Actieve beweeglijkheid: flexie 40°, extensie 30°, rotatie links 50° en rechts 60°, lateroflexie 25° beiderzijds. Eindstandige pijn bij extensie en rotatie naar links. Drukpijn paravertebraal C4–C6 links, verhoogde spierspanning van de m. trapezius links.", context:"Vergelijk: fysio 21-02-2022 (flex 35\u00b0, ext 25\u00b0), neuroloog 08-03-2023 (rot L 40\u00b0, R 55\u00b0, Spurling+). MRI: protrusie C5\u2013C6."},
+        {label:"Neurologisch bovenste extremiteiten", tekst:"Kracht symmetrisch 5/5. Reflexen symmetrisch opwekbaar. Verminderd gevoel aan de radiale zijde van de linker onderarm (C6) en aan dig IV–V links. Voor de duiding van de ulnarisklachten verwijs ik naar de neuroloog.", context:"EMG: ulnaris neuropathie elleboog L (42 m/s, N>50). Hypoesthesie C6 L, sensibiliteitsverlies dig IV\u2013V."},
+        {label:"Provocatietesten", tekst:"Spurling links positief met uitstraling naar de schouder, rechts negatief.", context:"Spurling positief L (neuroloog 08-03-2023)."},
+        {label:"Aanvullend onderzoek", tekst:"De MRI van 18-08-2022 heb ik zelf bekeken: discusdegeneratie C5–C6 met protrusie en foraminastenose links, passend bij het verslag. Geen aanvullend onderzoek verricht.", context:null}
       ]
     },
     {
       num:"8", title:"Diagnose en beschouwing", badge:"arts", type:"arts_template",
       prompt:"Per subveld zijn de relevante dossiergegevens samengevat. Zie ook tegenstrijdigheden (sectie 5b).",
       subfields: [
-        {label:"Diagnose op vakgebied", context:"Neuroloog: (1) cervicobrachialgie C5\u2013C6, (2) ulnaris neuropathie, (3) PCS. Zie sectie 5b."},
-        {label:"Causaal verband", context:"CT SEH: spondylose pre-existent. MRI: protrusie. Neuroloog: traumatisch geagraveerd. EMG: causaliteit open. \u2192 Zie tegenstrijdigheden 5b."},
-        {label:"Pre-existente factoren", context:"Spondylose C5\u2013C6 + L4\u2013L5 (CT/r\u00f6ntgen). Geen klachten in huisartsjournaal v\u00f3\u00f3r ongeval."},
-        {label:"Prognose en eindtoestand", context:"Neuroloog: PCS-herstel 6\u201312 mnd. Bedrijfsarts: volledige werkhervatting niet voor sept 2023. Huidig (apr 2024): 40% AO."},
-        {label:"Blijvende invaliditeit (AMA Guides 6e ed.)", context:"Relevante chapters: Ch.17 Spine (Table 17-2 Cervical DBI) voor cervicaal syndroom. Ch.15 Upper Extremities (Table 15-5 Clavicle/AC) voor AC-luxatie. Ch.13 CNS/PNS (Table 13-12 Peripheral Nerve) voor ulnaris neuropathie. Ch.13 (Table 13-6 TBI) voor PCS."}
+        {label:"Diagnose op vakgebied", tekst:"Chronische nekklachten met uitstraling naar de linker arm na een whiplashtrauma (WAD graad II), bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links. De ulnarisneuropathie en de cognitieve klachten vallen buiten mijn vakgebied.", context:"Neuroloog: (1) cervicobrachialgie C5\u2013C6, (2) ulnaris neuropathie, (3) PCS. Zie sectie 5b."},
+        {label:"Causaal verband", tekst:"De nekklachten zijn direct na het ongeval ontstaan, bij een blanco voorgeschiedenis voor het bewegingsapparaat. De degeneratie C5–C6 bestond al, maar gaf geen klachten. Naar mijn oordeel heeft het ongeval de klachten uitgelokt; een causaal verband acht ik aanwezig.", context:"CT SEH: spondylose pre-existent. MRI: protrusie. Neuroloog: traumatisch geagraveerd. EMG: causaliteit open. \u2192 Zie tegenstrijdigheden 5b."},
+        {label:"Pre-existente factoren", tekst:"Asymptomatische degeneratie C5–C6 en L4–L5. Zonder ongeval hadden op termijn ook nekklachten kunnen ontstaan; het moment en de omvang daarvan zijn niet met redelijke zekerheid vast te stellen.", context:"Spondylose C5\u2013C6 + L4\u2013L5 (CT/r\u00f6ntgen). Geen klachten in huisartsjournaal v\u00f3\u00f3r ongeval."},
+        {label:"Prognose en eindtoestand", tekst:"Ruim twee jaar na het ongeval en na uitgebreide behandeling verwacht ik geen wezenlijke verbetering meer. Eindtoestand per 23-04-2024.", context:"Neuroloog: PCS-herstel 6\u201312 mnd. Bedrijfsarts: volledige werkhervatting niet voor sept 2023. Huidig (apr 2024): 40% AO."},
+        {label:"Blijvende invaliditeit (AMA Guides 6e ed.)", tekst:"Cervicale wervelkolom volgens tabel 17-2, klasse 1, na correctie met de grade modifiers 5% van de gehele persoon. De ulnarisneuropathie en de cognitieve klachten beoordeelt de neuroloog.", context:"Relevante chapters: Ch.17 Spine (Table 17-2 Cervical DBI) voor cervicaal syndroom. Ch.15 Upper Extremities (Table 15-5 Clavicle/AC) voor AC-luxatie. Ch.13 CNS/PNS (Table 13-12 Peripheral Nerve) voor ulnaris neuropathie. Ch.13 (Table 13-6 TBI) voor PCS."}
       ]
     },
     {
       num:"9", title:"Beantwoording IWMD-vragen", badge:"arts", type:"iwmd_answers",
       intro:"De arts beantwoordt de vraagstelling. Per vraag staan de relevante bronnen uit het dossier.",
       questions: [
-        {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
-        {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", context:"Zie sectie 3."},
-        {q:"Vraag 3 \u2014 Bevindingen bij lichamelijk en hulponderzoek?", context:null},
-        {q:"Vraag 4 \u2014 Diagnose en differentiaaldiagnostische overwegingen?", context:null},
-        {q:"Vraag 5 \u2014 Causaal verband klachten/stoornissen met ongeval?", context:"Aandacht: 3 tegenstrijdigheden (sectie 5b). Pre-existente spondylose vs. traumatische agravatie."},
-        {q:"Vraag 6 \u2014 Eindtoestand? Zo ja, per welke datum?", context:"Neuroloog: PCS 6\u201312 mnd. 26 mnd post-trauma, klachten persisteren."},
-        {q:"Vraag 7 \u2014 Beperkingen in huidige toestand (incl. FML)?", context:"Bedrijfsarts: max 4u/dag, beperkt bovenhands, pijn zitten >45 min. AMA Guides 6e ed.: Ch.17 Table 17-2 (cervicaal), Ch.15 Table 15-5 (AC-luxatie), Ch.13 Table 13-12 (ulnaris), Ch.13 Table 13-6 (PCS)."},
-        {q:"Vraag 8 \u2014 Beperkingen toe te schrijven aan ongeval? Pre-existent?", context:"Kritiek: zie tegenstrijdigheid 1 (sectie 5b). Spondylose pre-existent, geen klachten gedocumenteerd."},
-        {q:"Vraag 9 \u2014 Therapeutische suggesties?", context:null},
-        {q:"Vraag 10 \u2014 Overige relevante feiten of omstandigheden?", context:"3 hiaten (sectie 5a), 3 tegenstrijdigheden (sectie 5b)."}
+        {q:"Vraag 1 \u2014 Anamnese: aard, ernst, verloop letsel en behandelingen?", antwoord:"Zie sectie 6 (anamnese) en de samenvatting medische informatie in sectie 5.", context:"Zie secties 4 en 6 voor het dossieroverzicht."},
+        {q:"Vraag 2 \u2014 Medische voorgeschiedenis op uw vakgebied?", antwoord:"Blanco voor het bewegingsapparaat. In 2019 spanningshoofdpijn bij de huisarts; geen nek- of schouderklachten (sectie 3).", context:"Zie sectie 3."},
+        {q:"Vraag 3 \u2014 Bevindingen bij lichamelijk en hulponderzoek?", antwoord:"Zie sectie 7.", context:null},
+        {q:"Vraag 4 \u2014 Diagnose en differentiaaldiagnostische overwegingen?", antwoord:"Chronische nekklachten met uitstraling naar de linker arm na WAD graad II, bij pre-existente degeneratie C5–C6. Differentiaal diagnostisch een radiculopathie C6 links.", context:null},
+        {q:"Vraag 5 \u2014 Causaal verband klachten/stoornissen met ongeval?", antwoord:"Ja. De klachten ontstonden direct na het ongeval, bij een blanco voorgeschiedenis. Zie sectie 8.", context:"Aandacht: 3 tegenstrijdigheden (sectie 5b). Pre-existente spondylose vs. traumatische agravatie."},
+        {q:"Vraag 6 \u2014 Eindtoestand? Zo ja, per welke datum?", antwoord:"Ja, per 23-04-2024.", context:"Neuroloog: PCS 6\u201312 mnd. 26 mnd post-trauma, klachten persisteren."},
+        {q:"Vraag 7 \u2014 Beperkingen in huidige toestand (incl. FML)?", antwoord:"Geen langdurig statische belasting van de nek: beeldschermwerk en autorijden maximaal een uur aaneengesloten. Geen werk boven schouderhoogte en niet tillen boven 10 kg.", context:"Bedrijfsarts: max 4u/dag, beperkt bovenhands, pijn zitten >45 min. AMA Guides 6e ed.: Ch.17 Table 17-2 (cervicaal), Ch.15 Table 15-5 (AC-luxatie), Ch.13 Table 13-12 (ulnaris), Ch.13 Table 13-6 (PCS)."},
+        {q:"Vraag 8 \u2014 Beperkingen toe te schrijven aan ongeval? Pre-existent?", antwoord:"Grotendeels aan het ongeval. Door de pre-existente degeneratie hadden op termijn ook zonder ongeval beperkingen kunnen ontstaan; de omvang daarvan is niet met redelijke zekerheid vast te stellen.", context:"Kritiek: zie tegenstrijdigheid 1 (sectie 5b). Spondylose pre-existent, geen klachten gedocumenteerd."},
+        {q:"Vraag 9 \u2014 Therapeutische suggesties?", antwoord:"Voortzetten van het oefenprogramma en ergonomische aanpassing van de werkplek. Van verdere invasieve behandeling verwacht ik weinig.", context:null},
+        {q:"Vraag 10 \u2014 Overige relevante feiten of omstandigheden?", antwoord:"Voor de ulnarisneuropathie en de cognitieve klachten adviseer ik een neurologische expertise, met neuropsychologisch onderzoek.", context:"3 hiaten (sectie 5a), 3 tegenstrijdigheden (sectie 5b)."}
       ]
     },
     {
@@ -170,7 +170,7 @@ var EXAMPLE_RAPPORT = {
       ]
     }
   ],
-  stats: {aiSections:8, artsSections:3, bronnen:10, hiaten:3, tegenstrijdigheden:3}
+  stats: {aiSections:7, artsSections:4, bronnen:10, hiaten:3, tegenstrijdigheden:3}
 };
 
 /* Tweede voorbeeld: medische expertise volgens de NVMSR-richtlijn (deel 1 met ongeval,
@@ -239,74 +239,74 @@ var EXAMPLE_NVMSR = {
     },
     {
       num:"1a", title:"Anamnese", badge:"arts", type:"arts_template",
-      prompt:"Door de arts in te vullen na het gesprek met betrokkene.",
+      prompt:"Het gesprek met betrokkene.",
       subfields: [
-        {label:"Toedracht en beloop", context:"Zie samenvatting medische informatie: fractuur, operatie T+2d, fysiotherapie tot T+6m, materiaalverwijdering T+14m."},
-        {label:"Huidige klachten en beperkingen in werk en vrije tijd", context:null}
+        {label:"Toedracht en beloop", tekst:"Op T±0 viel betrokkene tijdens werkzaamheden van een trap en ving zich op met de rechterhand. Op de SEH bleek de pols gebroken; twee dagen later volgde een operatie met een plaat. Na zes weken gips startte fysiotherapie, die tot een half jaar na het ongeval duurde. Na veertien maanden is de plaat verwijderd.", context:"Zie samenvatting medische informatie: fractuur, operatie T+2d, fysiotherapie tot T+6m, materiaalverwijdering T+14m."},
+        {label:"Huidige klachten en beperkingen in werk en vrije tijd", tekst:"Pijn aan de rechter pols bij draaien en steunen, bijvoorbeeld bij het aandraaien van koppelingen en bij opstaan uit een stoel. Langdurig gereedschap vasthouden lukt minder lang. Hij werkt weer volledig als monteur, maar laat zwaar trekwerk aan collega's over. Zijn fitnesstraining heeft hij aangepast. Geen pijnstillers.", context:null}
       ]
     },
     {
       num:"1b", title:"Medische gegevens", badge:"arts", type:"arts_template",
-      prompt:"Door de arts te bevestigen op basis van anamnese en dossier.",
+      prompt:"Op basis van anamnese en dossier.",
       subfields: [
-        {label:"Voorgeschiedenis, medicatie, allergieën", context:"Huisartsjournaal: geen klachten bovenste extremiteiten voor het ongeval."}
+        {label:"Voorgeschiedenis, medicatie, allergieën", tekst:"Geen klachten of behandelingen van de bovenste extremiteiten. Geen medicatie, geen allergieën. Rechtshandig.", context:"Huisartsjournaal: geen klachten bovenste extremiteiten voor het ongeval."}
       ]
     },
     {
       num:"1c", title:"Lichamelijk onderzoek", badge:"arts", type:"arts_template",
-      prompt:"Bevindingen door de onderzoekend arts in te vullen.",
+      prompt:"Bevindingen van de onderzoekend arts.",
       subfields: [
-        {label:"Algemeen en inspectie", context:null},
-        {label:"Palpatie en functie", context:"Fysiotherapie eindverslag T+6m: extensie pols rechts 45°, knijpkracht 70% van links (p. 3)."}
+        {label:"Algemeen en inspectie", tekst:"Lengte 181 cm, gewicht 83 kg. Normaal looppatroon. Rustig litteken van 8 cm aan de handpalmzijde van de rechter pols. Geen zwelling of standsafwijking.", context:null},
+        {label:"Palpatie en functie", tekst:"Drukpijn over het distale radio-ulnaire gewricht rechts, geen drukpijn in de tabatière. Pro- en supinatie eindstandig pijnlijk. Fijne motoriek normaal.", context:"Fysiotherapie eindverslag T+6m: extensie pols rechts 45°, knijpkracht 70% van links (p. 3)."}
       ],
       table: {
         kolommen: ["Rechts (aangedane zijde)","Links"],
-        rijen: ["Omtrek pols","Omtrek onderarm (10 cm distaal elleboog)","Pols extensie-flexie","Pols radiaal-ulnairdeviatie","Onderarm pronatie-supinatie","Knijpkracht (kg)"]
+        rijen: [["Omtrek pols","17,5 cm","17,0 cm"],["Omtrek onderarm (10 cm distaal elleboog)","27,0 cm","28,0 cm"],["Pols extensie-flexie","45-0-55","70-0-80"],["Pols radiaal-ulnairdeviatie","15-0-25","20-0-35"],["Onderarm pronatie-supinatie","80-0-70","85-0-85"],["Knijpkracht (kg)","32","46"]]
       }
     },
     {
       num:"1d", title:"Consistentie", badge:"arts", type:"arts_template",
       prompt:"Samenhang tussen anamnese, dossier en eigen bevindingen.",
-      subfields: [{label:"Oordeel over de consistentie", context:null}]
+      subfields: [{label:"Oordeel over de consistentie", tekst:"De klachten van betrokkene, het beloop in het medisch dossier en mijn bevindingen bij onderzoek zijn onderling consistent.", context:null}]
     },
     {
       num:"1f", title:"Diagnose", badge:"arts", type:"arts_template",
       prompt:"Diagnose op het eigen vakgebied.",
-      subfields: [{label:"Diagnose", context:"Status na distale radiusfractuur rechts, plaatfixatie en materiaalverwijdering."}]
+      subfields: [{label:"Diagnose", tekst:"Pijnlijke bewegingsbeperking van de rechter pols bij status na distale radiusfractuur rechts, behandeld met plaatfixatie en materiaalverwijdering.", context:"Status na distale radiusfractuur rechts, plaatfixatie en materiaalverwijdering."}]
     },
     {
       num:"1g", title:"Beperkingen", badge:"arts", type:"arts_template",
       prompt:"Beperkingen in werk, huishouden en vrije tijd.",
-      subfields: [{label:"Beperkingen", context:null}]
+      subfields: [{label:"Beperkingen", tekst:"Verminderde knijpkracht en belastbaarheid van de rechter pols. Beperkt in krachtig draaien, steunen op de hand en langdurig vasthouden van gereedschap. Geen beperkingen in de fijne motoriek.", context:null}]
     },
     {
       num:"1h", title:"Blijvende invaliditeit", badge:"arts", type:"arts_template",
       prompt:"Volgens de AMA Guides 6e editie en de leidraad van de Werkgroep Invaliditeit en Arbeidsongeschiktheid van de NOV.",
-      subfields: [{label:"Berekening per diagnose en totaal", context:null}]
+      subfields: [{label:"Berekening per diagnose en totaal", tekst:"De bewegingsbeperking van de pols (tabel 15-32) geeft 7% van de bovenste extremiteit. Die waarde is hoger dan de diagnosegebonden waarde en wordt daarom gebruikt. Blijvende invaliditeit: 7% van de bovenste extremiteit, 4% van de gehele persoon.", context:null}]
     },
     {
       num:"1i", title:"Medische eindsituatie", badge:"arts", type:"arts_template",
       prompt:"Is er sprake van een medische eindsituatie, en zo nee, wanneer wordt die verwacht?",
-      subfields: [{label:"Medische eindsituatie", context:"Laatste poliklinisch contact T+14m (materiaalverwijdering)."}]
+      subfields: [{label:"Medische eindsituatie", tekst:"Er is sprake van een medische eindsituatie. Verdere verbetering verwacht ik niet.", context:"Laatste poliklinisch contact T+14m (materiaalverwijdering)."}]
     },
     {
       num:"–", title:"Inzage en blokkeringsrecht", badge:"arts", type:"arts_template",
       prompt:"Vastleggen of betrokkene het concept wil inzien en of gebruik wordt gemaakt van het blokkeringsrecht.",
-      subfields: [{label:"Keuze van betrokkene", context:null}]
+      subfields: [{label:"Keuze van betrokkene", tekst:"Betrokkene wil het concept inzien. Op het blokkeringsrecht gewezen; hij maakt daar geen gebruik van.", context:null}]
     },
     {
       num:"2", title:"Situatie zonder ongeval", badge:"arts", type:"arts_template",
       prompt:"Klachten, afwijkingen en beperkingen in de hypothetische situatie zonder ongeval.",
       subfields: [
-        {label:"Klachten en beperkingen voor het ongeval", context:"Huisartsjournaal: geen klachten bovenste extremiteiten."},
-        {label:"Klachten die ook zonder ongeval waren ontstaan", context:null},
-        {label:"Blijvende invaliditeit zonder ongeval", context:null}
+        {label:"Klachten en beperkingen voor het ongeval", tekst:"Geen klachten aan de rechter pols of hand.", context:"Huisartsjournaal: geen klachten bovenste extremiteiten."},
+        {label:"Klachten die ook zonder ongeval waren ontstaan", tekst:"Nee, op mijn vakgebied zijn er geen klachten die ook zonder ongeval waren ontstaan.", context:null},
+        {label:"Blijvende invaliditeit zonder ongeval", tekst:"Nee.", context:null}
       ]
     },
     {
       num:"3", title:"Overige vragen", badge:"arts", type:"arts_template",
       prompt:"Aanvullende vragen van de opdrachtgever.",
-      subfields: [{label:"Overig", context:null}]
+      subfields: [{label:"Overig", tekst:"Geen aanvullende vragen.", context:null}]
     },
     {
       num:"–", title:"Bronnenlijst", badge:"ai", type:"bronnen",
@@ -461,6 +461,7 @@ s.subfields.forEach(function(sf){
 var label=typeof sf==="string"?sf:sf.label;
 var ctx=typeof sf==="string"?null:sf.context;
 h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span><strong>'+esc(label)+'</strong>';
+if(sf.tekst){h+='<p class="rp-arts-tekst">'+esc(sf.tekst)+'</p>';}
 if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossier:</span> '+esc(ctx)+'</div>';}
 h+='</div>';
 });
@@ -468,7 +469,7 @@ if(s.table){
 h+='<table class="rp-bronnen-table rp-meettabel"><thead><tr><th>Meting</th>';
 s.table.kolommen.forEach(function(k){h+='<th>'+esc(k)+'</th>';});
 h+='</tr></thead><tbody>';
-s.table.rijen.forEach(function(r){h+='<tr><td>'+esc(r)+'</td>';s.table.kolommen.forEach(function(){h+='<td class="rp-meet-leeg">&middot;&middot;&middot;</td>';});h+='</tr>';});
+s.table.rijen.forEach(function(r){var row=Array.isArray(r)?r:[r];h+='<tr><td>'+esc(row[0])+'</td>';s.table.kolommen.forEach(function(k,i){h+=row[i+1]!=null?'<td>'+esc(row[i+1])+'</td>':'<td class="rp-meet-leeg">&middot;&middot;&middot;</td>';});h+='</tr>';});
 h+='</tbody></table>';
 }
 h+='</div>';
@@ -482,7 +483,7 @@ var q=typeof item==="string"?item:item.q;
 var ctx=typeof item==="string"?null:item.context;
 h+='<div class="rp-question"><span class="rp-q-num">'+(q.indexOf("Vraag")===0?"":"Vraag "+(i+1))+'</span><p class="rp-q-text">'+esc(q.replace(/^Vraag \d+ \u2014 /,""))+'</p>';
 if(ctx){h+='<div class="rp-arts-context"><span class="rp-arts-ctx-label">Dossier:</span> '+esc(ctx)+'</div>';}
-h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span></div></div>';
+h+='<div class="rp-arts-field"><span class="rp-arts-label">Arts</span>'+(item.antwoord?'<p class="rp-arts-tekst">'+esc(item.antwoord)+'</p>':'')+'</div></div>';
 });
 }
 
