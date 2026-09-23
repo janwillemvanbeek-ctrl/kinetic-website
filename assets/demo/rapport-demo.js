@@ -15,7 +15,7 @@ var EXAMPLE_RAPPORT = {
   "zaaknummer": "2024-KME-01583",
   "betrokkene": "[PERSOON-1]",
   "geboortedatum": "[GEBOORTEDATUM]",
-  "status": "Concept · voorlopig oordeel",
+  "status": "Definitief",
   "specialisme": "Orthopedisch",
   "opdrachtgever": "[OPDRACHTGEVER]",
   "ongevalsdatum": "T±0",
@@ -82,14 +82,14 @@ var EXAMPLE_RAPPORT = {
     ],
     [
      "Kernbevindingen geverifieerd",
-     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op [DATUM]"
+     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op T+29m"
     ],
     [
      "Eindverantwoordelijk en ondertekend",
      "Orthopedisch chirurg, BIG [BIG-NR]"
     ]
    ],
-   "status": "Concept. Definitief na toetsing door de specialist, controle van vraagstelling en feitelijke gegevens door de opdrachtgever, en inzage door betrokkene."
+   "status": "Definitief. Ondertekend op T+30m, na controle van vraagstelling en feitelijke gegevens door de opdrachtgever en inzage door betrokkene."
   }
  },
  "compleetheid": {
@@ -110,11 +110,11 @@ var EXAMPLE_RAPPORT = {
   "ontbrekend": [
    {
     "doc": "Fysiotherapie eindverslag",
-    "prio": "kritiek"
+    "prio": "belangrijk"
    },
    {
     "doc": "Intake en voortgang pijnrevalidatie",
-    "prio": "kritiek"
+    "prio": "belangrijk"
    },
    {
     "doc": "Neuropsychologisch onderzoek",
@@ -227,25 +227,25 @@ var EXAMPLE_RAPPORT = {
    "type": "hiaten",
    "hiaten": [
     {
-     "prio": "kritiek",
+     "prio": "belangrijk",
      "doc": "Fysiotherapie eindverslag",
      "verwacht": "T+4m",
      "toelichting": "Intake aanwezig (bron 5), maar geen afsluitend verslag. Het resultaat van de behandeling is niet vast te stellen.",
-     "actie": "Opvragen bij [ORGANISATIE-6]."
+     "actie": "Opgevraagd bij [ORGANISATIE-6]; niet ontvangen. De conclusies in 1f houden hier rekening mee."
     },
     {
-     "prio": "kritiek",
+     "prio": "belangrijk",
      "doc": "Intake en voortgang pijnrevalidatie",
      "verwacht": "T+11m",
      "toelichting": "Verwijzing aanwezig (bron 7), maar geen intake of behandelplan.",
-     "actie": "Opvragen bij [ORGANISATIE-7]."
+     "actie": "Opgevraagd bij [ORGANISATIE-7]; niet ontvangen. Niet bepalend voor de conclusies."
     },
     {
      "prio": "belangrijk",
      "doc": "Neuropsychologisch onderzoek",
      "verwacht": "T+15–24m",
      "toelichting": "De neuroloog noemt een verdenking op een post-commotioneel syndroom (bron 10); een neuropsychologisch onderzoek ontbreekt.",
-     "actie": "Navragen bij de behandelend neuroloog."
+     "actie": "Buiten het orthopedisch vakgebied; zie het advies in 3a."
     }
    ]
   },
@@ -409,7 +409,7 @@ var EXAMPLE_RAPPORT = {
      ]
     ]
    },
-   "tableNote": "* Algemene referentiewaarden uitsluitend ter klinische oriëntatie; zij vormen geen zelfstandige AMA-classificatie. Bron: [BRON]. Weergegeven is de beste reproduceerbare waarde van drie metingen."
+   "tableNote": "* Algemene referentiewaarden uitsluitend ter klinische oriëntatie; zij vormen geen zelfstandige AMA-classificatie. Weergegeven is de beste reproduceerbare waarde van drie metingen."
   },
   {
    "num": "1d",
@@ -705,7 +705,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Verificatie en eindverantwoordelijkheid",
-     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op [DATUM], de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
+     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op T+29m, de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
     },
     {
      "label": "Opdrachtgever",
@@ -729,7 +729,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Concept toegezonden",
-     "value": "[DATUM], met termijn van twee weken"
+     "value": "T+29m, met termijn van twee weken"
     },
     {
      "label": "Reactie betrokkene",
@@ -749,19 +749,19 @@ var EXAMPLE_RAPPORT = {
    "fields": [
     {
      "label": "Specialist",
-     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkgever: [OPGAVE]"
+     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkzaam in [ORGANISATIE-9]"
     },
     {
      "label": "Onderzoekend arts",
-     "value": "Basisarts, BIG [BIG-NR]; werkgever: [OPGAVE]"
+     "value": "Basisarts, BIG [BIG-NR]; in dienst van Kinetic"
     },
     {
      "label": "Ervaring als deskundige",
-     "value": "Specialist: [AANTAL] jaar, circa [AANTAL] expertises per jaar; onderzoekend arts: [OPGAVE]"
+     "value": "Specialist: ruim twintig jaar orthopedisch chirurg, circa 50 expertises per jaar; onderzoekend arts: drie jaar ervaring met expertiseonderzoek"
     },
     {
      "label": "Nevenfuncties",
-     "value": "[OPGAVE]"
+     "value": "Geen nevenfuncties met een relatie tot partijen in deze zaak"
     },
     {
      "label": "Belangenconflicten",
@@ -769,7 +769,7 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Relatie met de opdrachtgever",
-     "value": "In de afgelopen twaalf maanden [AANTAL] opdrachten van deze opdrachtgever; verhouding eisende en verwerende zijde: [OPGAVE]"
+     "value": "In de afgelopen twaalf maanden vier opdrachten van deze opdrachtgever; verhouding eisende en verwerende zijde ongeveer gelijk"
     },
     {
      "label": "Wetenschappelijke discussie",
