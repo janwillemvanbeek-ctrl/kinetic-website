@@ -725,10 +725,6 @@ var EXAMPLE_RAPPORT = {
      "value": "In de afgelopen twaalf maanden vier opdrachten van deze opdrachtgever; verhouding eisende en verwerende zijde ongeveer gelijk"
     },
     {
-     "label": "Ondersteunend arts",
-     "value": "De basisarts die het dossier voorbereidde is in dienst van Kinetic; voor hem geldt hetzelfde: geen behandelrelatie met betrokkene en geen belang bij de uitkomst"
-    },
-    {
      "label": "Wetenschappelijke discussie",
      "value": "Over de betekenis van degeneratie na een whiplashtrauma bestaan uiteenlopende opvattingen; deze zijn meegewogen in 1f en deel 2"
     }
@@ -1379,10 +1375,6 @@ var EXAMPLE_NVMSR = {
     {
      "label": "Relatie met de verzekeraar",
      "value": "In de afgelopen twaalf maanden zes opdrachten van deze verzekeraar"
-    },
-    {
-     "label": "Ondersteunend arts",
-     "value": "De basisarts die het dossier voorbereidde is in dienst van Kinetic; voor hem geldt hetzelfde: geen behandelrelatie met betrokkene en geen belang bij de uitkomst"
     }
    ]
   },
@@ -1846,7 +1838,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=8",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=8"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=9",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=9"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
