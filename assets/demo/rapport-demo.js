@@ -68,10 +68,6 @@ var EXAMPLE_RAPPORT = {
      "Kinetic, case manager [CASEMANAGER]"
     ],
     [
-     "Dossierstudie en voorbereiding",
-     "[ARTS], basisarts, onder verantwoordelijkheid van de specialist"
-    ],
-    [
      "Anamnese en lichamelijk onderzoek",
      "Orthopedisch chirurg, zelf (NVMSR-richtlijn § 7.1)"
     ],
@@ -653,10 +649,6 @@ var EXAMPLE_RAPPORT = {
      "value": "Anamnese en lichamelijk onderzoek door de specialist zelf"
     },
     {
-     "label": "Voorbereiding",
-     "value": "Dossierstudie en concept van de medische samenvatting door [ARTS], basisarts, onder verantwoordelijkheid van de specialist; de basisarts verricht geen anamnese of lichamelijk onderzoek"
-    },
-    {
      "label": "Aanwezig bij onderzoek",
      "value": "Betrokkene en de specialist"
     },
@@ -873,10 +865,6 @@ var EXAMPLE_NVMSR = {
     [
      "Dossier geordend",
      "Kinetic, case manager [CASEMANAGER]"
-    ],
-    [
-     "Dossierstudie en voorbereiding",
-     "[ARTS], basisarts, onder verantwoordelijkheid van de specialist"
     ],
     [
      "Anamnese en lichamelijk onderzoek",
@@ -1307,10 +1295,6 @@ var EXAMPLE_NVMSR = {
     {
      "label": "Onderzoek",
      "value": "Anamnese en lichamelijk onderzoek door de specialist zelf"
-    },
-    {
-     "label": "Voorbereiding",
-     "value": "Dossierstudie en concept van de medische samenvatting door [ARTS], basisarts, onder verantwoordelijkheid van de specialist; de basisarts verricht geen anamnese of lichamelijk onderzoek"
     },
     {
      "label": "Verantwoordelijkheid",
@@ -1838,7 +1822,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=9",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=9"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=10",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=10"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
