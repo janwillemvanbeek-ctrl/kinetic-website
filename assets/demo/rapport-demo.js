@@ -863,8 +863,8 @@ var EXAMPLE_NVMSR = {
    },
    {
     "label": "Blijvende invaliditeit",
-    "waarde": "19%",
-    "toelichting": "Functieverlies rechterbeen; 8% gehele persoon (AMA Guides 6e druk)"
+    "waarde": "19% van het been",
+    "toelichting": "Voor het hele lichaam is dat 8%. De polis rekent met het been."
    },
    {
     "label": "Dossier",
@@ -1261,17 +1261,27 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "19% functieverlies van het rechterbeen volgens de AMA Guides, 6e druk: klasse 2 voor een tibiaplateaufractuur met ten hoogste 2 mm stapvorming (tabel 16-3), na correctie voor functionele historie, lichamelijk en aanvullend onderzoek. Er is geen voorafbestaande invaliditeit om in mindering te brengen.",
+     "tekst": "De blijvende invaliditeit is 19% functieverlies van het rechterbeen. Omgerekend naar het hele lichaam is dat 8%.",
      "context": null
     },
     {
-     "label": "Gehele persoon",
-     "tekst": "Omgerekend naar de gehele persoon is dit 8% (tabel 16-10, omrekenfactor 40%). Dit wordt vermeld ter informatie; de polis hanteert het percentage van het been.",
+     "label": "Twee getallen, één uitkomst",
+     "tekst": "Beide getallen beschrijven hetzelfde functieverlies, op een andere schaal. De 19% zegt hoeveel van de functie van het been verloren is. De 8% zegt hoeveel dat is ten opzichte van het hele lichaam: een been telt volgens de AMA Guides voor 40% van het lichaam, en 40% van 19% is afgerond 8% (tabel 16-10).",
      "context": null
     },
     {
-     "label": "Toepassing van de polis",
-     "tekst": "De omzetting naar een uitkeringspercentage volgens de polis is aan de verzekeraar.",
+     "label": "Welk getal de polis gebruikt",
+     "tekst": "Deze polis rekent met het percentage van het lichaamsdeel. Voor de uitkering is dus 19% van het been bepalend. De verzekeraar past dit toe op het percentage dat de polis voor volledig verlies van een been noemt (70%). De 8% voor het hele lichaam staat hier alleen ter vergelijking.",
+     "context": null
+    },
+    {
+     "label": "Onderbouwing",
+     "tekst": "AMA Guides, 6e druk: klasse 2 voor een tibiaplateaufractuur met ten hoogste 2 mm stapvorming (tabel 16-3), na correctie voor functionele historie, lichamelijk en aanvullend onderzoek.",
+     "context": null
+    },
+    {
+     "label": "Voorafbestaande invaliditeit",
+     "tekst": "Geen; er gaat niets van af (vraag 3).",
      "context": null
     }
    ]
@@ -1843,7 +1853,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=4",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=4"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=5",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=5"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
