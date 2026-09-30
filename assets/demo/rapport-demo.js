@@ -1312,12 +1312,12 @@ var EXAMPLE_NVMSR = {
   },
   {
    "num": "–",
-   "title": "Inzage en blokkeringsrecht",
+   "title": "Inzagerecht",
    "badge": "ai",
    "type": "fields",
    "fields": [
     {
-     "label": "Gewezen op recht",
+     "label": "Gewezen op inzagerecht",
      "value": "Bij het onderzoek, mondeling en schriftelijk"
     },
     {
@@ -1330,7 +1330,7 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Blokkeringsrecht",
-     "value": "Na inzage geen gebruik van gemaakt"
+     "value": "Niet van toepassing: het onderzoek vindt plaats op grond van een bestaande verzekeringsovereenkomst (NVMSR-richtlijn 2024, § 6.15)"
     }
    ]
   },
@@ -1822,7 +1822,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=10",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=10"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=11",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=11"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
