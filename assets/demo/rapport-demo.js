@@ -536,7 +536,7 @@ var EXAMPLE_RAPPORT = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "3% functieverlies van de gehele persoon volgens de AMA Guides, 6e druk. De berekening staat per stap in de rekenbijlage.",
+     "tekst": "3% functieverlies van de gehele persoon volgens de AMA Guides, 6e druk: klasse 1 voor aspecifieke nekklachten (tabel 17-2), na correctie voor functionele historie, lichamelijk en aanvullend onderzoek.",
      "context": null
     },
     {
@@ -554,48 +554,6 @@ var EXAMPLE_RAPPORT = {
      "tekst": "Functieverlies volgens de AMA Guides zegt iets over beperkingen in algemene dagelijkse activiteiten. Het is geen maat voor arbeidsongeschiktheid of verlies aan verdienvermogen.",
      "context": null
     }
-   ],
-   "stappen": [
-    [
-     "Editie en versie",
-     "AMA Guides to the Evaluation of Permanent Impairment, 6e druk"
-    ],
-    [
-     "Methode",
-     "Diagnosegebonden (DBI), hoofdstuk 17, wervelkolom"
-    ],
-    [
-     "Diagnoserij (tabel 17-2)",
-     "Aspecifieke chronische nekklachten na sprain/strain-letsel, met aanhoudende axiale en niet-objectiveerbare radiculaire klachten, herhaald gedocumenteerd"
-    ],
-    [
-     "Klasse",
-     "Klasse 1: 1–3% gehele persoon (graad A–E: 1, 1, 2, 3, 3)"
-    ],
-    [
-     "Standaardwaarde",
-     "Graad C = 2%"
-    ],
-    [
-     "Grade modifier functionele historie (tabel 17-6)",
-     "1: pijnklachten bij normale activiteit"
-    ],
-    [
-     "Grade modifier lichamelijk onderzoek (tabel 17-7)",
-     "2: Spurling links positief met reproduceerbare uitstralende pijn"
-    ],
-    [
-     "Grade modifier aanvullend onderzoek (tabel 17-9)",
-     "2: MRI-bevindingen C5–C6 passend bij het klinisch beeld"
-    ],
-    [
-     "Netto-aanpassing",
-     "(1 − 1) + (2 − 1) + (2 − 1) = +2, dus graad E"
-    ],
-    [
-     "Functieverlies gehele persoon",
-     "3%"
-    ]
    ]
   },
   {
@@ -1303,7 +1261,7 @@ var EXAMPLE_NVMSR = {
    "subfields": [
     {
      "label": "Oordeel",
-     "tekst": "19% functieverlies van het rechterbeen volgens de AMA Guides, 6e druk. Er is geen voorafbestaande invaliditeit om in mindering te brengen. De berekening staat per stap in de rekenbijlage.",
+     "tekst": "19% functieverlies van het rechterbeen volgens de AMA Guides, 6e druk: klasse 2 voor een tibiaplateaufractuur met ten hoogste 2 mm stapvorming (tabel 16-3), na correctie voor functionele historie, lichamelijk en aanvullend onderzoek. Er is geen voorafbestaande invaliditeit om in mindering te brengen.",
      "context": null
     },
     {
@@ -1421,73 +1379,8 @@ var EXAMPLE_NVMSR = {
    ]
   },
   {
-   "num": "B",
-   "title": "Rekenbijlage blijvende invaliditeit",
-   "badge": "arts",
-   "type": "arts_template",
-   "prompt": "Berekening volgens de AMA Guides, 6e druk, hoofdstuk 16 (onderste extremiteit).",
-   "subfields": [
-    {
-     "label": "Methode",
-     "tekst": "Diagnosegebonden methode (DBI). De bewegingsuitslag is niet als zelfstandige methode gebruikt, omdat er een passende diagnoserij is; de bewegingsbeperking telt mee als grade modifier.",
-     "context": null
-    },
-    {
-     "label": "Gevoeligheid",
-     "tekst": "Wordt de grade modifier voor aanvullend onderzoek niet meegeteld, dan blijft de uitkomst 19%. De netto-aanpassing is dan −2 in plaats van −3, en beide leiden tot graad A.",
-     "context": null
-    }
-   ],
-   "deel": "Bijlage",
-   "stappen": [
-    [
-     "Editie en versie",
-     "AMA Guides to the Evaluation of Permanent Impairment, 6e druk"
-    ],
-    [
-     "Diagnoserij (tabel 16-3, knie)",
-     "Tibiaplateaufractuur met ≤ 2 mm stapvorming in het gewrichtsvlak"
-    ],
-    [
-     "Klasse",
-     "Klasse 2: 14–25% onderste extremiteit (graad A–E: 19, 20, 22, 24, 25)"
-    ],
-    [
-     "Standaardwaarde",
-     "Graad C = 22%"
-    ],
-    [
-     "Grade modifier functionele historie (tabel 16-6)",
-     "1: AAOS Lower Limb-vragenlijst licht verminderd; geen hulpmiddel"
-    ],
-    [
-     "Grade modifier lichamelijk onderzoek (tabel 16-7)",
-     "1: minimale palpatoire bevindingen, lichte bewegingsbeperking, 1,5 cm atrofie"
-    ],
-    [
-     "Grade modifier aanvullend onderzoek (tabel 16-8)",
-     "1: gewrichtsspleet minder dan 25% versmald ten opzichte van links. De stapvorming is al gebruikt voor de klasse en telt niet opnieuw mee"
-    ],
-    [
-     "Netto-aanpassing",
-     "(1 − 2) + (1 − 2) + (1 − 2) = −3; maximaal twee graden omlaag, dus graad A"
-    ],
-    [
-     "Functieverlies onderste extremiteit",
-     "19%"
-    ],
-    [
-     "Aftrek voorafbestaande invaliditeit",
-     "Niet van toepassing (vraag 3)"
-    ],
-    [
-     "Uitkomst volgens de maatstaf van de polis",
-     "19% functieverlies van het rechterbeen"
-    ]
-   ]
-  },
-  {
    "num": "–",
+   "deel": "Bijlage",
    "title": "Bronnenlijst",
    "badge": "ai",
    "type": "bronnen",
@@ -1763,7 +1656,7 @@ data.sections.forEach(function(s,i){
   if(s.deel)h+='<li class="kr-toc-part">'+esc(s.deel)+'</li>';
   h+='<li><a href="#'+slug(s.title,i)+'"><span>'+esc(secNum(s.num))+'</span>'+esc(s.title)+'</a></li>';
 });
-h+='<li class="kr-toc-part">Afsluiting</li><li><a href="#kr-ondertekening"><span></span>Ondertekening</a></li>';
+
 h+='</ol>';
 h+='<div class="kr-legend"><span><i class="kr-dot kr-dot-do"></i>Dossierordening</span><span><i class="kr-dot kr-dot-arts"></i>Arts</span></div>';
 h+='</nav>';
@@ -1885,18 +1778,6 @@ h+='</tbody></table></div>';
 h+='</section>';
 });
 
-/* Ondertekening */
-var ot=m.ondertekening||{};
-h+='<section class="kr-sign" id="kr-ondertekening">';
-h+='<div class="kr-sec-head"><span class="kr-sec-num"></span><h3>Ondertekening</h3><span class="kr-sec-by">Arts &middot; specialist</span></div>';
-h+='<div class="kr-sign-grid">';
-h+='<div><span class="kr-sign-role">Onderzoekend arts</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+redact(ot.arts||"[ARTS]")+'</span></div>';
-h+='<div><span class="kr-sign-role">Gecontroleerd en ondertekend</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+esc(ot.specialist||"Medisch specialist, BIG-geregistreerd")+'</span></div>';
-h+='</div>';
-if(ot.rollen){h+='<dl class="kr-fields kr-sign-roles">';ot.rollen.forEach(function(r){h+='<div><dt>'+esc(r[0])+'</dt><dd>'+redact(r[1])+'</dd></div>';});h+='</dl>';}
-h+='<p class="kr-sign-status">'+esc(ot.status||"Concept. Nog niet ondertekend.")+'</p>';
-h+='</section>';
-
 h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><span>Fictief voorbeeld &middot; '+data.stats.bronnen+' bronnen &middot; '+data.stats.hiaten+(data.stats.hiaten===1?' hiaat':' hiaten')+'</span></footer>';
 h+='</div></div></article>';
 
@@ -1957,7 +1838,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=2",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=2"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=3",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=3"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
