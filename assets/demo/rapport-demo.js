@@ -61,7 +61,6 @@ var EXAMPLE_RAPPORT = {
    }
   ],
   "ondertekening": {
-   "arts": "[ARTS] · basisarts, BIG [BIG-NR]",
    "specialist": "Orthopedisch chirurg · BIG [BIG-NR]",
    "rollen": [
     [
@@ -69,23 +68,19 @@ var EXAMPLE_RAPPORT = {
      "Kinetic, case manager [CASEMANAGER]"
     ],
     [
+     "Dossierstudie en voorbereiding",
+     "[ARTS], basisarts, onder verantwoordelijkheid van de specialist"
+    ],
+    [
      "Anamnese en lichamelijk onderzoek",
-     "[ARTS], basisarts"
+     "Orthopedisch chirurg, zelf (NVMSR-richtlijn § 7.1)"
     ],
     [
-     "Concept opgesteld",
-     "[ARTS], basisarts"
+     "Beschouwing en conclusies",
+     "Orthopedisch chirurg"
     ],
     [
-     "Inhoudelijke supervisie",
-     "Orthopedisch chirurg, BIG [BIG-NR]"
-    ],
-    [
-     "Kernbevindingen geverifieerd",
-     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op T+29m"
-    ],
-    [
-     "Eindverantwoordelijk en ondertekend",
+     "Ondertekend en eindverantwoordelijk",
      "Orthopedisch chirurg, BIG [BIG-NR]"
     ]
    ],
@@ -655,15 +650,19 @@ var EXAMPLE_RAPPORT = {
     },
     {
      "label": "Onderzoek",
-     "value": "Anamnese en lichamelijk onderzoek door [ARTS], basisarts, onder supervisie van de specialist"
+     "value": "Anamnese en lichamelijk onderzoek door de specialist zelf"
+    },
+    {
+     "label": "Voorbereiding",
+     "value": "Dossierstudie en concept van de medische samenvatting door [ARTS], basisarts, onder verantwoordelijkheid van de specialist; de basisarts verricht geen anamnese of lichamelijk onderzoek"
     },
     {
      "label": "Aanwezig bij onderzoek",
-     "value": "Betrokkene en de onderzoekend arts; bij de verificatie betrokkene en de specialist"
+     "value": "Betrokkene en de specialist"
     },
     {
-     "label": "Verificatie en eindverantwoordelijkheid",
-     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op T+29m, de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
+     "label": "Verantwoordelijkheid",
+     "value": "De specialist is de deskundige; hij draagt de verantwoordelijkheid voor diagnose, beschouwing en conclusies en ondertekent het rapport"
     },
     {
      "label": "Opdrachtgever",
@@ -706,16 +705,12 @@ var EXAMPLE_RAPPORT = {
    "type": "fields",
    "fields": [
     {
-     "label": "Specialist",
-     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkzaam in [ORGANISATIE-9]"
-    },
-    {
-     "label": "Onderzoekend arts",
-     "value": "Basisarts, BIG [BIG-NR]; in dienst van Kinetic"
+     "label": "Deskundige",
+     "value": "Orthopedisch chirurg, BIG [BIG-NR]; werkzaam in [ORGANISATIE-9]"
     },
     {
      "label": "Ervaring als deskundige",
-     "value": "Specialist: ruim twintig jaar orthopedisch chirurg, circa 50 expertises per jaar; onderzoekend arts: drie jaar ervaring met expertiseonderzoek"
+     "value": "Ruim twintig jaar orthopedisch chirurg, circa 50 expertises per jaar"
     },
     {
      "label": "Nevenfuncties",
@@ -728,6 +723,10 @@ var EXAMPLE_RAPPORT = {
     {
      "label": "Relatie met de opdrachtgever",
      "value": "In de afgelopen twaalf maanden vier opdrachten van deze opdrachtgever; verhouding eisende en verwerende zijde ongeveer gelijk"
+    },
+    {
+     "label": "Ondersteunend arts",
+     "value": "De basisarts die het dossier voorbereidde is in dienst van Kinetic; voor hem geldt hetzelfde: geen behandelrelatie met betrokkene en geen belang bij de uitkomst"
     },
     {
      "label": "Wetenschappelijke discussie",
@@ -873,7 +872,6 @@ var EXAMPLE_NVMSR = {
    }
   ],
   "ondertekening": {
-   "arts": "[ARTS] · basisarts, BIG [BIG-NR]",
    "specialist": "Orthopedisch chirurg · BIG [BIG-NR]",
    "rollen": [
     [
@@ -881,23 +879,19 @@ var EXAMPLE_NVMSR = {
      "Kinetic, case manager [CASEMANAGER]"
     ],
     [
+     "Dossierstudie en voorbereiding",
+     "[ARTS], basisarts, onder verantwoordelijkheid van de specialist"
+    ],
+    [
      "Anamnese en lichamelijk onderzoek",
-     "[ARTS], basisarts"
+     "Orthopedisch chirurg, zelf (NVMSR-richtlijn § 7.1)"
     ],
     [
-     "Concept opgesteld",
-     "[ARTS], basisarts"
+     "Beschouwing en conclusies",
+     "Orthopedisch chirurg"
     ],
     [
-     "Inhoudelijke supervisie",
-     "Orthopedisch chirurg, BIG [BIG-NR]"
-    ],
-    [
-     "Kernbevindingen geverifieerd",
-     "Orthopedisch chirurg, bij eigen onderzoek van betrokkene op T+24m"
-    ],
-    [
-     "Eindverantwoordelijk en ondertekend",
+     "Ondertekend en eindverantwoordelijk",
      "Orthopedisch chirurg, BIG [BIG-NR]"
     ]
    ],
@@ -1316,11 +1310,15 @@ var EXAMPLE_NVMSR = {
     },
     {
      "label": "Onderzoek",
-     "value": "Anamnese en lichamelijk onderzoek door [ARTS], basisarts, onder supervisie van de specialist"
+     "value": "Anamnese en lichamelijk onderzoek door de specialist zelf"
     },
     {
-     "label": "Verificatie en eindverantwoordelijkheid",
-     "value": "De ondertekenend specialist heeft betrokkene zelf gezien op T+24m, de relevante orthopedische bevindingen geverifieerd en draagt de eindverantwoordelijkheid voor diagnose, beschouwing en conclusies"
+     "label": "Voorbereiding",
+     "value": "Dossierstudie en concept van de medische samenvatting door [ARTS], basisarts, onder verantwoordelijkheid van de specialist; de basisarts verricht geen anamnese of lichamelijk onderzoek"
+    },
+    {
+     "label": "Verantwoordelijkheid",
+     "value": "De specialist is de deskundige; hij draagt de verantwoordelijkheid voor diagnose, beschouwing en conclusies en ondertekent het rapport"
     },
     {
      "label": "Verzekeraar",
@@ -1363,16 +1361,12 @@ var EXAMPLE_NVMSR = {
    "type": "fields",
    "fields": [
     {
-     "label": "Specialist",
-     "value": "Specialisme orthopedie, BIG [BIG-NR]; werkzaam in [ORGANISATIE-9]"
-    },
-    {
-     "label": "Onderzoekend arts",
-     "value": "Basisarts, BIG [BIG-NR]; in dienst van Kinetic"
+     "label": "Deskundige",
+     "value": "Orthopedisch chirurg, BIG [BIG-NR]; werkzaam in [ORGANISATIE-9]"
     },
     {
      "label": "Ervaring als deskundige",
-     "value": "Specialist: ruim twintig jaar orthopedisch chirurg, circa 50 expertises per jaar; onderzoekend arts: drie jaar ervaring met expertiseonderzoek"
+     "value": "Ruim twintig jaar orthopedisch chirurg, circa 50 expertises per jaar"
     },
     {
      "label": "Nevenfuncties",
@@ -1385,6 +1379,10 @@ var EXAMPLE_NVMSR = {
     {
      "label": "Relatie met de verzekeraar",
      "value": "In de afgelopen twaalf maanden zes opdrachten van deze verzekeraar"
+    },
+    {
+     "label": "Ondersteunend arts",
+     "value": "De basisarts die het dossier voorbereidde is in dienst van Kinetic; voor hem geldt hetzelfde: geen behandelrelatie met betrokkene en geen belang bij de uitkomst"
     }
    ]
   },
@@ -1645,7 +1643,7 @@ h+='</header>';
 /* ---------- Kernbevindingen ---------- */
 if(m.kern&&m.kern.length){
 h+='<section class="kr-kern" aria-label="Kernbevindingen">';
-h+='<div class="kr-kern-head"><span class="kr-eyebrow">Kernbevindingen</span><span class="kr-kern-note">De conclusies van de arts, vooraf samengevat</span></div>';
+h+='<div class="kr-kern-head"><span class="kr-eyebrow">Kernbevindingen</span><span class="kr-kern-note">De conclusies van de specialist, vooraf samengevat</span></div>';
 var big=m.kern.filter(function(k){return k.groot;})[0], wide=m.kern.filter(function(k){return k.breed;})[0];
 h+='<div class="kr-hero">';
 if(wide)h+='<div class="kr-hero-diag"><span class="kr-kern-label">'+esc(wide.label)+'</span><p>'+esc(wide.waarde)+'</p></div>';
@@ -1667,8 +1665,9 @@ data.sections.forEach(function(s,i){
   h+='<li><a href="#'+slug(s.title,i)+'"><span>'+esc(secNum(s.num))+'</span>'+esc(s.title)+'</a></li>';
 });
 
+h+='<li class="kr-toc-part">Afsluiting</li><li><a href="#kr-ondertekening"><span></span>Ondertekening</a></li>';
 h+='</ol>';
-h+='<div class="kr-legend"><span><i class="kr-dot kr-dot-do"></i>Dossierordening</span><span><i class="kr-dot kr-dot-arts"></i>Arts</span></div>';
+h+='<div class="kr-legend"><span><i class="kr-dot kr-dot-do"></i>Dossierordening</span><span><i class="kr-dot kr-dot-arts"></i>Specialist</span></div>';
 h+='</nav>';
 
 h+='<div class="kr-doc">';
@@ -1683,7 +1682,7 @@ c.aanwezig.forEach(function(d){h+='<li><span class="kr-tile-ic"></span>'+esc(typ
 c.ontbrekend.forEach(function(d){h+='<li class="kr-miss"><span class="kr-tile-ic"></span>'+esc(typeof d==="string"?d:d.doc)+'<em>Ontbreekt</em></li>';});
 h+='</ul>';
 var nDo=data.sections.filter(function(x){return x.badge!=="arts";}).length, nAr=data.sections.length-nDo;
-h+='<div class="kr-share"><div class="kr-share-bar"><span class="kr-share-do" style="flex:'+nDo+'"></span><span class="kr-share-ar" style="flex:'+nAr+'"></span></div><div class="kr-share-leg"><span><i class="kr-dot kr-dot-do"></i>Dossierordening &middot; '+nDo+' onderdelen</span><span><i class="kr-dot kr-dot-arts"></i>Arts &middot; '+nAr+' onderdelen</span></div></div>';
+h+='<div class="kr-share"><div class="kr-share-bar"><span class="kr-share-do" style="flex:'+nDo+'"></span><span class="kr-share-ar" style="flex:'+nAr+'"></span></div><div class="kr-share-leg"><span><i class="kr-dot kr-dot-do"></i>Dossierordening &middot; '+nDo+' onderdelen</span><span><i class="kr-dot kr-dot-arts"></i>Specialist &middot; '+nAr+' onderdelen</span></div></div>';
 h+='</div>';
 }
 
@@ -1692,7 +1691,7 @@ data.sections.forEach(function(s,i){
 if(s.deel){partNo++;var pt2=s.deel.split(" \u00b7 "),dm=pt2[0].match(/^Deel (\d+)$/),glyph=dm?dm[1]:(pt2.length>1?pt2[1]:pt2[0]).charAt(0);h+='<div class="kr-chapter"><span class="kr-chapter-no">'+esc(glyph)+'</span><div><span class="kr-chapter-kick">'+esc(pt2.length>1?pt2[0]:"Onderdeel")+'</span><span class="kr-chapter-title">'+esc(pt2.length>1?pt2[1]:pt2[0])+'</span></div></div>';}
 var arts=s.badge==="arts";
 h+='<section class="kr-sec'+(arts?' kr-sec-arts':'')+'" id="'+slug(s.title,i)+'">';
-h+='<div class="kr-sec-head"><span class="kr-sec-num">'+esc(secNum(s.num))+'</span><h3>'+esc(s.title)+'</h3><span class="kr-sec-by">'+(arts?'Arts':'Dossierordening')+'</span></div>';
+h+='<div class="kr-sec-head"><span class="kr-sec-num">'+esc(secNum(s.num))+'</span><h3>'+esc(s.title)+'</h3><span class="kr-sec-by">'+(arts?'Specialist':'Dossierordening')+'</span></div>';
 
 if(s.type==="fields"){
 h+='<dl class="kr-fields">';
@@ -1740,17 +1739,17 @@ if(s.type==="tegenstrijdigheden"){
 s.items.forEach(function(it){
   h+='<div class="kr-contra"><div class="kr-gap-head"><strong>'+redact(it.thema)+'</strong><span class="kr-gap-prio kr-prio-'+esc(it.severity||"aandacht")+'">'+sevLabel(it.severity||"aandacht")+'</span></div>';
   h+='<ul>';it.bronnen.forEach(function(b){h+='<li>'+redact(b)+'</li>';});h+='</ul>';
-  h+='<p class="kr-gap-meta"><span>Voor de arts</span> '+redact(it.relevantie)+'</p></div>';
+  h+='<p class="kr-gap-meta"><span>Voor de specialist</span> '+redact(it.relevantie)+'</p></div>';
 });
 }
 
 if(s.type==="arts_template"){
 if(s.prompt)h+='<p class="kr-intro">'+esc(s.prompt)+'</p>';
-if(s.quote)h+='<blockquote class="kr-quote"><p>'+redact(s.quote)+'</p><cite>'+esc(s.quoteBy||"De onderzoekend arts")+'</cite></blockquote>';
+if(s.quote)h+='<blockquote class="kr-quote"><p>'+redact(s.quote)+'</p><cite>'+esc(s.quoteBy||"De specialist")+'</cite></blockquote>';
 s.subfields.forEach(function(sf){
   var label=typeof sf==="string"?sf:sf.label, ctx=typeof sf==="string"?null:sf.context, tx=typeof sf==="string"?null:sf.tekst;
   h+='<div class="kr-finding"><h4>'+esc(label)+'</h4>';
-  h+=tx?'<p class="kr-p">'+redact(tx)+'</p>':'<p class="kr-empty">In te vullen door de arts</p>';
+  h+=tx?'<p class="kr-p">'+redact(tx)+'</p>':'<p class="kr-empty">In te vullen door de specialist</p>';
   if(ctx)h+='<p class="kr-note"><span>Uit het dossier</span>'+redact(ctx)+'</p>';
   h+='</div>';
 });
@@ -1772,7 +1771,7 @@ h+='<ol class="kr-answers">';
 s.questions.forEach(function(it,qi){
   var q=typeof it==="string"?it:it.q, ctx=typeof it==="string"?null:it.context;
   h+='<li><span class="kr-answers-num">'+(qi+1)+'</span><div><p class="kr-answers-q">'+esc(q.replace(/^Vraag \d+ — /,""))+'</p>';
-  h+=it.antwoord?'<p class="kr-p">'+redact(it.antwoord)+'</p>':'<p class="kr-empty">In te vullen door de arts</p>';
+  h+=it.antwoord?'<p class="kr-p">'+redact(it.antwoord)+'</p>':'<p class="kr-empty">In te vullen door de specialist</p>';
   if(ctx)h+='<p class="kr-note"><span>Uit het dossier</span>'+redact(ctx)+'</p>';
   h+='</div></li>';
 });
@@ -1787,6 +1786,15 @@ h+='</tbody></table></div>';
 
 h+='</section>';
 });
+
+/* Ondertekening: alleen de deskundige tekent */
+var ot=m.ondertekening||{};
+h+='<section class="kr-sign" id="kr-ondertekening">';
+h+='<div class="kr-sec-head"><span class="kr-sec-num"></span><h3>Ondertekening</h3><span class="kr-sec-by">Deskundige</span></div>';
+h+='<div class="kr-sign-grid"><div><span class="kr-sign-role">Deskundige, ondertekend</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+esc(ot.specialist||"Medisch specialist, BIG-geregistreerd")+'</span></div></div>';
+if(ot.rollen){h+='<dl class="kr-fields kr-sign-roles">';ot.rollen.forEach(function(r){h+='<div><dt>'+esc(r[0])+'</dt><dd>'+redact(r[1])+'</dd></div>';});h+='</dl>';}
+h+='<p class="kr-sign-status">'+esc(ot.status||"Concept. Nog niet ondertekend.")+'</p>';
+h+='</section>';
 
 h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><span>Fictief voorbeeld &middot; '+data.stats.bronnen+' bronnen &middot; '+data.stats.hiaten+(data.stats.hiaten===1?' hiaat':' hiaten')+'</span></footer>';
 h+='</div></div></article>';
@@ -1848,7 +1856,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=6",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=6"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=7",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=7"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
