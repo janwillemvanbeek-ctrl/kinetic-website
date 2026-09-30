@@ -864,7 +864,7 @@ var EXAMPLE_NVMSR = {
    {
     "label": "Blijvende invaliditeit",
     "waarde": "19%",
-    "toelichting": "Functieverlies rechterbeen, AMA Guides 6e druk"
+    "toelichting": "Functieverlies rechterbeen; 8% gehele persoon (AMA Guides 6e druk)"
    },
    {
     "label": "Dossier",
@@ -1262,6 +1262,11 @@ var EXAMPLE_NVMSR = {
     {
      "label": "Oordeel",
      "tekst": "19% functieverlies van het rechterbeen volgens de AMA Guides, 6e druk: klasse 2 voor een tibiaplateaufractuur met ten hoogste 2 mm stapvorming (tabel 16-3), na correctie voor functionele historie, lichamelijk en aanvullend onderzoek. Er is geen voorafbestaande invaliditeit om in mindering te brengen.",
+     "context": null
+    },
+    {
+     "label": "Gehele persoon",
+     "tekst": "Omgerekend naar de gehele persoon is dit 8% (tabel 16-10, omrekenfactor 40%). Dit wordt vermeld ter informatie; de polis hanteert het percentage van het been.",
      "context": null
     },
     {
@@ -1838,7 +1843,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=3",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=3"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=4",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=4"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
