@@ -105,17 +105,17 @@
 }
 
 .cookie-banner__btn--primary {
-  background: #2F6F6A;
+  background: #0E5E57;
   color: #FAF9F7;
   border: 1px solid transparent;
 }
 
 .cookie-banner__btn--primary:hover {
-  background: #1F5A56;
+  background: #0A4842;
 }
 
 .cookie-banner__btn:focus-visible {
-  outline: 2px solid #2F6F6A;
+  outline: 2px solid #0E5E57;
   outline-offset: 2px;
 }
 

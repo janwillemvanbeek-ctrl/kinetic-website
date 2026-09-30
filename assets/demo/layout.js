@@ -22,7 +22,7 @@
   // Woordmerk conform de homepage; de footer gebruikt de inverse variant.
   function logoWordmark(inverse) {
     return '<span style="font-family:\'Inter\',sans-serif;font-weight:600;font-size:' + (inverse ? '1.3rem' : '26px') + ';letter-spacing:-.01em;color:' + (inverse ? '#FAF9F7' : '#1A1916') + ';">' +
-      'Kinetic<span style="color:' + (inverse ? '#5FB3A6' : '#0E5E57') + ';">.</span></span>';
+      'Kinetic<span style="color:' + (inverse ? '#7FC2B6' : '#0E5E57') + ';">.</span></span>';
   }
 
   function headerHTML() {

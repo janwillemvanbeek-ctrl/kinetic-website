@@ -1807,7 +1807,7 @@ if(!text)return;
 var btn=document.getElementById("extractBtn");
 btn.disabled=true;
 btn.innerHTML='<span class="spinner"></span>Verwerken…';
-document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(47,111,106,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">Conceptstructuur wordt opgebouwd…</p></div>';
+document.getElementById("output").innerHTML='<div style="text-align:center;padding:3rem;color:var(--stone)"><div class="spinner" style="border-color:rgba(14,94,87,.2);border-top-color:var(--warm-teal);width:24px;height:24px;margin:0 auto"></div><p style="margin-top:1rem">Conceptstructuur wordt opgebouwd…</p></div>';
 try{
 var parsed=await generateRapportData(text);
 renderRapport(parsed);
