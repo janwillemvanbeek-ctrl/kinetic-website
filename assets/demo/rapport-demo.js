@@ -1665,7 +1665,6 @@ data.sections.forEach(function(s,i){
   h+='<li><a href="#'+slug(s.title,i)+'"><span>'+esc(secNum(s.num))+'</span>'+esc(s.title)+'</a></li>';
 });
 
-h+='<li class="kr-toc-part">Afsluiting</li><li><a href="#kr-ondertekening"><span></span>Ondertekening</a></li>';
 h+='</ol>';
 h+='<div class="kr-legend"><span><i class="kr-dot kr-dot-do"></i>Dossierordening</span><span><i class="kr-dot kr-dot-arts"></i>Specialist</span></div>';
 h+='</nav>';
@@ -1787,15 +1786,6 @@ h+='</tbody></table></div>';
 h+='</section>';
 });
 
-/* Ondertekening: alleen de deskundige tekent */
-var ot=m.ondertekening||{};
-h+='<section class="kr-sign" id="kr-ondertekening">';
-h+='<div class="kr-sec-head"><span class="kr-sec-num"></span><h3>Ondertekening</h3><span class="kr-sec-by">Deskundige</span></div>';
-h+='<div class="kr-sign-grid"><div><span class="kr-sign-role">Deskundige, ondertekend</span><span class="kr-sign-line"></span><span class="kr-sign-name">'+esc(ot.specialist||"Medisch specialist, BIG-geregistreerd")+'</span></div></div>';
-if(ot.rollen){h+='<dl class="kr-fields kr-sign-roles">';ot.rollen.forEach(function(r){h+='<div><dt>'+esc(r[0])+'</dt><dd>'+redact(r[1])+'</dd></div>';});h+='</dl>';}
-h+='<p class="kr-sign-status">'+esc(ot.status||"Concept. Nog niet ondertekend.")+'</p>';
-h+='</section>';
-
 h+='<footer class="kr-foot"><span>Kinetic<i>.</i> Medische Expertises</span><span>Fictief voorbeeld &middot; '+data.stats.bronnen+' bronnen &middot; '+data.stats.hiaten+(data.stats.hiaten===1?' hiaat':' hiaten')+'</span></footer>';
 h+='</div></div></article>';
 
@@ -1856,7 +1846,7 @@ btn.innerHTML="Maak conceptstructuur";
 function init(){
 if(!document.getElementById("output"))return;
 var btns=document.querySelectorAll("[data-rapport-variant]");
-var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=7",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=7"};
+var PDF={iwmd:"assets/demo/pdf/kinetic-voorbeeldrapport-letselschade.pdf?v=8",nvmsr:"assets/demo/pdf/kinetic-voorbeeldrapport-ongevallenverzekering.pdf?v=8"};
 var frame=document.getElementById("rp-frame"),expand=document.getElementById("rp-expand"),dl=document.getElementById("rp-download"),viewer=document.getElementById("rapportviewer");
 function show(v,scroll){
   btns.forEach(function(x){var on=x.getAttribute("data-rapport-variant")===v;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});
